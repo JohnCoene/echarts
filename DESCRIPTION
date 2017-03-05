@@ -1,0 +1,14 @@
+Package: echarts
+Title: EChart htmlwidget
+Version: 0.0.0.9000
+Authors@R: person("John", "Coene", email = "jcoenep@gmail.com", role = c("aut", "cre"))
+Description: htmlwidget for ECharts 2.
+Depends:
+    R (>= 3.3.2)
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Imports:
+    htmlwidgets,
+    magrittr
+RoxygenNote: 5.0.1

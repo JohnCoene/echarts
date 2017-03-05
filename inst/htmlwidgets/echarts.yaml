@@ -1,0 +1,5 @@
+dependencies:
+ - name: echarts
+   version: 2.2.7
+   src: htmlwidgets/lib/echarts-2.2.7
+   script: echarts-all.js
