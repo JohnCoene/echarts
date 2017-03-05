@@ -70,3 +70,64 @@ chord_matrix <- function(){
 
   return(matrix)
 }
+
+default_dataRange <- function(serie){
+
+  data <- get("data", envir = data_env)
+  serie <- eval(substitute(serie, parent.frame()), data)
+
+  calc <- class2calc(serie)
+
+  dataRange <- list(
+    min = min(serie),
+    max = max(serie),
+    text = list("High", "Low"),
+    realtime = FALSE,
+    calculable = calc,
+    color = list('orangered','yellow','lightskyblue')
+  )
+
+  return(dataRange)
+
+}
+
+class2calc <- function(x){
+
+  if(class(x)[1] == "integer" || class(x)[1] == "numeric"){
+    TRUE
+  } else {
+    FALSE
+  }
+}
+
+
+build_coord <- function(long, lat){
+
+  x <- get("x", envir = data_env)
+  data <- get("data", envir = data_env)
+  lon <- eval(substitute(lon, parent.frame()), data)
+  lat <- eval(substitute(lat, parent.frame()), data)
+
+  serie <- cbind(lon, lat)
+  colnames(serie) <- NULL
+  serie <- apply(serie, 1, as.list)
+  names(serie) <- x
+
+  return(serie)
+
+}
+
+map_lines <- function(edges, source, target){
+
+  # source
+  source <- eval(substitute(source, parent.frame()), edges)
+  target <- eval(substitute(target, parent.frame()), edges)
+
+  # list of lists
+  edges <- list()
+  for(i in 1:length(source)){
+    edges[[i]] <- list(list(name = source[i]), list(name = target[i]))
+  }
+
+  return(edges)
+}

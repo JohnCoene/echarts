@@ -5,15 +5,13 @@
 #' @import htmlwidgets
 #'
 #' @export
-e_chart <- function(data, x, width = NULL, height = NULL, elementId = NULL) {
+echart <- function(data, x, width = NULL, height = NULL, elementId = NULL) {
 
   # x
-  xvar <- if(missing(x)) list()
-  xvar <- tryCatch(eval(substitute(x), data), error = function(e) e)
-  xvar <- if(is(xvar, "error")) x
+  xvar <- eval(substitute(x), data)
 
   # assign for future use
-  assign("x", x, envir = data_env)
+  assign("x", xvar, envir = data_env)
   assign("data", data, envir = data_env)
 
   # forward options using x

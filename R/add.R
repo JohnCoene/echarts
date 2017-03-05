@@ -1,7 +1,7 @@
 #' add bars
 #'
 #' @export
-e_bar <- function(p, serie, type = "bar", ...){
+ebar <- function(p, serie, type = "bar", ...){
 
   serie_name <- deparse(substitute(serie))
   serie <- vector_data(serie)
@@ -20,7 +20,7 @@ e_bar <- function(p, serie, type = "bar", ...){
 #' add lines
 #'
 #' @export
-e_line <- function(p, serie, ...){
+eline <- function(p, serie, ...){
 
   serie_name <- deparse(substitute(serie))
   serie <- vector_data(serie)
@@ -39,7 +39,7 @@ e_line <- function(p, serie, ...){
 #' add scatter
 #'
 #' @export
-e_scatter <- function(p, serie, size, ...){
+escatter <- function(p, serie, size, ...){
 
   serie_name <- deparse(substitute(serie))
   serie <- scatter_data(serie, size)
@@ -62,7 +62,7 @@ e_scatter <- function(p, serie, size, ...){
 #' add pie
 #'
 #' @export
-e_pie <- function(p, serie, ...){
+epie <- function(p, serie, ...){
 
   serie_name <- deparse(substitute(serie))
   serie <- val_name_data(serie)
@@ -84,7 +84,7 @@ e_pie <- function(p, serie, ...){
 #' add radar
 #'
 #' @export
-e_radar <- function(p, serie, ...){
+eradar <- function(p, serie, ...){
 
   serie_name <- deparse(substitute(serie))
   serie <- vector_data(serie)
@@ -115,7 +115,7 @@ e_radar <- function(p, serie, ...){
 #' Add chord
 #'
 #' @export
-e_chord <- function(p, sort = "ascending", sortSub = "descending", ...){
+echord <- function(p, sort = "ascending", sortSub = "descending", ...){
 
   opts <- list(...)
   opts$type <- "chord"
@@ -135,14 +135,173 @@ e_chord <- function(p, sort = "ascending", sortSub = "descending", ...){
 #' Add choropleth
 #'
 #' @export
-e_choropleth <- function(p, serie, mapType = "USA"){
+echoropleth <- function(p, serie, mapType = "world", dataRange, ...){
 
   serie_name <- deparse(substitute(serie))
 
   opts <- list(...)
   opts$name <- serie_name
   opts$type <- "map"
+  opts$mapType = mapType
   opts$data <- val_name_data(serie)
+
+  p$x$options$xAxis <- NULL
+  p$x$options$yAxis <- NULL
+
+  if(missing(dataRange)){
+    dataRange <- default_dataRange(serie)
+  }
+
+  p$x$options$dataRange <- dataRange
+
+  p$x$options$series <- append(p$x$options$series, list(opts))
+
+  p
+}
+
+#' Add map coordinates
+#'
+#' Add coordinates to map
+#'
+#' @export
+emap_coords <- function(p, lon, lat, mapType = "world", ...){
+
+  opts <- list(...)
+  opts$name <- "coords"
+  opts$type <- "map"
+  opts$mapType = mapType
+  opts$data <- list()
+  opts$geoCoord <- build_coord(lon, lat)
+
+  p$x$options$xAxis <- NULL
+  p$x$options$yAxis <- NULL
+
+  p$x$options$series <- append(p$x$options$series, list(opts))
+
+  p
+}
+
+#' Add map lines
+#'
+#' Add lines on map
+#'
+#' @export
+emap_lines <- function(p, edges, source, target){
+
+  opts <- list()
+  opts$smooth <- TRUE
+  opts$effect = list(
+    show = TRUE,
+    scaleSize = 1,
+    period = 30,
+    color = "#fff",
+    shadowBlur = 10
+  )
+  opts$data <- map_lines(edges, source, target)
+
+  p$x$options$xAxis <- NULL
+  p$x$options$yAxis <- NULL
+
+  previous <- length(p$x$options$series)
+
+  p$x$options$series[[previous]]$markLine = opts
+
+  p
+}
+
+#' Add map points
+#'
+#' Add map points
+#'
+#' @export
+emap_points <- function(p, serie){
+
+  data <- get("data", envir = data_env)
+  serie <- eval(substitute(serie), data)
+
+  opts <- list()
+  opts$symbol = 'emptyCircle'
+  opts$symbolSize = htmlwidgets::JS(" function (v){ return 10 + v/10 }")
+  opts$effect = list(show = TRUE, shadowBlur = 0)
+  opts$itemStyle = list(normal = list(label = list(show = FALSE)))
+  opts$data = val_name_data(serie)
+
+  p$x$options$xAxis <- NULL
+  p$x$options$yAxis <- NULL
+
+  previous <- length(p$x$options$series)
+
+  p$x$options$series[[previous]]$markPoint = opts
+
+  p
+}
+
+#' Add gauge
+#'
+#' Add gauge
+#'
+#' @export
+egauge <- function(p, value, name = "gauge", ...){
+
+  opts <- list(...)
+  opts$name = name
+  opts$type = "gauge"
+  opts$data = list(list(value = value, name = name))
+
+  p$x$options$xAxis <- NULL
+  p$x$options$yAxis <- NULL
+
+  p$x$options$series <- append(p$x$options$series, list(opts))
+
+  p
+}
+
+#' Add funnel
+#'
+#' Add funnel
+#'
+#' @export
+efunnel <- function(p, serie, ...){
+
+  data <- get("data", envir = data_env)
+  series_name <- deparse(substitute(serie))
+  serie <- eval(substitute(serie), data)
+
+  opts <- list(...)
+  opts$name = series_name
+  opts$type = "funnel"
+  opts$data = val_name_data(serie)
+
+  p$x$options$xAxis <- NULL
+  p$x$options$yAxis <- NULL
+
+  p$x$options$series <- append(p$x$options$series, list(opts))
+
+  p
+}
+
+#' Add venn
+#'
+#' Add venn diagram
+#'
+#' @export
+evenn <- function(p, val1, val2, overlap, ...){
+
+  data <- get("data", envir = data_env)
+  series_name <- deparse(substitute(serie))
+  serie <- eval(substitute(serie), data)
+
+  opts <- list(...)
+  opts$name = series_name
+  opts$type = "venn"
+  opts$itemStyle = list(
+    normal = list(
+      label = list(
+        show = TRUE
+      )
+    )
+  )
+  opts$data = val_name_data(serie)
 
   p$x$options$xAxis <- NULL
   p$x$options$yAxis <- NULL
