@@ -4,9 +4,21 @@
 \alias{evenn}
 \title{Add venn}
 \usage{
-evenn(p, serie, ...)
+evenn(p, serie, overlap, ...)
+}
+\arguments{
+\item{serie}{a named vector, see details.}
 }
 \description{
 Add venn diagram
+}
+\examples{
+venn <- data.frame(name = c("banana", "pineapple", "overlap"),
+  values = c(20, 50, 10))
+
+venn \%>\%
+  echart(name) \%>\%
+  evenn(values)
+
 }
 

@@ -9,4 +9,9 @@ egauge(p, value, name = "gauge", ...)
 \description{
 Add gauge
 }
+\examples{
+echart() \%>\%
+  egauge(85, "SPEED")
+
+}
 

@@ -9,4 +9,12 @@ efunnel(p, serie, ...)
 \description{
 Add funnel
 }
+\examples{
+funnel <- data.frame(stage = c("View", "Click", "Purchase"), value = c(80, 30, 20))
+
+funnel \%>\%
+  echart(stage) \%>\%
+  efunnel(value)
+
+}
 

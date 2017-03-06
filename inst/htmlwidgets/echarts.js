@@ -12,7 +12,7 @@ HTMLWidgets.widget({
 
       renderValue: function(x) {
 
-      var myChart = echarts.init(document.getElementById(el.id));
+      var myChart = echarts.init(document.getElementById(el.id), x.theme);
         var option = x.options;
         myChart.setOption(option);
 

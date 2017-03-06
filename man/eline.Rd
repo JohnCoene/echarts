@@ -2,11 +2,24 @@
 % Please edit documentation in R/add.R
 \name{eline}
 \alias{eline}
-\title{add lines}
+\title{Add lines}
 \usage{
-eline(p, serie, ...)
+eline(p, serie, fill = FALSE, stack = NULL, ...)
 }
 \description{
-add lines
+Add line serie.
+}
+\examples{
+mtcars \%>\%
+  echart(mpg) \%>\%
+  eline(qsec)
+
+mtcars \%>\%
+  echart(disp) \%>\%
+  eline(mpg, stack = "grp") \%>\%
+  eline(qsec, stack = "grp") \%>\%
+  eline(wt, fill = TRUE) \%>\%
+  etooltip()
+
 }
 

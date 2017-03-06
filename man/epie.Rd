@@ -2,11 +2,20 @@
 % Please edit documentation in R/add.R
 \name{epie}
 \alias{epie}
-\title{add pie}
+\title{Add pie}
 \usage{
 epie(p, serie, ...)
 }
 \description{
-add pie
+Add pie chart
+}
+\examples{
+pie <- data.frame(name = c("banana", "apple", "pineapple"),
+  value = c(40, 10, 15))
+
+pie \%>\%
+  echart(name) \%>\%
+  epie(value)
+
 }
 

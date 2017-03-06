@@ -8,14 +8,25 @@
 echart <- function(data, x, width = NULL, height = NULL, elementId = NULL) {
 
   # x
-  xvar <- eval(substitute(x), data)
+  if(!missing(x)){
+    xvar <- tryCatch(eval(substitute(x), data), error = function(e) e)
+    if(is(xvar, "error")){
+      xvar <- x
+    }
+  } else {
+    xvar <- list()
+  }
+
+  if(!missing(data)){
+    assign("data", data, envir = data_env)
+  }
 
   # assign for future use
   assign("x", xvar, envir = data_env)
-  assign("data", data, envir = data_env)
 
   # forward options using x
   x = list(
+    theme = "default",
     options = list(
       xAxis = list(
         list(

@@ -9,4 +9,12 @@ eradar(p, serie, ...)
 \description{
 add radar
 }
+\examples{
+radar <- data.frame(axis = LETTERS[1:6], value = runif(6, 2, 10))
+
+radar \%>\%
+  echart(axis) \%>\%
+  eradar(value)
+
+}
 

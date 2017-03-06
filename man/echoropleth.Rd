@@ -9,4 +9,13 @@ echoropleth(p, serie, mapType = "world", dataRange, ...)
 \description{
 Add choropleth
 }
+\examples{
+choropleth <- data.frame(countries = c("France", "Brazil", "China", "Russia", "Canada", "India"),
+  values = runif(6, 10, 25))
+
+choropleth \%>\%
+  echart(countries) \%>\%
+  echoropleth(values)
+
+}
 

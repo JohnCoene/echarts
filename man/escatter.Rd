@@ -2,11 +2,22 @@
 % Please edit documentation in R/add.R
 \name{escatter}
 \alias{escatter}
-\title{add scatter}
+\title{Add scatter}
 \usage{
 escatter(p, serie, size, ...)
 }
 \description{
-add scatter
+Add scatter serie.
+}
+\examples{
+mtcars \%>\%
+  echart(disp) \%>\%
+  escatter(mpg, qsec * 3)
+
+mtcars \%>\%
+  echart(disp) \%>\%
+  escatter(mpg, disp / 8) \%>\%
+  escatter(qsec, disp / 8)
+
 }
 

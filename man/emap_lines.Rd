@@ -9,4 +9,18 @@ emap_lines(p, edges, source, target)
 \description{
 Add lines on map
 }
+\examples{
+coords <- data.frame(city = c("London", "New York", "Beijing", "Sydney"),
+  lon = c(-0.1167218, -73.98002, 116.3883, 151.18518),
+  lat = c(51.49999, 40.74998, 39.92889, -33.92001))
+
+edges <- data.frame(source = c("Beijing", "Beijing", "New York"),
+  target = c("Sydney", "London", "London"))
+
+coords \%>\%
+  echart(city) \%>\%
+  emap_coords(lon, lat) \%>\%
+  emap_lines(edges, source, target)
+
+}
 

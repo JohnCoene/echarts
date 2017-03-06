@@ -131,3 +131,76 @@ map_lines <- function(edges, source, target){
 
   return(edges)
 }
+
+
+cloud_data <- function(freq, color){
+
+  x <- get("x", envir = data_env) # get words
+
+  # build data
+  data <- get("data", envir = data_env)
+  freq <- eval(substitute(freq, parent.frame()), data)
+
+  df <- cbind.data.frame(as.character(x), freq)
+  names(df) <- c("name", "value")
+
+  df <- apply(df, 1, as.list)
+
+  if(!missing(color)){
+    color <- eval(substitute(color, parent.frame()), data)
+    for(i in 1:length(color)){
+      df[[i]]$itemStyle <- list(normal = list(color = color[i]))
+    }
+  }
+
+  return(df)
+}
+
+heat_data <- function(y, z){
+
+  x <- get("x", envir = data_env) # get words
+
+  # build data
+  data <- get("data", envir = data_env)
+
+  # source
+  y <- eval(substitute(y, parent.frame()), data)
+  z <- eval(substitute(z, parent.frame()), data)
+
+  df <- cbind(x, y, z)
+  colnames(df) <- NULL # remove names
+
+  df <- apply(df, 1, as.list)
+
+  return(df)
+}
+
+heat_map_data <- function(lat, z){
+
+  x <- get("x", envir = data_env) # get words
+
+  # build data
+  data <- get("data", envir = data_env)
+
+  # source
+  lat <- eval(substitute(lat, parent.frame()), data)
+  z <- eval(substitute(z, parent.frame()), data)
+
+  df <- cbind(x, lat, z)
+  colnames(df) <- NULL # remove names
+
+  df <- apply(df, 1, as.list)
+
+  return(df)
+}
+
+default_legend <- function(p){
+  series <- p$x$options$series
+
+  name <- list()
+  for(i in 1:length(series)){
+    name[[i]] <- series[[i]]$name
+  }
+
+  return(name)
+}
