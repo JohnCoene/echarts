@@ -322,3 +322,34 @@ build_links <- function(edges, source, target, weight = 1){
   return(links)
 
 }
+
+mark <- function(p, which, opts, type = "markPoint"){
+
+  if(which == "previous"){
+
+    previous <- length(p$x$options$series)
+    p$x$options$series[[previous]][[type]] <- opts
+
+  } else if(tolower(which) == "all"){
+
+    for(i in 1:length(p$x$options$series)){
+      p$x$options$series[[i]][[type]] <- opts
+    }
+
+  } else {
+
+    # get all series names
+    n <- lapply(1:length(p$x$options$series), function(x){
+      p$x$options$series[[x]]$name
+    })
+
+    pos <- grep(paste0("^", which, "$"), n) # get which position
+
+    if(!length(pos)) stop(paste("cannot find serie named:", which), call. = FALSE)
+
+    p$x$options$series[[pos]][[type]] <- opts
+
+  }
+
+  p
+}

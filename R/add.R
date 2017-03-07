@@ -67,12 +67,8 @@ ebar <- function(p, serie, stack = NULL, clickable = TRUE, xAxisIndex = 0, yAxis
 #'
 #' @export
 eline <- function(p, serie, stack = NULL, clickable = TRUE, xAxisIndex = 0, yAxisIndex = 0, symbol = NULL,
-                  symbolSize = "2 | 4", symbolRate = NULL, showAllSymbol = FALSE, smooth = FALSE, legendHoverLink = TRUE,
+                  symbolSize = "2 | 4", symbolRate = NULL, showAllSymbol = FALSE, smooth = TRUE, legendHoverLink = TRUE,
                   dataFilter = "nearest", z = 2, zlevel = 0, tooltip, markPoint, markLine, ...){
-
-  tooltip <- if(missing(tooltip)) default_tooltip(trigger = "axis")
-  markPoint <- if(missing(markPoint)) default_mark_point()
-  markLine <- if(missing(markLine)) default_mark_line()
 
   serie_name <- deparse(substitute(serie))
   serie <- vector_data(serie)
@@ -95,9 +91,9 @@ eline <- function(p, serie, stack = NULL, clickable = TRUE, xAxisIndex = 0, yAxi
   opts$legendHoverLink <- legendHoverLink
   opts$z <- z
   opts$zlevel <- zlevel
-  opts$tooltip <- tooltip
-  opts$markPoint <- markPoint
-  opts$markLine <- markLine
+  opts$tooltip <- if(!missing(tooltip)) tooltip
+  opts$markPoint <- if(!missing(markPoint)) markPoint
+  opts$markLine <- if(!missing(markLine)) markLine
 
   p$x$options$series <- append(p$x$options$series, list(opts))
 
