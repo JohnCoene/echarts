@@ -101,9 +101,9 @@ class2calc <- function(x){
 }
 
 
-build_coord <- function(long, lat){
+build_coord <- function(lon, lat){
 
-  x <- get("x", envir = data_env)
+  x <- tryCatch(get("x", envir = data_env), error = function(e) e)
   data <- get("data", envir = data_env)
   lon <- eval(substitute(lon, parent.frame()), data)
   lat <- eval(substitute(lat, parent.frame()), data)
@@ -111,7 +111,8 @@ build_coord <- function(long, lat){
   serie <- cbind(lon, lat)
   colnames(serie) <- NULL
   serie <- apply(serie, 1, as.list)
-  names(serie) <- x
+
+  if(!is(x, "error")) names(serie) <- x
 
   return(serie)
 
@@ -175,18 +176,17 @@ heat_data <- function(y, z){
   return(df)
 }
 
-heat_map_data <- function(lat, z){
-
-  x <- get("x", envir = data_env) # get words
+heat_map_data <- function(lon, lat, z){
 
   # build data
   data <- get("data", envir = data_env)
 
   # source
+  lon <- eval(substitute(lon, parent.frame()), data)
   lat <- eval(substitute(lat, parent.frame()), data)
   z <- eval(substitute(z, parent.frame()), data)
 
-  df <- cbind(x, lat, z)
+  df <- cbind(lon, lat, z)
   colnames(df) <- NULL # remove names
 
   df <- apply(df, 1, as.list)
@@ -203,4 +203,122 @@ default_legend <- function(p){
   }
 
   return(name)
+}
+
+default_tooltip <- function(show = TRUE, trigger = "axis", zlevel = 1, z = 8, showContent = TRUE,
+                     position = NULL, formatter = NULL, islandFormatter = "{a} < br/>{b} : {c}",
+                     showDelay = 20, hideDelay = 100, transitionDuration = 4, enterable = FALSE,
+                     backgroundColor = "rgba(0,0,0,0.7)", borderColor = "#333", borderRadius = 4,
+                     borderWidth = 0, padding = 5, axisPointer, textStyle, ...){
+
+  textStyle <- if(missing(textStyle)) list(fontFamily = "Arial, Verdana, sans-serif", fontSize = 12,
+                                           fontStyle = "normal", fontWeight = "normal")
+
+  opts <- list(...)
+  opts$show <- show
+  opts$trigger <- trigger
+  opts$zlevel <- zlevel
+  opts$showContent <- showContent
+  opts$position <- position
+  opts$formatter <- formatter
+  opts$islandFormatter <- islandFormatter
+  opts$showDelay <- showDelay
+  opts$hideDelay <- hideDelay
+  opts$transitionDuration <- transitionDuration
+  opts$enterable <- enterable
+  opts$backgroundColor <- backgroundColor
+  opts$borderColor <- borderColor
+  opts$borderRadius <- borderRadius
+  opts$borderWidth <- borderWidth
+  opts$padding <- padding
+  opts$axisPointer <- if(!missing(axisPointer)) axisPointer
+  opts$textStyle <- if(!missing(textStyle)) textStyle
+
+  return(opts)
+
+}
+
+default_mark_point <- function(data = list(), clickable = TRUE, symbol = "pin", symbolSize = 10, symbolRate = NULL,
+                               large = FALSE, effect, itemStyle, ...){
+
+  opts <- list(...)
+  opts$clickable <- clickable
+  opts$symbol <- symbol
+  opts$symbolSize <- symbolSize
+  opts$symbolRate <- symbolRate
+  opts$large <- large
+  opts$effect <- if(!missing(effect)) effect
+  opts$itemStyle <- if(!missing(itemStyle)) itemStyle
+  opts$data <- data
+
+  return(opts)
+
+}
+
+default_mark_line <- function(data = list(), clickable = TRUE, symbol = list("circle", "arrow"), symbolSize = list(2, 4),
+                              symbolRate = NULL, large = FALSE, smooth = FALSE, smoothness = 0.2, precision = 2,
+                              bundling, effect, itemStyle, ...){
+
+  opts <- list(...)
+  opts$data <- data
+  opts$clickable <- clickable
+  opts$symbol <- symbol
+  opts$symbolSize <- symbolSize
+  opts$symbolRate <- symbolRate
+  opts$large <- large
+  opts$smooth <- smooth
+  opts$smoothness <- smoothness
+  opts$precision <- precision
+  opts$bundling <- if(!missing(bundling)) bundling
+  opts$effect <- if(!missing(effect)) effect
+  opts$itemStyle <- if(!missing(itemStyle)) itemStyle
+
+  return(opts)
+
+}
+
+
+default_gradient <- function(){
+  list("blue", "cyan", "lime", "yellow", "red")
+}
+
+build_nodes <- function(nodes, name, label = NULL, value = NULL, category = NULL, symbolSize = NULL,
+                        ignore = FALSE, symbol = "circle", fixX = FALSE, fixY = FALSE){
+
+  name <- eval(substitute(name, parent.frame()), nodes)
+  ignore <- if(length(ignore) > 1) eval(substitute(ignore, parent.frame()), nodes)
+  symbol <- if(length(symbol) > 1) eval(substitute(symbol, parent.frame()), nodes)
+  fixX <- if(length(fixX) > 1) eval(substitute(fixX, parent.frame()), nodes)
+  fixY <- if(length(fixY) > 1) eval(substitute(fixY, parent.frame()), nodes)
+
+  vertices <- data.frame(row.names = 1:length(name))
+  vertices$name <- name
+  vertices$value <- if(!is.null(value)) eval(substitute(value, parent.frame()), nodes)
+  vertices$symbolSize <- if(!is.null(symbolSize)) eval(substitute(symbolSize, parent.frame()), nodes)
+  vertices$label <- if(!is.null(label)) eval(substitute(label, parent.frame()), nodes)
+  vertices$category <- if(!is.null(category)) eval(substitute(category, parent.frame()), nodes)
+  vertices$ignore <- ignore
+  vertices$symbol <- symbol
+  vertices$fixX <- fixX
+  vertices$fixY <- fixY
+
+  row.names(vertices) <- NULL
+  vertices <- apply(vertices, 1, as.list)
+
+  return(vertices)
+
+}
+
+build_links <- function(edges, source, target, weight = 1){
+
+  source <- eval(substitute(source, parent.frame()), edges)
+  target <- eval(substitute(target, parent.frame()), edges)
+
+  links <- cbind.data.frame(source, target)
+  links$weight <- weight
+
+  links <- apply(links, 1, as.list)
+
+  return(links)
+
 }

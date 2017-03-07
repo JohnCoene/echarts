@@ -4,7 +4,10 @@
 \alias{ebar}
 \title{Add bars}
 \usage{
-ebar(p, serie, stack = NULL, ...)
+ebar(p, serie, stack = NULL, clickable = TRUE, xAxisIndex = 0,
+  yAxisIndex = 0, barGap = "100\%", barCategoryGap = "20\%",
+  legendHoverLink = TRUE, z = 2, zlevel = 0, tooltip, itemStyle, barWidth,
+  barMaxWidth, ...)
 }
 \description{
 Add bar serie.
@@ -16,10 +19,11 @@ mtcars \%>\%
 
 mtcars \%>\%
   echart(disp) \%>\%
-  ebar(mpg, stack = "grp") \%>\%
-  ebar(qsec, stack = "grp") \%>\%
-  ebar(wt) \%>\%
-  etooltip()
+  ebar(mpg, stack = "grp") \%>\% # stack
+  ebar(qsec, stack = "grp") \%>\% # stack
+  ebar(wt) \%>\% # not stacked
+  etooltip() \%>\%
+  elegend()
 
 }
 

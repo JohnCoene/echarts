@@ -4,7 +4,11 @@
 \alias{eline}
 \title{Add lines}
 \usage{
-eline(p, serie, fill = FALSE, stack = NULL, ...)
+eline(p, serie, stack = NULL, clickable = TRUE, xAxisIndex = 0,
+  yAxisIndex = 0, symbol = NULL, symbolSize = "2 | 4",
+  symbolRate = NULL, showAllSymbol = FALSE, smooth = FALSE,
+  legendHoverLink = TRUE, dataFilter = "nearest", z = 2, zlevel = 0,
+  tooltip, markPoint, markLine, ...)
 }
 \description{
 Add line serie.

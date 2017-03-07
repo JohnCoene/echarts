@@ -115,28 +115,9 @@ etooltip <- function(p, show = TRUE, trigger = "axis", zlevel = 1, z = 8, showCo
                      backgroundColor = "rgba(0,0,0,0.7)", borderColor = "#333", borderRadius = 4,
                      borderWidth = 0, padding = 5, axisPointer, textStyle, ...){
 
-  textStyle <- if(missing(textStyle)) list(fontFamily = "Arial, Verdana, sans-serif", fontSize = 12,
-                                           fontStyle = "normal", fontWeight = "normal")
-
-  opts <- list(...)
-  opts$show <- show
-  opts$trigger <- trigger
-  opts$zlevel <- zlevel
-  opts$showContent <- showContent
-  opts$position <- position
-  opts$formatter <- formatter
-  opts$islandFormatter <- islandFormatter
-  opts$showDelay <- showDelay
-  opts$hideDelay <- hideDelay
-  opts$transitionDuration <- transitionDuration
-  opts$enterable <- enterable
-  opts$backgroundColor <- backgroundColor
-  opts$borderColor <- borderColor
-  opts$borderRadius <- borderRadius
-  opts$borderWidth <- borderWidth
-  opts$padding <- padding
-  opts$axisPointer <- if(!missing(axisPointer)) axisPointer
-  opts$textStyle <- if(!missing(textStyle)) textStyle
+  opts <- default_tooltip(show, trigger, zlevel, z, showContent, position, formatter, islandFormatter,
+                          showDelay, hideDelay, transitionDuration, enterable, backgroundColor, borderColor,
+                          borderRadius, borderWidth, padding, axisPointer, textStyle, ...)
 
   p$x$options$tooltip <- append(p$x$options$tooltip, opts)
 

@@ -4,7 +4,11 @@
 \alias{egauge}
 \title{Add gauge}
 \usage{
-egauge(p, value, name = "gauge", ...)
+egauge(p, value, name = NULL, clickable = TRUE, legendHoverLink = TRUE,
+  center = list("50\%", "50\%"), radius = list("0\%", "75\%"),
+  startAngle = 225, endAngle = -45, min = 0, max = 100,
+  splitNumber = 10, z = 2, zlevel = 0, tooltip, markPoint, markLine,
+  axisLine, axisLabel, splitLine, pointer, title, detail, ...)
 }
 \description{
 Add gauge

@@ -4,7 +4,10 @@
 \alias{ecloud}
 \title{add wordcloud}
 \usage{
-ecloud(p, freq, color, ...)
+ecloud(p, freq, color, clickable = TRUE, center = list("50\%", "50\%"),
+  size = list("40\%", "40\%"), textRotation = list(0, 90),
+  autoSize = list(enable = TRUE, minSize = 12), z = 2, zlevel = 0,
+  markPoint, markLine, tooltip, ...)
 }
 \description{
 add wordcloud

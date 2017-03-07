@@ -4,7 +4,9 @@
 \alias{eheatmap}
 \title{add heatmap}
 \usage{
-eheatmap(p, y, z, ...)
+eheatmap(p, y, values, clickable = TRUE, blurSize = 30, minAlpha = 0.5,
+  valueScale = 1, opacity = 1, z = 2, zlevel = 0, gradientColors,
+  markPoint, markLine, tooltip, ...)
 }
 \description{
 add heatmap

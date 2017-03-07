@@ -4,7 +4,9 @@
 \alias{emap_points}
 \title{Add map points}
 \usage{
-emap_points(p, serie)
+emap_points(p, serie, clickable = TRUE, symbol = "pin",
+  symbolSize = htmlwidgets::JS(" function (v){ return 10 + v/10 }"),
+  symbolRotate = NULL, large = FALSE, itemStyle, effect, ...)
 }
 \description{
 Add map points
@@ -17,8 +19,22 @@ coords <- data.frame(city = c("London", "New York", "Beijing", "Sydney"),
 
 coords \%>\%
   echart(city) \%>\%
+  emap() \%>\%
   emap_coords(lon, lat) \%>\%
   emap_points(values)
+
+coords2 <- data.frame(city = "Rio", lon = -43.172896, lat = -22.906847, value = 15)
+
+coords \%>\%
+  echart(city) \%>\%
+  emap() \%>\%
+  emap_coords(lon, lat) \%>\%
+  emap_points(values, symbolSize = 5) \%>\%
+  edata(coords2, city) \%>\%
+  emap() \%>\%
+  emap_coords(lon, lat) \%>\%
+  emap_points(value, symbol = "emptyCircle", effect = list(show = TRUE, shadowBlur = 10)) \%>\%
+  etheme("infographic")
 
 }
 

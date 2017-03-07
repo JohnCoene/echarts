@@ -4,7 +4,11 @@
 \alias{efunnel}
 \title{Add funnel}
 \usage{
-efunnel(p, serie, ...)
+efunnel(p, serie, clickable = TRUE, legendHoverLink = TRUE,
+  sort = "descending", min = 0, max = 100, x = 80, y = 60, x2 = 80,
+  y2 = 60, width = NULL, height = NULL, funnelAlign = "center",
+  minSize = "0\%", maxSize = "100\%", gap = 0, markPoint, markLine,
+  tooltip, itemStyle, ...)
 }
 \description{
 Add funnel

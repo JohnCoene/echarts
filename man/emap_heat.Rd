@@ -4,7 +4,8 @@
 \alias{emap_heat}
 \title{Add heat on map}
 \usage{
-emap_heat(p, lat, z, mapType = "world", ...)
+emap_heat(p, lon, lat, z, blurSize = 30, minAlpha = 0.05, valueScale = 1,
+  opacity = 1, gradientColors, ...)
 }
 \description{
 Add heat on map
@@ -15,8 +16,14 @@ data <- data.frame(lon = runif(200, 90, 120),
   z = runif(200, 50, 75))
 
 data \%>\%
-  echart(lon) \%>\%
-  emap_heat(lat, z, "china")
+  echart() \%>\%
+  emap(mapType = "china") \%>\%
+  emap_heat(lon, lat, z)
+
+data \%>\%
+  echart() \%>\%
+  emap(mapType = "china") \%>\%
+  emap_heat(lon, lat, z, blurSize = 50, minAlpha = 0.3, opacity = 0.8,)
 
 }
 

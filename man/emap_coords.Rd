@@ -4,7 +4,7 @@
 \alias{emap_coords}
 \title{Add map coordinates}
 \usage{
-emap_coords(p, lon, lat, mapType = "world", ...)
+emap_coords(p, lon, lat)
 }
 \description{
 Add coordinates to map

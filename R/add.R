@@ -9,13 +9,18 @@
 #'
 #' mtcars %>%
 #'   echart(disp) %>%
-#'   ebar(mpg, stack = "grp") %>%
-#'   ebar(qsec, stack = "grp") %>%
-#'   ebar(wt) %>%
-#'   etooltip()
+#'   ebar(mpg, stack = "grp") %>% # stack
+#'   ebar(qsec, stack = "grp") %>% # stack
+#'   ebar(wt) %>% # not stacked
+#'   etooltip() %>%
+#'   elegend()
 #'
 #' @export
-ebar <- function(p, serie, stack = NULL, ...){
+ebar <- function(p, serie, stack = NULL, clickable = TRUE, xAxisIndex = 0, yAxisIndex = 0, barGap = "100%",
+                 barCategoryGap = "20%", legendHoverLink = TRUE, z = 2, zlevel = 0, tooltip, itemStyle,
+                 barWidth, barMaxWidth, ...){
+
+  tooltip <- if(missing(tooltip)) default_tooltip(trigger = "axis")
 
   serie_name <- deparse(substitute(serie))
   serie <- vector_data(serie)
@@ -26,6 +31,18 @@ ebar <- function(p, serie, stack = NULL, ...){
   opts$type <- "bar"
   opts$data <- serie
   opts$stack <- if(!is.null(stack)) stack
+  opts$clickable <- clickable
+  opts$xAxisIndex <- xAxisIndex
+  opts$yAxisIndex <- yAxisIndex
+  opts$barGap <- barGap
+  opts$barCategory <- barCategoryGap
+  opts$legendHoverLink <- legendHoverLink
+  opts$z <- z
+  opts$zlevel <- zlevel
+  opts$tooltip <- tooltip
+  opts$itemStyle <- if(!missing(itemStyle)) itemStyle
+  opts$barWidth <- if(!missing(barWidth)) barWidth
+  opts$barMaxWidth <- if(!missing(barMaxWidth)) barMaxWidth
 
   p$x$options$series <- append(p$x$options$series, list(opts))
 
@@ -49,7 +66,13 @@ ebar <- function(p, serie, stack = NULL, ...){
 #'   etooltip()
 #'
 #' @export
-eline <- function(p, serie, fill = FALSE, stack = NULL, ...){
+eline <- function(p, serie, stack = NULL, clickable = TRUE, xAxisIndex = 0, yAxisIndex = 0, symbol = NULL,
+                  symbolSize = "2 | 4", symbolRate = NULL, showAllSymbol = FALSE, smooth = FALSE, legendHoverLink = TRUE,
+                  dataFilter = "nearest", z = 2, zlevel = 0, tooltip, markPoint, markLine, ...){
+
+  tooltip <- if(missing(tooltip)) default_tooltip(trigger = "axis")
+  markPoint <- if(missing(markPoint)) default_mark_point()
+  markLine <- if(missing(markLine)) default_mark_line()
 
   serie_name <- deparse(substitute(serie))
   serie <- vector_data(serie)
@@ -60,7 +83,21 @@ eline <- function(p, serie, fill = FALSE, stack = NULL, ...){
   opts$type <- "line"
   opts$data <- serie
   opts$stack <- if(!is.null(stack)) stack
-  opts$itemStyle <- if(fill == TRUE) list(normal= list(areaStyle = list(type = 'default')))
+  opts$clickable <- clickable
+  opts$xAxisIndex <- xAxisIndex
+  opts$yAxisIndex <- yAxisIndex
+  opts$symbol <- symbol
+  opts$symbolSize <- symbolSize
+  opts$symbolRate <- symbolRate
+  opts$showAllSymbol <- showAllSymbol
+  opts$smooth <- smooth
+  opts$dataFilter <- dataFilter
+  opts$legendHoverLink <- legendHoverLink
+  opts$z <- z
+  opts$zlevel <- zlevel
+  opts$tooltip <- tooltip
+  opts$markPoint <- markPoint
+  opts$markLine <- markLine
 
   p$x$options$series <- append(p$x$options$series, list(opts))
 
@@ -217,13 +254,37 @@ eradar <- function(p, serie, ...){
 #'   echart(LETTERS[1:10]) %>%
 #'   echord()
 #'
+#' matrix %>%
+#'   echart(LETTERS[1:10]) %>%
+#'   echord(ribbonType = FALSE)
+#'
 #' @export
-echord <- function(p, sort = "ascending", sortSub = "descending", ...){
+echord <- function(p, name = NULL, sort = "none", sortSub = "none", clickable = TRUE, z = 2, zlevel = 0,
+                   symbol = NULL, symbolSize = NULL, clockWise = FALSE, minRadius = 10, maxRadius = 20,
+                   ribbonType = TRUE, showScale = FALSE, showScaleText = FALSE, padding = 2, categories, tooltip,
+                   markPoint, markLine, ...){
 
   opts <- list(...)
+  opts$name <- name
   opts$type <- "chord"
   opts$sort <- sort
   opts$sortSub <- sortSub
+  opts$clickable <- clickable
+  opts$z <- z
+  opts$zlevel <- zlevel
+  opts$symbol <- if(!is.null(symbol)) symbol
+  opts$symbolSize <- if(!is.null(symbolSize)) symbolSize
+  opts$clockWise <- clockWise
+  opts$minRadius <- minRadius
+  opts$maxRadius <- maxRadius
+  opts$ribbonType <- ribbonType
+  opts$showScale <- showScale
+  opts$showScaleText <- showScaleText
+  opts$padding <- padding
+  opts$categories <- if(!missing(categories)) categories
+  opts$tooltip <- if(!missing(tooltip)) tooltip
+  opts$markPoint <- if(!missing(markPoint)) markPoint
+  opts$markLine <- if(!missing(markLine)) markLine
   opts$data <- chord_data()
   opts$matrix <- chord_matrix()
 
@@ -239,33 +300,22 @@ echord <- function(p, sort = "ascending", sortSub = "descending", ...){
 #'
 #' @examples
 #' choropleth <- data.frame(countries = c("France", "Brazil", "China", "Russia", "Canada", "India"),
-#'   values = runif(6, 10, 25))
+#'   values = round(runif(6, 10, 25)))
 #'
 #' choropleth %>%
 #'   echart(countries) %>%
-#'   echoropleth(values)
+#'   emap() %>%
+#'   emap_choropleth(values)
 #'
 #' @export
-echoropleth <- function(p, serie, mapType = "world", dataRange, ...){
+emap_choropleth <- function(p, serie, dataRange){
 
-  serie_name <- deparse(substitute(serie))
+  previous <- length(p$x$options$series)
+  dataRange <- if(missing(dataRange)) default_dataRange(serie)
 
-  opts <- list(...)
-  opts$name <- serie_name
-  opts$type <- "map"
-  opts$mapType = mapType
-  opts$data <- val_name_data(serie)
-
-  p$x$options$xAxis <- NULL
-  p$x$options$yAxis <- NULL
-
-  if(missing(dataRange)){
-    dataRange <- default_dataRange(serie)
-  }
-
+  p$x$options$series[[previous]]$data <- val_name_data(serie)
   p$x$options$dataRange <- dataRange
-
-  p$x$options$series <- append(p$x$options$series, list(opts))
+  p$x$options$series[[previous]]$hoverable <- TRUE
 
   p
 }
@@ -275,19 +325,16 @@ echoropleth <- function(p, serie, mapType = "world", dataRange, ...){
 #' Add coordinates to map
 #'
 #' @export
-emap_coords <- function(p, lon, lat, mapType = "world", ...){
-
-  opts <- list(...)
-  opts$name <- "coords"
-  opts$type <- "map"
-  opts$mapType = mapType
-  opts$data <- list()
-  opts$geoCoord <- build_coord(lon, lat)
+emap_coords <- function(p, lon, lat){
 
   p$x$options$xAxis <- NULL
   p$x$options$yAxis <- NULL
 
-  p$x$options$series <- append(p$x$options$series, list(opts))
+  previous <- length(p$x$options$series)
+
+  p$x$options$series[[previous]]$geoCoord <- build_coord(lon, lat)
+
+  p
 
   p
 }
@@ -306,21 +353,61 @@ emap_coords <- function(p, lon, lat, mapType = "world", ...){
 #'
 #' coords %>%
 #'   echart(city) %>%
+#'   emap() %>%
 #'   emap_coords(lon, lat) %>%
 #'   emap_lines(edges, source, target)
 #'
+#' edges2 <- data.frame(source = "London", target = "Sydney")
+#'
+#' coords %>%
+#'   echart(city) %>%
+#'   emap() %>%
+#'   emap_coords(lon, lat) %>%
+#'   emap_lines(edges, source, target) %>%
+#'   emap() %>%
+#'   emap_coords(lon, lat) %>%
+#'   emap_lines(edges2, source, target, effect = emap_line_effect()) %>%
+#'   etheme("macarons")
+#'
+#' coords2 <- data.frame(city = "Sydney", lon = 151.18518, lat = -33.92001, value = 20)
+#'
+#' coords %>%
+#'   echart(city) %>%
+#'   emap() %>%
+#'   emap_coords(lon, lat) %>%
+#'   emap_lines(edges, source, target) %>%
+#'   edata(coords2, city) %>%
+#'   emap() %>%
+#'   emap_coords(lon, lat) %>%
+#'   emap_lines(edges2, source, target, effect = emap_line_effect(scaleSize = 2)) %>%
+#'   emap_coords(lon, lat) %>%
+#'   emap_points(value, symbol = "emptyCircle", effect = list(show = TRUE, shadowBlur = 10)) %>%
+#'   etheme("infographic")
+#'
+#' @seealso \code{\link{emap_coords}}
+#'
 #' @export
-emap_lines <- function(p, edges, source, target){
+emap_lines <- function(p, edges, source, target, name = NULL, clickable = TRUE, symbol = list("circle", "arrow"),
+                       symbolSize = list(2, 4), symbolRate = NULL, large = FALSE, smooth = TRUE, z = 2, zlevel = 0,
+                       smoothness = 0.2, precision = 2, bundling = list(enable = FALSE, maxTurningAngle = 45),
+                       effect, itemStyle, ...){
 
-  opts <- list()
-  opts$smooth <- TRUE
-  opts$effect = list(
-    show = TRUE,
-    scaleSize = 1,
-    period = 30,
-    color = "#fff",
-    shadowBlur = 10
-  )
+  opts <- list(...)
+  opts$name <- name
+  opts$clickable <- clickable
+  opts$symbol <- symbol
+  opts$symbolSize <- symbolSize
+  opts$symbolRate <- symbolRate
+  opts$large <- large
+  opts$smooth <- smooth
+  opts$z <- z
+  opts$zlevel <- zlevel
+  opts$smoothness <- smoothness
+  opts$precision <- precision
+  opts$bundling <- bundling
+  opts$effect <- if(!missing(effect)) effect
+  itemStyle <- if(!missing(itemStyle)) itemStyle
+
   opts$data <- map_lines(edges, source, target)
 
   p$x$options$xAxis <- NULL
@@ -345,20 +432,38 @@ emap_lines <- function(p, edges, source, target){
 #'
 #' coords %>%
 #'   echart(city) %>%
+#'   emap() %>%
 #'   emap_coords(lon, lat) %>%
 #'   emap_points(values)
 #'
+#' coords2 <- data.frame(city = "Rio", lon = -43.172896, lat = -22.906847, value = 15)
+#'
+#' coords %>%
+#'   echart(city) %>%
+#'   emap() %>%
+#'   emap_coords(lon, lat) %>%
+#'   emap_points(values, symbolSize = 5) %>%
+#'   edata(coords2, city) %>%
+#'   emap() %>%
+#'   emap_coords(lon, lat) %>%
+#'   emap_points(value, symbol = "emptyCircle", effect = list(show = TRUE, shadowBlur = 10)) %>%
+#'   etheme("infographic")
+#'
 #' @export
-emap_points <- function(p, serie){
+emap_points <- function(p, serie, clickable = TRUE, symbol = "pin", symbolSize = htmlwidgets::JS(" function (v){ return 10 + v/10 }"),
+                        symbolRotate = NULL, large = FALSE, itemStyle, effect, ...){
 
   data <- get("data", envir = data_env)
   serie <- eval(substitute(serie), data)
+  itemStyle <- if(missing(itemStyle)) list(normal = list(label = list(show = FALSE)))
 
   opts <- list()
-  opts$symbol = 'emptyCircle'
-  opts$symbolSize = htmlwidgets::JS(" function (v){ return 10 + v/10 }")
-  opts$effect = list(show = TRUE, shadowBlur = 0)
-  opts$itemStyle = list(normal = list(label = list(show = FALSE)))
+  opts$symbol = symbol
+  opts$symbolSize = symbolSize
+  opts$symbolRotate <- symbolRotate
+  opts$large <- large
+  opts$effect = if(!missing(effect)) effect
+  opts$itemStyle <- if(!missing(itemStyle)) itemStyle
   opts$data = val_name_data(serie)
 
   p$x$options$xAxis <- NULL
@@ -381,24 +486,99 @@ emap_points <- function(p, serie){
 #'   z = runif(200, 50, 75))
 #'
 #' data %>%
-#'   echart(lon) %>%
-#'   emap_heat(lat, z, "china")
+#'   echart() %>%
+#'   emap(mapType = "china") %>%
+#'   emap_heat(lon, lat, z)
+#'
+#' data %>%
+#'   echart() %>%
+#'   emap(mapType = "china") %>%
+#'   emap_heat(lon, lat, z, blurSize = 50, minAlpha = 0.3, opacity = 0.8,)
 #'
 #' @export
-emap_heat <- function(p, lat, z, mapType = "world", ...){
+emap_heat <- function(p, lon, lat, z, blurSize = 30, minAlpha = 0.05, valueScale = 1, opacity = 1,
+                      gradientColors, ...){
+
+  gradientColors <- if(missing(gradientColors)) default_gradient()
 
   opts <- list(...)
-  opts$name <- "heatmap"
-  opts$type <- "map"
-  opts$mapType = mapType
-  opts$data <- list()
-  opts$heatmap <- list(
-    minAlpha = 0.1,
-    data = heat_map_data(y, z)
-  )
+  opts$blurSize <- blurSize
+  opts$minAlpha <- minAlpha
+  opts$valueScale <- valueScale
+  opts$opacity <- opacity
+  opts$data <- heat_map_data(lon, lat, z)
+  opts$gradientColors <- gradientColors
 
-  p$x$options$xAxis <- NULL
-  p$x$options$yAxis <- NULL
+  # append
+  previous <- length(p$x$options$series)
+  p$x$options$series[[previous]]$heatmap = opts
+
+  p
+}
+
+#' Add blank map
+#'
+#' Setup map plot.
+#'
+#' @examples
+#' coords <- data.frame(city = c("London", "New York", "Beijing", "Sydney"),
+#'   lon = c(-0.1167218, -73.98002, 116.3883, 151.18518),
+#'   lat = c(51.49999, 40.74998, 39.92889, -33.92001),
+#'   values = runif(4, 10, 20))
+#'
+#' coords %>%
+#'   echart(city) %>% # initialise chart
+#'   emap() %>% # setup default map
+#'   emap_coords(lon, lat) %>% # add coordinates
+#'   emap_points(values) # plot values on coordinates
+#'
+#' edges <- data.frame(source = c("Beijing", "Beijing", "New York"),
+#'   target = c("Sydney", "London", "London"))
+#'
+#' coords %>%
+#'   echart(city) %>%
+#'   emap() %>%
+#'   emap_coords(lon, lat) %>%
+#'   emap_lines(edges, source, target)
+#'
+#' data <- data.frame(lon = runif(200, 90, 120),
+#'   lat = runif(200, 30, 39),
+#'   z = runif(200, 50, 75))
+#'
+#' data %>%
+#'   echart() %>%
+#'   emap(mapType = "china") %>%
+#'   emap_heat(lon, lat, z)
+#'
+#' @seealso \code{\link{emap_coords}}, \code{\link{emap_heat}}, \code{\link{emap_lines}}, \code{emap_choropleth},
+#' \code{\link{emap_points}}
+#'
+#' @export
+emap <- function(p, name = NULL, mapType = "world", clickable = TRUE, z = 2, zlevel = 0,
+                 selectedMode = NULL, hoverable = FALSE, dataRangeHoverLink = TRUE,
+                 mapLocation = list(x = "center", y = "center"), mapValueCalculation = "sum",
+                 mapValuePrecision = 0, showLegendSymbol = TRUE, roam = FALSE, scaleLimit = NULL,
+                 nameMap = NULL, textFixed = NULL, ...){
+
+  opts <- list(...)
+  opts$name <- name
+  opts$type <- "map"
+  opts$mapType <- mapType
+  opts$clickable <- clickable
+  opts$z <- z
+  opts$zlevel <- zlevel
+  opts$selectedMode <- selectedMode
+  opts$hoverable <- hoverable
+  opts$dataRangeHoverLink <- dataRangeHoverLink
+  opts$mapLocation <- mapLocation
+  opts$mapValueCalculation <- mapValueCalculation
+  opts$mapValuePrecision <- mapValuePrecision
+  opts$showLegendSymbol <- showLegendSymbol
+  opts$roam <- roam
+  opts$scaleLimit <- scaleLimit
+  opts$nameMap <- nameMap
+  opts$textFixed <- textFixed
+  opts$data <- list()
 
   p$x$options$xAxis <- NULL
   p$x$options$yAxis <- NULL
@@ -417,11 +597,39 @@ emap_heat <- function(p, lat, z, mapType = "world", ...){
 #'   egauge(85, "SPEED")
 #'
 #' @export
-egauge <- function(p, value, name = "gauge", ...){
+egauge <- function(p, value, name = NULL, clickable = TRUE, legendHoverLink = TRUE, center = list("50%", "50%"),
+                   radius = list("0%", "75%"), startAngle = 225, endAngle = -45, min = 0, max = 100,
+                   splitNumber = 10, z = 2, zlevel = 0, tooltip, markPoint, markLine, axisLine, axisLabel,
+                   splitLine, pointer, title, detail, ...){
+
+  tooltip <- if(missing(tooltip)) default_tooltip(trigger = "item")
+  markPoint <- if(missing(markPoint)) default_mark_point()
+  markLine <- if(missing(markLine)) default_mark_line()
 
   opts <- list(...)
   opts$name = name
   opts$type = "gauge"
+  opts$clickable <- clickable
+  opts$legendHoverLink <- legendHoverLink
+  opts$center <- center
+  opts$radius <- radius
+  opts$startAngle <- startAngle
+  opts$endAngle <- endAngle
+  opts$min <- min
+  opts$max <- max
+  opts$z <- z
+  opts$zlevel <- zlevel
+  opts$splitNumber <- splitNumber
+  opts$tooltip <- tooltip
+  opts$markPoint <- markPoint
+  opts$markLine <- markLine
+  opts$axisLine <- if(!missing(axisLine)) axisLine
+  opts$axisLabel <- if(!missing(axisLabel)) axisLabel
+  opts$splitLine <- if(!missing(splitLine)) splitLine
+  opts$pointer <- if(!missing(pointer)) pointer
+  opts$title <- if(!missing(title)) title
+  opts$detail <- if(!missing(detail)) detail
+
   opts$data = list(list(value = value, name = name))
 
   p$x$options$xAxis <- NULL
@@ -444,7 +652,14 @@ egauge <- function(p, value, name = "gauge", ...){
 #'   efunnel(value)
 #'
 #' @export
-efunnel <- function(p, serie, ...){
+efunnel <- function(p, serie, clickable = TRUE, legendHoverLink = TRUE, sort = "descending",
+                    min = 0, max = 100, x = 80, y = 60, x2 = 80, y2 = 60, width = NULL, height = NULL,
+                    funnelAlign = "center", minSize = "0%", maxSize = "100%", gap = 0, markPoint,
+                    markLine, tooltip, itemStyle,...){
+
+  tooltip <- if(missing(tooltip)) default_tooltip(trigger = "item")
+  markPoint <- if(missing(markPoint)) default_mark_point()
+  markLine <- if(missing(markLine)) default_mark_line()
 
   data <- get("data", envir = data_env)
   series_name <- deparse(substitute(serie))
@@ -453,6 +668,25 @@ efunnel <- function(p, serie, ...){
   opts <- list(...)
   opts$name = series_name
   opts$type = "funnel"
+  opts$clickable <- clickable
+  opts$legendHoverLink <- legendHoverLink
+  opts$sort <- sort
+  opts$min <- min
+  opts$max <- max
+  opts$x <- x
+  opts$y <- y
+  opts$x2 <- x2
+  opts$y2 <- y2
+  opts$width <- width
+  opts$height <- height
+  opts$funnelAlign <- funnelAlign
+  opts$minSize <- minSize
+  opts$maxSize <- maxSize
+  opts$gap <- gap
+  opts$markPoint <- markPoint
+  opts$markLine <- markLine
+  opts$tooltip <- tooltip
+  opts$itemStyle <- if(!missing(itemStyle)) itemStyle
   opts$data = val_name_data(serie)
 
   p$x$options$xAxis <- NULL
@@ -478,20 +712,24 @@ efunnel <- function(p, serie, ...){
 #'   evenn(values)
 #'
 #' @export
-evenn <- function(p, serie, overlap, ...){
+evenn <- function(p, serie, overlap, clickable = TRUE, z = 2, zlevel = 0, tooltip, itemStyle, markPoint, markLine, ...){
 
   series_name <- deparse(substitute(serie))
+  tooltip <- if(missing(tooltip)) default_tooltip(trigger = "item")
+  markPoint <- if(missing(markPoint)) default_mark_point()
+  markLine <- if(missing(markLine)) default_mark_line()
+  itemStyle <- list(normal = list(label = list(show = TRUE)))
 
   opts <- list(...)
   opts$name = series_name
   opts$type = "venn"
-  opts$itemStyle = list(
-    normal = list(
-      label = list(
-        show = TRUE
-      )
-    )
-  )
+  opts$itemStyle = itemStyle
+  opts$clickable <- clickable
+  opts$z <- z
+  opts$zlevel <- zlevel
+  opts$tooltip <- tooltip
+  opts$markPoint <- markPoint
+  opts$markLine <- markLine
   opts$data = val_name_data(serie)
 
   p$x$options$xAxis <- NULL
@@ -513,13 +751,28 @@ evenn <- function(p, serie, overlap, ...){
 #'   ecloud(freq, color)
 #'
 #' @export
-ecloud <- function(p, freq, color, ...){
+ecloud <- function(p, freq, color, clickable = TRUE, center = list("50%", "50%"), size = list("40%", "40%"),
+                   textRotation = list(0, 90), autoSize = list(enable = TRUE, minSize = 12), z = 2, zlevel = 0,
+                   markPoint, markLine, tooltip, ...){
 
   series_name <- deparse(substitute(freq))
+  tooltip <- if(missing(tooltip)) default_tooltip(trigger = "item")
+  markPoint <- if(missing(markPoint)) default_mark_point()
+  markLine <- if(missing(markLine)) default_mark_line()
 
   opts <- list(...)
   opts$name = series_name
   opts$type = "wordCloud"
+  opts$clickable <- clickable
+  opts$center <- center
+  opts$size <- size
+  opts$textRotation <- textRotation
+  opts$autoSize <- autoSize
+  opts$z <- z
+  opts$zlevel <- zlevel
+  opts$markPoint <- markPoint
+  opts$markLine <- markLine
+  opts$tooltip <- tooltip
   opts$data = cloud_data(freq, color)
 
   p$x$options$xAxis <- NULL
@@ -541,19 +794,74 @@ ecloud <- function(p, freq, color, ...){
 #'   eheatmap(y, z)
 #'
 #' @export
-eheatmap <- function(p, y, z, ...){
+eheatmap <- function(p, y, values, clickable = TRUE, blurSize = 30, minAlpha = 0.5, valueScale = 1,
+                     opacity = 1, z = 2, zlevel = 0, gradientColors, markPoint, markLine, tooltip, ...){
 
-  series_name <- deparse(substitute(z))
+  series_name <- deparse(substitute(values))
+  gradientColors <- if(missing(gradientColors)) default_gradient()
+  markPoint <- if(missing(markPoint)) default_mark_point()
+  markLine <- if(missing(markLine)) default_mark_line()
+  tooltip <- if(missing(tooltip)) default_tooltip(trigger = "item")
 
   opts <- list(...)
   opts$name = series_name
   opts$type = "heatmap"
-  opts$data = heat_data(y, z)
+  opts$tooltip <- tooltip
+  opts$clickable <- clickable
+  opts$blurSize <- blurSize
+  opts$minAlpha <- minAlpha
+  opts$valueScale <- valueScale
+  opts$opacity <- opacity
+  opts$z <- z
+  opts$zlevel <- zlevel
+  opts$gradientColors <- gradientColors
+  opts$markPoint <- markPoint
+  opts$markLine <- markLine
+  opts$data = heat_data(y, values)
 
   p$x$options$xAxis <- NULL
   p$x$options$yAxis <- NULL
 
   p$x$options$series <- append(p$x$options$series, list(opts))
+
+  p
+}
+
+#' Add data
+#'
+#' @export
+edata <- function(p, data, x, ...){
+
+  # x
+  if(!missing(x)){
+    xvar <- tryCatch(eval(substitute(x), data), error = function(e) e)
+    if(is(xvar, "error")){
+      xvar <- x
+    }
+  } else {
+    xvar <- list()
+  }
+
+  if(!missing(data)){
+    assign("data", data, envir = data_env)
+  }
+
+  # assign for future use
+  assign("x", xvar, envir = data_env)
+
+  # forward options using x
+  x = list(
+    theme = "default",
+    options = list(
+      xAxis = list(
+        list(
+          data = xvar
+        )
+      ),
+      yAxis = list(),
+      series = list()
+    )
+  )
 
   p
 }

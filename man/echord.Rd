@@ -4,7 +4,11 @@
 \alias{echord}
 \title{Add chord}
 \usage{
-echord(p, sort = "ascending", sortSub = "descending", ...)
+echord(p, name = NULL, sort = "none", sortSub = "none",
+  clickable = TRUE, z = 2, zlevel = 0, symbol = NULL,
+  symbolSize = NULL, clockWise = FALSE, minRadius = 10, maxRadius = 20,
+  ribbonType = TRUE, showScale = FALSE, showScaleText = FALSE,
+  padding = 2, categories, tooltip, markPoint, markLine, ...)
 }
 \description{
 Add chord
@@ -16,6 +20,10 @@ matrix <- matrix(sample(0:1, 100, replace=TRUE, prob=c(0.9,0.6)), nc=10)
 matrix \%>\%
   echart(LETTERS[1:10]) \%>\%
   echord()
+
+matrix \%>\%
+  echart(LETTERS[1:10]) \%>\%
+  echord(ribbonType = FALSE)
 
 }
 

@@ -4,7 +4,11 @@
 \alias{emap_lines}
 \title{Add map lines}
 \usage{
-emap_lines(p, edges, source, target)
+emap_lines(p, edges, source, target, name = NULL, clickable = TRUE,
+  symbol = list("circle", "arrow"), symbolSize = list(2, 4),
+  symbolRate = NULL, large = FALSE, smooth = TRUE, z = 2, zlevel = 0,
+  smoothness = 0.2, precision = 2, bundling = list(enable = FALSE,
+  maxTurningAngle = 45), effect, itemStyle, ...)
 }
 \description{
 Add lines on map
@@ -19,8 +23,39 @@ edges <- data.frame(source = c("Beijing", "Beijing", "New York"),
 
 coords \%>\%
   echart(city) \%>\%
+  emap() \%>\%
   emap_coords(lon, lat) \%>\%
   emap_lines(edges, source, target)
 
+edges2 <- data.frame(source = "London", target = "Sydney")
+
+coords \%>\%
+  echart(city) \%>\%
+  emap() \%>\%
+  emap_coords(lon, lat) \%>\%
+  emap_lines(edges, source, target) \%>\%
+  emap() \%>\%
+  emap_coords(lon, lat) \%>\%
+  emap_lines(edges2, source, target, effect = emap_line_effect()) \%>\%
+  etheme("macarons")
+
+coords2 <- data.frame(city = "Sydney", lon = 151.18518, lat = -33.92001, value = 20)
+
+coords \%>\%
+  echart(city) \%>\%
+  emap() \%>\%
+  emap_coords(lon, lat) \%>\%
+  emap_lines(edges, source, target) \%>\%
+  edata(coords2, city) \%>\%
+  emap() \%>\%
+  emap_coords(lon, lat) \%>\%
+  emap_lines(edges2, source, target, effect = emap_line_effect(scaleSize = 2)) \%>\%
+  emap_coords(lon, lat) \%>\%
+  emap_points(value, symbol = "emptyCircle", effect = list(show = TRUE, shadowBlur = 10)) \%>\%
+  etheme("infographic")
+
+}
+\seealso{
+\code{\link{emap_coords}}
 }
 
