@@ -4,7 +4,7 @@
 \alias{escatter}
 \title{Add scatter}
 \usage{
-escatter(p, serie, size, ...)
+escatter(p, serie, size, name = NULL, clickable = TRUE, ...)
 }
 \description{
 Add scatter serie.
@@ -16,8 +16,8 @@ mtcars \%>\%
 
 mtcars \%>\%
   echart(disp) \%>\%
-  escatter(mpg, disp / 8) \%>\%
-  escatter(qsec, disp / 8)
+  escatter(mpg, mpg * 2) \%>\%
+  escatter(qsec, qsec * 2)
 
 }
 

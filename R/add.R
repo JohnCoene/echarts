@@ -150,13 +150,13 @@ earea <- function(p, serie, stack = NULL, ...){
 #'
 #' mtcars %>%
 #'   echart(disp) %>%
-#'   escatter(mpg, disp / 8) %>%
-#'   escatter(qsec, disp / 8)
+#'   escatter(mpg, mpg * 2) %>%
+#'   escatter(qsec, qsec * 2)
 #'
 #' @export
-escatter <- function(p, serie, size, ...){
+escatter <- function(p, serie, size, name = NULL, clickable = TRUE,  ...){
 
-  serie_name <- deparse(substitute(serie))
+  serie_name <- if(is.null(name)) deparse(substitute(serie))
   serie <- scatter_data(serie, size)
 
   # build $serie
@@ -164,6 +164,7 @@ escatter <- function(p, serie, size, ...){
   opts$name <- serie_name
   opts$type <- "scatter"
   opts$data <- serie
+  opts$clickable
   opts$symbolSize <- if(!missing(size)){htmlwidgets::JS("function (value){ return Math.round(value[2] / 5);}")}
 
   p$x$options$xAxis[[1]]$data <- NULL
