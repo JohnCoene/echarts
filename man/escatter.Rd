@@ -12,7 +12,7 @@ Add scatter serie.
 \examples{
 mtcars \%>\%
   echart(disp) \%>\%
-  escatter(mpg, qsec * 3)
+  escatter(mpg)
 
 mtcars \%>\%
   echart(disp) \%>\%

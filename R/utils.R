@@ -339,13 +339,7 @@ mark <- function(p, which, opts, type = "markPoint"){
   } else {
 
     # get all series names
-    n <- lapply(1:length(p$x$options$series), function(x){
-      p$x$options$series[[x]]$name
-    })
-
-    pos <- grep(paste0("^", which, "$"), n) # get which position
-
-    if(!length(pos)) stop(paste("cannot find serie named:", which), call. = FALSE)
+    post <- get_series_name(p, which)
 
     p$x$options$series[[pos]][[type]] <- opts
 
@@ -464,4 +458,37 @@ add_toolbox_elem <- function(p, opts, elem){
 
   p
 
+}
+
+# return name index
+get_series_name <- function(p, which){
+
+  # get all series names
+  n <- lapply(1:length(p$x$options$series), function(x){
+    p$x$options$series[[x]]$name
+  })
+
+  position <- grep(paste0("^", which, "$"), n) # get which position
+
+  if(!length(position)) stop(paste("cannot find serie named:", which), call. = FALSE)
+
+  return(position)
+}
+
+get_min_ <- function(serie){
+  min(serie)
+}
+
+get_max_ <- function(serie){
+  max(serie)
+}
+
+# set calculable according to class
+is_calculable_ <- function(x){
+  cl <- class(x)[1]
+  if(cl == "integer" || cl == "numeric"){
+    TRUE
+  } else {
+    FALSE
+  }
 }
