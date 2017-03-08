@@ -353,3 +353,115 @@ mark <- function(p, which, opts, type = "markPoint"){
 
   p
 }
+
+axis_category <- function(show = TRUE, zlevel = 0, z = 0, boundaryGap = FALSE, ...){
+
+  opts <- list(...)
+  opts$type <- "category"
+  opts$show <- show
+  opts$zlevel <- zlevel
+  opts$z <- z
+  opts$boundaryGap <- boundaryGap
+
+  return(opts)
+}
+
+axis_value <- function(show = TRUE, zlevel = 0, z = 0, position = "left", name = NULL,
+                       nameLocation = "end", nameTextStyle = list(), boundaryGap = list(0, 0),
+                       min = NULL, max = NULL, scale = FALSE, splitNumber = NULL, ...){
+
+  opts <- list(...)
+  opts$type <- "value"
+  opts$show <- show
+  opts$zlevel <- zlevel
+  opts$z <- z
+  opts$position <- position
+  opts$name <- name
+  opts$nameLocation <- nameLocation
+  opts$nameTextStyle <- nameTextStyle
+  opts$boundaryGap <- boundaryGap
+  opts$min <- min
+  opts$max <- max
+  opts$scale <- scale
+  opts$splitNumber <- splitNumber
+
+  return(opts)
+}
+
+axis_time <- function(show = TRUE, zlevel = 0, z = 0, position = "bottom", name = NULL,
+                      nameLocation = "end", nameTextStyle = list(), boundaryGap = list(0, 0),
+                      min = NULL, max = NULL, scale = FALSE, splitNumber = NULL, ...){
+
+  opts <- list(...)
+  opts$type <- "time"
+  opts$show <- show
+  opts$zlevel <- zlevel
+  opts$z <- z
+  opts$position <- position
+  opts$name <- name
+  opts$nameLocation <- nameLocation
+  opts$nameTextStyle <- nameTextStyle
+  opts$boundaryGap <- boundaryGap
+  opts$min <- min
+  opts$max <- max
+  opts$scale <- scale
+  opts$splitNumber <- splitNumber
+
+  return(opts)
+}
+
+axis_log <- function(show = TRUE, zlevel = 0, z = 0, position = "left", logLabelBase = NULL,
+                     logPositive = NULL, ...){
+
+  opts <- list(...)
+  opts$type <- "log"
+  opts$show <- show
+  opts$zlevel <- zlevel
+  opts$z <- z
+  opts$position <- position
+  opts$name <- logLabelBase
+  opts$nameLocation <- logLabelBase
+
+  return(opts)
+}
+
+get_axis_type <- function(x){
+
+  cl <- class(x)[1]
+
+  if(cl == "character" || cl == "factor" || cl == "date"){
+    return("category")
+  } else if(cl == "POSIXct" || cl == "POSIXlt"){
+    return("category")
+  } else {
+    return("value")
+  }
+
+}
+
+add_axis <- function(p, opts, append = FALSE){
+
+  if(append == FALSE){
+    p$x$options$yAxis <- list(opts)
+  } else {
+    index <- length(p$x$options$yAxis) + 1
+    p$x$options$yAxis[[index]] <- opts
+  }
+
+  p
+}
+
+add_toolbox_elem <- function(p, opts, elem){
+
+  tb <- length(p$x$options$toolbox)
+
+  if(tb != 1){
+    p <- p %>%
+      etoolbox()
+  }
+
+  p$x$options$toolbox$feature[[elem]] <- opts
+
+  p
+
+}

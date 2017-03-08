@@ -125,39 +125,30 @@ etooltip <- function(p, show = TRUE, trigger = "axis", zlevel = 1, z = 8, showCo
 
 }
 
-#' Add toolbox
+#' Add data zoom
 #'
 #' @export
-etoolbox <- function(p, show = TRUE, zlevel = 0, z = 6, orient = "horizontal", x = "right", y = "top",
-                     backgroundColor = "rgba(0,0,0,0)", borderColor = "#ccc", borderWidth = 0, padding = 5,
-                     itemGap = 10, itemSize = 16, color, disableColor = "#ddd", effectiveColor = "red",
-                     showTitle = TRUE, textStyle, ...){
-
-  textStyle <- if(missing(textStyle)) list(fontFamily = "Arial, Verdana, sans-serif", fontSize = 12,
-                                           fontStyle = "normal", fontWeight = "normal")
-  color <- if(missing(color)) list("#1e90ff", "#22bb22", "#4b0082", "#d2691e")
+ezoom <- function(p, show = TRUE, zlevel = 0, z = 4, orient = "horizontal", backgroundColor = "rgba(0,0,0,0)",
+                  dataBackgroundColor = "#eee", fillerColor = "rgba(144,197,237,0.2)", handleColor = "rgba(70,130,180,0.8)",
+                  handleSize = 8, start = 0, end = 100, showDetail = TRUE, realtime = FALSE, zoomLock = FALSE, ...){
 
   opts <- list(...)
   opts$show <- show
   opts$zlevel <- zlevel
   opts$z <- z
   opts$orient <- orient
-  opts$x <- x
-  opts$y <- y
   opts$backgroundColor <- backgroundColor
-  opts$borderColor <- borderColor
-  opts$borderWidth <- borderWidth
-  opts$padding <- padding
-  opts$itemGap <- itemGap
-  opts$itemSize <- itemSize
-  opts$color <- color
-  opts$disableColor <- disableColor
-  opts$effectiveColor <- effectiveColor
-  opts$showTitle <- showTitle
-  opts$textStyle <- textStyle
+  opts$dataBackgroundColor <- dataBackgroundColor
+  opts$fillerColor <- fillerColor
+  opts$handleColor <- handleColor
+  opts$handleSize <- handleSize
+  opts$start <- start
+  opts$end <- end
+  opts$showDetail <- showDetail
+  opts$realtime <- realtime
+  opts$zoomLock <- zoomLock
 
-  p$x$options$toolbox <- append(p$x$options$toolbox, opts)
+  p$x$options$dataZoom <- append(p$x$options$dataZoom, opts)
 
   p
-
 }

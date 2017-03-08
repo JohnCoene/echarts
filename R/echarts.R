@@ -30,6 +30,7 @@ echart <- function(data, x, width = NULL, height = NULL, elementId = NULL) {
     options = list(
       xAxis = list(
         list(
+          type = get_axis_type(xvar),
           data = xvar
         )
       ),
