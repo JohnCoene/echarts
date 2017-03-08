@@ -23,6 +23,7 @@ echart <- function(data, x, width = NULL, height = NULL, elementId = NULL) {
 
   # assign for future use
   assign("x", xvar, envir = data_env)
+  if(length(xvar)) assign("x.name", deparse(substitute(x)), envir = data_env)
 
   # forward options using x
   x = list(
