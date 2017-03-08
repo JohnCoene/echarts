@@ -81,8 +81,6 @@ default_dataRange <- function(serie){
   dataRange <- list(
     min = min(serie),
     max = max(serie),
-    text = list("High", "Low"),
-    realtime = FALSE,
     calculable = calc,
     color = list('orangered','yellow','lightskyblue')
   )

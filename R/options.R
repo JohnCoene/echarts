@@ -192,16 +192,26 @@ etitle <- function(p, text, subtext, link, sublink, target = "blank", subtarget 
 #' Customise data range
 #'
 #' @export
-edatarange <- function(p, min, max, which = "previous", show = TRUE, color = list("#1e90ff", "#f0ffff"),
+edatarange <- function(p, scale, which = "previous", show = TRUE, color = list("#1e90ff", "#f0ffff"),
                        zlevel = 4, z = 0, orient = "vertical", x = "left", y = "bottom",
                        backgroundColor = "rgba(0,0,0,0)", borderColor = "#ccc", borderWidth = 0, padding = 5,
                        itemGap = 10, itemWidth = 20, itemHeight = 14, precision = 0, splitNumber = 5,
                        splitList = NULL, range = NULL, selectedMode = TRUE, calculable = FALSE, hoverLink = TRUE,
                        realtime = FALSE, text = list("High", "Low"), ...){
 
+  if(!missing(scale)){
+    data <- get("data", envir = data_env)
+    scale <- eval(substitute(scale), data)
+  } else {
+    scale <- 1:100
+  }
+
+  min <- min(scale)
+  max <- max(scale)
+
   opts <- list(...)
-  opts$min <- if(!missing(min)) min else p$x$options$dataRange$min
-  opts$max <- if(!missing(max)) max else p$x$options$dataRange$max
+  opts$min <- min
+  opts$max <- max
   opts$show <- show
   opts$color <- color
   opts$zlevel <- zlevel

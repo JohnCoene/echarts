@@ -151,17 +151,6 @@ earea <- function(p, serie, name = NULL, stack = NULL, ...){
 #' @export
 escatter <- function(p, serie, size, name = NULL, clickable = TRUE,  ...){
 
-  # datarange
-  data <- get("data", envir = data_env)
-  if(!missing(size)){
-    x <- eval(substitute(size), data)
-  } else {
-    x <- eval(substitute(serie), data)
-  }
-
-  p <- p %>%
-    edatarange(min = get_min_(x), max = get_max_(x), calculable = is_calculable_(x), show = TRUE)
-
   name <- ifelse(is.null(name), deparse(substitute(serie)), name)
   serie <- scatter_data(serie, size)
 
@@ -177,9 +166,6 @@ escatter <- function(p, serie, size, name = NULL, clickable = TRUE,  ...){
   p$x$options$xAxis[[1]]$type <- "value"
   p$x$options$yAxis <- list(list(type = "value"))
   p$x$options$series <- append(p$x$options$series, list(opts))
-
-  p <- p %>%
-    eyAxis(type = "value")
 
   p
 }
