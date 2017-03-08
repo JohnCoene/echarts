@@ -434,18 +434,18 @@ get_axis_type <- function(x){
   } else if(cl == "POSIXct" || cl == "POSIXlt"){
     return("category")
   } else {
-    return("value")
+    return("category")
   }
 
 }
 
-add_axis <- function(p, opts, append = FALSE){
+add_axis <- function(p, opts, append = FALSE, axis){
 
   if(append == FALSE){
-    p$x$options$yAxis <- list(opts)
+    p$x$options[[axis]] <- list(opts)
   } else {
-    index <- length(p$x$options$yAxis) + 1
-    p$x$options$yAxis[[index]] <- opts
+    index <- length(p$x$options[[axis]]) + 1
+    p$x$options[[axis]][[index]] <- opts
   }
 
   p
@@ -453,9 +453,9 @@ add_axis <- function(p, opts, append = FALSE){
 
 add_toolbox_elem <- function(p, opts, elem){
 
-  tb <- length(p$x$options$toolbox)
+  tb <- p$x$options$toolbox
 
-  if(tb != 1){
+  if(!length(tb)){
     p <- p %>%
       etoolbox()
   }

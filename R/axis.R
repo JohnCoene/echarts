@@ -23,7 +23,7 @@ eyAxis <- function(p, show = TRUE, type = "value", append = FALSE, ...){
   opts$type <- type
   opts$show <- show
 
-  p <- add_axis(p, opts, append)
+  p <- add_axis(p, opts, append, axis = "yAxis")
 
   p
 }
@@ -34,7 +34,7 @@ eyAxis_category <- function(p, show = TRUE, zlevel = 0, z = 0, boundaryGap = FAL
 
   opts <- axis_category(show, zlevel, z, boundaryGap, ...)
 
-  p$x$options$yAxis <- list(opts)
+  p <- add_axis(p, opts, append, axis = "yAxis")
 
   p
 }
@@ -48,7 +48,7 @@ eyAxis_value <- function(p, show = TRUE, zlevel = 0, z = 0, position = "left", n
   opts <- axis_value(show, zlevel, z, position, name, nameLocation, nameTextStyle, boundaryGap,
                      min, max, scale, splitNumber, ...)
 
-  p <- add_axis(p, opts, append)
+  p <- add_axis(p, opts, append, axis = "yAxis")
 
   p
 }
@@ -62,7 +62,7 @@ eyAxis_time <- function(p, show = TRUE, zlevel = 0, z = 0, position = "left", na
   opts <- axis_time(show, zlevel, z, position, name, nameLocation, nameTextStyle, boundaryGap,
                     min, max, scale, splitNumber, ...)
 
-  p <- add_axis(p, opts, append)
+  p <- add_axis(p, opts, append, axis = "yAxis")
 
   p
 }
@@ -74,7 +74,7 @@ eyAxis_log <- function(p, show = TRUE, zlevel = 0, z = 0, position = "left", log
 
   opts <- opts <- axis_log(show, zlevel, z, position, logLabelBase, logPositive, ...)
 
-  p$x$options$yAxis <- list(opts)
+  p <- add_axis(p, opts, append, axis = "yAxis")
 
   p
 }
@@ -91,7 +91,7 @@ exAxis <- function(show = TRUE, type = "value", ...){
   opts$show <- show
   opts$data <- p$x$options$xAxis[[1]]$data
 
-  p <- add_axis(p, opts, append)
+  p <- add_axis(p, opts, append, "xAxis")
 
   p
 }
@@ -103,7 +103,7 @@ exAxis_category <- function(p, show = TRUE, zlevel = 0, z = 0, boundaryGap = FAL
   opts <- axis_category(show, zlevel, z, boundaryGap, ...)
   opts$data <- p$x$options$xAxis[[1]]$data
 
-  p <- add_axis(p, opts, append)
+  p <- add_axis(p, opts, append, axis = "xAxis")
 
   p
 }
@@ -119,7 +119,7 @@ exAxis_value <- function(p, show = TRUE, zlevel = 0, z = 0, position = "bottom",
                      min, max, scale, splitNumber, ...)
   opts$data <- p$x$options$xAxis[[1]]$data
 
-  p <- add_axis(p, opts, append)
+  p <- add_axis(p, opts, append, axis = "xAxis")
 
   p
 
@@ -135,7 +135,7 @@ exAxis_time <- function(p, show = TRUE, zlevel = 0, z = 0, position = "bottom", 
                     min, max, scale, splitNumber, ...)
   opts$data <- p$x$options$xAxis[[1]]$data
 
-  p <- add_axis(p, opts, append)
+  p <- add_axis(p, opts, append, axis = "xAxis")
 
   p
 
@@ -149,7 +149,7 @@ exAxis_log <- function(p, show = TRUE, zlevel = 0, z = 0, position = "bottom", l
   opts <- axis_log(show, zlevel, z, position, logLabelBase, logPositive, ...)
   opts$data <- p$x$options$xAxis[[1]]$data
 
-  p <- add_axis(p, opts, append)
+  p <- add_axis(p, opts, append, axis = "xAxis")
 
   p
 }

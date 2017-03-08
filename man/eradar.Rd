@@ -4,7 +4,7 @@
 \alias{eradar}
 \title{add radar}
 \usage{
-eradar(p, serie, ...)
+eradar(p, serie, name = NULL, ...)
 }
 \description{
 add radar

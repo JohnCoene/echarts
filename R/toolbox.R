@@ -157,3 +157,20 @@ etoolbox_save <- function(p, show = TRUE, title = "Save as image", type = "png",
   p
 
 }
+
+#' Add all elements of toolbox
+#'
+#' Adds toolbok mark, restor, save, and view.
+#'
+#' @export
+etoolbox_full <- function(p, ...){
+
+  p <- p %>%
+    etoolbox() %>%
+    etoolbox_mark() %>%
+    etoolbox_restore() %>%
+    etoolbox_save() %>%
+    etoolbox_zoom()
+
+  p
+}

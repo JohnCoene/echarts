@@ -152,3 +152,35 @@ ezoom <- function(p, show = TRUE, zlevel = 0, z = 4, orient = "horizontal", back
 
   p
 }
+
+#' Add title
+#'
+#' @export
+etitle <- function(p, text, subtext, link, sublink, target = "blank", subtarget = "blank", x = "left", y = "top",
+                   backgroundColor = "rgba(0,0,0,0)", borderColor = "#ccc", borderWidth = 0, padding = 5,
+                   itemGap = 5, zlevel = 0, z = 6, show = TRUE, ...){
+
+  if(missing(text)) stop("must pass text")
+
+  opts <- list(...)
+  opts$show <- show
+  opts$text <- text
+  opts$subtext <- if(!missing(subtext)) subtext
+  opts$link <- if(!missing(link)) link
+  opts$sublink <- if(!missing(sublink)) sublink
+  opts$target <- target
+  opts$subtarget <- subtarget
+  opts$x <- x
+  opts$y <- y
+  opts$backgroundColor <- backgroundColor
+  opts$borderColor <- borderColor
+  opts$borderWidth <- borderWidth
+  opts$padding <- padding
+  opts$itemGap <- itemGap
+  opts$zlevel <- zlevel
+  opts$z <- z
+
+  p$x$options$title <- append(p$x$options$title, opts)
+
+  p
+}

@@ -4,7 +4,7 @@
 \alias{epie}
 \title{Add pie}
 \usage{
-epie(p, serie, ...)
+epie(p, serie, name = NULL, ...)
 }
 \description{
 Add pie chart

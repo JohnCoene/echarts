@@ -16,18 +16,18 @@
 #'   elegend()
 #'
 #' @export
-ebar <- function(p, serie, stack = NULL, clickable = TRUE, xAxisIndex = 0, yAxisIndex = 0, barGap = "100%",
+ebar <- function(p, serie, name = NULL, stack = NULL, clickable = TRUE, xAxisIndex = 0, yAxisIndex = 0, barGap = "100%",
                  barCategoryGap = "20%", legendHoverLink = TRUE, z = 2, zlevel = 0, tooltip, itemStyle,
                  barWidth, barMaxWidth, ...){
 
   tooltip <- if(missing(tooltip)) default_tooltip(trigger = "axis")
 
-  serie_name <- deparse(substitute(serie))
+  name <- if(is.null(name)) deparse(substitute(serie))
   serie <- vector_data(serie)
 
   # build $serie
   opts <- list(...)
-  opts$name <- serie_name
+  opts$name <- name
   opts$type <- "bar"
   opts$data <- serie
   opts$stack <- if(!is.null(stack)) stack
@@ -66,16 +66,16 @@ ebar <- function(p, serie, stack = NULL, clickable = TRUE, xAxisIndex = 0, yAxis
 #'   etooltip()
 #'
 #' @export
-eline <- function(p, serie, stack = NULL, clickable = TRUE, xAxisIndex = 0, yAxisIndex = 0, symbol = NULL,
+eline <- function(p, serie, name = NULL, stack = NULL, clickable = TRUE, xAxisIndex = 0, yAxisIndex = 0, symbol = NULL,
                   symbolSize = "2 | 4", symbolRate = NULL, showAllSymbol = FALSE, smooth = TRUE, legendHoverLink = TRUE,
                   dataFilter = "nearest", z = 2, zlevel = 0, tooltip, markPoint, markLine, ...){
 
-  serie_name <- deparse(substitute(serie))
+  name <- if(is.null(name)) deparse(substitute(serie))
   serie <- vector_data(serie)
 
   # build $serie
   opts <- list(...)
-  opts$name <- serie_name
+  opts$name <- name
   opts$type <- "line"
   opts$data <- serie
   opts$stack <- if(!is.null(stack)) stack
@@ -117,14 +117,14 @@ eline <- function(p, serie, stack = NULL, clickable = TRUE, xAxisIndex = 0, yAxi
 #'   etooltip()
 #'
 #' @export
-earea <- function(p, serie, stack = NULL, ...){
+earea <- function(p, serie, name = NULL, stack = NULL, ...){
 
-  serie_name <- deparse(substitute(serie))
+  name <- if(is.null(name)) deparse(substitute(serie))
   serie <- vector_data(serie)
 
   # build $serie
   opts <- list(...)
-  opts$name <- serie_name
+  opts$name <- name
   opts$type <- "line"
   opts$data <- serie
   opts$stack <- if(!is.null(stack)) stack
@@ -152,12 +152,12 @@ earea <- function(p, serie, stack = NULL, ...){
 #' @export
 escatter <- function(p, serie, size, name = NULL, clickable = TRUE,  ...){
 
-  serie_name <- if(is.null(name)) deparse(substitute(serie))
+  name <- if(is.null(name)) deparse(substitute(serie))
   serie <- scatter_data(serie, size)
 
   # build $serie
   opts <- list(...)
-  opts$name <- serie_name
+  opts$name <- name
   opts$type <- "scatter"
   opts$data <- serie
   opts$clickable
@@ -184,14 +184,14 @@ escatter <- function(p, serie, size, name = NULL, clickable = TRUE,  ...){
 #'   epie(value)
 #'
 #' @export
-epie <- function(p, serie, ...){
+epie <- function(p, serie, name = NULL, ...){
 
-  serie_name <- deparse(substitute(serie))
+  name <- if(is.null(name)) deparse(substitute(serie))
   serie <- val_name_data(serie)
 
   # build $serie
   opts <- list(...)
-  opts$name <- serie_name
+  opts$name <- name
   opts$type <- "pie"
   opts$data <- serie
 
@@ -213,15 +213,15 @@ epie <- function(p, serie, ...){
 #'   eradar(value)
 #'
 #' @export
-eradar <- function(p, serie, ...){
+eradar <- function(p, serie, name = NULL, ...){
 
-  serie_name <- deparse(substitute(serie))
+  name <- if(is.null(name)) deparse(substitute(serie))
   serie <- vector_data(serie)
   serie <- list(value = serie, name = serie_name)
 
   # build $serie
   opts <- list(...)
-  opts$name <- serie_name
+  opts$name <- name
   opts$type <- "radar"
   opts$data <- list(serie)
 
@@ -260,6 +260,8 @@ echord <- function(p, name = NULL, sort = "none", sortSub = "none", clickable = 
                    symbol = NULL, symbolSize = NULL, clockWise = FALSE, minRadius = 10, maxRadius = 20,
                    ribbonType = TRUE, showScale = FALSE, showScaleText = FALSE, padding = 2, categories, tooltip,
                    markPoint, markLine, ...){
+
+  name <- if(is.null(name)) deparse(substitute(serie))
 
   opts <- list(...)
   opts$name <- name
@@ -388,6 +390,8 @@ emap_lines <- function(p, edges, source, target, name = NULL, clickable = TRUE, 
                        symbolSize = list(2, 4), symbolRate = NULL, large = FALSE, smooth = TRUE, z = 2, zlevel = 0,
                        smoothness = 0.2, precision = 2, bundling = list(enable = FALSE, maxTurningAngle = 45),
                        effect, itemStyle, ...){
+
+  name <- if(is.null(name)) deparse(substitute(serie))
 
   opts <- list(...)
   opts$name <- name
@@ -602,10 +606,11 @@ egauge <- function(p, value, name = NULL, clickable = TRUE, legendHoverLink = TR
   tooltip <- if(missing(tooltip)) default_tooltip(trigger = "item")
   markPoint <- if(missing(markPoint)) default_mark_point()
   markLine <- if(missing(markLine)) default_mark_line()
+  name <- if(is.null(name)) deparse(substitute(value))
 
   opts <- list(...)
-  opts$name = name
-  opts$type = "gauge"
+  opts$name <- name
+  opts$type <- "gauge"
   opts$clickable <- clickable
   opts$legendHoverLink <- legendHoverLink
   opts$center <- center
@@ -649,7 +654,7 @@ egauge <- function(p, value, name = NULL, clickable = TRUE, legendHoverLink = TR
 #'   efunnel(value)
 #'
 #' @export
-efunnel <- function(p, serie, clickable = TRUE, legendHoverLink = TRUE, sort = "descending",
+efunnel <- function(p, serie, name = NULL, clickable = TRUE, legendHoverLink = TRUE, sort = "descending",
                     min = 0, max = 100, x = 80, y = 60, x2 = 80, y2 = 60, width = NULL, height = NULL,
                     funnelAlign = "center", minSize = "0%", maxSize = "100%", gap = 0, markPoint,
                     markLine, tooltip, itemStyle,...){
@@ -657,14 +662,14 @@ efunnel <- function(p, serie, clickable = TRUE, legendHoverLink = TRUE, sort = "
   tooltip <- if(missing(tooltip)) default_tooltip(trigger = "item")
   markPoint <- if(missing(markPoint)) default_mark_point()
   markLine <- if(missing(markLine)) default_mark_line()
+  name <- if(is.null(name)) deparse(substitute(serie))
 
   data <- get("data", envir = data_env)
-  series_name <- deparse(substitute(serie))
   serie <- eval(substitute(serie), data)
 
   opts <- list(...)
-  opts$name = series_name
-  opts$type = "funnel"
+  opts$name <- name
+  opts$type <- "funnel"
   opts$clickable <- clickable
   opts$legendHoverLink <- legendHoverLink
   opts$sort <- sort
@@ -709,18 +714,18 @@ efunnel <- function(p, serie, clickable = TRUE, legendHoverLink = TRUE, sort = "
 #'   evenn(values)
 #'
 #' @export
-evenn <- function(p, serie, overlap, clickable = TRUE, z = 2, zlevel = 0, tooltip, itemStyle, markPoint, markLine, ...){
+evenn <- function(p, serie, overlap, name = NULL, clickable = TRUE, z = 2, zlevel = 0, tooltip, itemStyle, markPoint, markLine, ...){
 
-  series_name <- deparse(substitute(serie))
+  name <- if(is.null(name)) deparse(substitute(serie))
   tooltip <- if(missing(tooltip)) default_tooltip(trigger = "item")
   markPoint <- if(missing(markPoint)) default_mark_point()
   markLine <- if(missing(markLine)) default_mark_line()
   itemStyle <- list(normal = list(label = list(show = TRUE)))
 
   opts <- list(...)
-  opts$name = series_name
-  opts$type = "venn"
-  opts$itemStyle = itemStyle
+  opts$name <- name
+  opts$type <- "venn"
+  opts$itemStyle <- itemStyle
   opts$clickable <- clickable
   opts$z <- z
   opts$zlevel <- zlevel
@@ -748,18 +753,18 @@ evenn <- function(p, serie, overlap, clickable = TRUE, z = 2, zlevel = 0, toolti
 #'   ecloud(freq, color)
 #'
 #' @export
-ecloud <- function(p, freq, color, clickable = TRUE, center = list("50%", "50%"), size = list("40%", "40%"),
+ecloud <- function(p, freq, color, name = NULL, clickable = TRUE, center = list("50%", "50%"), size = list("40%", "40%"),
                    textRotation = list(0, 90), autoSize = list(enable = TRUE, minSize = 12), z = 2, zlevel = 0,
                    markPoint, markLine, tooltip, ...){
 
-  series_name <- deparse(substitute(freq))
+  name <- if(is.null(name)) deparse(substitute(freq))
   tooltip <- if(missing(tooltip)) default_tooltip(trigger = "item")
   markPoint <- if(missing(markPoint)) default_mark_point()
   markLine <- if(missing(markLine)) default_mark_line()
 
   opts <- list(...)
-  opts$name = series_name
-  opts$type = "wordCloud"
+  opts$name <- name
+  opts$type <- "wordCloud"
   opts$clickable <- clickable
   opts$center <- center
   opts$size <- size
@@ -791,18 +796,18 @@ ecloud <- function(p, freq, color, clickable = TRUE, center = list("50%", "50%")
 #'   eheatmap(y, z)
 #'
 #' @export
-eheatmap <- function(p, y, values, clickable = TRUE, blurSize = 30, minAlpha = 0.5, valueScale = 1,
+eheatmap <- function(p, y, values, name = NULL, clickable = TRUE, blurSize = 30, minAlpha = 0.5, valueScale = 1,
                      opacity = 1, z = 2, zlevel = 0, gradientColors, markPoint, markLine, tooltip, ...){
 
-  series_name <- deparse(substitute(values))
+  name <- if(is.null(name)) deparse(substitute(values))
   gradientColors <- if(missing(gradientColors)) default_gradient()
   markPoint <- if(missing(markPoint)) default_mark_point()
   markLine <- if(missing(markLine)) default_mark_line()
   tooltip <- if(missing(tooltip)) default_tooltip(trigger = "item")
 
   opts <- list(...)
-  opts$name = series_name
-  opts$type = "heatmap"
+  opts$name <- name
+  opts$type <- "heatmap"
   opts$tooltip <- tooltip
   opts$clickable <- clickable
   opts$blurSize <- blurSize
