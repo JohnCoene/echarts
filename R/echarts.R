@@ -18,6 +18,7 @@ echart <- function(data, x, width = NULL, height = NULL, elementId = NULL) {
   }
 
   if(!missing(data)){
+    data <- map_grps_(data)
     assign("data", data, envir = data_env)
   }
 
@@ -72,6 +73,9 @@ echart_ <- function(data, x, width = NULL, height = NULL, elementId = NULL) {
   }
 
   if(!missing(data)){
+
+    data <- map_grps_(data)
+
     assign("data", data, envir = data_env)
   }
 

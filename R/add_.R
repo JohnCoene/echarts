@@ -23,14 +23,14 @@ ebar_ <- function(p, serie, name = NULL, stack = NULL, clickable = TRUE, xAxisIn
 
   tooltip <- if(missing(tooltip)) default_tooltip(trigger = "axis")
 
-  name <- if(is.null(name)) serie
+  data <- get_dat(serie)
 
-  for(i in 1:length(grps$cols)){
+  for(i in 1:length(data)){
     # build $serie
     opts <- list(...)
-    opts$name <- name
+    opts$name <- if(is.null(name)) names(data)[i] else name
     opts$type <- "bar"
-    opts$data <- vector_data_grp_(grps$cols[[i]], grps$data)
+    opts$data <- vector_data_(data[[i]], serie)
     opts$stack <- if(!is.null(stack)) stack
     opts$clickable <- clickable
     opts$xAxisIndex <- xAxisIndex
@@ -71,30 +71,32 @@ eline_ <- function(p, serie, name = NULL, stack = NULL, clickable = TRUE, xAxisI
                   symbolSize = "2 | 4", symbolRate = NULL, showAllSymbol = FALSE, smooth = TRUE, legendHoverLink = TRUE,
                   dataFilter = "nearest", z = 2, zlevel = 0, tooltip, ...){
 
-  name <- if(is.null(name)) serie
-  serie <- vector_data_(serie)
   tooltip <- if(missing(tooltip)) default_tooltip(trigger = "axis")
 
-  # build $serie
-  opts <- list(...)
-  opts$name <- name
-  opts$type <- "line"
-  opts$data <- serie
-  opts$stack <- if(!is.null(stack)) stack
-  opts$clickable <- clickable
-  opts$xAxisIndex <- xAxisIndex
-  opts$yAxisIndex <- yAxisIndex
-  opts$symbol <- symbol
-  opts$symbolSize <- symbolSize
-  opts$symbolRate <- symbolRate
-  opts$showAllSymbol <- showAllSymbol
-  opts$smooth <- smooth
-  opts$dataFilter <- dataFilter
-  opts$legendHoverLink <- legendHoverLink
-  opts$z <- z
-  opts$zlevel <- zlevel
+  data <- get_dat(serie)
 
-  p$x$options$series <- append(p$x$options$series, list(opts))
+  for(i in 1:length(data)){
+    # build $serie
+    opts <- list(...)
+    opts$name <- if(is.null(name)) names(data)[i] else name
+    opts$type <- "line"
+    opts$data <- vector_data_(data[[i]], serie)
+    opts$stack <- if(!is.null(stack)) stack
+    opts$clickable <- clickable
+    opts$xAxisIndex <- xAxisIndex
+    opts$yAxisIndex <- yAxisIndex
+    opts$symbol <- symbol
+    opts$symbolSize <- symbolSize
+    opts$symbolRate <- symbolRate
+    opts$showAllSymbol <- showAllSymbol
+    opts$smooth <- smooth
+    opts$dataFilter <- dataFilter
+    opts$legendHoverLink <- legendHoverLink
+    opts$z <- z
+    opts$zlevel <- zlevel
+
+    p$x$options$series <- append(p$x$options$series, list(opts))
+  }
 
   p
 }
@@ -117,20 +119,22 @@ eline_ <- function(p, serie, name = NULL, stack = NULL, clickable = TRUE, xAxisI
 #'   elegend()
 #'
 #' @export
-earea_ <- function(p, serie, name = NULL, stack = NULL, ...){
+earea_ <- function(p, serie, name = NULL, stack = NULL, smooth = TRUE, ...){
 
-  name <- if(is.null(name)) serie
-  serie <- vector_data_(serie)
+  data <- get_dat(serie)
 
-  # build $serie
-  opts <- list(...)
-  opts$name <- name
-  opts$type <- "line"
-  opts$data <- serie
-  opts$stack <- if(!is.null(stack)) stack
-  opts$itemStyle <-  list(normal= list(areaStyle = list(type = 'default')))
+  for(i in 1:length(data)){
+    # build $serie
+    opts <- list(...)
+    opts$name <- if(is.null(name)) names(data)[i] else name
+    opts$type <- "line"
+    opts$data <- vector_data_(data[[i]], serie)
+    opts$smooth <- smooth
+    opts$stack <- if(!is.null(stack)) stack
+    opts$itemStyle <-  list(normal= list(areaStyle = list(type = 'default')))
 
-  p$x$options$series <- append(p$x$options$series, list(opts))
+    p$x$options$series <- append(p$x$options$series, list(opts))
+  }
 
   p
 }
@@ -151,21 +155,23 @@ earea_ <- function(p, serie, name = NULL, stack = NULL, ...){
 #' @export
 escatter_ <- function(p, serie, size = NULL, name = NULL, clickable = TRUE, ...){
 
-  name <- if(is.null(name)) serie
-  serie <- scatter_data_(serie, size)
+  data <- get_dat(serie)
 
-  # build $serie
-  opts <- list(...)
-  opts$name <- name
-  opts$type <- "scatter"
-  opts$data <- serie
-  opts$clickable
-  opts$symbolSize <- if(!is.null(size)){htmlwidgets::JS("function (value){ return Math.round(value[2] / 5);}")}
+  for(i in 1:length(data)){
+    # build $serie
+    opts <- list(...)
+    opts$name <- if(is.null(name)) names(data)[i] else name
+    opts$type <- "scatter"
+    opts$data <- scatter_data_(data[[i]], serie, size)
+    opts$clickable
+    opts$symbolSize <- if(!is.null(size)) htmlwidgets::JS("function (value){ return Math.round(value[2] / 5);}")
+
+    p$x$options$series <- append(p$x$options$series, list(opts))
+  }
 
   p$x$options$xAxis[[1]]$data <- NULL
   p$x$options$xAxis[[1]]$type <- "value"
   p$x$options$yAxis <- list(list(type = "value"))
-  p$x$options$series <- append(p$x$options$series, list(opts))
 
   p
 }

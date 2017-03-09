@@ -1,12 +1,15 @@
-
-vector_data_ <- function(serie){
-  data <- get("data", envir = data_env) # get data for eval
-
-  data[, serie]
+na2ec <- function(data){
+  data[is.na(data)] <- "-"
+  data
 }
 
-vector_data_grp_ <- function(serie, data){
+get_dat <- function(serie){
+  data <- get("data", envir = data_env)
+  if(length(data) == 1) names(data) <- serie
+  data
+}
 
+vector_data_ <- function(data, serie){
   data[, serie]
 }
 
@@ -32,11 +35,10 @@ scatter_data_grp_ <- function(data, serie, size = NULL){
   return(values)
 }
 
-scatter_data_ <- function(serie, size = NULL){
+scatter_data_ <- function(data, serie, size = NULL){
 
   # get for eval
   x <- get("x", envir = data_env)
-  data <- get("data", envir = data_env)
 
   serie <- data[, serie]
 
@@ -59,9 +61,9 @@ val_name_data_ <- function(serie){
 
   # get for eval
   x <- get("x", envir = data_env)
-  data <- get("data", envir = data_env)
+  data <- get_dat(serie)
 
-  serie <- data[, serie]
+  serie <- data[[1]][, serie]
 
   data <- cbind.data.frame(x, serie)
   names(data) <- c("name", "value")

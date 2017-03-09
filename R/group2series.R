@@ -1,14 +1,18 @@
 #' group2series
 #'
-group2wide_ <- function(p, serie){
-
-  data <- get("data", envir = data_env)
+map_grps_ <- function(data){
 
   if(dplyr::is.grouped_df(data)){
 
     # deparse groups to get grp column
     g.col <- dplyr::groups(data)
     g.col <- unlist(lapply(g.col, deparse))
+
+
+    data <- data %>%
+      dplyr::ungroup() %>%
+      na2ec(.) %>%
+      as.data.frame(.)
 
     grps <- unique(data[,g.col]) # get unique grps
 
@@ -19,6 +23,11 @@ group2wide_ <- function(p, serie){
 
     data <- Map(filter_grp, grps)
 
+  } else {
+    data <- na2ec(data)
+    data <- list(data)
   }
+
+  return(data)
 
 }
