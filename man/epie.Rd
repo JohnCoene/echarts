@@ -10,12 +10,22 @@ epie(p, serie, name = NULL, ...)
 Add pie chart
 }
 \examples{
-pie <- data.frame(name = c("banana", "apple", "pineapple"),
-  value = c(40, 10, 15))
+pie <- data.frame(name = c("banana", "apple", "pineapple", "onion"),
+  value = c(40, 15, 12, 9))
 
 pie \%>\%
   echart(name) \%>\%
   epie(value)
+
+pie \%>\%
+  echart(name) \%>\%
+  epie(value, roseType = "area") \%>\%
+  etheme("helianthus")
+
+pie \%>\%
+  echart(name) \%>\%
+  epie(value, roseType = "radius") \%>\%
+  etheme("mint")
 
 }
 

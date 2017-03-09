@@ -65,10 +65,6 @@ elegend <- function(p, legend, show = TRUE, zlevel = 0, z = 4, orient = "horizon
                                            fontStyle = "normal", fontWeight = "normal")
   legend <- if(missing(legend)) default_legend(p)
 
-  if(!missing(legend)){
-    if(length(legend) != length(p$x$options$series)) stop("n legend != n series", call. = FALSE)
-  }
-
   opts <- list(...)
   opts$data <- legend
   opts$show <- show

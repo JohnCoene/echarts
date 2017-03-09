@@ -84,7 +84,7 @@ eyAxis_log <- function(p, show = TRUE, zlevel = 0, z = 0, position = "left", log
 #' @name xAxis
 #' @rdname xAxis
 #' @export
-exAxis <- function(show = TRUE, type = "value", ...){
+exAxis <- function(p, show = TRUE, type = "value", ...){
 
   opts <- list(...)
   opts$type <- type

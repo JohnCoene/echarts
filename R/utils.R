@@ -5,6 +5,35 @@ vector_data <- function(serie){
   eval(substitute(serie, parent.frame()), data) # eval
 }
 
+vector_data_ <- function(serie){
+  data <- get("data", envir = data_env) # get data for eval
+
+  data[, serie]
+}
+
+scatter_data_ <- function(serie, size){
+
+  # get for eval
+  x <- get("x", envir = data_env)
+  data <- get("data", envir = data_env)
+
+  serie <- data[, serie]
+
+  # build matrix
+  if(!missing(size)){
+    size <- data[, size]
+    values <- cbind(x, serie, size)
+  } else{
+    values <- cbind(x, serie)
+  }
+
+  colnames(values) <- NULL # remove names
+
+  values <- apply(values, 1, as.list)
+
+  return(values)
+}
+
 scatter_data <- function(serie, size){
 
   # get for eval
@@ -35,6 +64,22 @@ val_name_data <- function(serie){
   data <- get("data", envir = data_env)
 
   serie <- eval(substitute(serie, parent.frame()), data)
+
+  data <- cbind.data.frame(x, serie)
+  names(data) <- c("name", "value")
+
+  data <- apply(data, 1, as.list)
+
+  return(data)
+}
+
+val_name_data_ <- function(serie){
+
+  # get for eval
+  x <- get("x", envir = data_env)
+  data <- get("data", envir = data_env)
+
+  serie <- data[, serie]
 
   data <- cbind.data.frame(x, serie)
   names(data) <- c("name", "value")
@@ -89,6 +134,42 @@ default_dataRange <- function(serie){
 
 }
 
+default_dataRange_ <- function(serie){
+
+  data <- get("data", envir = data_env)
+  serie <- data[, serie]
+
+  calc <- class2calc(serie)
+
+  dataRange <- list(
+    min = min(serie),
+    max = max(serie),
+    calculable = calc,
+    color = list('orangered','yellow','lightskyblue')
+  )
+
+  return(dataRange)
+
+}
+
+default_dataRange_ <- function(serie){
+
+  data <- get("data", envir = data_env)
+  serie <- data[, serie]
+
+  calc <- class2calc(serie)
+
+  dataRange <- list(
+    min = min(serie),
+    max = max(serie),
+    calculable = calc,
+    color = list('orangered','yellow','lightskyblue')
+  )
+
+  return(dataRange)
+
+}
+
 class2calc <- function(x){
 
   if(class(x)[1] == "integer" || class(x)[1] == "numeric"){
@@ -116,11 +197,43 @@ build_coord <- function(lon, lat){
 
 }
 
+build_coord_ <- function(lon, lat){
+
+  x <- tryCatch(get("x", envir = data_env), error = function(e) e)
+  data <- get("data", envir = data_env)
+  lon <- data[, lon]
+  lat <- data[, lat]
+
+  serie <- cbind(lon, lat)
+  colnames(serie) <- NULL
+  serie <- apply(serie, 1, as.list)
+
+  if(!is(x, "error")) names(serie) <- x
+
+  return(serie)
+
+}
+
 map_lines <- function(edges, source, target){
 
   # source
   source <- eval(substitute(source, parent.frame()), edges)
   target <- eval(substitute(target, parent.frame()), edges)
+
+  # list of lists
+  edges <- list()
+  for(i in 1:length(source)){
+    edges[[i]] <- list(list(name = source[i]), list(name = target[i]))
+  }
+
+  return(edges)
+}
+
+map_lines_ <- function(edges, source, target){
+
+  # source
+  source <- edges[, source]
+  target <- edges[, target]
 
   # list of lists
   edges <- list()
@@ -155,6 +268,29 @@ cloud_data <- function(freq, color){
   return(df)
 }
 
+cloud_data_ <- function(freq, color){
+
+  x <- get("x", envir = data_env) # get words
+
+  # build data
+  data <- get("data", envir = data_env)
+  freq <- data[, freq]
+
+  df <- cbind.data.frame(as.character(x), freq)
+  names(df) <- c("name", "value")
+
+  df <- apply(df, 1, as.list)
+
+  if(!missing(color)){
+    color <- data[, color]
+    for(i in 1:length(color)){
+      df[[i]]$itemStyle <- list(normal = list(color = color[i]))
+    }
+  }
+
+  return(df)
+}
+
 heat_data <- function(y, z){
 
   x <- get("x", envir = data_env) # get words
@@ -165,6 +301,25 @@ heat_data <- function(y, z){
   # source
   y <- eval(substitute(y, parent.frame()), data)
   z <- eval(substitute(z, parent.frame()), data)
+
+  df <- cbind(x, y, z)
+  colnames(df) <- NULL # remove names
+
+  df <- apply(df, 1, as.list)
+
+  return(df)
+}
+
+heat_data_ <- function(y, z){
+
+  x <- get("x", envir = data_env) # get words
+
+  # build data
+  data <- get("data", envir = data_env)
+
+  # source
+  y <- data[, y]
+  z <- data[, z]
 
   df <- cbind(x, y, z)
   colnames(df) <- NULL # remove names
@@ -185,6 +340,20 @@ heat_map_data <- function(lon, lat, z){
   z <- eval(substitute(z, parent.frame()), data)
 
   df <- cbind(lon, lat, z)
+  colnames(df) <- NULL # remove names
+
+  df <- apply(df, 1, as.list)
+
+  return(df)
+}
+
+heat_map_data_ <- function(lon, lat, z){
+
+  # build data
+  data <- get("data", envir = data_env)
+
+  # source
+  df <- data[, c(lon, lat, z)]
   colnames(df) <- NULL # remove names
 
   df <- apply(df, 1, as.list)

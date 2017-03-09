@@ -46,6 +46,61 @@ echart <- function(data, x, width = NULL, height = NULL, elementId = NULL) {
     x,
     width = width,
     height = height,
+    sizingPolicy = htmlwidgets::sizingPolicy(defaultWidth = "100%"),
+    package = 'echarts',
+    elementId = elementId
+  )
+}
+
+#' Initiate an echart
+#'
+#' Initiate an echart graph.
+#'
+#' @import htmlwidgets
+#'
+#' @export
+echart_ <- function(data, x, width = NULL, height = NULL, elementId = NULL) {
+
+  # x
+  if(!missing(x)){
+    xvar <- data[, x]
+    if(is(xvar, "error")){
+      xvar <- x
+    }
+  } else {
+    xvar <- list()
+  }
+
+  if(!missing(data)){
+    assign("data", data, envir = data_env)
+  }
+
+  # assign for future use
+  assign("x", xvar, envir = data_env)
+  if(length(xvar)) assign("x.name", x, envir = data_env)
+
+  # forward options using x
+  x = list(
+    theme = "default",
+    options = list(
+      xAxis = list(
+        list(
+          type = get_axis_type(xvar),
+          data = xvar
+        )
+      ),
+      yAxis = list(),
+      series = list()
+    )
+  )
+
+  # create widget
+  htmlwidgets::createWidget(
+    name = 'echarts',
+    x,
+    width = width,
+    height = height,
+    sizingPolicy = htmlwidgets::sizingPolicy(defaultWidth = "100%"),
     package = 'echarts',
     elementId = elementId
   )

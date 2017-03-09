@@ -9,7 +9,7 @@
 \alias{xAxis}
 \title{Customize X axis}
 \usage{
-exAxis(show = TRUE, type = "value", ...)
+exAxis(p, show = TRUE, type = "value", ...)
 
 exAxis_category(p, show = TRUE, zlevel = 0, z = 0, boundaryGap = FALSE,
   append = FALSE, ...)
