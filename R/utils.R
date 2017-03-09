@@ -5,6 +5,33 @@ vector_data_ <- function(serie){
   data[, serie]
 }
 
+vector_data_grp_ <- function(serie, data){
+
+  data[, serie]
+}
+
+scatter_data_grp_ <- function(data, serie, size = NULL){
+
+  # get for eval
+  x <- get("x", envir = data_env)
+
+  serie <- data[, serie]
+
+  # build matrix
+  if(!is.null(size)){
+    size <- data[, size]
+    values <- cbind(x, serie, size)
+  } else {
+    values <- cbind(x, serie)
+  }
+
+  colnames(values) <- NULL # remove names
+
+  values <- apply(values, 1, as.list)
+
+  return(values)
+}
+
 scatter_data_ <- function(serie, size = NULL){
 
   # get for eval

@@ -12,8 +12,10 @@
 #'   ebar_("mpg", stack = "grp") %>% # stack
 #'   ebar_("qsec", stack = "grp") %>% # stack
 #'   ebar_("wt") %>% # not stacked
-#'   etooltip() %>%
-#'   elegend()
+#'   etooltip(trigger = "item") %>%
+#'   elegend() %>%
+#'   etoolbox_magic(type = list("stack", "tiled")) %>%
+#'   etoolbox_restore()
 #'
 #' @export
 ebar_ <- function(p, serie, name = NULL, stack = NULL, clickable = TRUE, xAxisIndex = 0, yAxisIndex = 0, barGap = "100%",
@@ -23,23 +25,25 @@ ebar_ <- function(p, serie, name = NULL, stack = NULL, clickable = TRUE, xAxisIn
 
   name <- if(is.null(name)) serie
 
-  # build $serie
-  opts <- list(...)
-  opts$name <- name
-  opts$type <- "bar"
-  opts$data <- vector_data_(serie)
-  opts$stack <- if(!is.null(stack)) stack
-  opts$clickable <- clickable
-  opts$xAxisIndex <- xAxisIndex
-  opts$yAxisIndex <- yAxisIndex
-  opts$barGap <- barGap
-  opts$barCategory <- barCategoryGap
-  opts$legendHoverLink <- legendHoverLink
-  opts$z <- z
-  opts$zlevel <- zlevel
-  opts$tooltip <- tooltip
+  for(i in 1:length(grps$cols)){
+    # build $serie
+    opts <- list(...)
+    opts$name <- name
+    opts$type <- "bar"
+    opts$data <- vector_data_grp_(grps$cols[[i]], grps$data)
+    opts$stack <- if(!is.null(stack)) stack
+    opts$clickable <- clickable
+    opts$xAxisIndex <- xAxisIndex
+    opts$yAxisIndex <- yAxisIndex
+    opts$barGap <- barGap
+    opts$barCategory <- barCategoryGap
+    opts$legendHoverLink <- legendHoverLink
+    opts$z <- z
+    opts$zlevel <- zlevel
+    opts$tooltip <- tooltip
 
-  p$x$options$series <- append(p$x$options$series, list(opts))
+    p$x$options$series <- append(p$x$options$series, list(opts))
+  }
 
   p
 }
@@ -803,7 +807,7 @@ edata_ <- function(p, data, x){
 
   # x
   if(!missing(x)){
-    xvar <- data[, x]
+    xvar <- unlist(unname(data[, x]))
   } else {
     xvar <- list()
   }

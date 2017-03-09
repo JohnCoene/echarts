@@ -32,7 +32,7 @@ echart <- function(data, x, width = NULL, height = NULL, elementId = NULL) {
       xAxis = list(
         list(
           type = get_axis_type(xvar),
-          data = xvar
+          data = unique(xvar)
         )
       ),
       yAxis = list(),
@@ -63,7 +63,7 @@ echart_ <- function(data, x, width = NULL, height = NULL, elementId = NULL) {
 
   # x
   if(!missing(x)){
-    xvar <- data[, x]
+    xvar <- tryCatch(unlist(unname(data[, x])), error = function(e) e)
     if(is(xvar, "error")){
       xvar <- x
     }
@@ -86,7 +86,7 @@ echart_ <- function(data, x, width = NULL, height = NULL, elementId = NULL) {
       xAxis = list(
         list(
           type = get_axis_type(xvar),
-          data = xvar
+          data = unique(xvar)
         )
       ),
       yAxis = list(),

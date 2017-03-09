@@ -75,12 +75,12 @@ eline <- function(p, serie, name = NULL, stack = NULL, clickable = TRUE, xAxisIn
 #'   etooltip()
 #'
 #' @export
-earea <- function(p, serie, name = NULL, stack = NULL, ...){
+earea <- function(p, serie, name = NULL, stack = NULL, smooth = TRUE, ...){
 
   serie <- deparse(substitute(serie))
 
   p %>%
-    earea_(serie, name, stack, ...)
+    earea_(serie, name, stack, smooth, ...)
 }
 
 #' Add scatter
