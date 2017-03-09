@@ -16,14 +16,14 @@ data <- data.frame(lon = runif(200, 90, 120),
   z = runif(200, 50, 75))
 
 data \%>\%
-  echart() \%>\%
+  echart_() \%>\%
   emap(mapType = "china") \%>\%
-  emap_heat(lon, lat, z)
+  emap_heat_("lon", "lat", "z")
 
 data \%>\%
   echart() \%>\%
   emap(mapType = "china") \%>\%
-  emap_heat(lon, lat, z, blurSize = 50, minAlpha = 0.3, opacity = 0.8) \%>\%
+  emap_heat_("lon", "lat", "z", blurSize = 50, minAlpha = 0.3, opacity = 0.8) \%>\%
   etheme("dark")
 
 }

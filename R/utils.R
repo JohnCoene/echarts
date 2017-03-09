@@ -1,17 +1,11 @@
 
-vector_data <- function(serie){
-  data <- get("data", envir = data_env) # get data for eval
-
-  eval(substitute(serie, parent.frame()), data) # eval
-}
-
 vector_data_ <- function(serie){
   data <- get("data", envir = data_env) # get data for eval
 
   data[, serie]
 }
 
-scatter_data_ <- function(serie, size){
+scatter_data_ <- function(serie, size = NULL){
 
   # get for eval
   x <- get("x", envir = data_env)
@@ -20,10 +14,10 @@ scatter_data_ <- function(serie, size){
   serie <- data[, serie]
 
   # build matrix
-  if(!missing(size)){
+  if(!is.null(size)){
     size <- data[, size]
     values <- cbind(x, serie, size)
-  } else{
+  } else {
     values <- cbind(x, serie)
   }
 
@@ -32,45 +26,6 @@ scatter_data_ <- function(serie, size){
   values <- apply(values, 1, as.list)
 
   return(values)
-}
-
-scatter_data <- function(serie, size){
-
-  # get for eval
-  x <- get("x", envir = data_env)
-  data <- get("data", envir = data_env)
-
-  serie <- eval(substitute(serie, parent.frame()), data)
-
-  # build matrix
-  if(!missing(size)){
-    size <- eval(substitute(size, parent.frame()), data)
-    values <- cbind(x, serie, size)
-  } else{
-    values <- cbind(x, serie)
-  }
-
-  colnames(values) <- NULL # remove names
-
-  values <- apply(values, 1, as.list)
-
-  return(values)
-}
-
-val_name_data <- function(serie){
-
-  # get for eval
-  x <- get("x", envir = data_env)
-  data <- get("data", envir = data_env)
-
-  serie <- eval(substitute(serie, parent.frame()), data)
-
-  data <- cbind.data.frame(x, serie)
-  names(data) <- c("name", "value")
-
-  data <- apply(data, 1, as.list)
-
-  return(data)
 }
 
 val_name_data_ <- function(serie){
@@ -116,42 +71,6 @@ chord_matrix <- function(){
   return(matrix)
 }
 
-default_dataRange <- function(serie){
-
-  data <- get("data", envir = data_env)
-  serie <- eval(substitute(serie, parent.frame()), data)
-
-  calc <- class2calc(serie)
-
-  dataRange <- list(
-    min = min(serie),
-    max = max(serie),
-    calculable = calc,
-    color = list('orangered','yellow','lightskyblue')
-  )
-
-  return(dataRange)
-
-}
-
-default_dataRange_ <- function(serie){
-
-  data <- get("data", envir = data_env)
-  serie <- data[, serie]
-
-  calc <- class2calc(serie)
-
-  dataRange <- list(
-    min = min(serie),
-    max = max(serie),
-    calculable = calc,
-    color = list('orangered','yellow','lightskyblue')
-  )
-
-  return(dataRange)
-
-}
-
 default_dataRange_ <- function(serie){
 
   data <- get("data", envir = data_env)
@@ -179,24 +98,6 @@ class2calc <- function(x){
   }
 }
 
-
-build_coord <- function(lon, lat){
-
-  x <- tryCatch(get("x", envir = data_env), error = function(e) e)
-  data <- get("data", envir = data_env)
-  lon <- eval(substitute(lon, parent.frame()), data)
-  lat <- eval(substitute(lat, parent.frame()), data)
-
-  serie <- cbind(lon, lat)
-  colnames(serie) <- NULL
-  serie <- apply(serie, 1, as.list)
-
-  if(!is(x, "error")) names(serie) <- x
-
-  return(serie)
-
-}
-
 build_coord_ <- function(lon, lat){
 
   x <- tryCatch(get("x", envir = data_env), error = function(e) e)
@@ -214,21 +115,6 @@ build_coord_ <- function(lon, lat){
 
 }
 
-map_lines <- function(edges, source, target){
-
-  # source
-  source <- eval(substitute(source, parent.frame()), edges)
-  target <- eval(substitute(target, parent.frame()), edges)
-
-  # list of lists
-  edges <- list()
-  for(i in 1:length(source)){
-    edges[[i]] <- list(list(name = source[i]), list(name = target[i]))
-  }
-
-  return(edges)
-}
-
 map_lines_ <- function(edges, source, target){
 
   # source
@@ -244,30 +130,6 @@ map_lines_ <- function(edges, source, target){
   return(edges)
 }
 
-
-cloud_data <- function(freq, color){
-
-  x <- get("x", envir = data_env) # get words
-
-  # build data
-  data <- get("data", envir = data_env)
-  freq <- eval(substitute(freq, parent.frame()), data)
-
-  df <- cbind.data.frame(as.character(x), freq)
-  names(df) <- c("name", "value")
-
-  df <- apply(df, 1, as.list)
-
-  if(!missing(color)){
-    color <- eval(substitute(color, parent.frame()), data)
-    for(i in 1:length(color)){
-      df[[i]]$itemStyle <- list(normal = list(color = color[i]))
-    }
-  }
-
-  return(df)
-}
-
 cloud_data_ <- function(freq, color){
 
   x <- get("x", envir = data_env) # get words
@@ -281,31 +143,12 @@ cloud_data_ <- function(freq, color){
 
   df <- apply(df, 1, as.list)
 
-  if(!missing(color)){
+  if(!is.null(color)){
     color <- data[, color]
     for(i in 1:length(color)){
       df[[i]]$itemStyle <- list(normal = list(color = color[i]))
     }
   }
-
-  return(df)
-}
-
-heat_data <- function(y, z){
-
-  x <- get("x", envir = data_env) # get words
-
-  # build data
-  data <- get("data", envir = data_env)
-
-  # source
-  y <- eval(substitute(y, parent.frame()), data)
-  z <- eval(substitute(z, parent.frame()), data)
-
-  df <- cbind(x, y, z)
-  colnames(df) <- NULL # remove names
-
-  df <- apply(df, 1, as.list)
 
   return(df)
 }
@@ -322,24 +165,6 @@ heat_data_ <- function(y, z){
   z <- data[, z]
 
   df <- cbind(x, y, z)
-  colnames(df) <- NULL # remove names
-
-  df <- apply(df, 1, as.list)
-
-  return(df)
-}
-
-heat_map_data <- function(lon, lat, z){
-
-  # build data
-  data <- get("data", envir = data_env)
-
-  # source
-  lon <- eval(substitute(lon, parent.frame()), data)
-  lat <- eval(substitute(lat, parent.frame()), data)
-  z <- eval(substitute(z, parent.frame()), data)
-
-  df <- cbind(lon, lat, z)
   colnames(df) <- NULL # remove names
 
   df <- apply(df, 1, as.list)
@@ -405,46 +230,6 @@ default_tooltip <- function(show = TRUE, trigger = "axis", zlevel = 1, z = 8, sh
 
 }
 
-default_mark_point <- function(data = list(), clickable = TRUE, symbol = "pin", symbolSize = 10, symbolRate = NULL,
-                               large = FALSE, effect, itemStyle, ...){
-
-  opts <- list(...)
-  opts$clickable <- clickable
-  opts$symbol <- symbol
-  opts$symbolSize <- symbolSize
-  opts$symbolRate <- symbolRate
-  opts$large <- large
-  opts$effect <- if(!missing(effect)) effect
-  opts$itemStyle <- if(!missing(itemStyle)) itemStyle
-  opts$data <- data
-
-  return(opts)
-
-}
-
-default_mark_line <- function(data = list(), clickable = TRUE, symbol = list("circle", "arrow"), symbolSize = list(2, 4),
-                              symbolRate = NULL, large = FALSE, smooth = FALSE, smoothness = 0.2, precision = 2,
-                              bundling, effect, itemStyle, ...){
-
-  opts <- list(...)
-  opts$data <- data
-  opts$clickable <- clickable
-  opts$symbol <- symbol
-  opts$symbolSize <- symbolSize
-  opts$symbolRate <- symbolRate
-  opts$large <- large
-  opts$smooth <- smooth
-  opts$smoothness <- smoothness
-  opts$precision <- precision
-  opts$bundling <- if(!missing(bundling)) bundling
-  opts$effect <- if(!missing(effect)) effect
-  opts$itemStyle <- if(!missing(itemStyle)) itemStyle
-
-  return(opts)
-
-}
-
-
 default_gradient <- function(){
   list("blue", "cyan", "lime", "yellow", "red")
 }
@@ -476,10 +261,11 @@ build_nodes <- function(nodes, name, label = NULL, value = NULL, category = NULL
 
 }
 
-build_links <- function(edges, source, target, weight = 1){
+build_links_ <- function(edges, source, target, weight = 1){
 
-  source <- eval(substitute(source, parent.frame()), edges)
-  target <- eval(substitute(target, parent.frame()), edges)
+  source <- edges[, source]
+  target <- edges[, target]
+  if(class(weight)[1] == "character") edges[, weight]
 
   links <- cbind.data.frame(source, target)
   links$weight <- weight

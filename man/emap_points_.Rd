@@ -6,7 +6,7 @@
 \usage{
 emap_points_(p, serie, clickable = TRUE, symbol = "pin",
   symbolSize = htmlwidgets::JS(" function (v){ return 10 + v/10 }"),
-  symbolRotate = NULL, large = FALSE, itemStyle, effect, ...)
+  symbolRotate = NULL, large = FALSE, itemStyle = NULL, ...)
 }
 \description{
 Add map points
@@ -18,23 +18,23 @@ coords <- data.frame(city = c("London", "New York", "Beijing", "Sydney"),
   values = runif(4, 10, 20))
 
 coords \%>\%
-  echart(city) \%>\%
+  echart_("city") \%>\%
   emap() \%>\%
-  emap_coords(lon, lat) \%>\%
-  emap_points(values)
+  emap_coords_("lon", "lat") \%>\%
+  emap_points_("values")
 
 coords2 <- data.frame(city = "Rio", lon = -43.172896, lat = -22.906847, value = 15)
 
 coords \%>\%
-  echart(city) \%>\%
+  echart_("city") \%>\%
   emap() \%>\%
-  emap_coords(lon, lat) \%>\%
-  emap_points(values, symbolSize = 5) \%>\%
-  edata(coords2, city) \%>\%
+  emap_coords_("lon", "lat") \%>\%
+  emap_points_("values", symbolSize = 5) \%>\%
+  edata_(coords2, "city") \%>\%
   emap() \%>\%
-  emap_coords(lon, lat) \%>\%
-  emap_points(value, symbol = "emptyCircle", effect = list(show = TRUE, shadowBlur = 10)) \%>\%
-  etheme("infographic")
+  emap_coords_("lon", "lat") \%>\%
+  emap_points_("value", symbol = "emptyCircle", effect = list(show = TRUE, shadowBlur = 10)) \%>\%
+  etheme("helianthus")
 
 }
 

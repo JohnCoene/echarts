@@ -4,7 +4,7 @@
 \alias{edata_}
 \title{Add data}
 \usage{
-edata_(p, data, x, ...)
+edata_(p, data, x)
 }
 \description{
 Add data

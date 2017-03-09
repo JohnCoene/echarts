@@ -6,7 +6,7 @@
 \usage{
 emap_points(p, serie, clickable = TRUE, symbol = "pin",
   symbolSize = htmlwidgets::JS(" function (v){ return 10 + v/10 }"),
-  symbolRotate = NULL, large = FALSE, itemStyle, effect, ...)
+  symbolRotate = NULL, large = FALSE, itemStyle = NULL, ...)
 }
 \description{
 Add map points

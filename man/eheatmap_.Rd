@@ -6,7 +6,7 @@
 \usage{
 eheatmap_(p, y, values, name = NULL, clickable = TRUE, blurSize = 30,
   minAlpha = 0.5, valueScale = 1, opacity = 1, z = 2, zlevel = 0,
-  gradientColors, markPoint, markLine, tooltip, ...)
+  gradientColors, tooltip, ...)
 }
 \description{
 add heatmap
@@ -16,8 +16,8 @@ set.seed(19880525)
 matrix <- data.frame(x = runif(100, 10, 200), y = runif(100, 10, 200), z = runif(100, 10 , 200))
 
 matrix \%>\%
-  echart(x) \%>\%
-  eheatmap(y, z)
+  echart_("x") \%>\%
+  eheatmap_("y", "z")
 
 }
 

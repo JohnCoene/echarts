@@ -8,7 +8,7 @@ emap_lines(p, edges, source, target, name = NULL, clickable = TRUE,
   symbol = list("circle", "arrow"), symbolSize = list(2, 4),
   symbolRate = NULL, large = FALSE, smooth = TRUE, z = 2, zlevel = 0,
   smoothness = 0.2, precision = 2, bundling = list(enable = FALSE,
-  maxTurningAngle = 45), effect, itemStyle, ...)
+  maxTurningAngle = 45), ...)
 }
 \description{
 Add lines on map
@@ -37,7 +37,7 @@ coords \%>\%
   emap() \%>\%
   emap_coords(lon, lat) \%>\%
   emap_lines(edges2, source, target, effect = emap_line_effect()) \%>\%
-  etheme("macarons")
+  etheme("helianthus")
 
 coords2 <- data.frame(city = "Sydney", lon = 151.18518, lat = -33.92001, value = 20)
 

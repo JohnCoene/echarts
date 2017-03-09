@@ -4,10 +4,10 @@
 \alias{ecloud_}
 \title{add wordcloud}
 \usage{
-ecloud_(p, freq, color, name = NULL, clickable = TRUE,
+ecloud_(p, freq, color = NULL, name = NULL, clickable = TRUE,
   center = list("50\%", "50\%"), size = list("40\%", "40\%"),
   textRotation = list(0, 90), autoSize = list(enable = TRUE, minSize = 12),
-  z = 2, zlevel = 0, markPoint, markLine, tooltip, ...)
+  z = 2, zlevel = 0, tooltip, ...)
 }
 \description{
 add wordcloud
@@ -17,8 +17,8 @@ tf <- data.frame(terms = c("ECharts", "htmlwidgets", "rstats", "htmltools"),
   freq = c(20, 17, 15, 7), color = c("Red", "orange", "yellow", "grey"))
 
 tf \%>\%
-  echart(terms) \%>\%
-  ecloud(freq, color)
+  echart_("terms") \%>\%
+  ecloud_("freq", "color")
 
 }
 

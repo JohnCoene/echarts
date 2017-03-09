@@ -8,7 +8,7 @@ emap_lines_(p, edges, source, target, name = NULL, clickable = TRUE,
   symbol = list("circle", "arrow"), symbolSize = list(2, 4),
   symbolRate = NULL, large = FALSE, smooth = TRUE, z = 2, zlevel = 0,
   smoothness = 0.2, precision = 2, bundling = list(enable = FALSE,
-  maxTurningAngle = 45), effect, itemStyle, ...)
+  maxTurningAngle = 45), ...)
 }
 \description{
 Add lines on map
@@ -22,37 +22,37 @@ edges <- data.frame(source = c("Beijing", "Beijing", "New York"),
   target = c("Sydney", "London", "London"))
 
 coords \%>\%
-  echart(city) \%>\%
+  echart_("city") \%>\%
   emap() \%>\%
-  emap_coords(lon, lat) \%>\%
-  emap_lines(edges, source, target)
+  emap_coords_("lon", "lat") \%>\%
+  emap_lines_(edges, "source", "target")
 
 edges2 <- data.frame(source = "London", target = "Sydney")
 
 coords \%>\%
-  echart(city) \%>\%
+  echart_("city") \%>\%
   emap() \%>\%
-  emap_coords(lon, lat) \%>\%
-  emap_lines(edges, source, target) \%>\%
+  emap_coords_("lon", "lat") \%>\%
+  emap_lines_(edges, "source", "target") \%>\%
   emap() \%>\%
-  emap_coords(lon, lat) \%>\%
-  emap_lines(edges2, source, target, effect = emap_line_effect()) \%>\%
-  etheme("macarons")
+  emap_coords_("lon", "lat") \%>\%
+  emap_lines_(edges2, "source", "target", effect = emap_line_effect()) \%>\%
+  etheme("helianthus")
 
 coords2 <- data.frame(city = "Sydney", lon = 151.18518, lat = -33.92001, value = 20)
 
 coords \%>\%
-  echart(city) \%>\%
+  echart_("city") \%>\%
   emap() \%>\%
-  emap_coords(lon, lat) \%>\%
-  emap_lines(edges, source, target) \%>\%
-  edata(coords2, city) \%>\%
+  emap_coords_("lon", "lat") \%>\%
+  emap_lines_(edges, "source", "target") \%>\%
+  edata_(coords2, "city") \%>\%
   emap() \%>\%
-  emap_coords(lon, lat) \%>\%
-  emap_lines(edges2, source, target, effect = emap_line_effect(scaleSize = 2)) \%>\%
-  emap_coords(lon, lat) \%>\%
-  emap_points(value, symbol = "emptyCircle", effect = list(show = TRUE, shadowBlur = 10)) \%>\%
-  etheme("infographic")
+  emap_coords_("lon", "lat") \%>\%
+  emap_lines_(edges2, "source", "target", effect = emap_line_effect(scaleSize = 2)) \%>\%
+  emap_coords_("lon", "lat") \%>\%
+  emap_points_("value", symbol = "emptyCircle", effect = list(show = TRUE, shadowBlur = 10)) \%>\%
+  etheme("dark")
 
 }
 \seealso{

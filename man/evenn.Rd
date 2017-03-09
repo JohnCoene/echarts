@@ -5,7 +5,7 @@
 \title{Add venn}
 \usage{
 evenn(p, serie, overlap, name = NULL, clickable = TRUE, z = 2,
-  zlevel = 0, tooltip, itemStyle, markPoint, markLine, ...)
+  zlevel = 0, tooltip, ...)
 }
 \arguments{
 \item{serie}{a named vector, see details.}
@@ -19,7 +19,8 @@ venn <- data.frame(name = c("banana", "pineapple", "overlap"),
 
 venn \%>\%
   echart(name) \%>\%
-  evenn(values)
+  evenn(values) \%>\%
+  etheme("infographic")
 
 }
 

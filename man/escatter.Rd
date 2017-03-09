@@ -16,8 +16,7 @@ mtcars \%>\%
 
 mtcars \%>\%
   echart(disp) \%>\%
-  escatter(mpg, mpg * 2) \%>\%
-  escatter(qsec, qsec * 2)
+  escatter(mpg, qsec)
 
 }
 

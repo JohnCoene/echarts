@@ -8,7 +8,7 @@ eline(p, serie, name = NULL, stack = NULL, clickable = TRUE,
   xAxisIndex = 0, yAxisIndex = 0, symbol = NULL, symbolSize = "2 | 4",
   symbolRate = NULL, showAllSymbol = FALSE, smooth = TRUE,
   legendHoverLink = TRUE, dataFilter = "nearest", z = 2, zlevel = 0,
-  tooltip, markPoint, markLine, ...)
+  tooltip, ...)
 }
 \description{
 Add line serie.

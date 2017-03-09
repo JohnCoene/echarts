@@ -4,7 +4,7 @@
 \alias{emap_choropleth_}
 \title{Add choropleth}
 \usage{
-emap_choropleth_(p, serie, dataRange)
+emap_choropleth_(p, serie, dataRange = NULL)
 }
 \description{
 Add choropleth

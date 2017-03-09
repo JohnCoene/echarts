@@ -47,8 +47,12 @@ var macarons2 = {color:['#ed9678','#e7dac9','#cb8e85','#f3f39d','#c8e49c','#f16d
 
 
       var myChart = echarts.init(document.getElementById(el.id));
-        var option = x.options;
-        myChart.setOption(option);
+
+        if(x.hasOwnProperty('timeline')){
+          myChart.setOption(x);
+        } else {
+          myChart.setOption(x.options);
+        }
 
         if(x.theme == "macarons" || x.theme == "infographic" || x.theme == "default"){
           myChart.setTheme(x.theme);
