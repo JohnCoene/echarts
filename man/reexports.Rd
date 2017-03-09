@@ -3,6 +3,8 @@
 \docType{import}
 \name{reexports}
 \alias{\%>\%}
+\alias{group_by}
+\alias{group_by_}
 \alias{reexports}
 \title{Objects exported from other packages}
 \description{
@@ -10,6 +12,8 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
+  \item{dplyr}{\code{\link[dplyr]{group_by}}, \code{\link[dplyr]{group_by_}}}
+
   \item{magrittr}{\code{\link[magrittr]{\%>\%}}}
 }}
 \keyword{internal}

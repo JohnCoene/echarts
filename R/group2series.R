@@ -22,6 +22,7 @@ map_grps_ <- function(data){
     }
 
     data <- Map(filter_grp, grps)
+    names(data) <- grps
 
   } else {
     data <- na2ec(data)

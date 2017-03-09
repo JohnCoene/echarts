@@ -201,21 +201,23 @@ escatter_ <- function(p, serie, size = NULL, name = NULL, clickable = TRUE, ...)
 #' @export
 epie_ <- function(p, serie, name = NULL, ...){
 
-  name <- if(is.null(name)) serie
-  serie <- val_name_data_(serie)
+  data <- get_dat(serie)
 
-  p$x$options$legend$data <- append(p$x$options$legend$data, serie)
+  for(i in 1:length(data)){
 
-  # build $serie
-  opts <- list(...)
-  opts$name <- name
-  opts$type <- "pie"
-  opts$data <- serie
+    # build $serie
+    opts <- list(...)
+    opts$name <- if(is.null(name)) names(data)[i] else name
+    opts$type <- "pie"
+    opts$data <- val_name_data_(data[[i]], serie)
 
-  p$x$options$xAxis <- NULL
-  p$x$options$yAxis <- NULL
+    p$x$options$xAxis <- NULL
+    p$x$options$yAxis <- NULL
 
-  p$x$options$series <- append(p$x$options$series, list(opts))
+    p$x$options$series <- append(p$x$options$series, list(opts))
+  }
+
+  p$x$options$legend$data <- append(p$x$options$legend$data, get_pie_legend())
 
   p
 }
@@ -223,39 +225,43 @@ epie_ <- function(p, serie, name = NULL, ...){
 #' add radar
 #'
 #' @examples
-#' radar <- data.frame(axis = LETTERS[1:6], value = runif(6, 2, 10), value2 = runif(6, 3, 11))
+#' radar <- data.frame(axis = rep(LETTERS[1:6], 4), grp = rep(LETTERS[4:9], 4),
+#'   value = runif(24, 2, 10))
 #'
 #' radar %>%
+#'   group_by_("grp") %>%
 #'   echart_("axis") %>%
 #'   eradar_("value") %>%
-#'   eradar_("value2") %>%
 #'   elegend()
 #'
 #' @export
 eradar_ <- function(p, serie, name = NULL, ...){
 
-  name <- if(is.null(name)) serie
-  serie <- vector_data_(serie)
-  serie <- list(value = serie, name = name)
+  data <- get_dat(serie)
 
-  # build $serie
-  opts <- list(...)
-  opts$name <- name
-  opts$type <- "radar"
-  opts$data <- list(serie)
+  for(i in 1:length(data)){
 
-  # set polar $indicator
-  p$x$options$polar <- list(
-    list(
-      indicator = polar_indicator()
+    n <- if(is.null(name)) names(data)[i] else name
+
+    # build $serie
+    opts <- list(...)
+    opts$name <- n
+    opts$type <- "radar"
+    opts$data <- list(list(value = vector_data_(data[[i]], serie), name = n))
+
+    # set polar $indicator
+    p$x$options$polar <- list(
+      list(
+        indicator = polar_indicator()
+      )
     )
-  )
+
+    p$x$options$series <- append(p$x$options$series, list(opts))
+  }
 
   # remove axis
   p$x$options$xAxis <- NULL
   p$x$options$yAxis <- NULL
-
-  p$x$options$series <- append(p$x$options$series, list(opts))
 
   p
 }

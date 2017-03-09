@@ -4,7 +4,7 @@
 \alias{earea}
 \title{Add area}
 \usage{
-earea(p, serie, name = NULL, stack = NULL, ...)
+earea(p, serie, name = NULL, stack = NULL, smooth = TRUE, ...)
 }
 \description{
 Add area serie

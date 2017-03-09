@@ -22,8 +22,10 @@ mtcars \%>\%
   ebar_("mpg", stack = "grp") \%>\% # stack
   ebar_("qsec", stack = "grp") \%>\% # stack
   ebar_("wt") \%>\% # not stacked
-  etooltip() \%>\%
-  elegend()
+  etooltip(trigger = "item") \%>\%
+  elegend() \%>\%
+  etoolbox_magic(type = list("stack", "tiled")) \%>\%
+  etoolbox_restore()
 
 }
 

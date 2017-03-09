@@ -10,12 +10,13 @@ eradar_(p, serie, name = NULL, ...)
 add radar
 }
 \examples{
-radar <- data.frame(axis = LETTERS[1:6], value = runif(6, 2, 10), value2 = runif(6, 3, 11))
+radar <- data.frame(axis = rep(LETTERS[1:6], 4), grp = rep(LETTERS[4:9], 4),
+  value = runif(24, 2, 10))
 
 radar \%>\%
+  group_by_("grp") \%>\%
   echart_("axis") \%>\%
   eradar_("value") \%>\%
-  eradar_("value2") \%>\%
   elegend()
 
 }

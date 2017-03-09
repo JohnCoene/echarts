@@ -13,28 +13,6 @@ vector_data_ <- function(data, serie){
   data[, serie]
 }
 
-scatter_data_grp_ <- function(data, serie, size = NULL){
-
-  # get for eval
-  x <- get("x", envir = data_env)
-
-  serie <- data[, serie]
-
-  # build matrix
-  if(!is.null(size)){
-    size <- data[, size]
-    values <- cbind(x, serie, size)
-  } else {
-    values <- cbind(x, serie)
-  }
-
-  colnames(values) <- NULL # remove names
-
-  values <- apply(values, 1, as.list)
-
-  return(values)
-}
-
 scatter_data_ <- function(data, serie, size = NULL){
 
   # get for eval
@@ -57,13 +35,12 @@ scatter_data_ <- function(data, serie, size = NULL){
   return(values)
 }
 
-val_name_data_ <- function(serie){
+val_name_data_ <- function(data, serie){
 
   # get for eval
   x <- get("x", envir = data_env)
-  data <- get_dat(serie)
 
-  serie <- data[[1]][, serie]
+  serie <- data[, serie]
 
   data <- cbind.data.frame(x, serie)
   names(data) <- c("name", "value")
@@ -75,6 +52,7 @@ val_name_data_ <- function(serie){
 
 polar_indicator <- function(){
   x <- get("x", envir = data_env)
+  x <- unique(x)
   x <- data.frame(text = x)
   x <- apply(x, 1, as.list)
   return(x)
@@ -473,4 +451,9 @@ is_calculable_ <- function(x){
   } else {
     FALSE
   }
+}
+
+get_pie_legend <- function(){
+  x <- get("x", envir = data_env)
+  return(as.character(x))
 }
