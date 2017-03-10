@@ -5,10 +5,10 @@
 #' @import htmlwidgets
 #'
 #' @export
-echart <- function(data, x = NULL, width = NULL, height = NULL, elementId = NULL) {
+echart <- function(data, x, width = NULL, height = NULL, elementId = NULL) {
 
   # x
-  if(!is.null(x)){
+  if(!missing(x)){
     xvar <- tryCatch(eval(substitute(x), data), error = function(e) e)
     xvar <- unique(xvar)
     x.name <- deparse(substitute(x))
@@ -64,17 +64,20 @@ echart <- function(data, x = NULL, width = NULL, height = NULL, elementId = NULL
 #' @import htmlwidgets
 #'
 #' @export
-echart_ <- function(data, x = NULL, width = NULL, height = NULL, elementId = NULL) {
+echart_ <- function(data, x, width = NULL, height = NULL, elementId = NULL) {
 
   # x
-  if(!is.null(x)){
+  if(!missing(x)){
     xvar <- tryCatch(unlist(unname(data[, x])), error = function(e) e)
     xvar <- unique(xvar)
+    x.name <- x
     if(is(xvar, "error")){
       xvar <- x
+      x.name <- NULL
     }
   } else {
     xvar <- x
+    x.name <- NULL
   }
 
   if(!missing(data)){
@@ -86,7 +89,7 @@ echart_ <- function(data, x = NULL, width = NULL, height = NULL, elementId = NUL
 
   # assign for future use
   assign("x", xvar, envir = data_env)
-  assign("x.name", x, envir = data_env)
+  assign("x.name", x.name, envir = data_env)
 
   # forward options using x
   x = list(
