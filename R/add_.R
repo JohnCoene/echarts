@@ -611,6 +611,10 @@ emap_ <- function(p, name = NULL, mapType = "world", clickable = TRUE, z = 2, zl
 #' echart() %>%
 #'   egauge(85, "SPEED")
 #'
+#' echart() %>%
+#'   egauge(85, "SPEED") %>%
+#'   etheme("helianthus")
+#'
 #' @export
 egauge_ <- function(p, value, indicator = "", name = NULL, clickable = TRUE, legendHoverLink = TRUE, center = list("50%", "50%"),
                    radius = list("0%", "75%"), startAngle = 225, endAngle = -45, min = 0, max = 100,
