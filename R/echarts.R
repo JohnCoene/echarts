@@ -10,14 +10,15 @@ echart <- function(data, x, width = NULL, height = NULL, elementId = NULL) {
   # x
   if(!missing(x)){
     xvar <- tryCatch(eval(substitute(x), data), error = function(e) e)
-    xvar <- unique(xvar)
-    x.name <- deparse(substitute(x))
     if(is(xvar, "error")){
       xvar <- x
       x.name <- NULL
+    } else {
+      xvar <- unique(xvar)
+      x.name <- deparse(substitute(x))
     }
   } else {
-    xvar <- x
+    xvar <- NULL
     x.name <- NULL
   }
 
@@ -69,14 +70,15 @@ echart_ <- function(data, x, width = NULL, height = NULL, elementId = NULL) {
   # x
   if(!missing(x)){
     xvar <- tryCatch(unlist(unname(data[, x])), error = function(e) e)
-    xvar <- unique(xvar)
-    x.name <- x
     if(is(xvar, "error")){
       xvar <- x
       x.name <- NULL
+    } else {
+      xvar <- unique(xvar)
+      x.name <- x
     }
   } else {
-    xvar <- x
+    xvar <- NULL
     x.name <- NULL
   }
 

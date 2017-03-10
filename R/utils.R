@@ -23,9 +23,9 @@ scatter_data_ <- function(data, serie, size = NULL){
   # build matrix
   if(!is.null(size)){
     size <- data[, size]
-    values <- cbind(x, serie, size)
+    values <- suppressWarnings(cbind(x, serie, size))
   } else {
-    values <- cbind(x, serie)
+    values <- suppressWarnings(cbind(x, serie))
   }
 
   colnames(values) <- NULL # remove names
@@ -70,7 +70,7 @@ chord_matrix <- function(){
   matrix <- get("data", envir = data_env)
   matrix <- matrix[[1]]
 
-  if(ncol(matrix) != nrow(matrix)) stop("eneven columns and rows", call. = FALSE)
+  if(ncol(matrix) != nrow(matrix)) stop("uneven columns and rows", call. = FALSE)
 
   colnames(matrix) <- NULL # remove names
 
