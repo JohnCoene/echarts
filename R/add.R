@@ -306,7 +306,7 @@ emap_lines <- function(p, edges, source, target, name = NULL, clickable = TRUE, 
 #'   etheme("infographic")
 #'
 #' @export
-emap_points <- function(p, serie, clickable = TRUE, symbol = "pin", symbolSize = htmlwidgets::JS(" function (v){ return 10 + v/10 }"),
+emap_points <- function(p, serie, clickable = TRUE, symbol = "pin", symbolSize = 10,
                         symbolRotate = NULL, large = FALSE, itemStyle = NULL, ...){
 
   serie <- deparse(substitute(serie))

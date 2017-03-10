@@ -6,8 +6,6 @@
 emap_line_effect <- function(show = TRUE, loop = TRUE, period = 30, scaleSize = 1, color = "#fff",
                              shadowBlur = 10, shadowColor = NULL, ...){
 
-  lineStyle <- if(missing(itemStyle))
-
   opts <- list(...)
   opts$show <- show
   opts$loop <- loop
