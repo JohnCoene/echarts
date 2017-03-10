@@ -181,6 +181,7 @@ heat_map_data_ <- function(lon, lat, z){
 
   # build data
   data <- get("data", envir = data_env)
+  data <- data[[1]]
 
   # source
   df <- data[, c(lon, lat, z)]
@@ -480,14 +481,16 @@ val_name_data_map_ <- function(data, serie){
 }
 
 clean_data_map <- function(data){
-  x.name <- get("x.name", envir = data_env)
+  x.name <- tryCatch(get("x.name", envir = data_env), error = function(e) e)
 
-  # clean FUN
-  clean <- function(x){
-    x[x[, x.name] != "",]
+  if(!is(x.name, "error")){
+    # clean FUN
+    clean <- function(x){
+      x[x[, x.name] != "",]
+    }
+
+    data <- Map(clean, data) # clean
   }
-
-  data <- Map(clean, data) # clean
 
   # remove now-empty data.frame
   data <- data[lapply(data, nrow) > 0]

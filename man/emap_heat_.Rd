@@ -5,7 +5,7 @@
 \title{Add heat on map}
 \usage{
 emap_heat_(p, lon, lat, z, blurSize = 30, minAlpha = 0.05, valueScale = 1,
-  opacity = 1, gradientColors, ...)
+  opacity = 1, gradientColors = NULL, ...)
 }
 \description{
 Add heat on map

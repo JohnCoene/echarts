@@ -338,9 +338,9 @@ emap_points <- function(p, serie, clickable = TRUE, symbol = "pin", symbolSize =
 #'
 #' @export
 emap_heat <- function(p, lon, lat, z, blurSize = 30, minAlpha = 0.05, valueScale = 1, opacity = 1,
-                      gradientColors, ...){
+                      gradientColors = NULL, ...){
 
-  gradientColors <- if(missing(gradientColors)) default_gradient()
+  gradientColors <- if(is.null(gradientColors)) default_gradient() else gradientColors
   lon <- deparse(substitute(lon))
   lat <- deparse(substitute(lat))
   z <- deparse(substitute(z))

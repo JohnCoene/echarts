@@ -509,7 +509,7 @@ emap_points_ <- function(p, serie, clickable = TRUE, symbol = "pin", symbolSize 
 #'
 #' @export
 emap_heat_ <- function(p, lon, lat, z, blurSize = 30, minAlpha = 0.05, valueScale = 1, opacity = 1,
-                      gradientColors, ...){
+                      gradientColors = NULL, ...){
 
   opts <- list(...)
   opts$blurSize <- blurSize
@@ -517,7 +517,7 @@ emap_heat_ <- function(p, lon, lat, z, blurSize = 30, minAlpha = 0.05, valueScal
   opts$valueScale <- valueScale
   opts$opacity <- opacity
   opts$data <- heat_map_data_(lon, lat, z)
-  opts$gradientColors <- if(missing(gradientColors)) default_gradient() else gradientColors
+  opts$gradientColors <- if(is.null(gradientColors)) default_gradient() else gradientColors
 
   # append
   previous <- length(p$x$options$series)
