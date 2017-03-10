@@ -69,7 +69,7 @@ chord_matrix <- function(){
 
   matrix <- get("data", envir = data_env)
 
-  if(ncol(matrix) != nrow(matrix)) stop("must pass adjacency matrix", call. = FALSE)
+  if(ncol(matrix) != nrow(matrix)) stop("eneven columns and rows", call. = FALSE)
 
   colnames(matrix) <- NULL # remove names
 

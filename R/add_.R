@@ -662,34 +662,37 @@ efunnel_ <- function(p, serie, name = NULL, clickable = TRUE, legendHoverLink = 
                     min = 0, max = 100, x = 80, y = 60, x2 = 80, y2 = 60, width = NULL, height = NULL,
                     funnelAlign = "center", minSize = "0%", maxSize = "100%", gap = 0, tooltip, ...){
 
-  tooltip <- if(missing(tooltip)) default_tooltip(trigger = "item")
-  name <- if(is.null(name)) serie else name
+  data <- get_dat(serie)
 
-  opts <- list(...)
-  opts$name <- name
-  opts$type <- "funnel"
-  opts$clickable <- clickable
-  opts$legendHoverLink <- legendHoverLink
-  opts$sort <- sort
-  opts$min <- min
-  opts$max <- max
-  opts$x <- x
-  opts$y <- y
-  opts$x2 <- x2
-  opts$y2 <- y2
-  opts$width <- width
-  opts$height <- height
-  opts$funnelAlign <- funnelAlign
-  opts$minSize <- minSize
-  opts$maxSize <- maxSize
-  opts$gap <- gap
-  opts$tooltip <- tooltip
-  opts$data = val_name_data_(serie)
+  for(i in 1:length(data)){
+    opts <- list(...)
+    opts$name <- if(is.null(name)) names(data)[i] else name
+    opts$type <- "funnel"
+    opts$clickable <- clickable
+    opts$legendHoverLink <- legendHoverLink
+    opts$sort <- sort
+    opts$min <- min
+    opts$max <- max
+    opts$x <- x
+    opts$y <- y
+    opts$x2 <- x2
+    opts$y2 <- y2
+    opts$width <- width
+    opts$height <- height
+    opts$funnelAlign <- funnelAlign
+    opts$minSize <- minSize
+    opts$maxSize <- maxSize
+    opts$gap <- gap
+    opts$tooltip <- if(missing(tooltip)) default_tooltip(trigger = "item") else tooltip
+    opts$data = val_name_data_(data[[i]], serie)
+
+    p$x$options$series <- append(p$x$options$series, list(opts))
+  }
+
+  p$x$options$legend$data <- append(p$x$options$legend$data, get_pie_legend()) # legend
 
   p$x$options$xAxis <- NULL
   p$x$options$yAxis <- NULL
-
-  p$x$options$series <- append(p$x$options$series, list(opts))
 
   p
 }
@@ -710,10 +713,12 @@ efunnel_ <- function(p, serie, name = NULL, clickable = TRUE, legendHoverLink = 
 #'   etheme("mint")
 #'
 #' @export
-evenn_ <- function(p, serie, overlap, name = NULL, clickable = TRUE, z = 2, zlevel = 0, tooltip, ...){
+evenn_ <- function(p, serie, name = NULL, clickable = TRUE, z = 2, zlevel = 0, tooltip, ...){
 
-  name <- if(is.null(name)) serie
-  tooltip <- if(missing(tooltip)) default_tooltip(trigger = "item")
+  data <- get_dat(serie)
+
+  name <- if(is.null(name)) names(data)[1] else name
+  tooltip <- if(missing(tooltip)) default_tooltip(trigger = "item") else tooltip
   itemStyle <- list(normal = list(label = list(show = TRUE)))
 
   opts <- list(...)
@@ -724,7 +729,7 @@ evenn_ <- function(p, serie, overlap, name = NULL, clickable = TRUE, z = 2, zlev
   opts$z <- z
   opts$zlevel <- zlevel
   opts$tooltip <- tooltip
-  opts$data = val_name_data_(serie)
+  opts$data = val_name_data_(data[[1]], serie)
 
   p$x$options$xAxis <- NULL
   p$x$options$yAxis <- NULL
@@ -749,7 +754,7 @@ ecloud_ <- function(p, freq, color = NULL, name = NULL, clickable = TRUE, center
                    textRotation = list(0, 90), autoSize = list(enable = TRUE, minSize = 12), z = 2, zlevel = 0, tooltip, ...){
 
   name <- ifelse(is.null(name), "cloud", name)
-  tooltip <- if(missing(tooltip)) default_tooltip(trigger = "item")
+  tooltip <- if(missing(tooltip)) default_tooltip(trigger = "item") else tooltip
 
   opts <- list(...)
   opts$name <- name
