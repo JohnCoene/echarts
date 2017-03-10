@@ -780,7 +780,7 @@ ecloud_ <- function(p, freq, color = NULL, name = NULL, clickable = TRUE, center
 #'
 #' @examples
 #' set.seed(19880525)
-#' matrix <- data.frame(x = runif(100, 10, 200), y = runif(100, 10, 200), z = runif(100, 10 , 200))
+#' matrix <- data.frame(x = runif(150, 10, 500), y = runif(150, 10, 500), z = runif(150, 10 , 200))
 #'
 #' matrix %>%
 #'   echart_("x") %>%
@@ -790,28 +790,28 @@ ecloud_ <- function(p, freq, color = NULL, name = NULL, clickable = TRUE, center
 eheatmap_ <- function(p, y, values, name = NULL, clickable = TRUE, blurSize = 30, minAlpha = 0.5, valueScale = 1,
                      opacity = 1, z = 2, zlevel = 0, gradientColors, tooltip, ...){
 
-  name <- ifelse(is.null(name), values, name)
-  gradientColors <- if(missing(gradientColors)) default_gradient()
-  tooltip <- if(missing(tooltip)) default_tooltip(trigger = "item")
+  data <- get_dat(values)
 
-  opts <- list(...)
-  opts$name <- name
-  opts$type <- "heatmap"
-  opts$tooltip <- tooltip
-  opts$clickable <- clickable
-  opts$blurSize <- blurSize
-  opts$minAlpha <- minAlpha
-  opts$valueScale <- valueScale
-  opts$opacity <- opacity
-  opts$z <- z
-  opts$zlevel <- zlevel
-  opts$gradientColors <- gradientColors
-  opts$data = heat_data_(y, values)
+  for(i in 1:length(data)){
+    opts <- list(...)
+    opts$name <- if(missing(name)) names(data)[i] else name
+    opts$type <- "heatmap"
+    opts$tooltip <- if(missing(tooltip)) default_tooltip(trigger = "item") else tooltip
+    opts$clickable <- clickable
+    opts$blurSize <- blurSize
+    opts$minAlpha <- minAlpha
+    opts$valueScale <- valueScale
+    opts$opacity <- opacity
+    opts$z <- z
+    opts$zlevel <- zlevel
+    opts$gradientColors <- if(missing(gradientColors)) default_gradient() else gradientColors
+    opts$data = heat_data_(data[[i]], y, values)
+
+    p$x$options$series <- append(p$x$options$series, list(opts))
+  }
 
   p$x$options$xAxis <- NULL
   p$x$options$yAxis <- NULL
-
-  p$x$options$series <- append(p$x$options$series, list(opts))
 
   p
 }

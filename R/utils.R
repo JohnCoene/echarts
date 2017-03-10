@@ -161,12 +161,9 @@ cloud_data_ <- function(data, freq, color){
   return(df)
 }
 
-heat_data_ <- function(y, z){
+heat_data_ <- function(data, y, z){
 
   x <- get("x", envir = data_env) # get words
-
-  # build data
-  data <- get("data", envir = data_env)
 
   # source
   y <- data[, y]
