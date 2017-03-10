@@ -14,7 +14,7 @@ add wordcloud
 }
 \examples{
 tf <- data.frame(terms = c("ECharts", "htmlwidgets", "rstats", "htmltools"),
-  freq = c(20, 17, 15, 7), color = c("Red", "orange", "yellow", "grey"))
+  freq = c(20, 17, 15, 7), color = c("red", "orange", "yellow", "grey"))
 
 tf \%>\%
   echart_("terms") \%>\%

@@ -4,8 +4,8 @@
 \alias{evenn_}
 \title{Add venn}
 \usage{
-evenn_(p, serie, overlap, name = NULL, clickable = TRUE, z = 2,
-  zlevel = 0, tooltip, ...)
+evenn_(p, serie, name = NULL, clickable = TRUE, z = 2, zlevel = 0,
+  tooltip, ...)
 }
 \arguments{
 \item{serie}{a named vector, see details.}

@@ -15,15 +15,15 @@ Add chord
 }
 \examples{
 set.seed(19880525)
-matrix <- matrix(sample(0:1, 100, replace=TRUE, prob=c(0.9,0.6)), nc=10)
+matrix <- matrix(sample(0:1, 100, replace = TRUE, prob = c(0.9,0.6)), nc = 10)
 
 matrix \%>\%
-  echart(LETTERS[1:10]) \%>\%
-  echord()
+  echart_(LETTERS[1:10]) \%>\%
+  echord_()
 
 matrix \%>\%
-  echart(LETTERS[1:10]) \%>\%
-  echord(ribbonType = FALSE)
+  echart_(LETTERS[1:10]) \%>\%
+  echord_(ribbonType = FALSE)
 
 }
 

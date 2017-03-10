@@ -68,11 +68,13 @@ chord_data <- function(){
 chord_matrix <- function(){
 
   matrix <- get("data", envir = data_env)
+  matrix <- matrix[[1]]
 
   if(ncol(matrix) != nrow(matrix)) stop("eneven columns and rows", call. = FALSE)
 
   colnames(matrix) <- NULL # remove names
 
+  matrix <- apply(matrix, 2, as.numeric) # to numeric!
   matrix <- apply(matrix, 1, as.list)
 
   return(matrix)
@@ -137,12 +139,11 @@ map_lines_ <- function(edges, source, target){
   return(edges)
 }
 
-cloud_data_ <- function(freq, color){
+cloud_data_ <- function(data, freq, color){
 
   x <- get("x", envir = data_env) # get words
 
   # build data
-  data <- get("data", envir = data_env)
   freq <- data[, freq]
 
   df <- cbind.data.frame(as.character(x), freq)

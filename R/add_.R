@@ -271,15 +271,15 @@ eradar_ <- function(p, serie, name = NULL, ...){
 #'
 #' @examples
 #' set.seed(19880525)
-#' matrix <- matrix(sample(0:1, 100, replace=TRUE, prob=c(0.9,0.6)), nc=10)
+#' matrix <- matrix(sample(0:1, 100, replace = TRUE, prob = c(0.9,0.6)), nc = 10)
 #'
 #' matrix %>%
-#'   echart(LETTERS[1:10]) %>%
-#'   echord()
+#'   echart_(LETTERS[1:10]) %>%
+#'   echord_()
 #'
 #' matrix %>%
-#'   echart(LETTERS[1:10]) %>%
-#'   echord(ribbonType = FALSE)
+#'   echart_(LETTERS[1:10]) %>%
+#'   echord_(ribbonType = FALSE)
 #'
 #' @export
 echord_ <- function(p, name = NULL, sort = "none", sortSub = "none", clickable = TRUE, z = 2, zlevel = 0,
@@ -294,8 +294,6 @@ echord_ <- function(p, name = NULL, sort = "none", sortSub = "none", clickable =
   opts$clickable <- clickable
   opts$z <- z
   opts$zlevel <- zlevel
-  opts$symbol <- if(!is.null(symbol)) symbol
-  opts$symbolSize <- if(!is.null(symbolSize)) symbolSize
   opts$clockWise <- clockWise
   opts$minRadius <- minRadius
   opts$maxRadius <- maxRadius
@@ -743,7 +741,7 @@ evenn_ <- function(p, serie, name = NULL, clickable = TRUE, z = 2, zlevel = 0, t
 #'
 #' @examples
 #' tf <- data.frame(terms = c("ECharts", "htmlwidgets", "rstats", "htmltools"),
-#'   freq = c(20, 17, 15, 7), color = c("Red", "orange", "yellow", "grey"))
+#'   freq = c(20, 17, 15, 7), color = c("red", "orange", "yellow", "grey"))
 #'
 #' tf %>%
 #'   echart_("terms") %>%
@@ -753,26 +751,27 @@ evenn_ <- function(p, serie, name = NULL, clickable = TRUE, z = 2, zlevel = 0, t
 ecloud_ <- function(p, freq, color = NULL, name = NULL, clickable = TRUE, center = list("50%", "50%"), size = list("40%", "40%"),
                    textRotation = list(0, 90), autoSize = list(enable = TRUE, minSize = 12), z = 2, zlevel = 0, tooltip, ...){
 
-  name <- ifelse(is.null(name), "cloud", name)
-  tooltip <- if(missing(tooltip)) default_tooltip(trigger = "item") else tooltip
+  data <- get_dat(freq)
 
-  opts <- list(...)
-  opts$name <- name
-  opts$type <- "wordCloud"
-  opts$clickable <- clickable
-  opts$center <- center
-  opts$size <- size
-  opts$textRotation <- textRotation
-  opts$autoSize <- autoSize
-  opts$z <- z
-  opts$zlevel <- zlevel
-  opts$tooltip <- tooltip
-  opts$data = cloud_data_(freq, color)
+  for(i in 1:length(data)){
+    opts <- list(...)
+    opts$name <- if(missing(name)) names(data)[i] else name
+    opts$type <- "wordCloud"
+    opts$clickable <- clickable
+    opts$center <- center
+    opts$size <- size
+    opts$textRotation <- textRotation
+    opts$autoSize <- autoSize
+    opts$z <- z
+    opts$zlevel <- zlevel
+    opts$tooltip <- if(missing(tooltip)) default_tooltip(trigger = "item") else tooltip
+    opts$data = cloud_data_(data[[i]], freq, color)
+
+    p$x$options$series <- append(p$x$options$series, list(opts))
+  }
 
   p$x$options$xAxis <- NULL
   p$x$options$yAxis <- NULL
-
-  p$x$options$series <- append(p$x$options$series, list(opts))
 
   p
 }
