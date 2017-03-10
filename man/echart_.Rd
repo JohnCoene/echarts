@@ -4,7 +4,7 @@
 \alias{echart_}
 \title{Initiate an echart}
 \usage{
-echart_(data, x, width = "100\%", height = NULL, elementId = NULL)
+echart_(data, x, width = NULL, height = NULL, elementId = NULL)
 }
 \description{
 Initiate an echart graph.

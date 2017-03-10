@@ -80,9 +80,7 @@ chord_matrix <- function(){
   return(matrix)
 }
 
-default_dataRange_ <- function(serie){
-
-  data <- get("data", envir = data_env)
+default_dataRange_ <- function(data, serie){
   serie <- data[, serie]
 
   calc <- class2calc(serie)

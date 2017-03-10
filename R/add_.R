@@ -326,11 +326,12 @@ echord_ <- function(p, name = NULL, sort = "none", sortSub = "none", clickable =
 #' @export
 emap_choropleth_ <- function(p, serie, dataRange = NULL){
 
-  dataRange <- if(is.null(dataRange)) default_dataRange_(serie) else dataRange
-  p$x$options$dataRange <- dataRange
+  data <- get_dat(serie)
+
+  p$x$options$dataRange <- if(is.null(dataRange)) default_dataRange_(data[[1]], serie) else dataRange
 
   previous <- length(p$x$options$series)
-  p$x$options$series[[previous]]$data <- val_name_data_(serie)
+  p$x$options$series[[previous]]$data <- val_name_data_(data[[1]], serie)
   p$x$options$series[[previous]]$hoverable <- TRUE
 
   p
