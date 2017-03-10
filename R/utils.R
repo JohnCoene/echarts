@@ -107,15 +107,17 @@ class2calc <- function(x){
   }
 }
 
-build_coord_ <- function(lon, lat){
+build_coord_ <- function(data, lon, lat){
 
-  x <- tryCatch(get("x", envir = data_env), error = function(e) e)
-  data <- get("data", envir = data_env)
-  lon <- data[, lon]
-  lat <- data[, lat]
+  x <- get("x.name", envir = data_env)
+  x <- data[, x]
 
-  serie <- cbind(lon, lat)
+  # build serie for EC
+  serie <- data[, c(lon, lat)]
+  rownames(serie) <- NULL
   colnames(serie) <- NULL
+
+  # to list
   serie <- apply(serie, 1, as.list)
 
   if(!is(x, "error")) names(serie) <- x
@@ -124,11 +126,11 @@ build_coord_ <- function(lon, lat){
 
 }
 
-map_lines_ <- function(edges, source, target){
+map_lines_ <- function(data, source, target){
 
-  # source
-  source <- edges[, source]
-  target <- edges[, target]
+  # source & target
+  source <- data[, source]
+  target <- data[, target]
 
   # list of lists
   edges <- list()
@@ -454,4 +456,43 @@ is_calculable_ <- function(x){
 get_pie_legend <- function(){
   x <- get("x", envir = data_env)
   return(as.character(x))
+}
+
+get_map_index_ <- function(p, series_name){
+  all_names <- mapply(function(x){ x[["name"]]}, p$x$options$series)
+  index <- match(series_name, all_names)
+
+  if(!length(index)) index <- length(p$x$options$series)
+  return(index)
+}
+
+val_name_data_map_ <- function(data, serie){
+
+  # get for eval
+  x <- get("x.name", envir = data_env)
+
+  data <- data[, c(x, serie)]
+  names(data) <- c("name", "value")
+  rownames(serie) <- NULL
+
+  data <- apply(data, 1, as.list)
+  names(data) <- NULL # remove persistent rownames
+
+  return(data)
+}
+
+clean_data_map <- function(data){
+  x.name <- get("x.name", envir = data_env)
+
+  # clean FUN
+  clean <- function(x){
+    x[x[, x.name] != "",]
+  }
+
+  data <- Map(clean, data) # clean
+
+  # remove now-empty data.frame
+  data <- data[lapply(data, nrow) > 0]
+
+  return(data)
 }

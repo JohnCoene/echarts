@@ -343,12 +343,13 @@ emap_choropleth_ <- function(p, serie, dataRange = NULL){
 #' @export
 emap_coords_ <- function(p, lon, lat){
 
-  p$x$options$xAxis <- NULL
-  p$x$options$yAxis <- NULL
+  data <- get("data", envir = data_env)
+  data <- clean_data_map(data)
 
-  previous <- length(p$x$options$series)
-
-  p$x$options$series[[previous]]$geoCoord <- build_coord_(lon, lat)
+  for(i in 1:length(data)){
+    index <- get_map_index_(p, names(data)[i])
+    p$x$options$series[[index]]$geoCoord <- build_coord_(data[[i]], lon, lat)
+  }
 
   p
 }
@@ -405,30 +406,28 @@ emap_lines_ <- function(p, edges, source, target, name = NULL, clickable = TRUE,
                        symbolSize = list(2, 4), symbolRate = NULL, large = FALSE, smooth = TRUE, z = 2, zlevel = 0,
                        smoothness = 0.2, precision = 2, bundling = list(enable = FALSE, maxTurningAngle = 45), ...){
 
-  name <- ifelse(is.null(name), "edges", name)
+  edges <- map_grps_(edges)
 
-  opts <- list(...)
-  opts$name <- name
-  opts$clickable <- clickable
-  opts$symbol <- symbol
-  opts$symbolSize <- symbolSize
-  opts$symbolRate <- symbolRate
-  opts$large <- large
-  opts$smooth <- smooth
-  opts$z <- z
-  opts$zlevel <- zlevel
-  opts$smoothness <- smoothness
-  opts$precision <- precision
-  opts$bundling <- bundling
+  for(i in 1:length(edges)){
+    opts <- list(...)
+    opts$name <- if(is.null(name)) names(edges)[i] else name
+    opts$clickable <- clickable
+    opts$symbol <- symbol
+    opts$symbolSize <- symbolSize
+    opts$symbolRate <- symbolRate
+    opts$large <- large
+    opts$smooth <- smooth
+    opts$z <- z
+    opts$zlevel <- zlevel
+    opts$smoothness <- smoothness
+    opts$precision <- precision
+    opts$bundling <- bundling
 
-  opts$data <- map_lines_(edges, source, target)
+    opts$data <- map_lines_(edges[[i]], source, target)
 
-  p$x$options$xAxis <- NULL
-  p$x$options$yAxis <- NULL
-
-  previous <- length(p$x$options$series)
-
-  p$x$options$series[[previous]]$markLine = opts
+    index <- get_map_index_(p, names(edges)[i])
+    p$x$options$series[[index]]$markLine = opts
+  }
 
   p
 }
@@ -463,25 +462,26 @@ emap_lines_ <- function(p, edges, source, target, name = NULL, clickable = TRUE,
 #'   etheme("helianthus")
 #'
 #' @export
-emap_points_ <- function(p, serie, clickable = TRUE, symbol = "pin", symbolSize = htmlwidgets::JS(" function (v){ return 10 + v/10 }"),
-                        symbolRotate = NULL, large = FALSE, itemStyle = NULL, ...){
+emap_points_ <- function(p, serie, clickable = TRUE, symbol = "pin", symbolSize = 10, symbolRotate = NULL,
+                         large = FALSE, itemStyle = NULL, ...){
 
-  itemStyle <- if(missing(itemStyle)) list(normal = list(label = list(show = FALSE))) else itemStyle
+  itemStyle <- if(is.null(itemStyle)) list(normal = list(label = list(show = FALSE))) else itemStyle
 
-  opts <- list(...)
-  opts$symbol = symbol
-  opts$symbolSize = symbolSize
-  opts$symbolRotate <- symbolRotate
-  opts$large <- large
-  opts$itemStyle <- itemStyle
-  opts$data = val_name_data_(serie)
+  data <- get("data", envir = data_env)
+  data <- clean_data_map(data)
 
-  p$x$options$xAxis <- NULL
-  p$x$options$yAxis <- NULL
+  for(i in 1:length(data)){
+    opts <- list(...)
+    opts$symbol = symbol
+    opts$symbolSize = symbolSize
+    opts$symbolRotate <- symbolRotate
+    opts$large <- large
+    opts$itemStyle <- itemStyle
+    opts$data = val_name_data_map_(data[[i]], serie)
 
-  previous <- length(p$x$options$series)
-
-  p$x$options$series[[previous]]$markPoint = opts
+    index <- get_map_index_(p, names(data)[i])
+    p$x$options$series[[index]]$markPoint = opts
+  }
 
   p
 }
@@ -510,15 +510,13 @@ emap_points_ <- function(p, serie, clickable = TRUE, symbol = "pin", symbolSize 
 emap_heat_ <- function(p, lon, lat, z, blurSize = 30, minAlpha = 0.05, valueScale = 1, opacity = 1,
                       gradientColors, ...){
 
-  gradientColors <- if(missing(gradientColors)) default_gradient()
-
   opts <- list(...)
   opts$blurSize <- blurSize
   opts$minAlpha <- minAlpha
   opts$valueScale <- valueScale
   opts$opacity <- opacity
   opts$data <- heat_map_data_(lon, lat, z)
-  opts$gradientColors <- gradientColors
+  opts$gradientColors <- if(missing(gradientColors)) default_gradient() else gradientColors
 
   # append
   previous <- length(p$x$options$series)
@@ -571,33 +569,36 @@ emap_ <- function(p, name = NULL, mapType = "world", clickable = TRUE, z = 2, zl
                  mapValuePrecision = 0, showLegendSymbol = TRUE, roam = FALSE, scaleLimit = NULL,
                  nameMap = NULL, textFixed = NULL, ...){
 
-  xname <- get("x.name", envir = data_env)
-  name <- ifelse(is.null(name), xname, name)
+  # clean data for EC maps - on setup only
+  data <- get("data", envir = data_env)
+  data <- clean_data_map(data)
 
-  opts <- list(...)
-  opts$name <- name
-  opts$type <- "map"
-  opts$mapType <- mapType
-  opts$clickable <- clickable
-  opts$z <- z
-  opts$zlevel <- zlevel
-  opts$selectedMode <- selectedMode
-  opts$hoverable <- hoverable
-  opts$dataRangeHoverLink <- dataRangeHoverLink
-  opts$mapLocation <- mapLocation
-  opts$mapValueCalculation <- mapValueCalculation
-  opts$mapValuePrecision <- mapValuePrecision
-  opts$showLegendSymbol <- showLegendSymbol
-  opts$roam <- roam
-  opts$scaleLimit <- scaleLimit
-  opts$nameMap <- nameMap
-  opts$textFixed <- textFixed
-  opts$data <- list()
+  for(i in 1:length(data)){
+    opts <- list(...)
+    opts$name <- if(is.null(name)) names(data)[i] else name
+    opts$type <- "map"
+    opts$mapType <- mapType # set to none if more than one map
+    opts$clickable <- clickable
+    opts$z <- z
+    opts$zlevel <- zlevel
+    opts$selectedMode <- selectedMode
+    opts$hoverable <- hoverable
+    opts$dataRangeHoverLink <- dataRangeHoverLink
+    opts$mapLocation <- mapLocation
+    opts$mapValueCalculation <- mapValueCalculation
+    opts$mapValuePrecision <- mapValuePrecision
+    opts$showLegendSymbol <- showLegendSymbol
+    opts$roam <- roam
+    opts$scaleLimit <- scaleLimit
+    opts$nameMap <- nameMap
+    opts$textFixed <- textFixed
+    opts$data <- list()
+
+    p$x$options$series <- append(p$x$options$series, list(opts))
+  }
 
   p$x$options$xAxis <- NULL
   p$x$options$yAxis <- NULL
-
-  p$x$options$series <- append(p$x$options$series, list(opts))
 
   p
 }
@@ -823,31 +824,24 @@ edata_ <- function(p, data, x){
 
   # x
   if(!missing(x)){
-    xvar <- unlist(unname(data[, x]))
+    xvar <- tryCatch(unlist(unname(data[, x])), error = function(e) e)
+    if(is(xvar, "error")){
+      xvar <- x
+    }
   } else {
     xvar <- list()
   }
 
-  if(!missing(data)) assign("data", data, envir = data_env)
-  if(length(xvar)) assign("x.name", x, envir = data_env)
+  if(!missing(data)){
+
+    data <- map_grps_(data)
+
+    assign("data", data, envir = data_env)
+  }
 
   # assign for future use
   assign("x", xvar, envir = data_env)
-
-  # forward options using x
-  x = list(
-    theme = "default",
-    options = list(
-      xAxis = list(
-        list(
-          type = get_axis_type(xvar),
-          data = xvar
-        )
-      ),
-      yAxis = list(),
-      series = list()
-    )
-  )
+  if(length(xvar)) assign("x.name", x, envir = data_env)
 
   p
 }

@@ -5,7 +5,7 @@
 \title{emap line effect}
 \usage{
 emap_line_effect(show = TRUE, loop = TRUE, period = 30, scaleSize = 1,
-  color = "#fff", shadowBlur = 10, shadowColor = NULL)
+  color = "#fff", shadowBlur = 10, shadowColor = NULL, ...)
 }
 \description{
 Effect for emap lines

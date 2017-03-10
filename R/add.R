@@ -517,7 +517,7 @@ eheatmap <- function(p, y, values, name = NULL, clickable = TRUE, blurSize = 30,
 #' Add data
 #'
 #' @export
-edata <- function(p, data, x = NULL){
+edata <- function(p, data, x){
 
   # x
   if(!missing(x)){
@@ -530,27 +530,13 @@ edata <- function(p, data, x = NULL){
   }
 
   if(!missing(data)){
+    data <- map_grps_(data)
     assign("data", data, envir = data_env)
   }
 
   # assign for future use
   assign("x", xvar, envir = data_env)
   if(length(xvar)) assign("x.name", deparse(substitute(x)), envir = data_env)
-
-  # forward options using x
-  x = list(
-    theme = "default",
-    options = list(
-      xAxis = list(
-        list(
-          type = get_axis_type(xvar),
-          data = xvar
-        )
-      ),
-      yAxis = list(),
-      series = list()
-    )
-  )
 
   p
 
