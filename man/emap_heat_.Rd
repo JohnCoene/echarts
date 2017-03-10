@@ -11,9 +11,9 @@ emap_heat_(p, lon, lat, z, blurSize = 30, minAlpha = 0.05, valueScale = 1,
 Add heat on map
 }
 \examples{
-data <- data.frame(lon = runif(200, 90, 120),
-  lat = runif(200, 30, 39),
-  z = runif(200, 50, 75))
+data <- data.frame(lon = runif(300, 90, 120),
+  lat = runif(300, 30, 39),
+  z = runif(300, 75, 100))
 
 data \%>\%
   echart_() \%>\%
@@ -23,8 +23,7 @@ data \%>\%
 data \%>\%
   echart() \%>\%
   emap(mapType = "china") \%>\%
-  emap_heat_("lon", "lat", "z", blurSize = 50, minAlpha = 0.3, opacity = 0.8) \%>\%
-  etheme("dark")
+  emap_heat_("lon", "lat", "z", blurSize = 50, minAlpha = 0.3, opacity = 0.8)
 
 }
 

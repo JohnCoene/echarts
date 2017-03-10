@@ -481,9 +481,9 @@ val_name_data_map_ <- function(data, serie){
 }
 
 clean_data_map <- function(data){
-  x.name <- tryCatch(get("x.name", envir = data_env), error = function(e) e)
+  x.name <- get("x.name", envir = data_env)
 
-  if(!is(x.name, "error")){
+  if(!is.null(x.name)){
     # clean FUN
     clean <- function(x){
       x[x[, x.name] != "",]
