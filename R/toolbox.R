@@ -166,11 +166,12 @@ etoolbox_save <- function(p, show = TRUE, title = "Save as image", type = "png",
 etoolbox_full <- function(p, ...){
 
   p <- p %>%
-    etoolbox() %>%
+    etoolbox(...) %>%
     etoolbox_mark() %>%
     etoolbox_restore() %>%
     etoolbox_save() %>%
-    etoolbox_zoom()
+    etoolbox_zoom() %>%
+    etoolbox_view()
 
   p
 }

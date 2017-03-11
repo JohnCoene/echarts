@@ -17,5 +17,9 @@ Add gauge
 echart() \%>\%
   egauge(85, "SPEED")
 
+echart() \%>\%
+  egauge(85, "SPEED") \%>\%
+  etheme("helianthus")
+
 }
 

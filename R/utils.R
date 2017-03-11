@@ -497,3 +497,12 @@ clean_data_map <- function(data){
 
   return(data)
 }
+
+check_xvar <- function(data, x){
+
+  if(dplyr::is.grouped_df(data)){
+    x <- unique(x)
+  }
+
+  return(x)
+}

@@ -11,10 +11,10 @@ echart <- function(data, x, width = NULL, height = NULL, elementId = NULL) {
   if(!missing(x)){
     xvar <- tryCatch(eval(substitute(x), data), error = function(e) e)
     if(is(xvar, "error")){
-      xvar <- x
+      xvar <- check_xvar(data, x)
       x.name <- NULL
     } else {
-      xvar <- unique(xvar)
+      xvar <- check_xvar(data, xvar)
       x.name <- deparse(substitute(x))
     }
   } else {
@@ -52,7 +52,8 @@ echart <- function(data, x, width = NULL, height = NULL, elementId = NULL) {
     x,
     width = width,
     height = height,
-    sizingPolicy = htmlwidgets::sizingPolicy(defaultWidth = "100%"),
+    sizingPolicy = htmlwidgets::sizingPolicy(defaultWidth = "100%",
+                                             knitr.defaultWidth = "100%"),
     package = 'echarts',
     elementId = elementId
   )
@@ -71,10 +72,10 @@ echart_ <- function(data, x, width = NULL, height = NULL, elementId = NULL) {
   if(!missing(x)){
     xvar <- tryCatch(unlist(unname(data[, x])), error = function(e) e)
     if(is(xvar, "error")){
-      xvar <- x
+      xvar <- check_xvar(data, x)
       x.name <- NULL
     } else {
-      xvar <- unique(xvar)
+      xvar <- check_xvar(data, xvar)
       x.name <- x
     }
   } else {
@@ -114,7 +115,8 @@ echart_ <- function(data, x, width = NULL, height = NULL, elementId = NULL) {
     x,
     width = width,
     height = height,
-    sizingPolicy = htmlwidgets::sizingPolicy(defaultWidth = "100%"),
+    sizingPolicy = htmlwidgets::sizingPolicy(defaultWidth = "100%",
+                                             knitr.defaultWidth = "100%"),
     package = 'echarts',
     elementId = elementId
   )
