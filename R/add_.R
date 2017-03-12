@@ -251,14 +251,13 @@ eradar_ <- function(p, serie, name = NULL, ...){
 
     p$x$options$series <- append(p$x$options$series, list(opts))
 
-  }
-
-  # set polar $indicator
-  p$x$options$polar <- list(
-    list(
-      indicator = polar_indicator()
+    # set polar $indicator
+    p$x$options$polar <- list(
+      list(
+        indicator = polar_indicator()
+      )
     )
-  )
+  }
 
   # remove axis
   p$x$options$xAxis <- NULL

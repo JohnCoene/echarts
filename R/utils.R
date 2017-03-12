@@ -205,7 +205,7 @@ default_legend <- function(p){
 
 default_tooltip <- function(show = TRUE, trigger = "axis", zlevel = 1, z = 8, showContent = TRUE,
                      position = NULL, formatter = NULL, islandFormatter = "{a} < br/>{b} : {c}",
-                     showDelay = 20, hideDelay = 100, transitionDuration = 4, enterable = FALSE,
+                     showDelay = 5, hideDelay = 100, transitionDuration = 4, enterable = FALSE,
                      backgroundColor = "rgba(0,0,0,0.7)", borderColor = "#333", borderRadius = 4,
                      borderWidth = 0, padding = 5, axisPointer, textStyle, ...){
 
