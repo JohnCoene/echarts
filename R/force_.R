@@ -43,8 +43,8 @@ elinks_ <- function(p, links, source, target, weight = 1){
 #'   elinks_(edges, "source", "target")
 #'
 #' @export
-enodes_ <- function(p, nodes, name, label = NULL, value = NULL, category = NULL, symbolSize = NULL, ignore = FALSE, symbol = "circle",
-                   fixX = FALSE, fixY = FALSE){
+enodes_ <- function(p, nodes, name, label = NULL, value = NULL, category = NULL, symbolSize = NULL, depth = NULL, ignore = FALSE,
+                    symbol = "circle", fixX = FALSE, fixY = FALSE){
 
 
   if(missing(name) || missing(nodes)) stop("must pass nodes and name column")
@@ -61,6 +61,7 @@ enodes_ <- function(p, nodes, name, label = NULL, value = NULL, category = NULL,
   vertices$symbolSize <- if(!is.null(symbolSize)) nodes[, symbolSize]
   vertices$label <- if(!is.null(label)) nodes[, label]
   vertices$category <- if(!is.null(category)) cat2num(nodes[, category])
+  vertices$depth <- if(!is.null(depth)) nodes[, depth]
   vertices$ignore <- ignore
   vertices$symbol <- symbol
   vertices$fixX <- fixX

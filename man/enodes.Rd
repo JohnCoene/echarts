@@ -4,8 +4,8 @@
 \alias{enodes}
 \title{Add nodes}
 \usage{
-enodes(p, nodes, name, label, value, category, symbolSize, ignore = FALSE,
-  symbol = "circle", fixX = FALSE, fixY = FALSE)
+enodes(p, nodes, name, label, value, category, symbolSize, depth,
+  ignore = FALSE, symbol = "circle", fixX = FALSE, fixY = FALSE)
 }
 \description{
 Add nodes for \code{\link{eforce}}.

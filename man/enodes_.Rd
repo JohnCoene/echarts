@@ -5,8 +5,8 @@
 \title{Add nodes}
 \usage{
 enodes_(p, nodes, name, label = NULL, value = NULL, category = NULL,
-  symbolSize = NULL, ignore = FALSE, symbol = "circle", fixX = FALSE,
-  fixY = FALSE)
+  symbolSize = NULL, depth = NULL, ignore = FALSE, symbol = "circle",
+  fixX = FALSE, fixY = FALSE)
 }
 \description{
 Add nodes for \code{\link{eforce}}.

@@ -50,7 +50,7 @@ elinks <- function(p, links, source, target, weight = 1){
 #'   elinks(edges, source, target)
 #'
 #' @export
-enodes <- function(p, nodes, name, label, value, category, symbolSize, ignore = FALSE, symbol = "circle",
+enodes <- function(p, nodes, name, label, value, category, symbolSize, depth, ignore = FALSE, symbol = "circle",
                    fixX = FALSE, fixY = FALSE){
 
   name <- deparse(substitute(name))
@@ -58,9 +58,10 @@ enodes <- function(p, nodes, name, label, value, category, symbolSize, ignore = 
   value <- if(!missing(value)) deparse(substitute(value)) else NULL
   category <- if(!missing(category)) deparse(substitute(category)) else NULL
   symbolSize <- if(!missing(symbolSize)) deparse(substitute(symbolSize)) else NULL
+  depth <- if(!missing(depth)) deparse(substitute(depth)) else NULL
 
   p %>%
-    enodes_(nodes, name, label, value, category, symbolSize, ignore, symbol, fixX, fixY)
+    enodes_(nodes, name, label, value, category, symbolSize, depth, ignore, symbol, fixX, fixY)
 
 }
 
