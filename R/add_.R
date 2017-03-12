@@ -217,7 +217,7 @@ epie_ <- function(p, serie, name = NULL, ...){
     p$x$options$series <- append(p$x$options$series, list(opts))
   }
 
-  p$x$options$legend$data <- append(p$x$options$legend$data, get_pie_legend())
+  p$x$options$legend$data <- p$x$options$legend$data <- get_pie_legend()
 
   p
 }
@@ -692,7 +692,7 @@ efunnel_ <- function(p, serie, name = NULL, clickable = TRUE, legendHoverLink = 
     p$x$options$series <- append(p$x$options$series, list(opts))
   }
 
-  p$x$options$legend$data <- append(p$x$options$legend$data, get_pie_legend()) # legend
+  p$x$options$legend$data <- get_pie_legend() # legend
 
   p$x$options$xAxis <- NULL
   p$x$options$yAxis <- NULL

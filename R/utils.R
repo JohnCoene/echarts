@@ -524,3 +524,8 @@ cat2num <- function(x){
   x <- x - 1 # javascript counts from 0
   return(x)
 }
+
+force_legend <- function(categories){
+  categories <- unique(categories)
+  return(categories)
+}

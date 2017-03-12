@@ -63,7 +63,12 @@ elegend <- function(p, legend, show = TRUE, zlevel = 0, z = 4, orient = "horizon
 
   textStyle <- if(missing(textStyle)) list(fontFamily = "Arial, Verdana, sans-serif", fontSize = 12,
                                            fontStyle = "normal", fontWeight = "normal")
-  legend <- if(missing(legend)) default_legend(p)
+
+  if(missing(legend) && !length(p$x$options$legend$data)){
+    legend <- if(missing(legend)) default_legend(p)
+  } else if(missing(legend) && length(p$x$options$legend$data)) {
+    legend <- p$x$options$legend$data
+  }
 
   opts <- list(...)
   opts$data <- legend

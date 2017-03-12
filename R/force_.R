@@ -76,6 +76,13 @@ enodes_ <- function(p, nodes, name, label = NULL, value = NULL, category = NULL,
   p$x$options$series[[previous]]$categories <- if(!is.null(category)) node_cat(nodes[, category])
   p$x$options$series[[previous]]$nodes <- vertices
 
+  # adapt legend
+  if(!is.null(category)){
+    p$x$options$legend$data <- force_legend(nodes[, category])
+    p$x$options$legend$x <- "left"
+    p$x$options$legend$orient <- "vertical"
+  }
+
   p
 
 }
