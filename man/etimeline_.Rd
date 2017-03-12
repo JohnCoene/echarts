@@ -4,9 +4,9 @@
 \alias{etimeline_}
 \title{Add timeline}
 \usage{
-etimeline_(p, timeline = NULL, show = TRUE, zlevel = 0, z = 4,
-  type = "time", notMerge = FALSE, realtime = TRUE, x = 80, y = NULL,
-  x2 = 80, y2 = 0, height = 50, backgroundColor = "rgba(0,0,0,0)",
+etimeline_(p, timeline, show = TRUE, zlevel = 0, z = 4, type = "time",
+  notMerge = FALSE, realtime = TRUE, x = 80, y = NULL, x2 = 80,
+  y2 = 0, height = 50, backgroundColor = "rgba(0,0,0,0)",
   borderWidth = 0, borderColor = "#ccc", padding = 5,
   controlPosition = "left", autoPlay = FALSE, loop = TRUE,
   playInterval = 2000, symbol = "emptyDiamond", symbolSize = 4,
@@ -16,16 +16,13 @@ etimeline_(p, timeline = NULL, show = TRUE, zlevel = 0, z = 4,
 Add timeline
 }
 \examples{
-tl <- data.frame(x = 1:20,
-  day1 = runif(20, 5, 10),
-  day2 = runif(20, 5, 10),
-  day3 = runif(20, 5, 10))
+tl <- data.frame(x = 1:100,
+  values = runif(100, 1, 5),
+  time.stamp = rep(c("day1", "day2", "day3", "day4"), 25))
 
 tl \%>\%
   echart_("x") \%>\%
-  eline_("day1") \%>\%
-  eline_("day2") \%>\%
-  eline_("day3") \%>\%
+  eline_("values") \%>\%
   etimeline_()
 
 }

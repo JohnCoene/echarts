@@ -70,7 +70,10 @@ chord_matrix <- function(){
   matrix <- get("data", envir = data_env)
   matrix <- matrix[[1]]
 
+  x.len <- length(get("x", envir = data_env))
+
   if(ncol(matrix) != nrow(matrix)) stop("uneven columns and rows", call. = FALSE)
+  if(x.len != ncol(matrix)) stop("length of x != matrix dimensions", call. = FALSE)
 
   colnames(matrix) <- NULL # remove names
 
@@ -504,5 +507,20 @@ check_xvar <- function(data, x){
     x <- unique(x)
   }
 
+  return(x)
+}
+
+node_cat <- function(categories){
+
+  categories <- unique(categories)
+  cat <- data.frame(name = categories)
+  cat <- apply(cat, 1, as.list)
+
+  return(cat)
+}
+
+cat2num <- function(x){
+  x <- as.numeric(as.factor(x)) # to numeric
+  x <- x - 1 # javascript counts from 0
   return(x)
 }

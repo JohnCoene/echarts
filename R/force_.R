@@ -60,7 +60,7 @@ enodes_ <- function(p, nodes, name, label = NULL, value = NULL, category = NULL,
   vertices$value <- if(!is.null(value)) nodes[, value]
   vertices$symbolSize <- if(!is.null(symbolSize)) nodes[, symbolSize]
   vertices$label <- if(!is.null(label)) nodes[, label]
-  vertices$category <- if(!is.null(category)) nodes[, category]
+  vertices$category <- if(!is.null(category)) cat2num(nodes[, category])
   vertices$ignore <- ignore
   vertices$symbol <- symbol
   vertices$fixX <- fixX
@@ -71,7 +71,9 @@ enodes_ <- function(p, nodes, name, label = NULL, value = NULL, category = NULL,
 
   previous <- length(p$x$options$series)
 
-  p$x$options$series[[previous]]$nodes = vertices
+
+  p$x$options$series[[previous]]$categories <- if(!is.null(category)) node_cat(nodes[, category])
+  p$x$options$series[[previous]]$nodes <- vertices
 
   p
 

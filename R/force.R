@@ -18,7 +18,7 @@
 #' echart() %>%
 #'   eforce(itemStyle = list(normal = list(label = list(show = TRUE)))) %>% # show labels
 #'   enodes(nodes, name, value = value, category = group) %>%
-#'   elinks(edges, source, target, weight)
+#'   elinks(edges, source, target, weight = 1)
 #'
 #' @export
 elinks <- function(p, links, source, target, weight = 1){
