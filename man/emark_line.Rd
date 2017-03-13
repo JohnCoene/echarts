@@ -8,9 +8,69 @@ emark_line(p, which = "previous", data = list(), clickable = TRUE,
   symbol = list("circle", "arrow"), symbolSize = list(2, 4),
   symbolRotate = NULL, large = FALSE, smooth = FALSE, precision = 2,
   bundling = list(enable = FALSE, maxTurningAngle = 45), z = 2,
-  zlevel = 0, effect, itemStyle, ...)
+  zlevel = 0, ...)
+}
+\arguments{
+\item{p}{an echart object.}
+
+\item{which}{serie to mark lines of, takes \code{previous}, \code{all} or name of specific serie.}
+
+\item{data}{data of mark points, points to mark.}
+
+\item{clickable}{whether marked points are clickable.}
+
+\item{symbol}{symbol, see details for valid values.}
+
+\item{symbolSize}{size of symbol.}
+
+\item{symbolRotate}{symbol rotation angle, i.e.:\code{30}.}
+
+\item{large}{set to \code{TRUE} to optimise for large datasets.}
+
+\item{smooth}{whether to smooth line.}
+
+\item{precision}{decimal precision.}
+
+\item{bundling}{line bundling.}
+
+\item{z, zlevel}{first and second grade cascading control, the higher z the closer to the top.}
+
+\item{...}{any other options to pass to mark points.}
 }
 \description{
 mark line
+}
+\details{
+Valid values for \code{symbol}:
+\itemize{
+  \item{\code{circle}}
+  \item{\code{rectangle}}
+  \item{\code{triangle}}
+  \item{\code{diamond}}
+  \item{\code{emptyCircle}}
+  \item{\code{emptyRectangle}}
+  \item{\code{emptyTriangle}}
+  \item{\code{emptyDiamond}}
+  \item{\code{heart}}
+  \item{\code{droplet}}
+  \item{\code{pin}}
+  \item{\code{arrow}}
+  \item{\code{star}}
+}
+}
+\examples{
+df <- data.frame(x = c("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"),
+                 radio = c(320, 332, 301, 334, 390, 330, 320),
+                 social = c(120, 132, 101, 134, 90, 230, 210))
+
+df \%>\%
+  echart(x) \%>\%
+  ebar(radio, stack = "grp") \%>\%
+  ebar(social, stack = "grp") \%>\%
+  emark_line(data = list(list(type = "max")), clickable = FALSE) \%>\%
+  etooltip(axisPointer = list(type = "shadow")) \%>\%
+  etoolbox_full() \%>\%
+  etoolbox_magic(type = list("tiled", "stack", "line", "bar"))
+
 }
 

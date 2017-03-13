@@ -6,7 +6,15 @@
 \usage{
 etoolbox_full(p, ...)
 }
+\arguments{
+\item{p}{an echart object.}
+
+\item{...}{any other option to pass to \code{\link{etoolbox}}.}
+}
 \description{
 Adds toolbok mark, restor, save, and view.
+}
+\details{
+Adds mark, restore, save, view and zoom buttons
 }
 

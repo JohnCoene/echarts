@@ -22,6 +22,8 @@ emap_(p, name = NULL, mapType = "world", clickable = TRUE, z = 2,
 \arguments{
 \item{p}{an echart object.}
 
+\item{name}{name of serie.}
+
 \item{mapType}{type of map, see examples.}
 
 \item{clickable}{whether elements are clickable.}
@@ -50,7 +52,7 @@ emap_(p, name = NULL, mapType = "world", clickable = TRUE, z = 2,
 
 \item{textFixed}{fixed text location for a region.}
 
-\item{mapValueLocation}{calculation of map values \code{sum} or \code{average}.}
+\item{...}{any other options to pass to map serie.}
 }
 \description{
 Add blank map

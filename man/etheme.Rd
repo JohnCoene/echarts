@@ -6,6 +6,11 @@
 \usage{
 etheme(p, theme = "default")
 }
+\arguments{
+\item{p}{an echart object.}
+
+\item{theme, }{see details for valid values.}
+}
 \description{
 Add a theme.
 }

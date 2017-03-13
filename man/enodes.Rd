@@ -24,6 +24,8 @@ enodes_(p, nodes, name, label = NULL, value = NULL, category = NULL,
 
 \item{value}{nodes value (size).}
 
+\item{category}{nodes group column.}
+
 \item{symbolSize}{nodes symbol size column.}
 
 \item{depth}{depth of nodes.}
@@ -33,8 +35,6 @@ enodes_(p, nodes, name, label = NULL, value = NULL, category = NULL,
 \item{symbol}{nodes symbol, see details for valid values.}
 
 \item{fixX, fixY}{whether to fix x and y axis position.}
-
-\item{vategory}{nodes group column.}
 }
 \description{
 Add nodes for \code{\link{eforce}}.

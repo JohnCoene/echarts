@@ -7,10 +7,55 @@
 etoolbox(p, show = TRUE, zlevel = 0, z = 6, orient = "horizontal",
   x = "right", y = "top", backgroundColor = "rgba(0,0,0,0)",
   borderColor = "#ccc", borderWidth = 0, padding = 5, itemGap = 10,
-  itemSize = 16, color, disableColor = "#ddd", effectiveColor = "red",
-  showTitle = TRUE, textStyle, ...)
+  itemSize = 16, color = NULL, disableColor = "#ddd",
+  effectiveColor = "red", showTitle = TRUE, textStyle = NULL, ...)
+}
+\arguments{
+\item{p}{an echart object.}
+
+\item{show}{whether to show the toolbox.}
+
+\item{z, zlevel}{first and second grade cascading control, the higher z the closer to the top.}
+
+\item{orient}{toolbox orientation, \code{horizontal} or \code{vertical}.}
+
+\item{x}{horizontal alignment, \code{left}, \code{right}.}
+
+\item{y}{vertical alignment, \code{top}, \code{center}, \code{bottom}.}
+
+\item{backgroundColor}{background color.}
+
+\item{borderColor}{border color.}
+
+\item{borderWidth}{border width.}
+
+\item{padding}{padding.}
+
+\item{itemGap}{space between toolbox buttons.}
+
+\item{itemSize}{size of buttons.}
+
+\item{color}{color of buttons.}
+
+\item{disableColor}{color of disabled item.}
+
+\item{effectiveColor}{color of active button.}
+
+\item{showTitle}{set to \code{TRUE} to show text.}
+
+\item{textStyle}{style of text.}
+
+\item{...}{any other options.}
 }
 \description{
 Setup toolbox
+}
+\examples{
+mtcars \%>\%
+  echart(qsec) \%>\%
+  ebar(mpg) \%>\%
+  etoolbox() \%>\%
+  etoolbox_magic(type = list("line", "bar"))
+
 }
 

@@ -7,7 +7,30 @@
 etoolbox_save(p, show = TRUE, title = "Save as image", type = "png",
   name = "echarts", lang = "Save")
 }
+\arguments{
+\item{p}{an echart object.}
+
+\item{show}{whether to show the button.}
+
+\item{title}{title of button.}
+
+\item{type}{image type}
+
+\item{name}{of file.}
+
+\item{lang}{text.}
+}
 \description{
-Add toolbox save as image button
+Add save as image button.
+}
+\examples{
+mtcars \%>\%
+  echart(disp) \%>\%
+  ebar(mpg, stack = "grp") \%>\% # stack
+  ebar(qsec, stack = "grp") \%>\% # stack
+  etoolbox() \%>\%
+  etoolbox_save()
+
+
 }
 

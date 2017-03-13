@@ -80,6 +80,7 @@ ebar_ <- function(p, serie, name = NULL, stack = NULL, clickable = TRUE, xAxisIn
 #' @param symbolRotate angle by which symbol is rotated, i.e.: \code{30}.
 #' @param showAllSymbol By default, a symbol will show only when its corresponding axis label does.
 #' @param smooth whether to smooth line.
+#' @param legendHoverLink enables legend hover link to the chart.
 #' @param dataFilter ECharts data filtering strategy, see details.
 #' @param z,zlevel first and second grade cascading control, the higher z the closer to the top.
 #' @param tooltip style of tooltip.
@@ -890,13 +891,13 @@ emap_heat_ <- function(p, lon, lat, z, blurSize = 30, minAlpha = 0.05, valueScal
 #'
 #' @param p an echart object.
 #' @param mapType type of map, see examples.
+#' @param name name of serie.
 #' @param clickable whether elements are clickable.
 #' @param z,zlevel first and second grade cascading control, the higher z the closer to the top.
 #' @param selectedMode whether items can be selected.
 #' @param hoverable whether elements are hoverable.
 #' @param dataRangeHoverLink enables dataRange hover link to the chart.
 #' @param mapLocation x and y location of map on canvas, takes \code{top}, \code{bottom}, \code{left}, \code{right}, \code{center}.
-#' @param mapValueLocation calculation of map values \code{sum} or \code{average}.
 #' @param mapValueCalculation takes \code{sum} or \code{average}.
 #' @param mapValuePrecision decimal precision.
 #' @param showLegendSymbol whether to show symbol on legend.
@@ -904,6 +905,7 @@ emap_heat_ <- function(p, lon, lat, z, blurSize = 30, minAlpha = 0.05, valueScal
 #' @param scaleLimit controls drag and zoom limits.
 #' @param nameMap custom name mapping.
 #' @param textFixed fixed text location for a region.
+#' @param ... any other options to pass to map serie.
 #'
 #' @examples
 #' coords <- data.frame(city = c("London", "New York", "Beijing", "Sydney"),

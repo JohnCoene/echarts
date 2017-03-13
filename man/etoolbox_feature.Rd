@@ -6,7 +6,31 @@
 \usage{
 etoolbox_feature(p, mark, dataZoom, dataView, magicType, restore, saveAsImage)
 }
+\arguments{
+\item{p}{an echart object.}
+
+\item{mark}{markLine icons see \code{\link{etoolbox_mark}}.}
+
+\item{dataZoom}{dataZoom icons \code{\link{etoolbox_zoom}}.}
+
+\item{dataView}{dataView icons \code{\link{etoolbox_view}}.}
+
+\item{magicType}{magicType icons \code{\link{etoolbox_magic}}.}
+
+\item{restore}{restore icon \code{\link{etoolbox_restore}}.}
+
+\item{saveAsImage}{saveAsImage icon \code{\link{etoolbox_save}}.}
+}
 \description{
-Add toolbox feature
+Add toolbox feature.
+}
+\examples{
+mtcars \%>\%
+  echart(qsec) \%>\%
+  ebar(mpg) \%>\%
+  etoolbox() \%>\%
+  etoolbox_magic(type = list("line", "bar")) \%>\%
+  etoolbox_feature(restore = list(show = TRUE))
+
 }
 

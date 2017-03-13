@@ -7,11 +7,9 @@ map_grps_ <- function(data){
     g.col <- dplyr::groups(data)
     g.col <- unlist(lapply(g.col, deparse))
 
-
-    data <- data %>%
-      dplyr::ungroup() %>%
-      na2ec(.) %>%
-      as.data.frame(.)
+    data <- dplyr::ungroup(data)
+    data <- na2ec(data)
+    data <- as.data.frame(data)
 
     grps <- unique(data[,g.col]) # get unique grps
 

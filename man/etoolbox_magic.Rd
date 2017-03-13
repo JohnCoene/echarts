@@ -6,7 +6,30 @@
 \usage{
 etoolbox_magic(p, show = TRUE, type = list(), title, ...)
 }
+\arguments{
+\item{p}{an echart object.}
+
+\item{show}{wehtehr to show magic buttons.}
+
+\item{type}{chart types.}
+
+\item{title}{titles of charts.}
+
+\item{...}{any other options to pass to magic feature.}
+}
 \description{
-Add toolbox magic buttons
+Enable changing chart type.
+}
+\examples{
+mtcars \%>\%
+  echart(disp) \%>\%
+  ebar(mpg, stack = "grp") \%>\% # stack
+  ebar(qsec, stack = "grp") \%>\% # stack
+  ebar(wt) \%>\% # not stacked
+  etooltip() \%>\%
+  elegend() \%>\%
+  etoolbox() \%>\%
+  etoolbox_magic(type = list("bar", "line", "stack", "tiled"))
+
 }
 

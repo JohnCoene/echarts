@@ -11,6 +11,43 @@ elegend(p, legend, show = TRUE, zlevel = 0, z = 4,
   itemHeight = 14, formatter = NULL, selectedMode = TRUE,
   selected = NULL, textStyle, ...)
 }
+\arguments{
+\item{p}{an echart object.}
+
+\item{legend}{legend.}
+
+\item{show}{wether to show legend.}
+
+\item{z, zlevel}{first and second grade cascading control, the higher z the closer to the top.}
+
+\item{orient}{orientation, \code{vertical} or \code{horizontal}.}
+
+\item{x}{x alignment, \code{center}, \code{left} or \code{right}.}
+
+\item{y}{y alignment, \code{center}, \code{top} or \code{bottom}.}
+
+\item{backgroundColor}{background color.}
+
+\item{borderColor}{border color.}
+
+\item{borderWidth}{border width.}
+
+\item{padding}{legend padding.}
+
+\item{itemGap}{gap between legend items.}
+
+\item{itemWidth, itemHeight}{width and height of items.}
+
+\item{formatter}{default formatter.}
+
+\item{selectedMode}{selection mode.}
+
+\item{selected}{default selected state.}
+
+\item{textStyle}{textStyle.}
+
+\item{...}{any other option to pass to legend.}
+}
 \description{
 Add legend
 }

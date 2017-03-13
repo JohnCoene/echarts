@@ -2,12 +2,33 @@
 % Please edit documentation in R/toolbox.R
 \name{etoolbox_view}
 \alias{etoolbox_view}
-\title{Add toolbox view}
+\title{Add toolbox data view}
 \usage{
 etoolbox_view(p, show = TRUE, title = "View", readOnly = FALSE,
   lang = list("Data View", "close", "refresh"), ...)
 }
+\arguments{
+\item{p}{an echart object.}
+
+\item{show}{whether to show data view.}
+
+\item{title}{button title.}
+
+\item{readOnly}{set as read-only.}
+
+\item{lang}{default text.}
+
+\item{...}{any other parameters to pass to data view.}
+}
 \description{
-Add toolbox view
+Enables viewing data table.
+}
+\examples{
+mtcars \%>\%
+  echart(qsec) \%>\%
+  ebar(mpg) \%>\%
+  etoolbox() \%>\%
+  etoolbox_view()
+
 }
 

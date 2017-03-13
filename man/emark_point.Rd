@@ -6,9 +6,58 @@
 \usage{
 emark_point(p, which = "previous", data = list(), clickable = TRUE,
   symbol = "pin", symbolSize = 10, symbolRotate = NULL, large = FALSE,
-  effect, itemStyle, ...)
+  ...)
+}
+\arguments{
+\item{p}{an echart object.}
+
+\item{which}{serie to mark lines of, takes \code{previous}, \code{all} or name of specific serie.}
+
+\item{data}{data of mark points, points to mark.}
+
+\item{clickable}{whether marked points are clickable.}
+
+\item{symbol}{symbol, see details for valid values.}
+
+\item{symbolSize}{size of symbol.}
+
+\item{symbolRotate}{symbol rotation angle, i.e.:\code{30}.}
+
+\item{large}{set to \code{TRUE} to optimise for large datasets.}
+
+\item{...}{any other options to pass to mark points.}
 }
 \description{
 mark points
+}
+\details{
+Valid values for \code{symbol}:
+\itemize{
+  \item{\code{circle}}
+  \item{\code{rectangle}}
+  \item{\code{triangle}}
+  \item{\code{diamond}}
+  \item{\code{emptyCircle}}
+  \item{\code{emptyRectangle}}
+  \item{\code{emptyTriangle}}
+  \item{\code{emptyDiamond}}
+  \item{\code{heart}}
+  \item{\code{droplet}}
+  \item{\code{pin}}
+  \item{\code{arrow}}
+  \item{\code{star}}
+}
+}
+\examples{
+df <- data.frame(x = 1:150,
+                 y = round(rnorm(150, mean = 5, sd = 1), 2),
+                 z = round(rnorm(150, mean = 7, sd = 1), 2))
+
+df \%>\%
+  echart(x) \%>\%
+  escatter(y) \%>\%
+  escatter(z) \%>\%
+  emark_point(which = "all", data = list(list(type = "min"), list(type = "max")))
+
 }
 

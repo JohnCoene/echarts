@@ -50,7 +50,7 @@ elinks <- function(p, links, source, target, weight = 1){
 #' @param name name column.
 #' @param label nodes label column.
 #' @param value nodes value (size).
-#' @param vategory nodes group column.
+#' @param category nodes group column.
 #' @param symbolSize nodes symbol size column.
 #' @param depth depth of nodes.
 #' @param ignore whether to ignore nodes.

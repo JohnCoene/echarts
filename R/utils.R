@@ -303,7 +303,7 @@ mark <- function(p, which, opts, type = "markPoint"){
     # get all series names
     post <- get_series_name(p, which)
 
-    p$x$options$series[[pos]][[type]] <- opts
+    p$x$options$series[[post]][[type]] <- opts
 
   }
 

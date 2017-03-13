@@ -99,8 +99,8 @@ enodes_ <- function(p, nodes, name, label = NULL, value = NULL, category = NULL,
 #'
 #' @export
 eforce_ <- function(p, name = NULL, large = FALSE, center = list("50%", "50%"), roam = FALSE, size = "100%", ribbonType = FALSE,
-                   minRadius = 10, maxRadius = 20, linkSymbol = "none", linkSymbolSize = list(10, 15), scaling = 1,
-                   gravity = 1, draggable = TRUE, useWorker = TRUE, steps = 1, z = 2, zlevel = 0, ...){
+                    minRadius = 10, maxRadius = 20, linkSymbol = "none", linkSymbolSize = list(10, 15), scaling = 1,
+                    gravity = 1, draggable = TRUE, useWorker = TRUE, steps = 1, z = 2, zlevel = 0, ...){
 
   opts <- list(...)
   opts$name <- if(!is.null(name)) name

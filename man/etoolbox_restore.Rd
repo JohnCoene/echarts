@@ -6,7 +6,23 @@
 \usage{
 etoolbox_restore(p, show = TRUE, title = "Reset")
 }
+\arguments{
+\item{p}{an echart object.}
+
+\item{show}{whether to show button.}
+
+\item{title}{title of button.}
+}
 \description{
-Add toolbox restore button
+Add toolbox restore button.
+}
+\examples{
+mtcars \%>\%
+  echart(disp) \%>\%
+  ebar(mpg, stack = "grp") \%>\% # stack
+  ebar(qsec, stack = "grp") \%>\% # stack
+  ebar(wt) \%>\% # not stacked
+  etoolbox_restore()
+
 }
 

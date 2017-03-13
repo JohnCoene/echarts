@@ -72,4 +72,15 @@ Customise the colorbar of your chart.
 \details{
 \code{ecolorbar} refers to \href{http://echarts.baidu.com/echarts2/doc/option-en.html#dataRange.hoverLink}{datarange} in docs.
 }
+\examples{
+df <- data.frame(x = 1:20,
+                 y = runif(20, 5, 10),
+                 size = runif(20, 5, 15))
+
+df \%>\%
+  echart(x) \%>\%
+  escatter(y, size, symbolSize = 10, legendHoverLink = TRUE) \%>\%
+  ecolorbar(color = list("red", "blue"), min = 5, max = 15, calculable = TRUE)
+
+}
 

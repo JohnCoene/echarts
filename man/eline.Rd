@@ -7,7 +7,7 @@
 \usage{
 eline(p, serie, name = NULL, stack = NULL, clickable = TRUE,
   xAxisIndex = 0, yAxisIndex = 0, symbol = NULL, symbolSize = "2 | 4",
-  symbolRate = NULL, showAllSymbol = FALSE, smooth = TRUE,
+  symbolRotate = NULL, showAllSymbol = FALSE, smooth = TRUE,
   legendHoverLink = TRUE, dataFilter = "nearest", z = 2, zlevel = 0,
   tooltip, ...)
 
@@ -34,9 +34,13 @@ eline_(p, serie, name = NULL, stack = NULL, clickable = TRUE,
 
 \item{symbolSize}{of symbol.}
 
+\item{symbolRotate}{angle by which symbol is rotated, i.e.: \code{30}.}
+
 \item{showAllSymbol}{By default, a symbol will show only when its corresponding axis label does.}
 
 \item{smooth}{whether to smooth line.}
+
+\item{legendHoverLink}{enables legend hover link to the chart.}
 
 \item{dataFilter}{ECharts data filtering strategy, see details.}
 
@@ -45,8 +49,6 @@ eline_(p, serie, name = NULL, stack = NULL, clickable = TRUE,
 \item{tooltip}{style of tooltip.}
 
 \item{...}{any other argument to pass to the serie.}
-
-\item{symbolRotate}{angle by which symbol is rotated, i.e.: \code{30}.}
 }
 \description{
 Add lines

@@ -46,14 +46,14 @@ ebar <- function(p, serie, name = NULL, stack = NULL, clickable = TRUE, xAxisInd
 #'
 #' @export
 eline <- function(p, serie, name = NULL, stack = NULL, clickable = TRUE, xAxisIndex = 0, yAxisIndex = 0, symbol = NULL,
-                  symbolSize = "2 | 4", symbolRate = NULL, showAllSymbol = FALSE, smooth = TRUE, legendHoverLink = TRUE,
+                  symbolSize = "2 | 4", symbolRotate = NULL, showAllSymbol = FALSE, smooth = TRUE, legendHoverLink = TRUE,
                   dataFilter = "nearest", z = 2, zlevel = 0, tooltip, ...){
 
   serie <- deparse(substitute(serie))
   tooltip <- if(missing(tooltip)) default_tooltip(trigger = "axis")
 
   p %>%
-    eline_(serie, name, stack, clickable, xAxisIndex, yAxisIndex, symbol, symbolSize, symbolRate, showAllSymbol, smooth,
+    eline_(serie, name, stack, clickable, xAxisIndex, yAxisIndex, symbol, symbolSize, symbolRotate, showAllSymbol, smooth,
            legendHoverLink, dataFilter, z, zlevel, tooltip, ...)
 
 }

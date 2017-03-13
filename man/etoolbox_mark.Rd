@@ -9,7 +9,24 @@ etoolbox_mark(p, show = TRUE, title = list(mark = "Mark", markUndo = "Undo",
   width = 2, shadowColor = "rgba(0,0,0,0)", shadowBlur = 5, shadowOffsetX = 3,
   shadowOffsetY = 3))
 }
+\arguments{
+\item{p}{an echart object.}
+
+\item{show}{whether to show mark.}
+
+\item{title}{mark button title.}
+
+\item{lineStyle}{style of marked line.}
+}
 \description{
-Add toolbox feature mark button
+Enable marking chart.
+}
+\examples{
+mtcars \%>\%
+  echart(qsec) \%>\%
+  ebar(mpg) \%>\%
+  etoolbox() \%>\%
+  etoolbox_mark()
+
 }
 

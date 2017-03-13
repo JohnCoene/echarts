@@ -110,12 +110,30 @@ eanimation <- function(p, animation = TRUE, addDataAnimation = TRUE, animationTh
 
 #' Add legend
 #'
+#' @param p an echart object.
+#' @param legend legend.
+#' @param show wether to show legend.
+#' @param z,zlevel first and second grade cascading control, the higher z the closer to the top.
+#' @param orient orientation, \code{vertical} or \code{horizontal}.
+#' @param x x alignment, \code{center}, \code{left} or \code{right}.
+#' @param y y alignment, \code{center}, \code{top} or \code{bottom}.
+#' @param backgroundColor background color.
+#' @param borderColor border color.
+#' @param borderWidth border width.
+#' @param selectedMode selection mode.
+#' @param selected  default selected state.
+#' @param textStyle textStyle.
+#' @param formatter default formatter.
+#' @param itemGap gap between legend items.
+#' @param itemWidth,itemHeight width and height of items.
+#' @param padding legend padding.
+#' @param ... any other option to pass to legend.
+#'
 #' @export
 elegend <- function(p, legend, show = TRUE, zlevel = 0, z = 4, orient = "horizontal", x = "center",
                     y = "top", backgroundColor = "rgba(0,0,0,0)", borderColor = "#ccc", borderWidth = 0,
                     padding = 5, itemGap = 10, itemWidth = 20, itemHeight = 14, formatter = NULL,
-                    selectedMode = TRUE, selected = NULL,
-                    textStyle, ...){
+                    selectedMode = TRUE, selected = NULL, textStyle, ...){
 
   textStyle <- if(missing(textStyle)) list(fontFamily = "Arial, Verdana, sans-serif", fontSize = 12,
                                            fontStyle = "normal", fontWeight = "normal")
@@ -155,6 +173,9 @@ elegend <- function(p, legend, show = TRUE, zlevel = 0, z = 4, orient = "horizon
 #' Add theme
 #'
 #' Add a theme.
+#'
+#' @param p an echart object.
+#' @param theme, see details for valid values.
 #'
 #' @details
 #' valid themes:
@@ -387,6 +408,16 @@ etitle <- function(p, text, subtext, link, sublink, target = "blank", subtarget 
 #'
 #' @details
 #' \code{ecolorbar} refers to \href{http://echarts.baidu.com/echarts2/doc/option-en.html#dataRange.hoverLink}{datarange} in docs.
+#'
+#' @examples
+#' df <- data.frame(x = 1:20,
+#'                  y = runif(20, 5, 10),
+#'                  size = runif(20, 5, 15))
+#'
+#' df %>%
+#'   echart(x) %>%
+#'   escatter(y, size, symbolSize = 10, legendHoverLink = TRUE) %>%
+#'   ecolorbar(color = list("red", "blue"), min = 5, max = 15, calculable = TRUE)
 #'
 #' @export
 ecolorbar <- function(p, min = NULL, max = NULL, which = "previous", show = TRUE, color = list("#1e90ff", "#f0ffff"),
