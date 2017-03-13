@@ -80,7 +80,7 @@ earea <- function(p, serie, name = NULL, stack = NULL, smooth = TRUE, ...){
   serie <- deparse(substitute(serie))
 
   p %>%
-    earea_(serie, name = NULL, stack = NULL, smooth = TRUE, ...)
+    earea_(serie, name, stack, smooth, ...)
 }
 
 #' Add scatter

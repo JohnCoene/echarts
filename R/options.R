@@ -209,9 +209,9 @@ etheme <- function(p, theme = "default"){
   themes <- c("default", "mint", "macarons", "macarons2", "green", "blue", "dark", "blue", "dark", "gray", "helianthus",
               "red", "roma", "sakura", "shine", "infographic")
 
-  if(!theme %in% themes) stop("invalid theme")
+  if(!tolower(theme) %in% themes) stop("invalid theme")
 
-  p$x$theme <- theme
+  p$x$theme <- tolower(theme)
 
   p
 }
