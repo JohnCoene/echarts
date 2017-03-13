@@ -4,7 +4,9 @@
 \alias{eradar}
 \title{add radar}
 \usage{
-eradar(p, serie, name = NULL, ...)
+eradar(p, serie, name = NULL, clickable = TRUE, symbol = NULL,
+  symbolSize = 4, symbolRotate = NULL, legendHoverLink = TRUE,
+  polarIndex = 0, z = 2, zlevel = 0, ...)
 }
 \description{
 add radar

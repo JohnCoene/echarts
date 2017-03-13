@@ -10,8 +10,57 @@ echord_(p, name = NULL, sort = "none", sortSub = "none",
   ribbonType = TRUE, showScale = FALSE, showScaleText = FALSE,
   padding = 2, ...)
 }
+\arguments{
+\item{p}{an echart object.}
+
+\item{name}{name of serie.}
+
+\item{sort, sortSub}{data sorting, \code{none}, \code{ascending} or \code{descending}.}
+
+\item{clickable}{whether plot is clickable.}
+
+\item{z, zlevel}{first and second grade cascading control, the higher z the closer to the top.}
+
+\item{symbol}{marker, see details for valid values.}
+
+\item{symbolSize}{of symbol.}
+
+\item{clockWise}{whether links are displayed in clockwise direction.}
+
+\item{minRadius, maxRadius}{minimum and maximum radius after mapping to symbol size.}
+
+\item{showScale}{whether the scale will be showed. Only available if ribbonType is true.}
+
+\item{showScaleText}{whether to show scale text.}
+
+\item{padding}{distance between each sector.}
+
+\item{...}{any other options to pass to serie.}
+
+\item{symbolRotate}{angle by which symbol is rotated, i.e.: \code{30}.}
+
+\item{whether}{to use ribbon shapes.}
+}
 \description{
 Add chord
+}
+\details{
+Valid values for \code{symbol}:
+\itemize{
+  \item{\code{circle}}
+  \item{\code{rectangle}}
+  \item{\code{triangle}}
+  \item{\code{diamond}}
+  \item{\code{emptyCircle}}
+  \item{\code{emptyRectangle}}
+  \item{\code{emptyTriangle}}
+  \item{\code{emptyDiamond}}
+  \item{\code{heart}}
+  \item{\code{droplet}}
+  \item{\code{pin}}
+  \item{\code{arrow}}
+  \item{\code{star}}
+}
 }
 \examples{
 set.seed(19880525)
@@ -25,5 +74,8 @@ matrix \%>\%
   echart_(LETTERS[1:10]) \%>\%
   echord_(ribbonType = FALSE)
 
+}
+\seealso{
+\href{http://echarts.baidu.com/echarts2/doc/option-en.html#series-i(radar)}{official scatter options docs}
 }
 

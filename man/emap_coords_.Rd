@@ -6,7 +6,27 @@
 \usage{
 emap_coords_(p, lon, lat)
 }
+\arguments{
+\item{p}{an echart object}
+
+\item{lon, lat}{coordinates to plot.}
+}
 \description{
-Add coordinates to map
+Add coordinates to map.
+}
+\examples{
+coords <- data.frame(city = c("London", "New York", "Beijing", "Sydney"),
+  lon = c(-0.1167218, -73.98002, 116.3883, 151.18518),
+  lat = c(51.49999, 40.74998, 39.92889, -33.92001))
+
+edges <- data.frame(source = c("Beijing", "Beijing", "New York"),
+  target = c("Sydney", "London", "London"))
+
+coords \%>\%
+  echart_("city") \%>\%
+  emap() \%>\%
+  emap_coords_("lon", "lat") \%>\%
+  emap_lines_(edges, "source", "target")
+
 }
 

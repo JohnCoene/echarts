@@ -10,6 +10,24 @@ emap_points_(p, serie, clickable = TRUE, symbol = "pin", symbolSize = 10,
 \description{
 Add map points
 }
+\details{
+Valid values for \code{symbol}:
+\itemize{
+  \item{\code{circle}}
+  \item{\code{rectangle}}
+  \item{\code{triangle}}
+  \item{\code{diamond}}
+  \item{\code{emptyCircle}}
+  \item{\code{emptyRectangle}}
+  \item{\code{emptyTriangle}}
+  \item{\code{emptyDiamond}}
+  \item{\code{heart}}
+  \item{\code{droplet}}
+  \item{\code{pin}}
+  \item{\code{arrow}}
+  \item{\code{star}}
+}
+}
 \examples{
 coords <- data.frame(city = c("London", "New York", "Beijing", "Sydney"),
   lon = c(-0.1167218, -73.98002, 116.3883, 151.18518),

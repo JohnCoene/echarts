@@ -13,7 +13,7 @@ vector_data_ <- function(data, serie){
   data[, serie]
 }
 
-scatter_data_ <- function(data, serie, size = NULL){
+scatter_data_ <- function(data, serie, size = NULL, symbolSize){
 
   # get for eval
   x <- get("x", envir = data_env)
@@ -23,6 +23,7 @@ scatter_data_ <- function(data, serie, size = NULL){
   # build matrix
   if(!is.null(size)){
     size <- data[, size]
+    size <- normalise_size(size, symbolSize)
     values <- suppressWarnings(cbind(x, serie, size))
   } else {
     values <- suppressWarnings(cbind(x, serie))
@@ -91,8 +92,7 @@ default_dataRange_ <- function(data, serie){
   dataRange <- list(
     min = min(serie),
     max = max(serie),
-    calculable = calc,
-    color = list('orangered','yellow','lightskyblue')
+    calculable = calc
   )
 
   return(dataRange)
@@ -528,4 +528,23 @@ cat2num <- function(x){
 force_legend <- function(categories){
   categories <- unique(categories)
   return(categories)
+}
+
+scatter_size <- function(size){
+  htmlwidgets::JS("function(value){return value[2];}")
+}
+
+normalise_size <- function(size, symbolSize){
+  size <- (x - min(x)) / (max(x) - min(x))
+  size <- size * symbolSize
+  return(size)
+}
+
+compute_max <- function(data, serie){
+
+  data <- do.call("rbind.data.frame", lapply(data, as.data.frame))
+  x <- data[, serie]
+
+  return(max(x))
+
 }

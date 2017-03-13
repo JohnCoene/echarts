@@ -2,7 +2,15 @@
 #'
 #' Initiate an echart graph.
 #'
+#' @param data data.frame containing data to plot.
+#' @param x variable column.
+#' @param width,height dimensions of chart.
+#' @param elementId id of div containing chart.
+#'
 #' @import htmlwidgets
+#'
+#' @name echart
+#' @rdname echart
 #'
 #' @export
 echart <- function(data, x, width = "100%", height = 400, elementId = NULL) {
@@ -59,11 +67,7 @@ echart <- function(data, x, width = "100%", height = 400, elementId = NULL) {
   )
 }
 
-#' Initiate an echart
-#'
-#' Initiate an echart graph.
-#'
-#' @import htmlwidgets
+#' @rdname echart
 #'
 #' @export
 echart_ <- function(data, x, width = "100%", height = 400, elementId = NULL) {

@@ -4,7 +4,10 @@
 \alias{earea}
 \title{Add area}
 \usage{
-earea(p, serie, name = NULL, stack = NULL, smooth = TRUE, ...)
+earea(p, serie, name = NULL, clickable = TRUE, legendHoverLink = TRUE,
+  center = list("50\%", "50\%"), radius = list(0, "75\%"),
+  startAngle = 90, minAngle = 0, clockWise = TRUE, roseType = NULL,
+  selectedOffset = 10, selectedMode = FALSE, z = 2, zlevel = 0, ...)
 }
 \description{
 Add area serie

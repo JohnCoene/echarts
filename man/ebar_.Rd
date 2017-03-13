@@ -5,9 +5,32 @@
 \title{Add bars}
 \usage{
 ebar_(p, serie, name = NULL, stack = NULL, clickable = TRUE,
-  xAxisIndex = 0, yAxisIndex = 0, barGap = "100\%",
+  xAxisIndex = 0, yAxisIndex = 0, barGap = "30\%",
   barCategoryGap = "20\%", legendHoverLink = TRUE, z = 2, zlevel = 0,
   tooltip, ...)
+}
+\arguments{
+\item{p}{an echart object.}
+
+\item{serie}{value column name to plot.}
+
+\item{name}{of serie.}
+
+\item{stack}{name of the stack.}
+
+\item{clickable}{whether plot is clickable.}
+
+\item{xAxisIndex, yAxisIndex}{axis indexes.}
+
+\item{barGap, barCategoryGap}{distance between each bar.}
+
+\item{legendHoverLink}{enables legend hover links.}
+
+\item{z, zlevel}{first and second grade cascading control, the higher z the closer to the top.}
+
+\item{tooltip}{style of tooltip.}
+
+\item{...}{any other argument to pass to the serie.}
 }
 \description{
 Add bar serie.
@@ -27,5 +50,8 @@ mtcars \%>\%
   etoolbox_magic(type = list("stack", "tiled")) \%>\%
   etoolbox_restore()
 
+}
+\seealso{
+\href{http://echarts.baidu.com/echarts2/doc/option-en.html#series-i(bar)}{official bar options docs}
 }
 

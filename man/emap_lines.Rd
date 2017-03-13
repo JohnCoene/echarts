@@ -5,10 +5,9 @@
 \title{Add map lines}
 \usage{
 emap_lines(p, edges, source, target, name = NULL, clickable = TRUE,
-  symbol = list("circle", "arrow"), symbolSize = list(2, 4),
-  symbolRate = NULL, large = FALSE, smooth = TRUE, z = 2, zlevel = 0,
-  smoothness = 0.2, precision = 2, bundling = list(enable = FALSE,
-  maxTurningAngle = 45), ...)
+  symbol = "arrow", symbolSize = 2, symbolRotate = NULL, large = FALSE,
+  smooth = TRUE, z = 2, zlevel = 0, smoothness = 0.2, precision = 2,
+  bundling = list(enable = FALSE, maxTurningAngle = 45), ...)
 }
 \description{
 Add lines on map

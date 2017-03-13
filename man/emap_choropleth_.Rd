@@ -4,7 +4,12 @@
 \alias{emap_choropleth_}
 \title{Add choropleth}
 \usage{
-emap_choropleth_(p, serie, dataRange = NULL)
+emap_choropleth_(p, serie)
+}
+\arguments{
+\item{p}{an echart object.}
+
+\item{serie}{values to plot.}
 }
 \description{
 Add choropleth
@@ -18,5 +23,14 @@ choropleth \%>\%
   emap() \%>\%
   emap_choropleth_("values")
 
+choropleth \%>\%
+  echart_("countries") \%>\%
+  emap() \%>\%
+  emap_choropleth_("values") \%>\%
+  edatarange(color = list("red", "yellow"), calculable = TRUE)
+
+}
+\seealso{
+\code{\link{edatarange}}
 }
 

@@ -4,7 +4,10 @@
 \alias{epie}
 \title{Add pie}
 \usage{
-epie(p, serie, name = NULL, ...)
+epie(p, serie, name = NULL, clickable = TRUE, legendHoverLink = TRUE,
+  center = list("50\%", "50\%"), radius = list(0, "75\%"),
+  startAngle = 90, minAngle = 0, clockWise = TRUE, roseType = NULL,
+  selectedOffset = 10, selectedMode = TRUE, z = 2, zlevel = 0, ...)
 }
 \description{
 Add pie chart

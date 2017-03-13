@@ -4,7 +4,9 @@
 \alias{escatter}
 \title{Add scatter}
 \usage{
-escatter(p, serie, size, name = NULL, clickable = TRUE, ...)
+escatter(p, serie, size = NULL, name = NULL, clickable = TRUE,
+  symbol = NULL, symbolSize = 4, symbolRotate = NULL, large = FALSE,
+  largeThreshold = 2000, legendHoverLink = TRUE, z = 2, zlevel = 0, ...)
 }
 \description{
 Add scatter serie.

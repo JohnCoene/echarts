@@ -6,8 +6,21 @@
 \usage{
 earea_(p, serie, name = NULL, stack = NULL, smooth = TRUE, ...)
 }
+\arguments{
+\item{p}{an echart object.}
+
+\item{serie}{value column name to plot.}
+
+\item{name}{of serie.}
+
+\item{stack}{name of the stack.}
+
+\item{smooth}{whether to smooth line.}
+
+\item{...}{any other argument to pass to the serie. i.e.: same parameters as \code{\link{eline}} or \code{\link{eline_}}}
+}
 \description{
-Add area serie
+Add area serie.
 }
 \examples{
 mtcars \%>\%

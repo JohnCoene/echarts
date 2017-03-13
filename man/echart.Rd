@@ -2,9 +2,21 @@
 % Please edit documentation in R/echarts.R
 \name{echart}
 \alias{echart}
+\alias{echart_}
 \title{Initiate an echart}
 \usage{
 echart(data, x, width = "100\%", height = 400, elementId = NULL)
+
+echart_(data, x, width = "100\%", height = 400, elementId = NULL)
+}
+\arguments{
+\item{data}{data.frame containing data to plot.}
+
+\item{x}{variable column.}
+
+\item{width, height}{dimensions of chart.}
+
+\item{elementId}{id of div containing chart.}
 }
 \description{
 Initiate an echart graph.

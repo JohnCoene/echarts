@@ -4,7 +4,7 @@
 \alias{edatarange}
 \title{Customise data range}
 \usage{
-edatarange(p, scale, which = "previous", show = TRUE,
+edatarange(p, min = NULL, max = NULL, which = "previous", show = TRUE,
   color = list("#1e90ff", "#f0ffff"), zlevel = 4, z = 0,
   orient = "vertical", x = "left", y = "bottom",
   backgroundColor = "rgba(0,0,0,0)", borderColor = "#ccc",

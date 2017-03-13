@@ -75,12 +75,15 @@ eline <- function(p, serie, name = NULL, stack = NULL, clickable = TRUE, xAxisIn
 #'   etooltip()
 #'
 #' @export
-earea <- function(p, serie, name = NULL, stack = NULL, smooth = TRUE, ...){
+earea <- function(p, serie, name = NULL, clickable = TRUE, legendHoverLink = TRUE, center = list("50%", "50%"),
+                  radius = list(0, "75%"), startAngle = 90, minAngle = 0, clockWise = TRUE, roseType = NULL, selectedOffset = 10,
+                  selectedMode = FALSE, z = 2, zlevel = 0, ...){
 
   serie <- deparse(substitute(serie))
 
   p %>%
-    earea_(serie, name, stack, smooth, ...)
+    earea_(serie, name, clickable, legendHoverLink, center, radius, startAngle, minAngle, clockWise, roseType, selectedOffset,
+           selectedMode, z, zlevel, ...)
 }
 
 #' Add scatter
@@ -97,13 +100,14 @@ earea <- function(p, serie, name = NULL, stack = NULL, smooth = TRUE, ...){
 #'   escatter(mpg, qsec)
 #'
 #' @export
-escatter <- function(p, serie, size, name = NULL, clickable = TRUE, ...){
+escatter <- function(p, serie, size = NULL, name = NULL, clickable = TRUE, symbol = NULL, symbolSize = 4, symbolRotate = NULL,
+                     large = FALSE, largeThreshold = 2000, legendHoverLink = TRUE, z = 2, zlevel = 0, ...){
 
   serie <- deparse(substitute(serie))
   size <- if(!missing(size)) deparse(substitute(size)) else NULL
 
   p %>%
-    escatter_(serie, size, name, clickable, ...)
+    escatter_(serie, size, name, clickable, symbol, symbolSize, symbolRotate, large, largeThreshold, legendHoverLink, z, zlevel, ...)
 }
 
 #' Add pie
@@ -129,12 +133,15 @@ escatter <- function(p, serie, size, name = NULL, clickable = TRUE, ...){
 #'   etheme("mint")
 #'
 #' @export
-epie <- function(p, serie, name = NULL, ...){
+epie <- function(p, serie, name = NULL, clickable = TRUE, legendHoverLink = TRUE, center = list("50%", "50%"),
+                 radius = list(0, "75%"), startAngle = 90, minAngle = 0, clockWise = TRUE, roseType = NULL, selectedOffset = 10,
+                 selectedMode = TRUE, z = 2, zlevel = 0, ...){
 
   serie <- deparse(substitute(serie))
 
   p %>%
-    epie_(serie, name, ...)
+    epie_(serie, name, clickable, legendHoverLink, center, radius, startAngle, minAngle, clockWise, roseType, selectedOffset,
+          selectedMode, z, zlevel, ...)
 }
 
 #' add radar
@@ -147,12 +154,13 @@ epie <- function(p, serie, name = NULL, ...){
 #'   eradar(value)
 #'
 #' @export
-eradar <- function(p, serie, name = NULL, ...){
+eradar <- function(p, serie, name = NULL, clickable = TRUE, symbol = NULL, symbolSize = 4, symbolRotate = NULL,
+                   legendHoverLink = TRUE, polarIndex = 0, z = 2, zlevel = 0, ...){
 
   serie <- deparse(substitute(serie))
 
   p %>%
-    eradar_(serie, name, ...)
+    eradar_(serie, name, clickable, symbol, symbolSize, symbolRotate, legendHoverLink, polarIndex, z, zlevel, ...)
 }
 
 
@@ -176,8 +184,7 @@ echord <- function(p, name = NULL, sort = "none", sortSub = "none", clickable = 
                    ribbonType = TRUE, showScale = FALSE, showScaleText = FALSE, padding = 2, ...){
 
   p %>%
-    echord_(name, sort, sortSub, clickable, z, zlevel,
-            symbol, symbolSize, clockWise, minRadius, maxRadius,
+    echord_(name, sort, sortSub, clickable, z, zlevel, symbol, symbolSize, clockWise, minRadius, maxRadius,
             ribbonType, showScale, showScaleText, padding, ...)
 }
 
@@ -193,13 +200,12 @@ echord <- function(p, name = NULL, sort = "none", sortSub = "none", clickable = 
 #'   emap_choropleth(values)
 #'
 #' @export
-emap_choropleth <- function(p, serie, dataRange = NULL){
+emap_choropleth <- function(p, serie){
 
   serie <- deparse(substitute(serie))
-  dataRange <- if(is.null(dataRange)) default_dataRange_(serie) else NULL
 
   p %>%
-    emap_choropleth_(serie, dataRange)
+    emap_choropleth_(serie)
 }
 
 #' Add map coordinates
@@ -264,15 +270,15 @@ emap_coords <- function(p, lon, lat){
 #' @seealso \code{\link{emap_coords}}
 #'
 #' @export
-emap_lines <- function(p, edges, source, target, name = NULL, clickable = TRUE, symbol = list("circle", "arrow"),
-                       symbolSize = list(2, 4), symbolRate = NULL, large = FALSE, smooth = TRUE, z = 2, zlevel = 0,
+emap_lines <- function(p, edges, source, target, name = NULL, clickable = TRUE, symbol = "arrow",
+                       symbolSize = 2, symbolRotate = NULL, large = FALSE, smooth = TRUE, z = 2, zlevel = 0,
                        smoothness = 0.2, precision = 2, bundling = list(enable = FALSE, maxTurningAngle = 45), ...){
 
   source <- deparse(substitute(source))
   target <- deparse(substitute(target))
 
   p %>%
-    emap_lines_(edges, source, target, name, clickable, symbol, symbolSize, symbolRate, large, smooth, z, zlevel,
+    emap_lines_(edges, source, target, name, clickable, symbol, symbolSize, symbolRotate, large, smooth, z, zlevel,
                 smoothness, precision, bundling, ...)
 }
 
@@ -408,7 +414,7 @@ emap <- function(p, name = NULL, mapType = "world", clickable = TRUE, z = 2, zle
 #'   egauge(85, "SPEED")
 #'
 #' @export
-egauge <- function(p, value, indicator = "", name = NULL, clickable = TRUE, legendHoverLink = TRUE, center = list("50%", "50%"),
+egauge <- function(p, value, indicator = "", name = NULL, clickable = FALSE, legendHoverLink = TRUE, center = list("50%", "50%"),
                    radius = list("0%", "75%"), startAngle = 225, endAngle = -45, min = 0, max = 100,
                    splitNumber = 10, z = 2, zlevel = 0, tooltip, ...){
 
@@ -433,7 +439,7 @@ egauge <- function(p, value, indicator = "", name = NULL, clickable = TRUE, lege
 #'
 #' @export
 efunnel <- function(p, serie, name = NULL, clickable = TRUE, legendHoverLink = TRUE, sort = "descending",
-                    min = 0, max = 100, x = 80, y = 60, x2 = 80, y2 = 60, width = NULL, height = NULL,
+                    min = NULL, max = NULL, x = 80, y = 60, x2 = 80, y2 = 60, width = NULL, height = NULL,
                     funnelAlign = "center", minSize = "0%", maxSize = "100%", gap = 0, tooltip, ...){
 
   tooltip <- if(missing(tooltip)) default_tooltip(trigger = "item")

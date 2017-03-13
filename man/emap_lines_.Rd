@@ -5,13 +5,61 @@
 \title{Add map lines}
 \usage{
 emap_lines_(p, edges, source, target, name = NULL, clickable = TRUE,
-  symbol = list("circle", "arrow"), symbolSize = list(2, 4),
-  symbolRate = NULL, large = FALSE, smooth = TRUE, z = 2, zlevel = 0,
-  smoothness = 0.2, precision = 2, bundling = list(enable = FALSE,
-  maxTurningAngle = 45), ...)
+  symbol = "arrow", symbolSize = 2, symbolRotate = NULL, large = FALSE,
+  smooth = TRUE, z = 2, zlevel = 0, smoothness = 0.2, precision = 2,
+  bundling = list(enable = FALSE, maxTurningAngle = 45), ...)
+}
+\arguments{
+\item{p}{an echart object.}
+
+\item{edges}{edges data.frame.}
+
+\item{source, target}{source and target columns in edges data.frame.}
+
+\item{name}{name of serie.}
+
+\item{clickable}{whether lines are clikable.}
+
+\item{symbol}{symbol, see valid details for valid values.}
+
+\item{symbolSize}{of symbol.}
+
+\item{symbolRotate}{angle by which symbol is rotated, i.e.: \code{30}.}
+
+\item{large}{optimises for 2'000 data points and over.}
+
+\item{smooth}{whether to smooth lines.}
+
+\item{z, zlevel}{first and second grade cascading control, the higher z the closer to the top.}
+
+\item{smoothness}{line smoothness}
+
+\item{precision}{for 'average'.}
+
+\item{bundling}{edge bundling settings, see usage.}
+
+\item{...}{any other options to pass to line.}
 }
 \description{
-Add lines on map
+Add lines on map.
+}
+\details{
+Valid values for \code{symbol}:
+\itemize{
+  \item{\code{circle}}
+  \item{\code{rectangle}}
+  \item{\code{triangle}}
+  \item{\code{diamond}}
+  \item{\code{emptyCircle}}
+  \item{\code{emptyRectangle}}
+  \item{\code{emptyTriangle}}
+  \item{\code{emptyDiamond}}
+  \item{\code{heart}}
+  \item{\code{droplet}}
+  \item{\code{pin}}
+  \item{\code{arrow}}
+  \item{\code{star}}
+}
 }
 \examples{
 coords <- data.frame(city = c("London", "New York", "Beijing", "Sydney"),
@@ -56,6 +104,6 @@ coords \%>\%
 
 }
 \seealso{
-\code{\link{emap_coords}}
+\code{\link{emap_coords}} \href{http://echarts.baidu.com/echarts2/doc/option-en.html#series-i(map).markLine}{official map line docs}
 }
 

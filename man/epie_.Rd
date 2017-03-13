@@ -4,7 +4,39 @@
 \alias{epie_}
 \title{Add pie}
 \usage{
-epie_(p, serie, name = NULL, ...)
+epie_(p, serie, name = NULL, clickable = TRUE, legendHoverLink = TRUE,
+  center = list("50\%", "50\%"), radius = list(0, "75\%"),
+  startAngle = 90, minAngle = 0, clockWise = TRUE, roseType = NULL,
+  selectedOffset = 10, selectedMode = TRUE, z = 2, zlevel = 0, ...)
+}
+\arguments{
+\item{p}{an echart object.}
+
+\item{serie}{value column name to plot.}
+
+\item{name}{of serie.}
+
+\item{clickable}{whether plot is clickable.}
+
+\item{legendHoverLink}{enables legend hover links.}
+
+\item{center}{coordinates of the center.}
+
+\item{radius}{radius in pixels or percent.}
+
+\item{startAngle, minAngle}{start and minimum angle.}
+
+\item{clockWise}{whether to display slices in clockwise direction}
+
+\item{roseType}{type of pie, takes \code{NULL}, \code{area} or \code{radius}, see examples.}
+
+\item{selectedOffset}{offset of selected slice.}
+
+\item{selectedMode}{whether slices are selectable.}
+
+\item{z, zlevel}{first and second grade cascading control, the higher z the closer to the top.}
+
+\item{...}{any other option to pass to serie.}
 }
 \description{
 Add pie chart
@@ -27,5 +59,8 @@ pie \%>\%
   epie_("value", roseType = "radius") \%>\%
   etheme("mint")
 
+}
+\seealso{
+\href{http://echarts.baidu.com/echarts2/doc/option-en.html#series-i(pie)}{official pie options docs}
 }
 
