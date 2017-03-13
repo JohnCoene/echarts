@@ -26,6 +26,9 @@
 #'   enodes(nodes, name, value = value, category = group) %>%
 #'   elinks(edges, source, target, weight = 1)
 #'
+#' @name elinks
+#' @rdname elinks
+#'
 #' @export
 elinks <- function(p, links, source, target, weight = 1){
 
@@ -85,6 +88,9 @@ elinks <- function(p, links, source, target, weight = 1){
 #'   enodes(nodes, name, value = value, category = group) %>%
 #'   elinks(edges, source, target)
 #'
+#' @name nodes
+#' @rdname enodes
+#'
 #' @export
 enodes <- function(p, nodes, name, label, value, category, symbolSize, depth, ignore = FALSE, symbol = "circle",
                    fixX = FALSE, fixY = FALSE){
@@ -122,6 +128,9 @@ enodes <- function(p, nodes, name, label, value, category, symbolSize, depth, ig
 #' @param steps the number of iterations of each frame layout calculation.
 #' @param z,zlevel first and second grade cascading control, the higher z the closer to the top.
 #' @param ... any other options to pass to serie.
+#'
+#' @name eforce
+#' @rdname eforce
 #'
 #' @export
 eforce <- function(p, name = NULL, large = FALSE, center = list("50%", "50%"), roam = FALSE, size = "100%", ribbonType = FALSE,

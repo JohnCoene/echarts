@@ -15,6 +15,8 @@
 #'   enodes_(nodes, "name", value = "value", category = "group") %>%
 #'   elinks_(edges, "source", "target")
 #'
+#' @rdname elinks
+#'
 #' @export
 elinks_ <- function(p, links, source, target, weight = 1){
 
@@ -41,6 +43,8 @@ elinks_ <- function(p, links, source, target, weight = 1){
 #'   eforce_(itemStyle = list(normal = list(label = list(show = TRUE)))) %>% # show labels
 #'   enodes_(nodes, "name", value = "value", category = "group") %>%
 #'   elinks_(edges, "source", "target")
+#'
+#' @rdname enodes
 #'
 #' @export
 enodes_ <- function(p, nodes, name, label = NULL, value = NULL, category = NULL, symbolSize = NULL, depth = NULL, ignore = FALSE,
@@ -90,6 +94,8 @@ enodes_ <- function(p, nodes, name, label = NULL, value = NULL, category = NULL,
 #' Build force network
 #'
 #' Plot force directed graph.
+#'
+#' @rdname eforce
 #'
 #' @export
 eforce_ <- function(p, name = NULL, large = FALSE, center = list("50%", "50%"), roam = FALSE, size = "100%", ribbonType = FALSE,
