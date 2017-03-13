@@ -9,7 +9,7 @@
 \alias{xAxis}
 \title{Customize X axis}
 \usage{
-exAxis(p, show = TRUE, type = "value", ...)
+exAxis(p, show = TRUE, type = "value", append = FALSE, ...)
 
 exAxis_category(p, show = TRUE, zlevel = 0, z = 0, boundaryGap = FALSE,
   append = FALSE, ...)
@@ -27,7 +27,53 @@ exAxis_time(p, show = TRUE, zlevel = 0, z = 0, position = "bottom",
 exAxis_log(p, show = TRUE, zlevel = 0, z = 0, position = "bottom",
   logLabelBase = NULL, logPositive = NULL, append = FALSE, ...)
 }
+\arguments{
+\item{p}{an echart object.}
+
+\item{show}{whether to show the axis.}
+
+\item{type}{type of axis takes, \code{value}, \code{category}, \code{time}, \code{log}.}
+
+\item{append}{whether to append options to current axis or override.}
+
+\item{...}{any other parameter to pass to the axis.}
+
+\item{z, zlevel}{first and second grade cascading control, the higher z the closer to the top.}
+
+\item{boundaryGap}{whether to plot on axis line or between.}
+
+\item{position}{position of axis, takes \code{bottom}, \code{top}, \code{left} or \code{right}.}
+
+\item{name}{name of the axis.}
+
+\item{nameLocation}{location of \code{name}, takes \code{start} or \code{end}.}
+
+\item{nameTextStyle}{style of \code{name}.}
+
+\item{min, max}{min and max values.}
+
+\item{scale}{If \code{FALSE}, the value axis must start with 0. If \code{TRUE}, you can set the minimum and maximum value
+of value axis as the starting and ending value of your value axis.}
+
+\item{splitNumber}{number of segments, defaults to auto split along with the min/max.}
+
+\item{logLabelBase}{base log.}
+
+\item{logPositive}{if \code{FALSE} negative values are not supported.}
+}
 \description{
+Customise x axis.
+
 Customize X axis
+}
+\examples{
+mtcars$models <- row.names(mtcars)
+
+mtcars[1:10,] \%>\%
+  echart(models) \%>\%
+  eline(mpg) \%>\%
+  exAxis_category() \%>\%
+  eyAxis_value(min = 10, append = FALSE, scale = TRUE)
+
 }
 

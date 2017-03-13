@@ -7,12 +7,62 @@
 etooltip(p, show = TRUE, trigger = "axis", zlevel = 1, z = 8,
   showContent = TRUE, position = NULL, formatter = NULL,
   islandFormatter = "{a} < br/>{b} : {c}", showDelay = 20,
-  hideDelay = 100, transitionDuration = 4, enterable = FALSE,
+  hideDelay = 100, transitionDuration = 0.4, enterable = FALSE,
   backgroundColor = "rgba(0,0,0,0.7)", borderColor = "#333",
   borderRadius = 4, borderWidth = 0, padding = 5, axisPointer, textStyle,
   ...)
 }
+\arguments{
+\item{p}{an echart object.}
+
+\item{show}{whether to show the tooltip.}
+
+\item{trigger}{element that triggers the tooltip, takes \code{item}, \code{axis}.}
+
+\item{z, zlevel}{first and second grade cascading control, the higher z the closer to the top.}
+
+\item{showContent}{whether to show the content of tooltip.}
+
+\item{position}{specifies position, pass a \code{list}, like \code{list(10, 10)}, fixed position; pass a function,
+like \code{htmlwidgets::JS("function([x, y]) {return [x + 10, y + 10]}")}}
+
+\item{formatter}{see \href{official documentation}{http://echarts.baidu.com/echarts2/doc/option-en.html#tooltip.formatter} for more details.}
+
+\item{islandFormatter}{island content formatter.}
+
+\item{showDelay}{number of milliseconds the tooltip shows.}
+
+\item{hideDelay}{number of milliseconds to wait until the tooltip is hidden when mouse out from a point or chart.}
+
+\item{transitionDuration}{duration in seconds of the animated transition.}
+
+\item{enterable}{whether to let the mouse go into the tip dom.}
+
+\item{backgroundColor}{background color.}
+
+\item{borderColor}{border color.}
+
+\item{borderRadius}{border radius.}
+
+\item{borderWidth}{border width.}
+
+\item{padding}{padding.}
+
+\item{axisPointer}{axis pointer, triggered by axis.}
+
+\item{textStyle}{tooltip text size.}
+
+\item{...}{any other options to pass to tooltip.}
+}
 \description{
-Add tooltip
+Customise tooltip.
+}
+\examples{
+mtcars \%>\%
+  echart(disp) \%>\%
+  eline(mpg) \%>\%
+  eline(qsec) \%>\%
+  etooltip(trigger = "axis")
+
 }
 

@@ -10,6 +10,41 @@ eforce(p, name = NULL, large = FALSE, center = list("50\%", "50\%"),
   scaling = 1, gravity = 1, draggable = TRUE, useWorker = TRUE,
   steps = 1, z = 2, zlevel = 0, ...)
 }
+\arguments{
+\item{p}{an echart objects.}
+
+\item{name}{name of network.}
+
+\item{large}{set to \code{TRUE} to optimise for large graphs.}
+
+\item{center}{center of network.}
+
+\item{roam}{set to \code{TRUE} to enable zoom and drag.}
+
+\item{size}{size of layout.}
+
+\item{ribbonType}{whether to use ribbons.}
+
+\item{minRadius, maxRadius}{minimum and maximum radius of nodes.}
+
+\item{linkSymbol}{can be set to \code{arrow}.}
+
+\item{linkSymbolSize}{size of \code{symbol}.}
+
+\item{scaling}{scaling factor.}
+
+\item{gravity}{centripetal force coefficient.}
+
+\item{draggable}{set to \code{TRUE} to allow dragging nodes.}
+
+\item{useWorker}{specifies whether to put layout calculation into web worker when the browser supports web worker.}
+
+\item{steps}{the number of iterations of each frame layout calculation.}
+
+\item{z, zlevel}{first and second grade cascading control, the higher z the closer to the top.}
+
+\item{...}{any other options to pass to serie.}
+}
 \description{
 Plot force directed graph.
 }

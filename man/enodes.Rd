@@ -7,8 +7,49 @@
 enodes(p, nodes, name, label, value, category, symbolSize, depth,
   ignore = FALSE, symbol = "circle", fixX = FALSE, fixY = FALSE)
 }
+\arguments{
+\item{p}{an echart object.}
+
+\item{nodes}{nodes data.frame.}
+
+\item{name}{name column.}
+
+\item{label}{nodes label column.}
+
+\item{value}{nodes value (size).}
+
+\item{symbolSize}{nodes symbol size column.}
+
+\item{depth}{depth of nodes.}
+
+\item{ignore}{whether to ignore nodes.}
+
+\item{symbol}{nodes symbol, see details for valid values.}
+
+\item{fixX, fixY}{whether to fix x and y axis position.}
+
+\item{vategory}{nodes group column.}
+}
 \description{
 Add nodes for \code{\link{eforce}}.
+}
+\details{
+Valid values for \code{symbol}:
+\itemize{
+  \item{\code{circle}}
+  \item{\code{rectangle}}
+  \item{\code{triangle}}
+  \item{\code{diamond}}
+  \item{\code{emptyCircle}}
+  \item{\code{emptyRectangle}}
+  \item{\code{emptyTriangle}}
+  \item{\code{emptyDiamond}}
+  \item{\code{heart}}
+  \item{\code{droplet}}
+  \item{\code{pin}}
+  \item{\code{arrow}}
+  \item{\code{star}}
+}
 }
 \examples{
 let <- LETTERS[1:20]

@@ -1,5 +1,19 @@
 #' Add global options
 #'
+#' Add global options.
+#'
+#' @param p an echart object.
+#' @param backgroundColor background color.
+#' @param color colors to use in chart.
+#' @param renderAsImage allows rendering as image.
+#' @param calculable specifies whether the drag-recalculate feature will be enabled.
+#' @param symbolList list of default symbols.
+#' @param calculableColor color of border around drag-recalculate.
+#' @param calculableHolderColor color of calculable holder.
+#' @param nameConnector a connector that links the names of data series together after the combination of data series.
+#' @param valueConnector a connector that links the name of data series with value when island appears after the combination of data series.
+#' @param ... any other options.
+#'
 #' @export
 eoptions <- function(p, backgroundColor = NULL, color, renderAsImage = FALSE, calculable = FALSE, symbolList,
                      calculableColor = "rgba(255,165,0,0.6)", calculableHolderColor = "#ccc", nameConnector = "&",
@@ -32,6 +46,48 @@ eoptions <- function(p, backgroundColor = NULL, color, renderAsImage = FALSE, ca
 
 #' Add animations
 #'
+#' Add animations
+#'
+#' @param p an echart objects.
+#' @param animation whether to show the initial animation.
+#' @param addDataAnimation specifies whether the dynamic data interface animation will be enabled.
+#' @param animationThreshold threshold of animated elements.
+#' @param animationDuration duration of animation, in ms.
+#' @param animationDurationUpdate duration of the update animation, in ms.
+#' @param animationEasing easing effect, see details for valid values.
+#' @param ... any other options.
+#'
+#' @details
+#' \itemize{
+#'   \item{\code{linear}}
+#'   \item{\code{QuadraticIn}}
+#'   \item{\code{QuadraticOut}}
+#'   \item{\code{QuadraticInOut}}
+#'   \item{\code{CubicIn}}
+#'   \item{\code{CubicOut}}
+#'   \item{\code{CubicInOut}}
+#'   \item{\code{QuarticIn}}
+#'   \item{\code{QuarticOut}}
+#'   \item{\code{QuarticInOut}}
+#'   \item{\code{SinusoidalIn}}
+#'   \item{\code{SinusoidalOut}}
+#'   \item{\code{SinusoidalInOut}}
+#'   \item{\code{ExponentialIn}}
+#'   \item{\code{ExponentialOut}}
+#'   \item{\code{ExponentialInOut}}
+#'   \item{\code{CircularIn}}
+#'   \item{\code{CircularOut}}
+#'   \item{\code{CircularInOut}}
+#'   \item{\code{ElasticIn}}
+#'   \item{\code{ElasticOut}}
+#'   \item{\code{ElasticInOut}}
+#'   \item{\code{BackIn}}
+#'   \item{\code{BackOut}}
+#'   \item{\code{BackInOut}}
+#'   \item{\code{BounceIn}}
+#'   \item{\code{BounceOut}}
+#'   \item{\code{BounceInOut}}
+#' }
 #'
 #' @export
 eanimation <- function(p, animation = TRUE, addDataAnimation = TRUE, animationThreshold = 2000,
@@ -98,13 +154,41 @@ elegend <- function(p, legend, show = TRUE, zlevel = 0, z = 4, orient = "horizon
 
 #' Add theme
 #'
+#' Add a theme.
+#'
 #' @details
 #' valid themes:
+#' \itemize{
+#'   \item{\code{default}}
+#'   \item{\code{mint}}
+#'   \item{\code{macarons}}
+#'   \item{\code{macarons2}}
+#'   \item{\code{green}}
+#'   \item{\code{blue}}
+#'   \item{\code{dark}}
+#'   \item{\code{gray}}
+#'   \item{\code{helianthus}}
+#'   \item{\code{red}}
+#'   \item{\code{roma}}
+#'   \item{\code{sakura}}
+#'   \item{\code{shine}}
+#'   \item{\code{infographic}}
+#' }
 #'
-#' \code{default}, \code{macarons}, \code{infographic}
+#' @examples
+#' mtcars %>%
+#'   echart(disp) %>%
+#'   ebar(qsec) %>%
+#'   ebar(mpg) %>%
+#'   etheme("roma")
 #'
 #' @export
 etheme <- function(p, theme = "default"){
+
+  themes <- c("default", "mint", "macarons", "macarons2", "green", "blue", "dark", "blue", "dark", "gray", "helianthus",
+              "red", "roma", "sakura", "shine", "infographic")
+
+  if(!theme %in% themes) stop("invalid theme")
 
   p$x$theme <- theme
 
@@ -113,10 +197,41 @@ etheme <- function(p, theme = "default"){
 
 #' Add tooltip
 #'
+#' Customise tooltip.
+#'
+#' @param p an echart object.
+#' @param show whether to show the tooltip.
+#' @param trigger element that triggers the tooltip, takes \code{item}, \code{axis}.
+#' @param z,zlevel first and second grade cascading control, the higher z the closer to the top.
+#' @param showContent whether to show the content of tooltip.
+#' @param position specifies position, pass a \code{list}, like \code{list(10, 10)}, fixed position; pass a function,
+#' like \code{htmlwidgets::JS("function([x, y]) {return [x + 10, y + 10]}")}
+#' @param formatter see \href{official documentation}{http://echarts.baidu.com/echarts2/doc/option-en.html#tooltip.formatter} for more details.
+#' @param islandFormatter island content formatter.
+#' @param showDelay number of milliseconds the tooltip shows.
+#' @param hideDelay number of milliseconds to wait until the tooltip is hidden when mouse out from a point or chart.
+#' @param transitionDuration duration in seconds of the animated transition.
+#' @param enterable whether to let the mouse go into the tip dom.
+#' @param backgroundColor background color.
+#' @param borderColor border color.
+#' @param borderRadius border radius.
+#' @param borderWidth border width.
+#' @param padding padding.
+#' @param axisPointer axis pointer, triggered by axis.
+#' @param textStyle tooltip text size.
+#' @param ... any other options to pass to tooltip.
+#'
+#' @examples
+#' mtcars %>%
+#'   echart(disp) %>%
+#'   eline(mpg) %>%
+#'   eline(qsec) %>%
+#'   etooltip(trigger = "axis")
+#'
 #' @export
 etooltip <- function(p, show = TRUE, trigger = "axis", zlevel = 1, z = 8, showContent = TRUE,
                      position = NULL, formatter = NULL, islandFormatter = "{a} < br/>{b} : {c}",
-                     showDelay = 20, hideDelay = 100, transitionDuration = 4, enterable = FALSE,
+                     showDelay = 20, hideDelay = 100, transitionDuration = 0.4, enterable = FALSE,
                      backgroundColor = "rgba(0,0,0,0.7)", borderColor = "#333", borderRadius = 4,
                      borderWidth = 0, padding = 5, axisPointer, textStyle, ...){
 
@@ -131,6 +246,29 @@ etooltip <- function(p, show = TRUE, trigger = "axis", zlevel = 1, z = 8, showCo
 }
 
 #' Add data zoom
+#'
+#' Add data zoom.
+#'
+#' @param p an echart object.
+#' @param show whether to show the data zoom.
+#' @param z,zlevel first and second grade cascading control, the higher z the closer to the top.
+#' @param orient orientation, takes \code{vertical} or \code{horinzontal}.
+#' @param backgroundColor background color.
+#' @param dataBackgroundColor background color of data zoom.
+#' @param fillerColor fill color of selected area.
+#' @param handleColor color of data zoom handle.
+#' @param handleSize size of handle.
+#' @param start,end percent start and end.
+#' @param showDetail whether to show detail when dragging.
+#' @param realtime set to \code{TRUE} if using real time data.
+#' @param zoomLock when set to true, the selected area cannot be zoomed.
+#' @param ... any other options to pass to data zoom.
+#'
+#' @examples
+#' mtcars %>%
+#'   echart(disp) %>%
+#'   eline(mpg) %>%
+#'   ezoom()
 #'
 #' @export
 ezoom <- function(p, show = TRUE, zlevel = 0, z = 4, orient = "horizontal", backgroundColor = "rgba(0,0,0,0)",
@@ -159,6 +297,32 @@ ezoom <- function(p, show = TRUE, zlevel = 0, z = 4, orient = "horizontal", back
 }
 
 #' Add title
+#'
+#' Add chart title and subtitles.
+#'
+#' @param p an echart object.
+#' @param text title.
+#' @param subtext subtitle.
+#' @param link hyperlink.
+#' @param sublink subtext hyperlink.
+#' @param target \code{link} opening window: \code{self} or \code{blank}.
+#' @param subtarget \code{sublink} opening window: \code{self} or \code{blank}.
+#' @param x positon of title, \code{left} or \code{right}.
+#' @param y postion of title, \code{top}, \code{bottom} or \code{center}.
+#' @param backgroundColor background color.
+#' @param borderColor border color.
+#' @param borderWidth width of border.
+#' @param padding padding.
+#' @param itemGap gap between title and subtitle.
+#' @param show whether to show the title.
+#' @param z,zlevel first and second grade cascading control, the higher z the closer to the top.
+#' @param ... any other options to pass to title
+#'
+#' @examples
+#' mtcars %>%
+#'   echart(disp) %>%
+#'   eline(mpg) %>%
+#'   etitle("MPG vs DISP", "Made with EChart", link = "http://echarts.baidu.com", target = "blank")
 #'
 #' @export
 etitle <- function(p, text, subtext, link, sublink, target = "blank", subtarget = "blank", x = "left", y = "top",
@@ -190,10 +354,42 @@ etitle <- function(p, text, subtext, link, sublink, target = "blank", subtarget 
   p
 }
 
-#' Customise data range
+#' Customise colorbar
+#'
+#' Customise the colorbar of your chart.
+#'
+#' @param p an echart object.
+#' @param min,max minimum and maximum.
+#' @param which series to serie is to be affected, takes the name of a serie, \code{previous} or \code{all}.
+#' @param show whether to show the color bar.
+#' @param color colors.
+#' @param z,zlevel first and second grade cascading control, the higher z the closer to the top.
+#' @param orient orientation of bar, \code{vertical} or \code{horizontal}.
+#' @param x x position; \code{left} or \code{right}.
+#' @param y y posotion; \code{top} or \code{bottom}.
+#' @param backgroundColor background color.
+#' @param borderColor border color.
+#' @param borderWidth width of border.
+#' @param padding padding.
+#' @param itemGap gap between items on bar.
+#' @param itemWidth width of the bar.
+#' @param itemHeight height of the bar.
+#' @param precision decimal precision.
+#' @param splitNumber number of segments.
+#' @param splitList see \href{http://echarts.baidu.com/echarts2/doc/option-en.html#dataRange.splitList}{official docs} for details.
+#' @param range used to set initial range i.e.: \code{list(start = 10, end = 50)}.
+#' @param selectedMode selection mode.
+#' @param calculable whether values are calculable.
+#' @param hoverLink hoverlink with map.
+#' @param realtime set to \code{TRUE} if using real time stream.
+#' @param text text at either end of bar.
+#' @param ... any other argument to pass to color bar.
+#'
+#' @details
+#' \code{ecolorbar} refers to \href{http://echarts.baidu.com/echarts2/doc/option-en.html#dataRange.hoverLink}{datarange} in docs.
 #'
 #' @export
-edatarange <- function(p, min = NULL, max = NULL, which = "previous", show = TRUE, color = list("#1e90ff", "#f0ffff"),
+ecolorbar <- function(p, min = NULL, max = NULL, which = "previous", show = TRUE, color = list("#1e90ff", "#f0ffff"),
                        zlevel = 4, z = 0, orient = "vertical", x = "left", y = "bottom",
                        backgroundColor = "rgba(0,0,0,0)", borderColor = "#ccc", borderWidth = 0, padding = 5,
                        itemGap = 10, itemWidth = 20, itemHeight = 14, precision = 0, splitNumber = 5,

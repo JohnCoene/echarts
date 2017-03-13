@@ -10,7 +10,43 @@ ezoom(p, show = TRUE, zlevel = 0, z = 4, orient = "horizontal",
   handleColor = "rgba(70,130,180,0.8)", handleSize = 8, start = 0,
   end = 100, showDetail = TRUE, realtime = FALSE, zoomLock = FALSE, ...)
 }
+\arguments{
+\item{p}{an echart object.}
+
+\item{show}{whether to show the data zoom.}
+
+\item{z, zlevel}{first and second grade cascading control, the higher z the closer to the top.}
+
+\item{orient}{orientation, takes \code{vertical} or \code{horinzontal}.}
+
+\item{backgroundColor}{background color.}
+
+\item{dataBackgroundColor}{background color of data zoom.}
+
+\item{fillerColor}{fill color of selected area.}
+
+\item{handleColor}{color of data zoom handle.}
+
+\item{handleSize}{size of handle.}
+
+\item{start, end}{percent start and end.}
+
+\item{showDetail}{whether to show detail when dragging.}
+
+\item{realtime}{set to \code{TRUE} if using real time data.}
+
+\item{zoomLock}{when set to true, the selected area cannot be zoomed.}
+
+\item{...}{any other options to pass to data zoom.}
+}
 \description{
-Add data zoom
+Add data zoom.
+}
+\examples{
+mtcars \%>\%
+  echart(disp) \%>\%
+  eline(mpg) \%>\%
+  ezoom()
+
 }
 

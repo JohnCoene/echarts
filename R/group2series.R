@@ -1,5 +1,4 @@
-#' group2series
-#'
+# group2series
 map_grps_ <- function(data){
 
   if(dplyr::is.grouped_df(data)){

@@ -2,6 +2,12 @@
 #'
 #' Add edges for \code{\link{eforce}}.
 #'
+#' @param p an echart object.
+#' @param links edges data.frame.
+#' @param source source column.
+#' @param target target column.
+#' @param weight edge weight.
+#'
 #' @examples
 #' let <- LETTERS[1:20]
 #'
@@ -36,6 +42,36 @@ elinks <- function(p, links, source, target, weight = 1){
 #'
 #' Add nodes for \code{\link{eforce}}.
 #'
+#' @param p an echart object.
+#' @param nodes nodes data.frame.
+#' @param name name column.
+#' @param label nodes label column.
+#' @param value nodes value (size).
+#' @param vategory nodes group column.
+#' @param symbolSize nodes symbol size column.
+#' @param depth depth of nodes.
+#' @param ignore whether to ignore nodes.
+#' @param symbol nodes symbol, see details for valid values.
+#' @param fixX,fixY whether to fix x and y axis position.
+#'
+#' @details
+#' Valid values for \code{symbol}:
+#' \itemize{
+#'   \item{\code{circle}}
+#'   \item{\code{rectangle}}
+#'   \item{\code{triangle}}
+#'   \item{\code{diamond}}
+#'   \item{\code{emptyCircle}}
+#'   \item{\code{emptyRectangle}}
+#'   \item{\code{emptyTriangle}}
+#'   \item{\code{emptyDiamond}}
+#'   \item{\code{heart}}
+#'   \item{\code{droplet}}
+#'   \item{\code{pin}}
+#'   \item{\code{arrow}}
+#'   \item{\code{star}}
+#' }
+#'
 #' @examples
 #' let <- LETTERS[1:20]
 #'
@@ -68,6 +104,24 @@ enodes <- function(p, nodes, name, label, value, category, symbolSize, depth, ig
 #' Build force network
 #'
 #' Plot force directed graph.
+#'
+#' @param p an echart objects.
+#' @param name name of network.
+#' @param large set to \code{TRUE} to optimise for large graphs.
+#' @param center center of network.
+#' @param roam set to \code{TRUE} to enable zoom and drag.
+#' @param size size of layout.
+#' @param ribbonType whether to use ribbons.
+#' @param minRadius,maxRadius minimum and maximum radius of nodes.
+#' @param linkSymbol can be set to \code{arrow}.
+#' @param linkSymbolSize size of \code{symbol}.
+#' @param scaling scaling factor.
+#' @param gravity centripetal force coefficient.
+#' @param draggable set to \code{TRUE} to allow dragging nodes.
+#' @param useWorker specifies whether to put layout calculation into web worker when the browser supports web worker.
+#' @param steps the number of iterations of each frame layout calculation.
+#' @param z,zlevel first and second grade cascading control, the higher z the closer to the top.
+#' @param ... any other options to pass to serie.
 #'
 #' @export
 eforce <- function(p, name = NULL, large = FALSE, center = list("50%", "50%"), roam = FALSE, size = "100%", ribbonType = FALSE,

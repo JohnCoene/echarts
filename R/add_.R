@@ -31,6 +31,9 @@
 #'
 #' @seealso \href{http://echarts.baidu.com/echarts2/doc/option-en.html#series-i(bar)}{official bar options docs}
 #'
+#' @name ebar
+#' @rdname ebar
+#'
 #' @export
 ebar_ <- function(p, serie, name = NULL, stack = NULL, clickable = TRUE, xAxisIndex = 0, yAxisIndex = 0, barGap = "30%",
                  barCategoryGap = "20%", legendHoverLink = TRUE, z = 2, zlevel = 0, tooltip, ...){
@@ -128,9 +131,12 @@ ebar_ <- function(p, serie, name = NULL, stack = NULL, clickable = TRUE, xAxisIn
 #'
 #' @seealso \href{http://echarts.baidu.com/echarts2/doc/option-en.html#series-i(line)}{official line options docs}
 #'
+#' @name eline
+#' @rdname eline
+#'
 #' @export
 eline_ <- function(p, serie, name = NULL, stack = NULL, clickable = TRUE, xAxisIndex = 0, yAxisIndex = 0, symbol = NULL,
-                  symbolSize = "4", symbolRate = NULL, showAllSymbol = FALSE, smooth = TRUE, legendHoverLink = TRUE,
+                  symbolSize = "4", symbolRotate = NULL, showAllSymbol = FALSE, smooth = TRUE, legendHoverLink = TRUE,
                   dataFilter = "nearest", z = 2, zlevel = 0, tooltip, ...){
 
   tooltip <- if(missing(tooltip)) default_tooltip(trigger = "axis")
@@ -149,7 +155,7 @@ eline_ <- function(p, serie, name = NULL, stack = NULL, clickable = TRUE, xAxisI
     opts$yAxisIndex <- yAxisIndex
     opts$symbol <- symbol
     opts$symbolSize <- symbolSize
-    opts$symbolRate <- symbolRate
+    opts$symbolRotate <- symbolRotate
     opts$showAllSymbol <- showAllSymbol
     opts$smooth <- smooth
     opts$dataFilter <- dataFilter
@@ -187,6 +193,9 @@ eline_ <- function(p, serie, name = NULL, stack = NULL, clickable = TRUE, xAxisI
 #'   etooltip() %>%
 #'   elegend()
 #'
+#' @name earea
+#' @rdname earea
+#'
 #' @export
 earea_ <- function(p, serie, name = NULL, stack = NULL, smooth = TRUE, ...){
 
@@ -215,6 +224,7 @@ earea_ <- function(p, serie, name = NULL, stack = NULL, smooth = TRUE, ...){
 #' @param p an echart object.
 #' @param serie value column name to plot.
 #' @param name of serie.
+#' @param size size of points/bubble.
 #' @param clickable whether plot is clickable.
 #' @param symbol marker, see details for valid values.
 #' @param symbolSize of symbol.
@@ -253,6 +263,9 @@ earea_ <- function(p, serie, name = NULL, stack = NULL, smooth = TRUE, ...){
 #'   escatter_("mpg", "qsec", symbolSize = 10)
 #'
 #' @seealso \href{http://echarts.baidu.com/echarts2/doc/option-en.html#series-i(scatter)}{official scatter options docs}
+#'
+#' @name escatter
+#' @rdname escatter
 #'
 #' @export
 escatter_ <- function(p, serie, size = NULL, name = NULL, clickable = TRUE, symbol = NULL, symbolSize = 4, symbolRotate = NULL,
@@ -323,6 +336,9 @@ escatter_ <- function(p, serie, size = NULL, name = NULL, clickable = TRUE, symb
 #'   etheme("mint")
 #'
 #' @seealso \href{http://echarts.baidu.com/echarts2/doc/option-en.html#series-i(pie)}{official pie options docs}
+#'
+#' @name epie
+#' @rdname epie
 #'
 #' @export
 epie_ <- function(p, serie, name = NULL, clickable = TRUE, legendHoverLink = TRUE, center = list("50%", "50%"),
@@ -408,6 +424,9 @@ epie_ <- function(p, serie, name = NULL, clickable = TRUE, legendHoverLink = TRU
 #'
 #' @seealso \href{http://echarts.baidu.com/echarts2/doc/option-en.html#series-i(radar)}{official radar options docs}
 #'
+#' @name eradar
+#' @rdname eradar
+#'
 #' @export
 eradar_ <- function(p, serie, name = NULL, clickable = TRUE, symbol = NULL, symbolSize = 4, symbolRotate = NULL,
                     legendHoverLink = TRUE, polarIndex = 0, z = 2, zlevel = 0, ...){
@@ -452,6 +471,8 @@ eradar_ <- function(p, serie, name = NULL, clickable = TRUE, symbol = NULL, symb
 
 #' Add chord
 #'
+#' Add chord chart.
+#'
 #' @param p an echart object.
 #' @param name name of serie.
 #' @param sort,sortSub data sorting, \code{none}, \code{ascending} or \code{descending}.
@@ -459,13 +480,12 @@ eradar_ <- function(p, serie, name = NULL, clickable = TRUE, symbol = NULL, symb
 #' @param z,zlevel first and second grade cascading control, the higher z the closer to the top.
 #' @param symbol marker, see details for valid values.
 #' @param symbolSize of symbol.
-#' @param symbolRotate angle by which symbol is rotated, i.e.: \code{30}.
 #' @param clockWise whether links are displayed in clockwise direction.
 #' @param minRadius,maxRadius minimum and maximum radius after mapping to symbol size.
-#' @param whether to use ribbon shapes.
 #' @param showScale whether the scale will be showed. Only available if ribbonType is true.
 #' @param showScaleText whether to show scale text.
 #' @param padding distance between each sector.
+#' @param ribbonType set to \code{TRUE} to use ribbons.
 #' @param ... any other options to pass to serie.
 #'
 #' @details
@@ -499,6 +519,9 @@ eradar_ <- function(p, serie, name = NULL, clickable = TRUE, symbol = NULL, symb
 #'   echord_(ribbonType = FALSE)
 #'
 #' @seealso \href{http://echarts.baidu.com/echarts2/doc/option-en.html#series-i(radar)}{official scatter options docs}
+#'
+#' @name echord
+#' @rdname echord
 #'
 #' @export
 echord_ <- function(p, name = NULL, sort = "none", sortSub = "none", clickable = TRUE, z = 2, zlevel = 0,
@@ -549,9 +572,12 @@ echord_ <- function(p, name = NULL, sort = "none", sortSub = "none", clickable =
 #'   echart_("countries") %>%
 #'   emap() %>%
 #'   emap_choropleth_("values") %>%
-#'   edatarange(color = list("red", "yellow"), calculable = TRUE)
+#'   ecolorbar(color = list("red", "yellow"), calculable = TRUE)
 #'
-#' @seealso \code{\link{edatarange}}
+#' @seealso \code{\link{ecolorbar}}
+#'
+#' @name emap_choropleth
+#' @rdname emap_choropleth
 #'
 #' @export
 emap_choropleth_ <- function(p, serie){
@@ -587,6 +613,9 @@ emap_choropleth_ <- function(p, serie){
 #'   emap() %>%
 #'   emap_coords_("lon", "lat") %>%
 #'   emap_lines_(edges, "source", "target")
+#'
+#' @name emap_coords
+#' @rdname emap_coords
 #'
 #' @export
 emap_coords_ <- function(p, lon, lat){
@@ -683,6 +712,9 @@ emap_coords_ <- function(p, lon, lat){
 #'
 #' @seealso \code{\link{emap_coords}} \href{http://echarts.baidu.com/echarts2/doc/option-en.html#series-i(map).markLine}{official map line docs}
 #'
+#' @name emap_lines
+#' @rdname emap_lines
+#'
 #' @export
 emap_lines_ <- function(p, edges, source, target, name = NULL, clickable = TRUE, symbol = "arrow",
                        symbolSize = 2, symbolRotate = NULL, large = FALSE, smooth = TRUE, z = 2, zlevel = 0,
@@ -773,6 +805,9 @@ emap_lines_ <- function(p, edges, source, target, name = NULL, clickable = TRUE,
 #'
 #' @seealso \href{http://echarts.baidu.com/echarts2/doc/option-en.html#series-i(map).markPoint}{office map points docs}
 #'
+#' @name emap_points
+#' @rdname emap_points
+#'
 #' @export
 emap_points_ <- function(p, serie, clickable = TRUE, symbol = "pin", symbolSize = 10, symbolRotate = NULL,
                          large = FALSE, itemStyle = NULL, ...){
@@ -810,6 +845,7 @@ emap_points_ <- function(p, serie, clickable = TRUE, symbol = "pin", symbolSize 
 #' @param valueScale \code{z} multiplier.
 #' @param opacity opacity of heatmap.
 #' @param gradientColors colors.
+#' @param ... any other parameter to pass to heatmap.
 #'
 #' @examples
 #' data <- data.frame(lon = runif(300, 90, 120),
@@ -825,6 +861,9 @@ emap_points_ <- function(p, serie, clickable = TRUE, symbol = "pin", symbolSize 
 #'   echart() %>%
 #'   emap(mapType = "china") %>%
 #'   emap_heat_("lon", "lat", "z", blurSize = 50, minAlpha = 0.3, opacity = 0.8)
+#'
+#' @name emap_heat
+#' @rdname emap_heat
 #'
 #' @export
 emap_heat_ <- function(p, lon, lat, z, blurSize = 30, minAlpha = 0.05, valueScale = 1, opacity = 1,
@@ -855,9 +894,10 @@ emap_heat_ <- function(p, lon, lat, z, blurSize = 30, minAlpha = 0.05, valueScal
 #' @param z,zlevel first and second grade cascading control, the higher z the closer to the top.
 #' @param selectedMode whether items can be selected.
 #' @param hoverable whether elements are hoverable.
-#' @param dataRangeHoverLInk enables dataRange hover link to the chart.
+#' @param dataRangeHoverLink enables dataRange hover link to the chart.
 #' @param mapLocation x and y location of map on canvas, takes \code{top}, \code{bottom}, \code{left}, \code{right}, \code{center}.
 #' @param mapValueLocation calculation of map values \code{sum} or \code{average}.
+#' @param mapValueCalculation takes \code{sum} or \code{average}.
 #' @param mapValuePrecision decimal precision.
 #' @param showLegendSymbol whether to show symbol on legend.
 #' @param roam enables zoom and drag.
@@ -908,6 +948,9 @@ emap_heat_ <- function(p, lon, lat, z, blurSize = 30, minAlpha = 0.05, valueScal
 #'
 #' @seealso \code{\link{emap_coords}}, \code{\link{emap_heat}}, \code{\link{emap_lines}}, \code{emap_choropleth},
 #' \code{\link{emap_points}}, \href{http://echarts.baidu.com/echarts2/doc/option-en.html#series-i(map)}{official map docs}
+#'
+#' @name emap
+#' @rdname emap
 #'
 #' @export
 emap_ <- function(p, name = NULL, mapType = "world", clickable = TRUE, z = 2, zlevel = 0,
@@ -983,6 +1026,9 @@ emap_ <- function(p, name = NULL, mapType = "world", clickable = TRUE, z = 2, zl
 #'
 #' @seealso \href{http://echarts.baidu.com/echarts2/doc/option-en.html#series-i(gauge)}{official gauge docs}
 #'
+#' @name egauge
+#' @rdname egauge
+#'
 #' @export
 egauge_ <- function(p, value, indicator = "", name = NULL, clickable = FALSE, legendHoverLink = TRUE, center = list("50%", "50%"),
                    radius = list("0%", "75%"), startAngle = 225, endAngle = -45, min = 0, max = 100,
@@ -1044,6 +1090,9 @@ egauge_ <- function(p, value, indicator = "", name = NULL, clickable = FALSE, le
 #'   efunnel_("value")
 #'
 #' @seealso \href{http://echarts.baidu.com/echarts2/doc/option-en.html#series-i(funnel)}{official funnel docs}
+#'
+#' @name efunnel
+#' @rdname efunnel
 #'
 #' @export
 efunnel_ <- function(p, serie, name = NULL, clickable = TRUE, legendHoverLink = TRUE, sort = "descending",
@@ -1110,13 +1159,16 @@ efunnel_ <- function(p, serie, name = NULL, clickable = TRUE, legendHoverLink = 
 #'
 #' @seealso \href{http://echarts.baidu.com/echarts2/doc/option-en.html#series-i(venn)}{official venn docs}
 #'
+#' @name evenn
+#' @rdname evenn
+#'
 #' @export
-evenn_ <- function(p, serie, name = NULL, clickable = TRUE, z = 2, zlevel = 0, tooltip, ...){
+evenn_ <- function(p, serie, name = NULL, clickable = TRUE, z = 2, zlevel = 0, tooltip = NULL, ...){
 
   data <- get_dat(serie)
 
   name <- if(is.null(name)) names(data)[1] else name
-  tooltip <- if(missing(tooltip)) default_tooltip(trigger = "item") else tooltip
+  if(is.null(tooltip)) tooltip <- default_tooltip(trigger = "item")
   itemStyle <- list(normal = list(label = list(show = TRUE)))
 
   opts <- list(...)
@@ -1142,7 +1194,7 @@ evenn_ <- function(p, serie, name = NULL, clickable = TRUE, z = 2, zlevel = 0, t
 #' Add wordcloud serie.
 #'
 #' @param p an echart object.
-#' @param term frequencies.
+#' @param freq frequencies.
 #' @param color color of terms.
 #' @param name name of wordcloud.
 #' @param clickable whether terms are clickable.
@@ -1162,6 +1214,11 @@ evenn_ <- function(p, serie, name = NULL, clickable = TRUE, z = 2, zlevel = 0, t
 #'   echart_("terms") %>%
 #'   ecloud_("freq", "color") %>%
 #'   etooltip()
+#'
+#' @seealso \href{http://echarts.baidu.com/echarts2/doc/option-en.html#series-i(wordCloud)}{official wordcloud docs}
+#'
+#' @name ecloud
+#' @rdname ecloud
 #'
 #' @export
 ecloud_ <- function(p, freq, color = NULL, name = NULL, clickable = TRUE, center = list("50%", "50%"), size = list("40%", "40%"),
@@ -1192,7 +1249,23 @@ ecloud_ <- function(p, freq, color = NULL, name = NULL, clickable = TRUE, center
   p
 }
 
-#' add heatmap
+#' Add heatmap
+#'
+#' Add heatmap.
+#'
+#' @param p an echart object.
+#' @param y yaxis values.
+#' @param values heat.
+#' @param name name of serie.
+#' @param clickable whether chart is clickable.
+#' @param blurSize size of points blur.
+#' @param minAlpha minimum transparency.
+#' @param valueScale \code{values} multiplier.
+#' @param opacity opacity of heatmap.
+#' @param z,zlevel first and second grade cascading control, the higher z the closer to the top.
+#' @param gradientColors colors used for gradient as a \code{list} i.e.:\code{list("red", "blue")}
+#' @param tooltip cutomise tooltip.
+#' @param ... any other options to pass to heatmap.
 #'
 #' @examples
 #' set.seed(19880525)
@@ -1201,6 +1274,11 @@ ecloud_ <- function(p, freq, color = NULL, name = NULL, clickable = TRUE, center
 #' matrix %>%
 #'   echart_("x") %>%
 #'   eheatmap_("y", "z")
+#'
+#' @seealso \href{http://echarts.baidu.com/echarts2/doc/option-en.html#series-i(heatmap)}{official heatmap docs}
+#'
+#' @name eheatmap
+#' @rdname eheatmap
 #'
 #' @export
 eheatmap_ <- function(p, y, values, name = NULL, clickable = TRUE, blurSize = 30, minAlpha = 0.5, valueScale = 1,
@@ -1233,6 +1311,17 @@ eheatmap_ <- function(p, y, values, name = NULL, clickable = TRUE, blurSize = 30
 }
 
 #' Add data
+#'
+#' Add a dataset.
+#'
+#' @param p an echart object.
+#' @param data data.frame.
+#' @param x x variable.
+#'
+#' @seealso \code{emap}
+#'
+#' @name edata
+#' @rdname edata
 #'
 #' @export
 edata_ <- function(p, data, x){

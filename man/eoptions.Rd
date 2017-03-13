@@ -9,7 +9,30 @@ eoptions(p, backgroundColor = NULL, color, renderAsImage = FALSE,
   calculableHolderColor = "#ccc", nameConnector = "&",
   valueConnector = ":", ...)
 }
+\arguments{
+\item{p}{an echart object.}
+
+\item{backgroundColor}{background color.}
+
+\item{color}{colors to use in chart.}
+
+\item{renderAsImage}{allows rendering as image.}
+
+\item{calculable}{specifies whether the drag-recalculate feature will be enabled.}
+
+\item{symbolList}{list of default symbols.}
+
+\item{calculableColor}{color of border around drag-recalculate.}
+
+\item{calculableHolderColor}{color of calculable holder.}
+
+\item{nameConnector}{a connector that links the names of data series together after the combination of data series.}
+
+\item{valueConnector}{a connector that links the name of data series with value when island appears after the combination of data series.}
+
+\item{...}{any other options.}
+}
 \description{
-Add global options
+Add global options.
 }
 

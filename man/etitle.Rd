@@ -10,7 +10,49 @@ etitle(p, text, subtext, link, sublink, target = "blank",
   borderWidth = 0, padding = 5, itemGap = 5, zlevel = 0, z = 6,
   show = TRUE, ...)
 }
+\arguments{
+\item{p}{an echart object.}
+
+\item{text}{title.}
+
+\item{subtext}{subtitle.}
+
+\item{link}{hyperlink.}
+
+\item{sublink}{subtext hyperlink.}
+
+\item{target}{\code{link} opening window: \code{self} or \code{blank}.}
+
+\item{subtarget}{\code{sublink} opening window: \code{self} or \code{blank}.}
+
+\item{x}{positon of title, \code{left} or \code{right}.}
+
+\item{y}{postion of title, \code{top}, \code{bottom} or \code{center}.}
+
+\item{backgroundColor}{background color.}
+
+\item{borderColor}{border color.}
+
+\item{borderWidth}{width of border.}
+
+\item{padding}{padding.}
+
+\item{itemGap}{gap between title and subtitle.}
+
+\item{z, zlevel}{first and second grade cascading control, the higher z the closer to the top.}
+
+\item{show}{whether to show the title.}
+
+\item{...}{any other options to pass to title}
+}
 \description{
-Add title
+Add chart title and subtitles.
+}
+\examples{
+mtcars \%>\%
+  echart(disp) \%>\%
+  eline(mpg) \%>\%
+  etitle("MPG vs DISP", "Made with EChart", link = "http://echarts.baidu.com", target = "blank")
+
 }
 

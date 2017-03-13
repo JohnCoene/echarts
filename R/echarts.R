@@ -12,6 +12,8 @@
 #' @name echart
 #' @rdname echart
 #'
+#' @importFrom methods is
+#'
 #' @export
 echart <- function(data, x, width = "100%", height = 400, elementId = NULL) {
 
@@ -22,8 +24,9 @@ echart <- function(data, x, width = "100%", height = 400, elementId = NULL) {
       xvar <- check_xvar(data, x)
       x.name <- NULL
     } else {
-      xvar <- check_xvar(data, xvar)
       x.name <- deparse(substitute(x))
+      data <- sort_data(data, x.name)
+      xvar <- check_xvar(data, xvar)
     }
   } else {
     xvar <- NULL

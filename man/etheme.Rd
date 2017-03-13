@@ -7,11 +7,33 @@
 etheme(p, theme = "default")
 }
 \description{
-Add theme
+Add a theme.
 }
 \details{
 valid themes:
+\itemize{
+  \item{\code{default}}
+  \item{\code{mint}}
+  \item{\code{macarons}}
+  \item{\code{macarons2}}
+  \item{\code{green}}
+  \item{\code{blue}}
+  \item{\code{dark}}
+  \item{\code{gray}}
+  \item{\code{helianthus}}
+  \item{\code{red}}
+  \item{\code{roma}}
+  \item{\code{sakura}}
+  \item{\code{shine}}
+  \item{\code{infographic}}
+}
+}
+\examples{
+mtcars \%>\%
+  echart(disp) \%>\%
+  ebar(qsec) \%>\%
+  ebar(mpg) \%>\%
+  etheme("roma")
 
-\code{default}, \code{macarons}, \code{infographic}
 }
 

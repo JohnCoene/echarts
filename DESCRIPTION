@@ -11,5 +11,6 @@ LazyData: true
 Imports:
     htmlwidgets,
     magrittr,
-    dplyr
+    dplyr,
+    methods
 RoxygenNote: 5.0.1

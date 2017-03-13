@@ -534,10 +534,10 @@ scatter_size <- function(size){
   htmlwidgets::JS("function(value){return value[2];}")
 }
 
-normalise_size <- function(size, symbolSize){
-  size <- (x - min(x)) / (max(x) - min(x))
-  size <- size * symbolSize
-  return(size)
+normalise_size <- function(x, symbolSize){
+  x <- (x - min(x)) / (max(x) - min(x))
+  x <- x * symbolSize
+  return(x)
 }
 
 compute_max <- function(data, serie){
@@ -547,4 +547,22 @@ compute_max <- function(data, serie){
 
   return(max(x))
 
+}
+
+sort_data <- function(data, x){
+  xvar <- data[, x]
+  sort <- sortable(xvar)
+  if(sort == TRUE){
+    data <- data[order(data[, x]),]
+  }
+  return(data)
+}
+
+sortable <- function(x){
+  if(class(x)[1] == "integer" || class(x)[1] == "numeric" || class(x)[1] == "Date" || class(x)[1] == "POSIXct" ||
+     class(x)[1] == "POSIXlt"){
+    TRUE
+  } else {
+    FALSE
+  }
 }

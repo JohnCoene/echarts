@@ -6,6 +6,17 @@
 \usage{
 elinks(p, links, source, target, weight = 1)
 }
+\arguments{
+\item{p}{an echart object.}
+
+\item{links}{edges data.frame.}
+
+\item{source}{source column.}
+
+\item{target}{target column.}
+
+\item{weight}{edge weight.}
+}
 \description{
 Add edges for \code{\link{eforce}}.
 }

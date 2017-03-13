@@ -8,7 +8,56 @@ eanimation(p, animation = TRUE, addDataAnimation = TRUE,
   animationThreshold = 2000, animationDuration = 2000,
   animationDurationUpdate = 500, animationEasing = "ExponentialOut", ...)
 }
+\arguments{
+\item{p}{an echart objects.}
+
+\item{animation}{whether to show the initial animation.}
+
+\item{addDataAnimation}{specifies whether the dynamic data interface animation will be enabled.}
+
+\item{animationThreshold}{threshold of animated elements.}
+
+\item{animationDuration}{duration of animation, in ms.}
+
+\item{animationDurationUpdate}{duration of the update animation, in ms.}
+
+\item{animationEasing}{easing effect, see details for valid values.}
+
+\item{...}{any other options.}
+}
 \description{
 Add animations
+}
+\details{
+\itemize{
+  \item{\code{linear}}
+  \item{\code{QuadraticIn}}
+  \item{\code{QuadraticOut}}
+  \item{\code{QuadraticInOut}}
+  \item{\code{CubicIn}}
+  \item{\code{CubicOut}}
+  \item{\code{CubicInOut}}
+  \item{\code{QuarticIn}}
+  \item{\code{QuarticOut}}
+  \item{\code{QuarticInOut}}
+  \item{\code{SinusoidalIn}}
+  \item{\code{SinusoidalOut}}
+  \item{\code{SinusoidalInOut}}
+  \item{\code{ExponentialIn}}
+  \item{\code{ExponentialOut}}
+  \item{\code{ExponentialInOut}}
+  \item{\code{CircularIn}}
+  \item{\code{CircularOut}}
+  \item{\code{CircularInOut}}
+  \item{\code{ElasticIn}}
+  \item{\code{ElasticOut}}
+  \item{\code{ElasticInOut}}
+  \item{\code{BackIn}}
+  \item{\code{BackOut}}
+  \item{\code{BackInOut}}
+  \item{\code{BounceIn}}
+  \item{\code{BounceOut}}
+  \item{\code{BounceInOut}}
+}
 }
 
