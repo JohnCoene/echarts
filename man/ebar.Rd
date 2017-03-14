@@ -45,18 +45,6 @@ Add bar serie.
 }
 \examples{
 mtcars \%>\%
-  echart(mpg) \%>\%
-  ebar(qsec)
-
-mtcars \%>\%
-  echart(disp) \%>\%
-  ebar(mpg, stack = "grp") \%>\% # stack
-  ebar(qsec, stack = "grp") \%>\% # stack
-  ebar(wt) \%>\% # not stacked
-  etooltip() \%>\%
-  elegend()
-
-mtcars \%>\%
   echart_("mpg") \%>\%
   ebar_("qsec")
 
@@ -69,6 +57,16 @@ mtcars \%>\%
   elegend() \%>\%
   etoolbox_magic(type = list("stack", "tiled")) \%>\%
   etoolbox_restore()
+
+df <- data.frame(x = LETTERS[1:4], y = runif(4, 0, 20), z = runif(4, 10, 15), w = runif(4, 15, 30))
+
+df \%>\%
+  echart(x) \%>\%
+  ebar(y, stack = "grp") \%>\%
+  ebar(z, stack = "grp") \%>\%
+  ebar(w) \%>\%
+  etheme("macarons") \%>\%
+  etooltip(trigger = "axis")
 
 }
 \seealso{

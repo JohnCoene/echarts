@@ -144,7 +144,6 @@ exAxis <- function(p, show = TRUE, type = "value", append = FALSE, ...){
   opts <- list(...)
   opts$type <- type
   opts$show <- show
-  opts$data <- p$x$options$xAxis[[1]]$data
 
   p <- add_axis(p, opts, append, "xAxis")
 

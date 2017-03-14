@@ -15,7 +15,7 @@
 #' @importFrom methods is
 #'
 #' @export
-echart <- function(data, x, width = "100%", height = 400, elementId = NULL) {
+echart <- function(data, x, width = NULL, height = NULL, elementId = NULL) {
 
   # x
   if(!missing(x)){
@@ -48,7 +48,7 @@ echart <- function(data, x, width = "100%", height = 400, elementId = NULL) {
     options = list(
       xAxis = list(
         list(
-          type = get_axis_type(xvar),
+          type = "category",
           data = xvar
         )
       ),
@@ -64,7 +64,8 @@ echart <- function(data, x, width = "100%", height = 400, elementId = NULL) {
     width = width,
     height = height,
     sizingPolicy = htmlwidgets::sizingPolicy(defaultWidth = "100%",
-                                             knitr.defaultWidth = "100%"),
+                                             knitr.defaultWidth = "100%",
+                                             knitr.defaultHeight = 400),
     package = 'echarts',
     elementId = elementId
   )
@@ -73,7 +74,7 @@ echart <- function(data, x, width = "100%", height = 400, elementId = NULL) {
 #' @rdname echart
 #'
 #' @export
-echart_ <- function(data, x, width = "100%", height = 400, elementId = NULL) {
+echart_ <- function(data, x, width = NULL, height = NULL, elementId = NULL) {
 
   # x
   if(!missing(x)){
@@ -107,7 +108,7 @@ echart_ <- function(data, x, width = "100%", height = 400, elementId = NULL) {
     options = list(
       xAxis = list(
         list(
-          type = get_axis_type(xvar),
+          type = "category",
           data = unique(xvar)
         )
       ),
@@ -123,7 +124,8 @@ echart_ <- function(data, x, width = "100%", height = 400, elementId = NULL) {
     width = width,
     height = height,
     sizingPolicy = htmlwidgets::sizingPolicy(defaultWidth = "100%",
-                                             knitr.defaultWidth = "100%"),
+                                             knitr.defaultWidth = "100%",
+                                             knitr.defaultHeight = 400),
     package = 'echarts',
     elementId = elementId
   )

@@ -29,6 +29,16 @@
 #'   etoolbox_magic(type = list("stack", "tiled")) %>%
 #'   etoolbox_restore()
 #'
+#' df <- data.frame(x = LETTERS[1:4], y = runif(4, 0, 20), z = runif(4, 10, 15), w = runif(4, 15, 30))
+#'
+#' df %>%
+#'   echart(x) %>%
+#'   ebar(y, stack = "grp") %>%
+#'   ebar(z, stack = "grp") %>%
+#'   ebar(w) %>%
+#'   etheme("macarons") %>%
+#'   etooltip(trigger = "axis")
+#'
 #' @seealso \href{http://echarts.baidu.com/echarts2/doc/option-en.html#series-i(bar)}{official bar options docs}
 #'
 #' @name ebar
@@ -116,19 +126,36 @@ ebar_ <- function(p, serie, name = NULL, stack = NULL, clickable = TRUE, xAxisIn
 #' }
 #'
 #' @examples
-#' mtcars %>%
-#'   echart_("mpg") %>%
-#'   eline_("qsec", symbol = "emptyCircle") %>%
-#'   etooltip(trigger = "item")
+#' df <- data.frame(x = 1:50, y = runif(50, 5, 10), z = runif(50, 7, 12), w = runif(50, 10, 13))
 #'
-#' mtcars %>%
-#'   echart_("disp") %>%
-#'   eline_("mpg", stack = "grp") %>%
-#'   eline_("qsec", stack = "grp") %>%
-#'   eline_("wt", smooth = FALSE) %>%
+#' df %>%
+#'   echart_("x") %>%
+#'   eline_("y",
+#'          symbolSize = htmlwidgets::JS("function(value){ return value[1]/2}"),
+#'          showAllSymbol = TRUE,
+#'          symbol = "emptyCircle") %>%
+#'   eline_("w",
+#'          symbolSize = htmlwidgets::JS("function(value){ return value[1]/2}"),
+#'          showAllSymbol = TRUE,
+#'          symbol = "emptyDiamond") %>%
+#'   etooltip() %>%
+#'   etheme("helianthus")
+#'
+#' df %>%
+#'   echart_("x") %>%
+#'   eline_("y", stack = "grp") %>%
+#'   eline_("z", stack = "grp") %>%
+#'   eline_("w", smooth = FALSE, showAllSymbol = TRUE, symbolSize = 3, symbol = "circle") %>%
 #'   etooltip() %>%
 #'   elegend() %>%
 #'   etoolbox_magic(type = list("line", "bar"))
+#'
+#' df <- data.frame(x = LETTERS[1:10], y = round(runif(10, 30, 70)), z = round(runif(10, 10, 50)))
+#'
+#' df %>%
+#'   echart(x) %>%
+#'   eline(y) %>%
+#'   eline(z)
 #'
 #' @seealso \href{http://echarts.baidu.com/echarts2/doc/option-en.html#series-i(line)}{official line options docs}
 #'
@@ -149,7 +176,7 @@ eline_ <- function(p, serie, name = NULL, stack = NULL, clickable = TRUE, xAxisI
     opts <- list(...)
     opts$name <- if(is.null(name)) names(data)[i] else name
     opts$type <- "line"
-    opts$data <- vector_data_(data[[i]], serie)
+    opts$data <- xy_data_(data[[i]], serie)
     opts$stack <- if(!is.null(stack)) stack
     opts$clickable <- clickable
     opts$xAxisIndex <- xAxisIndex
@@ -167,6 +194,8 @@ eline_ <- function(p, serie, name = NULL, stack = NULL, clickable = TRUE, xAxisI
     p$x$options$series <- append(p$x$options$series, list(opts))
   }
 
+  p <- adjust_axis(p, data)
+
   p
 }
 
@@ -182,17 +211,24 @@ eline_ <- function(p, serie, name = NULL, stack = NULL, clickable = TRUE, xAxisI
 #' @param ... any other argument to pass to the serie. i.e.: same parameters as \code{\link{eline}} or \code{\link{eline_}}
 #'
 #' @examples
-#' mtcars %>%
-#'   echart_("mpg") %>%
-#'   earea_("qsec")
+#' df <- data.frame(x = LETTERS[1:10], y = runif(10, 30, 70), z = runif(10, 10, 50))
 #'
-#' mtcars %>%
-#'   echart_("disp") %>%
-#'   earea_("mpg", stack = "grp") %>%
-#'   earea_("qsec", stack = "grp") %>%
-#'   earea_("wt", stack = "grp") %>%
-#'   etooltip() %>%
-#'   elegend()
+#' df %>%
+#'   echart_("x") %>%
+#'   earea_("y", smooth = FALSE)
+#'
+#' df %>%
+#'   echart(x) %>%
+#'   earea(y, stack = "grp") %>%
+#'   earea(z, stack = "grp") %>%
+#'   etheme("roma")
+#'
+#' df <- data.frame(x = 1:10, y = runif(10, 30, 70), z = runif(10, 10, 50))
+#'
+#' df %>%
+#'   echart(x) %>%
+#'   earea(z) %>%
+#'   earea(y)
 #'
 #' @name earea
 #' @rdname earea
@@ -207,13 +243,15 @@ earea_ <- function(p, serie, name = NULL, stack = NULL, smooth = TRUE, ...){
     opts <- list(...)
     opts$name <- if(is.null(name)) names(data)[i] else name
     opts$type <- "line"
-    opts$data <- vector_data_(data[[i]], serie)
+    opts$data <- xy_data_(data[[i]], serie)
     opts$smooth <- smooth
     opts$stack <- if(!is.null(stack)) stack
     opts$itemStyle <-  list(normal= list(areaStyle = list(type = 'default')))
 
     p$x$options$series <- append(p$x$options$series, list(opts))
   }
+
+  p <- adjust_axis(p, data)
 
   p
 }
@@ -257,11 +295,14 @@ earea_ <- function(p, serie, name = NULL, stack = NULL, smooth = TRUE, ...){
 #' @examples
 #' mtcars %>%
 #'   echart_("disp") %>%
-#'   escatter_("mpg", symbol = "emptyCircle")
+#'   escatter_("mpg", symbol = "emptyCircle") %>%
+#'   exAxis()
 #'
 #' mtcars %>%
 #'   echart_("disp") %>%
-#'   escatter_("mpg", "qsec", symbolSize = 10)
+#'   escatter_("mpg", "qsec", symbolSize = 15) %>%
+#'   exAxis_value(axisLabel = list(show = FALSE)) %>%
+#'   etheme("mint")
 #'
 #' @seealso \href{http://echarts.baidu.com/echarts2/doc/option-en.html#series-i(scatter)}{official scatter options docs}
 #'
@@ -292,6 +333,8 @@ escatter_ <- function(p, serie, size = NULL, name = NULL, clickable = TRUE, symb
 
     p$x$options$series <- append(p$x$options$series, list(opts))
   }
+
+  p <- adjust_axis(p, data)
 
   # change axis type
   p$x$options$yAxis <- list(list(type = "value"))

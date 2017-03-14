@@ -1,18 +1,5 @@
 #' Add bars
 #'
-#' @examples
-#' mtcars %>%
-#'   echart(mpg) %>%
-#'   ebar(qsec)
-#'
-#' mtcars %>%
-#'   echart(disp) %>%
-#'   ebar(mpg, stack = "grp") %>% # stack
-#'   ebar(qsec, stack = "grp") %>% # stack
-#'   ebar(wt) %>% # not stacked
-#'   etooltip() %>%
-#'   elegend()
-#'
 #' @rdname ebar
 #'
 #' @export
@@ -29,18 +16,6 @@ ebar <- function(p, serie, name = NULL, stack = NULL, clickable = TRUE, xAxisInd
 }
 
 #' Add lines
-#'
-#' @examples
-#' mtcars %>%
-#'   echart(mpg) %>%
-#'   eline(qsec)
-#'
-#' mtcars %>%
-#'   echart(disp) %>%
-#'   eline(mpg, stack = "grp") %>%
-#'   eline(qsec, stack = "grp") %>%
-#'   eline(wt, fill = TRUE) %>%
-#'   etooltip()
 #'
 #' @rdname eline
 #'
@@ -59,18 +34,6 @@ eline <- function(p, serie, name = NULL, stack = NULL, clickable = TRUE, xAxisIn
 }
 
 #' Add area
-#'
-#' @examples
-#' mtcars %>%
-#'   echart(mpg) %>%
-#'   earea(qsec)
-#'
-#' mtcars %>%
-#'   echart(disp) %>%
-#'   ebar(mpg) %>%
-#'   earea(qsec, stack = "grp") %>%
-#'   earea(wt, stack = "grp") %>%
-#'   etooltip()
 #'
 #' @rdname earea
 #'
@@ -516,7 +479,7 @@ ecloud <- function(p, freq, color, name = NULL, clickable = TRUE, center = list(
 eheatmap <- function(p, y, values, name = NULL, clickable = TRUE, blurSize = 30, minAlpha = 0.5, valueScale = 1,
                      opacity = 1, z = 2, zlevel = 0, gradientColors, tooltip, ...){
 
-  gradientColors <- if(missing(gradientColors)) default_gradient()
+  gradientColors <- if(missing(gradientColors)) default_gradient() else gradientColors
   tooltip <- if(missing(tooltip)) default_tooltip(trigger = "item")
   y <- deparse(substitute(y))
   values <- deparse(substitute(values))

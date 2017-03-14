@@ -85,30 +85,36 @@ Valid values for \code{dataFilter} are:
 }
 }
 \examples{
-mtcars \%>\%
-  echart(mpg) \%>\%
-  eline(qsec)
+df <- data.frame(x = 1:50, y = runif(50, 5, 10), z = runif(50, 7, 12), w = runif(50, 10, 13))
 
-mtcars \%>\%
-  echart(disp) \%>\%
-  eline(mpg, stack = "grp") \%>\%
-  eline(qsec, stack = "grp") \%>\%
-  eline(wt, fill = TRUE) \%>\%
-  etooltip()
+df \%>\%
+  echart_("x") \%>\%
+  eline_("y",
+         symbolSize = htmlwidgets::JS("function(value){ return value[1]/2}"),
+         showAllSymbol = TRUE,
+         symbol = "emptyCircle") \%>\%
+  eline_("w",
+         symbolSize = htmlwidgets::JS("function(value){ return value[1]/2}"),
+         showAllSymbol = TRUE,
+         symbol = "emptyDiamond") \%>\%
+  etooltip() \%>\%
+  etheme("helianthus")
 
-mtcars \%>\%
-  echart_("mpg") \%>\%
-  eline_("qsec", symbol = "emptyCircle") \%>\%
-  etooltip(trigger = "item")
-
-mtcars \%>\%
-  echart_("disp") \%>\%
-  eline_("mpg", stack = "grp") \%>\%
-  eline_("qsec", stack = "grp") \%>\%
-  eline_("wt", smooth = FALSE) \%>\%
+df \%>\%
+  echart_("x") \%>\%
+  eline_("y", stack = "grp") \%>\%
+  eline_("z", stack = "grp") \%>\%
+  eline_("w", smooth = FALSE, showAllSymbol = TRUE, symbolSize = 3, symbol = "circle") \%>\%
   etooltip() \%>\%
   elegend() \%>\%
   etoolbox_magic(type = list("line", "bar"))
+
+df <- data.frame(x = LETTERS[1:10], y = round(runif(10, 30, 70)), z = round(runif(10, 10, 50)))
+
+df \%>\%
+  echart(x) \%>\%
+  eline(y) \%>\%
+  eline(z)
 
 }
 \seealso{

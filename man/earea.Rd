@@ -28,28 +28,24 @@ Add area
 Add area serie.
 }
 \examples{
-mtcars \%>\%
-  echart(mpg) \%>\%
-  earea(qsec)
+df <- data.frame(x = LETTERS[1:10], y = runif(10, 30, 70), z = runif(10, 10, 50))
 
-mtcars \%>\%
-  echart(disp) \%>\%
-  ebar(mpg) \%>\%
-  earea(qsec, stack = "grp") \%>\%
-  earea(wt, stack = "grp") \%>\%
-  etooltip()
+df \%>\%
+  echart_("x") \%>\%
+  earea_("y", smooth = FALSE)
 
-mtcars \%>\%
-  echart_("mpg") \%>\%
-  earea_("qsec")
+df \%>\%
+  echart(x) \%>\%
+  earea(y, stack = "grp") \%>\%
+  earea(z, stack = "grp") \%>\%
+  etheme("roma")
 
-mtcars \%>\%
-  echart_("disp") \%>\%
-  earea_("mpg", stack = "grp") \%>\%
-  earea_("qsec", stack = "grp") \%>\%
-  earea_("wt", stack = "grp") \%>\%
-  etooltip() \%>\%
-  elegend()
+df <- data.frame(x = 1:10, y = runif(10, 30, 70), z = runif(10, 10, 50))
+
+df \%>\%
+  echart(x) \%>\%
+  earea(z) \%>\%
+  earea(y)
 
 }
 

@@ -74,11 +74,14 @@ mtcars \%>\%
 
 mtcars \%>\%
   echart_("disp") \%>\%
-  escatter_("mpg", symbol = "emptyCircle")
+  escatter_("mpg", symbol = "emptyCircle") \%>\%
+  exAxis()
 
 mtcars \%>\%
   echart_("disp") \%>\%
-  escatter_("mpg", "qsec", symbolSize = 10)
+  escatter_("mpg", "qsec", symbolSize = 15) \%>\%
+  exAxis_value(axisLabel = list(show = FALSE)) \%>\%
+  etheme("mint")
 
 }
 \seealso{
