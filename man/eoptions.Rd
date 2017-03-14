@@ -4,23 +4,21 @@
 \alias{eoptions}
 \title{Add global options}
 \usage{
-eoptions(p, backgroundColor = NULL, color, renderAsImage = FALSE,
-  calculable = FALSE, symbolList, calculableColor = "rgba(255,165,0,0.6)",
-  calculableHolderColor = "#ccc", nameConnector = "&",
-  valueConnector = ":", ...)
+eoptions(p, backgroundColor = NULL, renderAsImage = FALSE,
+  calculable = FALSE, color = NULL,
+  calculableColor = "rgba(255,165,0,0.6)", calculableHolderColor = "#ccc",
+  nameConnector = "&", valueConnector = ":", ...)
 }
 \arguments{
 \item{p}{an echart object.}
 
 \item{backgroundColor}{background color.}
 
-\item{color}{colors to use in chart.}
-
 \item{renderAsImage}{allows rendering as image.}
 
 \item{calculable}{specifies whether the drag-recalculate feature will be enabled.}
 
-\item{symbolList}{list of default symbols.}
+\item{color}{colors to use in chart.}
 
 \item{calculableColor}{color of border around drag-recalculate.}
 
@@ -31,6 +29,8 @@ eoptions(p, backgroundColor = NULL, color, renderAsImage = FALSE,
 \item{valueConnector}{a connector that links the name of data series with value when island appears after the combination of data series.}
 
 \item{...}{any other options.}
+
+\item{symbolList}{list of default symbols.}
 }
 \description{
 Add global options.

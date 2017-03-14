@@ -15,26 +15,18 @@
 #' @param ... any other options.
 #'
 #' @export
-eoptions <- function(p, backgroundColor = NULL, color, renderAsImage = FALSE, calculable = FALSE, symbolList,
+eoptions <- function(p, backgroundColor = NULL, renderAsImage = FALSE, calculable = FALSE, color = NULL,
                      calculableColor = "rgba(255,165,0,0.6)", calculableHolderColor = "#ccc", nameConnector = "&",
                      valueConnector = ":", ...){
 
-  color <- if(missing(color)) list("#ff7f50", "#87cefa", "#da70d6", "#32cd32", "#6495ed", "#ff69b4",
-                                   "#ba55d3", "#cd5c5c", "#ffa500", "#40e0d0", "#1e90ff", "#ff6347",
-                                   "#7b68ee", "#00fa9a", "#ffd700", "#6699FF", "#ff6666", "#3cb371",
-                                   "#b8860b", "#30e0e0")
-
-  symbolList <- if(missing(symbolList)) list("circle", "rectangle", "triangle","diamond", "emptyCircle",
-                                             "emptyRectangle", "emptyTriangle", "emptyDiamond")
-
   opts <- list(...)
   opts$backgroundColor <- backgroundColor
-  opts$color <- color
+  opts$color <- if(!is.null(color)) color
   opts$renderAsImage <- renderAsImage
   opts$calculable <- calculable
-  opts$symbolList <- symbolList
-  opts$calculableColor = calculableColor
-  opts$calculableHolderColor = calculableHolderColor
+  opts$symbolList <- if(!is.null(symbolList)) symbolList
+  opts$calculableColor <- calculableColor
+  opts$calculableHolderColor <- calculableHolderColor
   opts$nameConnector <- nameConnector
   opts$valueConnector <- valueConnector
 
