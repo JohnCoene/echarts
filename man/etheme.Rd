@@ -31,6 +31,7 @@ valid themes:
   \item{\code{sakura}}
   \item{\code{shine}}
   \item{\code{infographic}}
+  \item{\code{solarlight}}
 }
 }
 \examples{

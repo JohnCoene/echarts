@@ -204,6 +204,7 @@ elegend <- function(p, legend, show = TRUE, zlevel = 0, z = 4, orient = "horizon
 #'   \item{\code{sakura}}
 #'   \item{\code{shine}}
 #'   \item{\code{infographic}}
+#'   \item{\code{solarlight}}
 #' }
 #'
 #' @examples
@@ -217,7 +218,7 @@ elegend <- function(p, legend, show = TRUE, zlevel = 0, z = 4, orient = "horizon
 etheme <- function(p, theme = "default"){
 
   themes <- c("default", "mint", "macarons", "macarons2", "green", "blue", "dark", "blue", "dark", "gray", "helianthus",
-              "red", "roma", "sakura", "shine", "infographic")
+              "red", "roma", "sakura", "shine", "infographic", "solarlight")
 
   if(!tolower(theme) %in% themes) stop("invalid theme")
 

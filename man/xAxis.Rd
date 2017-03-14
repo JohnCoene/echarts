@@ -14,15 +14,15 @@ exAxis(p, show = TRUE, type = "value", append = FALSE, ...)
 exAxis_category(p, show = TRUE, zlevel = 0, z = 0, boundaryGap = FALSE,
   append = FALSE, ...)
 
-exAxis_value(p, show = TRUE, zlevel = 0, z = 0, position = "bottom",
-  name = NULL, nameLocation = "end", nameTextStyle = list(),
-  boundaryGap = list(0, 0), min = NULL, max = NULL, scale = FALSE,
-  splitNumber = NULL, append = FALSE, ...)
+exAxis_value(p, show = TRUE, min = NULL, max = NULL, zlevel = 0,
+  z = 0, position = "bottom", name = NULL, nameLocation = "end",
+  boundaryGap = list(0, 0), scale = FALSE, splitNumber = NULL,
+  append = FALSE, ...)
 
 exAxis_time(p, show = TRUE, zlevel = 0, z = 0, position = "bottom",
-  name = NULL, nameLocation = "end", nameTextStyle = list(),
-  boundaryGap = list(0, 0), min = NULL, max = NULL, scale = FALSE,
-  splitNumber = NULL, append = FALSE, ...)
+  name = NULL, nameLocation = "end", boundaryGap = list(0, 0),
+  min = NULL, max = NULL, scale = FALSE, splitNumber = NULL,
+  append = FALSE, ...)
 
 exAxis_log(p, show = TRUE, zlevel = 0, z = 0, position = "bottom",
   logLabelBase = NULL, logPositive = NULL, append = FALSE, ...)
@@ -42,15 +42,13 @@ exAxis_log(p, show = TRUE, zlevel = 0, z = 0, position = "bottom",
 
 \item{boundaryGap}{whether to plot on axis line or between.}
 
+\item{min, max}{min and max values.}
+
 \item{position}{position of axis, takes \code{bottom}, \code{top}, \code{left} or \code{right}.}
 
 \item{name}{name of the axis.}
 
 \item{nameLocation}{location of \code{name}, takes \code{start} or \code{end}.}
-
-\item{nameTextStyle}{style of \code{name}.}
-
-\item{min, max}{min and max values.}
 
 \item{scale}{If \code{FALSE}, the value axis must start with 0. If \code{TRUE}, you can set the minimum and maximum value
 of value axis as the starting and ending value of your value axis.}
@@ -60,6 +58,8 @@ of value axis as the starting and ending value of your value axis.}
 \item{logLabelBase}{base log.}
 
 \item{logPositive}{if \code{FALSE} negative values are not supported.}
+
+\item{nameTextStyle}{style of \code{name}.}
 }
 \description{
 Customise x axis.

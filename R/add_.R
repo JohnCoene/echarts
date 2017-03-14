@@ -176,7 +176,7 @@ eline_ <- function(p, serie, name = NULL, stack = NULL, clickable = TRUE, xAxisI
     opts <- list(...)
     opts$name <- if(is.null(name)) names(data)[i] else name
     opts$type <- "line"
-    opts$data <- xy_data_(data[[i]], serie)
+    opts$data <- xy_data_(data[[i]], serie, stack)
     opts$stack <- if(!is.null(stack)) stack
     opts$clickable <- clickable
     opts$xAxisIndex <- xAxisIndex
@@ -194,7 +194,7 @@ eline_ <- function(p, serie, name = NULL, stack = NULL, clickable = TRUE, xAxisI
     p$x$options$series <- append(p$x$options$series, list(opts))
   }
 
-  p <- adjust_axis(p, data)
+  p <- adjust_axis(p, data, stack)
 
   p
 }

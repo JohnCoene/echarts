@@ -13,14 +13,18 @@ vector_data_ <- function(data, serie){
   data[, serie]
 }
 
-xy_data_ <- function(data, serie){
+xy_data_ <- function(data, serie, stack){
   x <- get("x.name", envir = data_env)
   x <- data[, x]
   if(class(x)[1] == "integer" || class(x)[1] == "numeric") {
-    x <- cbind(x, data[, serie])
-    colnames(x) <- NULL
-    x <- x[order(x[,1]),]
-    x <- apply(x, 1, as.list)
+    if(is.null(stack)){
+      x <- cbind(x, data[, serie])
+      colnames(x) <- NULL
+      x <- x[order(x[,1]),]
+      x <- apply(x, 1, as.list)
+    } else {
+      x <- data[, serie]
+    }
   } else {
     x <- data[, serie]
   }
@@ -28,7 +32,7 @@ xy_data_ <- function(data, serie){
 }
 
 # override axis
-adjust_axis <- function(p, data){
+adjust_axis <- function(p, data, stack){
 
   data <- do.call("rbind.data.frame", lapply(data, as.data.frame))
 
@@ -37,7 +41,12 @@ adjust_axis <- function(p, data){
 
   if(class(x)[1] == "integer" || class(x)[1] == "numeric") {
     p$x$options$yAxis <- list(list(type = "value"))
-    p$x$options$xAxis <- list(list(type = "value", min = min(x), max = max(x)))
+    if(is.null(stack)){
+      p$x$options$xAxis <- list(list(type = "value", min = min(x), max = max(x)))
+    } else {
+      x <- sort(x)
+      p$x$options$xAxis <- list(list(type = "category", data = x))
+    }
   }
   p
 }
@@ -600,4 +609,30 @@ sortable <- function(x){
   } else {
     FALSE
   }
+}
+
+axis_data <- function(type){
+  if(type == "category"){
+    x <- tryCatch(get("x", envir = data_env), error = function(e) e)
+    if(!is(x, "error")){
+      x <- sort(x)
+      x <- unique(x)
+      return(x)
+    } else {
+      NULL
+    }
+  } else {
+    return(NULL)
+  }
+}
+
+axis_it <- function(p, append, opts, axis){
+
+  if(append == TRUE){
+    p$x$options[[axis]] <- append(p$x$options[[axis]], opts)
+  } else {
+    p$x$options[[axis]] <- list(opts)
+  }
+
+  p
 }

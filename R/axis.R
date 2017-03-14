@@ -9,7 +9,6 @@
 #' @param position position of axis, takes \code{bottom}, \code{top}, \code{left} or \code{right}.
 #' @param name name of the axis.
 #' @param nameLocation location of \code{name}, takes \code{start} or \code{end}.
-#' @param nameTextStyle style of \code{name}.
 #' @param min,max min and max values.
 #' @param scale If \code{FALSE}, the value axis must start with 0. If \code{TRUE}, you can set the minimum and maximum value
 #' of value axis as the starting and ending value of your value axis.
@@ -142,10 +141,11 @@ NULL
 exAxis <- function(p, show = TRUE, type = "value", append = FALSE, ...){
 
   opts <- list(...)
-  opts$type <- type
   opts$show <- show
+  opts$data <- axis_data(type)
+  opts$type <- type
 
-  p <- add_axis(p, opts, append, "xAxis")
+  p <- axis_it(p, append, opts, "xAxis")
 
   p
 }
@@ -154,10 +154,17 @@ exAxis <- function(p, show = TRUE, type = "value", append = FALSE, ...){
 #' @export
 exAxis_category <- function(p, show = TRUE, zlevel = 0, z = 0, boundaryGap = FALSE, append = FALSE, ...){
 
-  opts <- axis_category(show, zlevel, z, boundaryGap, ...)
-  opts$data <- p$x$options$xAxis[[1]]$data
+  type <- "category"
 
-  p <- add_axis(p, opts, append, axis = "xAxis")
+  opts <- list(...)
+  opts$data <- axis_data(type)
+  opts$type <- type
+  opts$show <- show
+  opts$zlevel <- zlevel
+  opts$z <- z
+  opts$boundaryGap <- boundaryGap
+
+  p <- axis_it(p, append, opts, "xAxis")
 
   p
 }
@@ -165,15 +172,28 @@ exAxis_category <- function(p, show = TRUE, zlevel = 0, z = 0, boundaryGap = FAL
 
 #' @rdname xAxis
 #' @export
-exAxis_value <- function(p, show = TRUE, zlevel = 0, z = 0, position = "bottom", name = NULL,
-                         nameLocation = "end", nameTextStyle = list(), boundaryGap = list(0, 0),
-                         min = NULL, max = NULL, scale = FALSE, splitNumber = NULL, append = FALSE, ...){
+exAxis_value <- function(p, show = TRUE, min = NULL, max = NULL, zlevel = 0, z = 0, position = "bottom", name = NULL,
+                         nameLocation = "end", boundaryGap = list(0, 0), scale = FALSE, splitNumber = NULL,
+                         append = FALSE, ...){
 
-  opts <- axis_value(show, zlevel, z, position, name, nameLocation, nameTextStyle, boundaryGap,
-                     min, max, scale, splitNumber, ...)
-  opts$data <- p$x$options$xAxis[[1]]$data
+  type <- "value"
 
-  p <- add_axis(p, opts, append, axis = "xAxis")
+  opts <- list(...)
+  opts$data <- axis_data(type)
+  opts$type <- type
+  opts$show <- show
+  opts$zlevel <- zlevel
+  opts$z <- z
+  opts$name <- if(!is.null(name)) name
+  opts$position <- position
+  opts$boundaryGap <- boundaryGap
+  opts$min <- if(!is.null(min)) min
+  opts$max <- if(!is.null(max)) max
+  opts$nameLocation <- nameLocation
+  opts$scale <- scale
+  opts$splitNumber <- if(!is.null(splitNumber)) splitNumber
+
+  p <- axis_it(p, append, opts, "xAxis")
 
   p
 
@@ -182,14 +202,27 @@ exAxis_value <- function(p, show = TRUE, zlevel = 0, z = 0, position = "bottom",
 #' @rdname xAxis
 #' @export
 exAxis_time <- function(p, show = TRUE, zlevel = 0, z = 0, position = "bottom", name = NULL,
-                        nameLocation = "end", nameTextStyle = list(), boundaryGap = list(0, 0),
-                        min = NULL, max = NULL, scale = FALSE, splitNumber = NULL, append = FALSE, ...){
+                        nameLocation = "end", boundaryGap = list(0, 0), min = NULL, max = NULL, scale = FALSE,
+                        splitNumber = NULL, append = FALSE, ...){
 
-  opts <- axis_time(show, zlevel, z, position, name, nameLocation, nameTextStyle, boundaryGap,
-                    min, max, scale, splitNumber, ...)
-  opts$data <- p$x$options$xAxis[[1]]$data
+  type <- "time"
 
-  p <- add_axis(p, opts, append, axis = "xAxis")
+  opts <- list(...)
+  opts$data <- axis_data(type)
+  opts$type <- type
+  opts$show <- show
+  opts$zlevel <- zlevel
+  opts$z <- z
+  opts$name <- if(!is.null(name)) name
+  opts$position <- position
+  opts$boundaryGap <- boundaryGap
+  opts$min <- if(!is.null(min)) min
+  opts$max <- if(!is.null(max)) max
+  opts$nameLocation <- nameLocation
+  opts$scale <- scale
+  opts$splitNumber <- if(!is.null(splitNumber)) splitNumber
+
+  p <- axis_it(p, append, opts, "xAxis")
 
   p
 
@@ -200,10 +233,20 @@ exAxis_time <- function(p, show = TRUE, zlevel = 0, z = 0, position = "bottom", 
 exAxis_log <- function(p, show = TRUE, zlevel = 0, z = 0, position = "bottom", logLabelBase = NULL,
                        logPositive = NULL, append = FALSE, ...){
 
-  opts <- axis_log(show, zlevel, z, position, logLabelBase, logPositive, ...)
-  opts$data <- p$x$options$xAxis[[1]]$data
+  type <- "log"
 
-  p <- add_axis(p, opts, append, axis = "xAxis")
+  opts <- list(...)
+  opts$data <- axis_data(type)
+  opts$type <- type
+  opts$show <- show
+  opts$zlevel <- zlevel
+  opts$z <- z
+  opts$position <- position
+  opts$logLabelBase <- if(!is.null(logLabelBase)) logLabelBase
+  opts$logPositive <- if(!is.null(logPositive)) logPositive
+
+
+  p <- axis_it(p, append, opts, "xAxis")
 
   p
 }
