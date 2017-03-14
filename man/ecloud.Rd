@@ -41,18 +41,9 @@ ecloud_(p, freq, color = NULL, name = NULL, clickable = TRUE,
 \item{...}{any other argument to pass to funnel.}
 }
 \description{
-Add wordcloud
-
 Add wordcloud serie.
 }
 \examples{
-tf <- data.frame(terms = c("ECharts", "htmlwidgets", "rstats", "htmltools"),
-  freq = c(20, 17, 15, 7), color = c("Red", "orange", "yellow", "grey"))
-
-tf \%>\%
-  echart(terms) \%>\%
-  ecloud(freq, color)
-
 tf <- data.frame(terms = c("ECharts", "htmlwidgets", "rstats", "htmltools"),
   freq = c(20, 17, 15, 7), color = c("red", "orange", "yellow", "grey"))
 

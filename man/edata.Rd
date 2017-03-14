@@ -17,8 +17,6 @@ edata_(p, data, x)
 \item{x}{x variable.}
 }
 \description{
-Add data
-
 Add a dataset.
 }
 \seealso{

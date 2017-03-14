@@ -457,8 +457,8 @@ epie_ <- function(p, serie, name = NULL, clickable = TRUE, legendHoverLink = TRU
 #' }
 #'
 #' @examples
-#' radar <- data.frame(axis = rep(LETTERS[1:6], 4), grp = sample(LETTERS[4:9], 24, replace = T),
-#'   value = runif(24, 2, 10))
+#' radar <- data.frame(axis = rep(LETTERS[1:6], 4), grp = sample(LETTERS[4:9], 24, replace = TRUE),
+#'                     value = runif(24, 2, 10))
 #'
 #' radar %>%
 #'   group_by_("grp") %>%
@@ -567,8 +567,8 @@ eradar_ <- function(p, serie, name = NULL, clickable = TRUE, symbol = NULL, symb
 #'   echord_()
 #'
 #' matrix %>%
-#'   echart_(LETTERS[1:10]) %>%
-#'   echord_(ribbonType = FALSE)
+#'   echart(LETTERS[1:10]) %>%
+#'   echord(ribbonType = FALSE)
 #'
 #' @seealso \href{http://echarts.baidu.com/echarts2/doc/option-en.html#series-i(radar)}{official scatter options docs}
 #'
@@ -617,13 +617,13 @@ echord_ <- function(p, name = NULL, sort = "none", sortSub = "none", clickable =
 #'
 #' choropleth %>%
 #'   echart_("countries") %>%
-#'   emap() %>%
+#'   emap_() %>%
 #'   emap_choropleth_("values")
 #'
 #' choropleth %>%
 #'   echart_("countries") %>%
 #'   emap() %>%
-#'   emap_choropleth_("values") %>%
+#'   emap_choropleth(values) %>%
 #'   ecolorbar(color = list("red", "yellow"), calculable = TRUE)
 #'
 #' @seealso \code{\link{ecolorbar}}

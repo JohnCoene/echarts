@@ -55,40 +55,9 @@ emap_(p, name = NULL, mapType = "world", clickable = TRUE, z = 2,
 \item{...}{any other options to pass to map serie.}
 }
 \description{
-Add blank map
-
 Setup map plot.
 }
 \examples{
-coords <- data.frame(city = c("London", "New York", "Beijing", "Sydney"),
-  lon = c(-0.1167218, -73.98002, 116.3883, 151.18518),
-  lat = c(51.49999, 40.74998, 39.92889, -33.92001),
-  values = runif(4, 10, 20))
-
-coords \%>\%
-  echart(city) \%>\% # initialise chart
-  emap() \%>\% # setup default map
-  emap_coords(lon, lat) \%>\% # add coordinates
-  emap_points(values) # plot values on coordinates
-
-edges <- data.frame(source = c("Beijing", "Beijing", "New York"),
-  target = c("Sydney", "London", "London"))
-
-coords \%>\%
-  echart(city) \%>\%
-  emap() \%>\%
-  emap_coords(lon, lat) \%>\%
-  emap_lines(edges, source, target)
-
-data <- data.frame(lon = runif(200, 90, 120),
-  lat = runif(200, 30, 39),
-  z = runif(200, 50, 75))
-
-data \%>\%
-  echart() \%>\%
-  emap(mapType = "china") \%>\%
-  emap_heat(lon, lat, z)
-
 coords <- data.frame(city = c("London", "New York", "Beijing", "Sydney"),
   lon = c(-0.1167218, -73.98002, 116.3883, 151.18518),
   lat = c(51.49999, 40.74998, 39.92889, -33.92001),
@@ -131,9 +100,6 @@ us_data \%>\%
 
 }
 \seealso{
-\code{\link{emap_coords}}, \code{\link{emap_heat}}, \code{\link{emap_lines}}, \code{emap_choropleth},
-\code{\link{emap_points}}
-
 \code{\link{emap_coords}}, \code{\link{emap_heat}}, \code{\link{emap_lines}}, \code{emap_choropleth},
 \code{\link{emap_points}}, \href{http://echarts.baidu.com/echarts2/doc/option-en.html#series-i(map)}{official map docs}
 }

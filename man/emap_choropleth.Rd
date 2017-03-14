@@ -16,30 +16,20 @@ emap_choropleth_(p, serie)
 }
 \description{
 Add choropleth
-
-Add choropleth
 }
 \examples{
 choropleth <- data.frame(countries = c("France", "Brazil", "China", "Russia", "Canada", "India"),
   values = round(runif(6, 10, 25)))
 
 choropleth \%>\%
-  echart(countries) \%>\%
-  emap() \%>\%
-  emap_choropleth(values)
-
-choropleth <- data.frame(countries = c("France", "Brazil", "China", "Russia", "Canada", "India"),
-  values = round(runif(6, 10, 25)))
-
-choropleth \%>\%
   echart_("countries") \%>\%
-  emap() \%>\%
+  emap_() \%>\%
   emap_choropleth_("values")
 
 choropleth \%>\%
   echart_("countries") \%>\%
   emap() \%>\%
-  emap_choropleth_("values") \%>\%
+  emap_choropleth(values) \%>\%
   ecolorbar(color = list("red", "yellow"), calculable = TRUE)
 
 }

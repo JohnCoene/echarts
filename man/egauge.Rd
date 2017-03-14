@@ -47,14 +47,9 @@ egauge_(p, value, indicator = "", name = NULL, clickable = FALSE,
 \item{...}{any other arguments.}
 }
 \description{
-Add gauge
-
 Add gauge.
 }
 \examples{
-echart() \%>\%
-  egauge(85, "SPEED")
-
 echart() \%>\%
   egauge(85, "SPEED")
 

@@ -47,8 +47,6 @@ emap_lines_(p, edges, source, target, name = NULL, clickable = TRUE,
 \item{...}{any other options to pass to line.}
 }
 \description{
-Add map lines
-
 Add lines on map.
 }
 \details{
@@ -70,46 +68,6 @@ Valid values for \code{symbol}:
 }
 }
 \examples{
-coords <- data.frame(city = c("London", "New York", "Beijing", "Sydney"),
-  lon = c(-0.1167218, -73.98002, 116.3883, 151.18518),
-  lat = c(51.49999, 40.74998, 39.92889, -33.92001))
-
-edges <- data.frame(source = c("Beijing", "Beijing", "New York"),
-  target = c("Sydney", "London", "London"))
-
-coords \%>\%
-  echart(city) \%>\%
-  emap() \%>\%
-  emap_coords(lon, lat) \%>\%
-  emap_lines(edges, source, target)
-
-edges2 <- data.frame(source = "London", target = "Sydney")
-
-coords \%>\%
-  echart(city) \%>\%
-  emap() \%>\%
-  emap_coords(lon, lat) \%>\%
-  emap_lines(edges, source, target) \%>\%
-  emap() \%>\%
-  emap_coords(lon, lat) \%>\%
-  emap_lines(edges2, source, target, effect = emap_line_effect()) \%>\%
-  etheme("helianthus")
-
-coords2 <- data.frame(city = "Sydney", lon = 151.18518, lat = -33.92001, value = 20)
-
-coords \%>\%
-  echart(city) \%>\%
-  emap() \%>\%
-  emap_coords(lon, lat) \%>\%
-  emap_lines(edges, source, target) \%>\%
-  edata(coords2, city) \%>\%
-  emap() \%>\%
-  emap_coords(lon, lat) \%>\%
-  emap_lines(edges2, source, target, effect = emap_line_effect(scaleSize = 2)) \%>\%
-  emap_coords(lon, lat) \%>\%
-  emap_points(value, symbol = "emptyCircle", effect = list(show = TRUE, shadowBlur = 10)) \%>\%
-  etheme("infographic")
-
 coords <- data.frame(city = c("London", "New York", "Beijing", "Sydney"),
   lon = c(-0.1167218, -73.98002, 116.3883, 151.18518),
   lat = c(51.49999, 40.74998, 39.92889, -33.92001))
@@ -152,8 +110,6 @@ coords \%>\%
 
 }
 \seealso{
-\code{\link{emap_coords}}
-
 \code{\link{emap_coords}} \href{http://echarts.baidu.com/echarts2/doc/option-en.html#series-i(map).markLine}{official map line docs}
 }
 

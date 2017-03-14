@@ -15,8 +15,6 @@ emap_coords_(p, lon, lat)
 \item{lon, lat}{coordinates to plot.}
 }
 \description{
-Add map coordinates
-
 Add coordinates to map.
 }
 \examples{

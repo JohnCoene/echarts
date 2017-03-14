@@ -58,8 +58,8 @@ Valid values for \code{symbol}:
 }
 }
 \examples{
-radar <- data.frame(axis = rep(LETTERS[1:6], 4), grp = sample(LETTERS[4:9], 24, replace = T),
-  value = runif(24, 2, 10))
+radar <- data.frame(axis = rep(LETTERS[1:6], 4), grp = sample(LETTERS[4:9], 24, replace = TRUE),
+                    value = runif(24, 2, 10))
 
 radar \%>\%
   group_by_("grp") \%>\%

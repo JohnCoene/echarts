@@ -32,8 +32,6 @@ emap_points_(p, serie, clickable = TRUE, symbol = "pin", symbolSize = 10,
 }
 \description{
 Add map points
-
-Add map points
 }
 \details{
 Valid values for \code{symbol}:
@@ -54,30 +52,6 @@ Valid values for \code{symbol}:
 }
 }
 \examples{
-coords <- data.frame(city = c("London", "New York", "Beijing", "Sydney"),
-  lon = c(-0.1167218, -73.98002, 116.3883, 151.18518),
-  lat = c(51.49999, 40.74998, 39.92889, -33.92001),
-  values = runif(4, 10, 20))
-
-coords \%>\%
-  echart(city) \%>\%
-  emap() \%>\%
-  emap_coords(lon, lat) \%>\%
-  emap_points(values)
-
-coords2 <- data.frame(city = "Rio", lon = -43.172896, lat = -22.906847, value = 15)
-
-coords \%>\%
-  echart(city) \%>\%
-  emap() \%>\%
-  emap_coords(lon, lat) \%>\%
-  emap_points(values, symbolSize = 5) \%>\%
-  edata(coords2, city) \%>\%
-  emap() \%>\%
-  emap_coords(lon, lat) \%>\%
-  emap_points(value, symbol = "emptyCircle", effect = list(show = TRUE, shadowBlur = 10)) \%>\%
-  etheme("infographic")
-
 coords <- data.frame(city = c("London", "New York", "Beijing", "Sydney"),
   lon = c(-0.1167218, -73.98002, 116.3883, 151.18518),
   lat = c(51.49999, 40.74998, 39.92889, -33.92001),

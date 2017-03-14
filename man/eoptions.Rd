@@ -5,9 +5,7 @@
 \title{Add global options}
 \usage{
 eoptions(p, backgroundColor = NULL, renderAsImage = FALSE,
-  calculable = FALSE, color = NULL,
-  calculableColor = "rgba(255,165,0,0.6)", calculableHolderColor = "#ccc",
-  nameConnector = "&", valueConnector = ":", ...)
+  calculable = FALSE, color = NULL, symbolList = NULL, ...)
 }
 \arguments{
 \item{p}{an echart object.}
@@ -20,17 +18,9 @@ eoptions(p, backgroundColor = NULL, renderAsImage = FALSE,
 
 \item{color}{colors to use in chart.}
 
-\item{calculableColor}{color of border around drag-recalculate.}
-
-\item{calculableHolderColor}{color of calculable holder.}
-
-\item{nameConnector}{a connector that links the names of data series together after the combination of data series.}
-
-\item{valueConnector}{a connector that links the name of data series with value when island appears after the combination of data series.}
+\item{symbolList}{list of default symbols.}
 
 \item{...}{any other options.}
-
-\item{symbolList}{list of default symbols.}
 }
 \description{
 Add global options.

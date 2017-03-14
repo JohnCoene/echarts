@@ -8,16 +8,10 @@
 #' @param renderAsImage allows rendering as image.
 #' @param calculable specifies whether the drag-recalculate feature will be enabled.
 #' @param symbolList list of default symbols.
-#' @param calculableColor color of border around drag-recalculate.
-#' @param calculableHolderColor color of calculable holder.
-#' @param nameConnector a connector that links the names of data series together after the combination of data series.
-#' @param valueConnector a connector that links the name of data series with value when island appears after the combination of data series.
 #' @param ... any other options.
 #'
 #' @export
-eoptions <- function(p, backgroundColor = NULL, renderAsImage = FALSE, calculable = FALSE, color = NULL,
-                     calculableColor = "rgba(255,165,0,0.6)", calculableHolderColor = "#ccc", nameConnector = "&",
-                     valueConnector = ":", ...){
+eoptions <- function(p, backgroundColor = NULL, renderAsImage = FALSE, calculable = FALSE, color = NULL, symbolList = NULL, ...){
 
   opts <- list(...)
   opts$backgroundColor <- backgroundColor
@@ -25,10 +19,6 @@ eoptions <- function(p, backgroundColor = NULL, renderAsImage = FALSE, calculabl
   opts$renderAsImage <- renderAsImage
   opts$calculable <- calculable
   opts$symbolList <- if(!is.null(symbolList)) symbolList
-  opts$calculableColor <- calculableColor
-  opts$calculableHolderColor <- calculableHolderColor
-  opts$nameConnector <- nameConnector
-  opts$valueConnector <- valueConnector
 
   p$x$options <- append(p$x$options, opts)
 

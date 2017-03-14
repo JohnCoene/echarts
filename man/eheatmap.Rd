@@ -41,18 +41,9 @@ eheatmap_(p, y, values, name = NULL, clickable = TRUE, blurSize = 30,
 \item{...}{any other options to pass to heatmap.}
 }
 \description{
-Add heatmap
-
 Add heatmap.
 }
 \examples{
-set.seed(19880525)
-matrix <- data.frame(x = runif(100, 10, 200), y = runif(100, 10, 200), z = runif(100, 10 , 200))
-
-matrix \%>\%
-  echart(x) \%>\%
-  eheatmap(y, z)
-
 set.seed(19880525)
 matrix <- data.frame(x = runif(150, 10, 500), y = runif(150, 10, 500), z = runif(150, 10 , 200))
 

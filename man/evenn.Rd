@@ -27,19 +27,9 @@ evenn_(p, serie, name = NULL, clickable = TRUE, z = 2, zlevel = 0,
 \item{...}{any other argument to pass to funnel.}
 }
 \description{
-Add venn
-
 Add venn diagram
 }
 \examples{
-venn <- data.frame(name = c("banana", "pineapple", "overlap"),
-  values = c(20, 50, 10))
-
-venn \%>\%
-  echart(name) \%>\%
-  evenn(values) \%>\%
-  etheme("infographic")
-
 venn <- data.frame(name = c("banana", "pineapple", "overlap"),
   values = c(20, 50, 10))
 

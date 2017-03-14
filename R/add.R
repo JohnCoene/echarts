@@ -1,5 +1,4 @@
 #' @rdname ebar
-#'
 #' @export
 ebar <- function(p, serie, name = NULL, stack = NULL, clickable = TRUE, xAxisIndex = 0, yAxisIndex = 0, barGap = "100%",
                  barCategoryGap = "20%", legendHoverLink = TRUE, z = 2, zlevel = 0, tooltip, ...){
@@ -14,7 +13,6 @@ ebar <- function(p, serie, name = NULL, stack = NULL, clickable = TRUE, xAxisInd
 }
 
 #' @rdname eline
-#'
 #' @export
 eline <- function(p, serie, name = NULL, stack = NULL, clickable = TRUE, xAxisIndex = 0, yAxisIndex = 0, symbol = NULL,
                   symbolSize = "2 | 4", symbolRotate = NULL, showAllSymbol = FALSE, smooth = TRUE, legendHoverLink = TRUE,
@@ -30,7 +28,6 @@ eline <- function(p, serie, name = NULL, stack = NULL, clickable = TRUE, xAxisIn
 }
 
 #' @rdname earea
-#'
 #' @export
 earea <- function(p, serie, name = NULL, stack = NULL, smooth = TRUE, ...){
 
@@ -41,7 +38,6 @@ earea <- function(p, serie, name = NULL, stack = NULL, smooth = TRUE, ...){
 }
 
 #' @rdname escatter
-#'
 #' @export
 escatter <- function(p, serie, size = NULL, name = NULL, clickable = TRUE, symbol = NULL, symbolSize = 4, symbolRotate = NULL,
                      large = FALSE, largeThreshold = 2000, legendHoverLink = TRUE, z = 2, zlevel = 0, ...){
@@ -54,7 +50,6 @@ escatter <- function(p, serie, size = NULL, name = NULL, clickable = TRUE, symbo
 }
 
 #' @rdname epie
-#'
 #' @export
 epie <- function(p, serie, name = NULL, clickable = TRUE, legendHoverLink = TRUE, center = list("50%", "50%"),
                  radius = list(0, "75%"), startAngle = 90, minAngle = 0, clockWise = TRUE, roseType = NULL, selectedOffset = 10,
@@ -68,7 +63,6 @@ epie <- function(p, serie, name = NULL, clickable = TRUE, legendHoverLink = TRUE
 }
 
 #' @rdname eradar
-#'
 #' @export
 eradar <- function(p, serie, name = NULL, clickable = TRUE, symbol = NULL, symbolSize = 4, symbolRotate = NULL,
                    legendHoverLink = TRUE, polarIndex = 0, z = 2, zlevel = 0, ...){
@@ -79,23 +73,7 @@ eradar <- function(p, serie, name = NULL, clickable = TRUE, symbol = NULL, symbo
     eradar_(serie, name, clickable, symbol, symbolSize, symbolRotate, legendHoverLink, polarIndex, z, zlevel, ...)
 }
 
-
-#' Add chord
-#'
-#' @examples
-#' set.seed(19880525)
-#' matrix <- matrix(sample(0:1, 100, replace=TRUE, prob=c(0.9,0.6)), nc=10)
-#'
-#' matrix %>%
-#'   echart(LETTERS[1:10]) %>%
-#'   echord_()
-#'
-#' matrix %>%
-#'   echart(LETTERS[1:10]) %>%
-#'   echord_(ribbonType = FALSE)
-#'
 #' @rdname echord
-#'
 #' @export
 echord <- function(p, name = NULL, sort = "none", sortSub = "none", clickable = TRUE, z = 2, zlevel = 0,
                    symbol = NULL, symbolSize = NULL, clockWise = FALSE, minRadius = 10, maxRadius = 20,
@@ -106,19 +84,7 @@ echord <- function(p, name = NULL, sort = "none", sortSub = "none", clickable = 
             ribbonType, showScale, showScaleText, padding, ...)
 }
 
-#' Add choropleth
-#'
-#' @examples
-#' choropleth <- data.frame(countries = c("France", "Brazil", "China", "Russia", "Canada", "India"),
-#'   values = round(runif(6, 10, 25)))
-#'
-#' choropleth %>%
-#'   echart(countries) %>%
-#'   emap() %>%
-#'   emap_choropleth(values)
-#'
 #' @rdname emap_choropleth
-#'
 #' @export
 emap_choropleth <- function(p, serie){
 
@@ -128,10 +94,7 @@ emap_choropleth <- function(p, serie){
     emap_choropleth_(serie)
 }
 
-#' Add map coordinates
-#'
 #' @rdname emap_coords
-#'
 #' @export
 emap_coords <- function(p, lon, lat){
 
@@ -142,50 +105,6 @@ emap_coords <- function(p, lon, lat){
     emap_coords_(lon, lat)
 }
 
-#' Add map lines
-#'
-#' @examples
-#' coords <- data.frame(city = c("London", "New York", "Beijing", "Sydney"),
-#'   lon = c(-0.1167218, -73.98002, 116.3883, 151.18518),
-#'   lat = c(51.49999, 40.74998, 39.92889, -33.92001))
-#'
-#' edges <- data.frame(source = c("Beijing", "Beijing", "New York"),
-#'   target = c("Sydney", "London", "London"))
-#'
-#' coords %>%
-#'   echart(city) %>%
-#'   emap() %>%
-#'   emap_coords(lon, lat) %>%
-#'   emap_lines(edges, source, target)
-#'
-#' edges2 <- data.frame(source = "London", target = "Sydney")
-#'
-#' coords %>%
-#'   echart(city) %>%
-#'   emap() %>%
-#'   emap_coords(lon, lat) %>%
-#'   emap_lines(edges, source, target) %>%
-#'   emap() %>%
-#'   emap_coords(lon, lat) %>%
-#'   emap_lines(edges2, source, target, effect = emap_line_effect()) %>%
-#'   etheme("helianthus")
-#'
-#' coords2 <- data.frame(city = "Sydney", lon = 151.18518, lat = -33.92001, value = 20)
-#'
-#' coords %>%
-#'   echart(city) %>%
-#'   emap() %>%
-#'   emap_coords(lon, lat) %>%
-#'   emap_lines(edges, source, target) %>%
-#'   edata(coords2, city) %>%
-#'   emap() %>%
-#'   emap_coords(lon, lat) %>%
-#'   emap_lines(edges2, source, target, effect = emap_line_effect(scaleSize = 2)) %>%
-#'   emap_coords(lon, lat) %>%
-#'   emap_points(value, symbol = "emptyCircle", effect = list(show = TRUE, shadowBlur = 10)) %>%
-#'   etheme("infographic")
-#'
-#' @seealso \code{\link{emap_coords}}
 #'
 #' @rdname emap_lines
 #'
@@ -202,35 +121,7 @@ emap_lines <- function(p, edges, source, target, name = NULL, clickable = TRUE, 
                 smoothness, precision, bundling, ...)
 }
 
-#' Add map points
-#'
-#' @examples
-#' coords <- data.frame(city = c("London", "New York", "Beijing", "Sydney"),
-#'   lon = c(-0.1167218, -73.98002, 116.3883, 151.18518),
-#'   lat = c(51.49999, 40.74998, 39.92889, -33.92001),
-#'   values = runif(4, 10, 20))
-#'
-#' coords %>%
-#'   echart(city) %>%
-#'   emap() %>%
-#'   emap_coords(lon, lat) %>%
-#'   emap_points(values)
-#'
-#' coords2 <- data.frame(city = "Rio", lon = -43.172896, lat = -22.906847, value = 15)
-#'
-#' coords %>%
-#'   echart(city) %>%
-#'   emap() %>%
-#'   emap_coords(lon, lat) %>%
-#'   emap_points(values, symbolSize = 5) %>%
-#'   edata(coords2, city) %>%
-#'   emap() %>%
-#'   emap_coords(lon, lat) %>%
-#'   emap_points(value, symbol = "emptyCircle", effect = list(show = TRUE, shadowBlur = 10)) %>%
-#'   etheme("infographic")
-#'
 #' @rdname emap_points
-#'
 #' @export
 emap_points <- function(p, serie, clickable = TRUE, symbol = "pin", symbolSize = 10,
                         symbolRotate = NULL, large = FALSE, itemStyle = NULL, ...){
@@ -242,26 +133,7 @@ emap_points <- function(p, serie, clickable = TRUE, symbol = "pin", symbolSize =
     emap_points_(serie, clickable, symbol, symbolSize, symbolRotate, large, itemStyle, ...)
 }
 
-#' Add heat on map
-#'
-#' @examples
-#' data <- data.frame(lon = runif(200, 90, 120),
-#'   lat = runif(200, 30, 39),
-#'   z = runif(200, 50, 75))
-#'
-#' data %>%
-#'   echart() %>%
-#'   emap(mapType = "china") %>%
-#'   emap_heat(lon, lat, z)
-#'
-#' data %>%
-#'   echart() %>%
-#'   emap(mapType = "china") %>%
-#'   emap_heat(lon, lat, z, blurSize = 50, minAlpha = 0.3, opacity = 0.8) %>%
-#'   etheme("dark")
-#'
 #' @rdname emap_heat
-#'
 #' @export
 emap_heat <- function(p, lon, lat, z, blurSize = 30, minAlpha = 0.05, valueScale = 1, opacity = 1,
                       gradientColors = NULL, ...){
@@ -275,43 +147,7 @@ emap_heat <- function(p, lon, lat, z, blurSize = 30, minAlpha = 0.05, valueScale
     emap_heat_(lon, lat, z, blurSize, minAlpha, valueScale, opacity, gradientColors, ...)
 }
 
-#' Add blank map
-#'
-#' @examples
-#' coords <- data.frame(city = c("London", "New York", "Beijing", "Sydney"),
-#'   lon = c(-0.1167218, -73.98002, 116.3883, 151.18518),
-#'   lat = c(51.49999, 40.74998, 39.92889, -33.92001),
-#'   values = runif(4, 10, 20))
-#'
-#' coords %>%
-#'   echart(city) %>% # initialise chart
-#'   emap() %>% # setup default map
-#'   emap_coords(lon, lat) %>% # add coordinates
-#'   emap_points(values) # plot values on coordinates
-#'
-#' edges <- data.frame(source = c("Beijing", "Beijing", "New York"),
-#'   target = c("Sydney", "London", "London"))
-#'
-#' coords %>%
-#'   echart(city) %>%
-#'   emap() %>%
-#'   emap_coords(lon, lat) %>%
-#'   emap_lines(edges, source, target)
-#'
-#' data <- data.frame(lon = runif(200, 90, 120),
-#'   lat = runif(200, 30, 39),
-#'   z = runif(200, 50, 75))
-#'
-#' data %>%
-#'   echart() %>%
-#'   emap(mapType = "china") %>%
-#'   emap_heat(lon, lat, z)
-#'
-#' @seealso \code{\link{emap_coords}}, \code{\link{emap_heat}}, \code{\link{emap_lines}}, \code{emap_choropleth},
-#' \code{\link{emap_points}}
-#'
 #' @rdname emap
-#'
 #' @export
 emap <- function(p, name = NULL, mapType = "world", clickable = TRUE, z = 2, zlevel = 0,
                   selectedMode = NULL, hoverable = FALSE, dataRangeHoverLink = TRUE,
@@ -325,14 +161,7 @@ emap <- function(p, name = NULL, mapType = "world", clickable = TRUE, z = 2, zle
 
 }
 
-#' Add gauge
-#'
-#' @examples
-#' echart() %>%
-#'   egauge(85, "SPEED")
-#'
 #' @rdname egauge
-#'
 #' @export
 egauge <- function(p, value, indicator = "", name = NULL, clickable = FALSE, legendHoverLink = TRUE, center = list("50%", "50%"),
                    radius = list("0%", "75%"), startAngle = 225, endAngle = -45, min = 0, max = 100,
@@ -346,17 +175,7 @@ egauge <- function(p, value, indicator = "", name = NULL, clickable = FALSE, leg
             splitNumber , z, zlevel, tooltip, ...)
 }
 
-#' Add funnel
-#'
-#' @examples
-#' funnel <- data.frame(stage = c("View", "Click", "Purchase"), value = c(80, 30, 20))
-#'
-#' funnel %>%
-#'   echart(stage) %>%
-#'   efunnel(value)
-#'
 #' @rdname efunnel
-#'
 #' @export
 efunnel <- function(p, serie, name = NULL, clickable = TRUE, legendHoverLink = TRUE, sort = "descending",
                     min = NULL, max = NULL, x = 80, y = 60, x2 = 80, y2 = 60, width = NULL, height = NULL,
@@ -370,19 +189,7 @@ efunnel <- function(p, serie, name = NULL, clickable = TRUE, legendHoverLink = T
              funnelAlign, minSize, maxSize, gap, tooltip, ...)
 }
 
-#' Add venn
-#'
-#' @examples
-#' venn <- data.frame(name = c("banana", "pineapple", "overlap"),
-#'   values = c(20, 50, 10))
-#'
-#' venn %>%
-#'   echart(name) %>%
-#'   evenn(values) %>%
-#'   etheme("infographic")
-#'
 #' @rdname evenn
-#'
 #' @export
 evenn <- function(p,  serie, name = NULL, clickable = TRUE, z = 2, zlevel = 0, tooltip = NULL, ...){
 
@@ -393,18 +200,7 @@ evenn <- function(p,  serie, name = NULL, clickable = TRUE, z = 2, zlevel = 0, t
     evenn_( serie, name, clickable, z, zlevel, tooltip, ...)
 }
 
-#' Add wordcloud
-#'
-#' @examples
-#' tf <- data.frame(terms = c("ECharts", "htmlwidgets", "rstats", "htmltools"),
-#'   freq = c(20, 17, 15, 7), color = c("Red", "orange", "yellow", "grey"))
-#'
-#' tf %>%
-#'   echart(terms) %>%
-#'   ecloud(freq, color)
-#'
 #' @rdname ecloud
-#'
 #' @export
 ecloud <- function(p, freq, color, name = NULL, clickable = TRUE, center = list("50%", "50%"), size = list("40%", "40%"),
                    textRotation = list(0, 90), autoSize = list(enable = TRUE, minSize = 12), z = 2, zlevel = 0, tooltip, ...){
@@ -417,18 +213,7 @@ ecloud <- function(p, freq, color, name = NULL, clickable = TRUE, center = list(
     ecloud_(freq, color, name, clickable, center, size, textRotation, autoSize, z, zlevel, tooltip, ...)
 }
 
-#' Add heatmap
-#'
-#' @examples
-#' set.seed(19880525)
-#' matrix <- data.frame(x = runif(100, 10, 200), y = runif(100, 10, 200), z = runif(100, 10 , 200))
-#'
-#' matrix %>%
-#'   echart(x) %>%
-#'   eheatmap(y, z)
-#'
 #' @rdname eheatmap
-#'
 #' @export
 eheatmap <- function(p, y, values, name = NULL, clickable = TRUE, blurSize = 30, minAlpha = 0.5, valueScale = 1,
                      opacity = 1, z = 2, zlevel = 0, gradientColors, tooltip, ...){
@@ -442,10 +227,7 @@ eheatmap <- function(p, y, values, name = NULL, clickable = TRUE, blurSize = 30,
     eheatmap_(y, values, name, clickable, blurSize, minAlpha, valueScale, opacity, z, zlevel, gradientColors, tooltip, ...)
 }
 
-#' Add data
-#'
 #' @rdname edata
-#'
 #' @export
 edata <- function(p, data, x){
 

@@ -47,8 +47,6 @@ echord_(p, name = NULL, sort = "none", sortSub = "none",
 \item{...}{any other options to pass to serie.}
 }
 \description{
-Add chord
-
 Add chord chart.
 }
 \details{
@@ -71,17 +69,6 @@ Valid values for \code{symbol}:
 }
 \examples{
 set.seed(19880525)
-matrix <- matrix(sample(0:1, 100, replace=TRUE, prob=c(0.9,0.6)), nc=10)
-
-matrix \%>\%
-  echart(LETTERS[1:10]) \%>\%
-  echord_()
-
-matrix \%>\%
-  echart(LETTERS[1:10]) \%>\%
-  echord_(ribbonType = FALSE)
-
-set.seed(19880525)
 matrix <- matrix(sample(0:1, 100, replace = TRUE, prob = c(0.9,0.6)), nc = 10)
 
 matrix \%>\%
@@ -89,8 +76,8 @@ matrix \%>\%
   echord_()
 
 matrix \%>\%
-  echart_(LETTERS[1:10]) \%>\%
-  echord_(ribbonType = FALSE)
+  echart(LETTERS[1:10]) \%>\%
+  echord(ribbonType = FALSE)
 
 }
 \seealso{

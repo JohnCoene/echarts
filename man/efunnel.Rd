@@ -47,16 +47,8 @@ efunnel_(p, serie, name = NULL, clickable = TRUE, legendHoverLink = TRUE,
 }
 \description{
 Add funnel
-
-Add funnel
 }
 \examples{
-funnel <- data.frame(stage = c("View", "Click", "Purchase"), value = c(80, 30, 20))
-
-funnel \%>\%
-  echart(stage) \%>\%
-  efunnel(value)
-
 funnel <- data.frame(stage = c("View", "Click", "Purchase"), value = c(80, 30, 20))
 
 funnel \%>\%
