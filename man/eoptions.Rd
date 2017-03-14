@@ -25,4 +25,11 @@ eoptions(p, backgroundColor = NULL, renderAsImage = FALSE,
 \description{
 Add global options.
 }
+\examples{
+mtcars \%>\%
+  echart(mpg) \%>\%
+  eline(qsec) \%>\%
+  eoptions(backgroundColor = "black")
+
+}
 

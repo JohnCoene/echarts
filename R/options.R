@@ -10,6 +10,12 @@
 #' @param symbolList list of default symbols.
 #' @param ... any other options.
 #'
+#' @examples
+#' mtcars %>%
+#'   echart(mpg) %>%
+#'   eline(qsec) %>%
+#'   eoptions(backgroundColor = "black")
+#'
 #' @export
 eoptions <- function(p, backgroundColor = NULL, renderAsImage = FALSE, calculable = FALSE, color = NULL, symbolList = NULL, ...){
 
@@ -71,6 +77,17 @@ eoptions <- function(p, backgroundColor = NULL, renderAsImage = FALSE, calculabl
 #'   \item{\code{BounceInOut}}
 #' }
 #'
+#' @examples
+#' mtcars %>%
+#'   echart(mpg) %>%
+#'   ebar(qsec) %>%
+#'   eanimation(animationEasing = "BounceIn")
+#'
+#' mtcars %>%
+#'   echart(mpg) %>%
+#'   escatter(qsec) %>%
+#'   eanimation(animationEasing = "CubicInOut")
+#'
 #' @export
 eanimation <- function(p, animation = TRUE, addDataAnimation = TRUE, animationThreshold = 2000,
                        animationDuration = 2000, animationDurationUpdate = 500,
@@ -111,6 +128,15 @@ eanimation <- function(p, animation = TRUE, addDataAnimation = TRUE, animationTh
 #' @param padding legend padding.
 #' @param ... any other option to pass to legend.
 #'
+#' @examples
+#' df <- data.frame(x = LETTERS[1:10], y = runif(10, 0, 10), z = runif(10, 0, 10))
+#'
+#' df %>%
+#'   echart(x) %>%
+#'   ebar(y, name = "y - serie") %>%
+#'   ebar(z) %>%
+#'   elegend()
+#'
 #' @export
 elegend <- function(p, legend, show = TRUE, zlevel = 0, z = 4, orient = "horizontal", x = "center",
                     y = "top", backgroundColor = "rgba(0,0,0,0)", borderColor = "#ccc", borderWidth = 0,
@@ -124,6 +150,8 @@ elegend <- function(p, legend, show = TRUE, zlevel = 0, z = 4, orient = "horizon
     legend <- if(missing(legend)) default_legend(p)
   } else if(missing(legend) && length(p$x$options$legend$data)) {
     legend <- p$x$options$legend$data
+  } else if (!missing(legend)) {
+    legend <- legend
   }
 
   opts <- list(...)
@@ -438,4 +466,65 @@ ecolorbar <- function(p, min = NULL, max = NULL, which = "previous", show = TRUE
   p$x$options$dataRange$calculable <- calculable
 
   p
+}
+
+#' Add Zoom and roam controller
+#'
+#' Add zoom and roam controller to map.
+#'
+#' @param p an echart object.
+#' @param show set to \code{TRUE} to show the controller
+#' @param z,zlevel first and second grade cascading control, the higher z the closer to the top.
+#' @param x x position; \code{left} or \code{right}.
+#' @param y y posotion; \code{top} or \code{bottom}.
+#' @param width,height dimensions of controller.
+#' @param backgroundColor background color.
+#' @param borderColor border color.
+#' @param borderWidth width of border.
+#' @param padding padding.
+#' @param fillerColor filler color.
+#' @param handleColor color of handle.
+#' @param step moving step of the 4 direction roam in px.
+#' @param mapTypeControl ou can specify every single mapType when multiple map in a chart at the same time, such as: \code{list({ china = FALSE, world = TRUE})}.
+#' @param ... any other option to pass to controller.
+#'
+#' @examples
+#' coords <- data.frame(city = c("London", "New York", "Beijing", "Sydney"),
+#'   lon = c(-0.1167218, -73.98002, 116.3883, 151.18518),
+#'   lat = c(51.49999, 40.74998, 39.92889, -33.92001),
+#'   values = runif(4, 10, 20))
+#'
+#' coords %>%
+#'   echart_("city") %>%
+#'   emap() %>%
+#'   emap_coords_("lon", "lat") %>%
+#'   emap_points_("values") %>%
+#'   emap_roam(mapTypeControl = list(world = TRUE))
+#'
+#' @export
+emap_roam <- function(p, show = TRUE, zlevel = 0, z = 4, x = "left", y = "top", width = 80, height = 120,
+                      backgroundColor = "rgba(0,0,0,0)", borderColor = "#ccc", borderWidth = 0, padding = 5,
+                      fillerColor = "#fff", handleColor = "#6495ed", step = 15, mapTypeControl = NULL, ...){
+
+  opts <- list(...)
+  opts$show <- show
+  opts$zlevel <- zlevel
+  opts$z <- z
+  opts$x <- x
+  opts$y <- y
+  opts$width <- width
+  opts$height <- height
+  opts$backgroundColor <- backgroundColor
+  opts$borderColor <- borderColor
+  opts$borderWidth <- borderWidth
+  opts$padding <- padding
+  opts$fillerColor <- fillerColor
+  opts$handleColor <- handleColor
+  opts$step <- step
+  opts$mapTypeControl <- if(!is.null(mapTypeControl)) mapTypeControl
+
+  p$x$options$roamController <- opts
+
+  p
+
 }

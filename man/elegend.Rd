@@ -51,4 +51,14 @@ elegend(p, legend, show = TRUE, zlevel = 0, z = 4,
 \description{
 Add legend
 }
+\examples{
+df <- data.frame(x = LETTERS[1:10], y = runif(10, 0, 10), z = runif(10, 0, 10))
+
+df \%>\%
+  echart(x) \%>\%
+  ebar(y, name = "y - serie") \%>\%
+  ebar(z) \%>\%
+  elegend()
+
+}
 

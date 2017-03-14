@@ -60,4 +60,16 @@ Add animations
   \item{\code{BounceInOut}}
 }
 }
+\examples{
+mtcars \%>\%
+  echart(mpg) \%>\%
+  ebar(qsec) \%>\%
+  eanimation(animationEasing = "BounceIn")
+
+mtcars \%>\%
+  echart(mpg) \%>\%
+  escatter(qsec) \%>\%
+  eanimation(animationEasing = "CubicInOut")
+
+}
 
