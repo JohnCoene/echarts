@@ -41,8 +41,6 @@ escatter_(p, serie, size = NULL, name = NULL, clickable = TRUE,
 \item{...}{any other options to pass to the serie.}
 }
 \description{
-Add scatter
-
 Add scatter serie.
 }
 \details{
@@ -64,14 +62,6 @@ Valid values for \code{symbol}:
 }
 }
 \examples{
-mtcars \%>\%
-  echart(disp) \%>\%
-  escatter(mpg)
-
-mtcars \%>\%
-  echart(disp) \%>\%
-  escatter(mpg, qsec)
-
 mtcars \%>\%
   echart_("disp") \%>\%
   escatter_("mpg", symbol = "emptyCircle") \%>\%

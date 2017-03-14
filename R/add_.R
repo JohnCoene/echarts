@@ -367,17 +367,17 @@ escatter_ <- function(p, serie, size = NULL, name = NULL, clickable = TRUE, symb
 #'
 #' pie %>%
 #'   echart_("name") %>%
-#'   epie_("value")
+#'   epie(value)
 #'
 #' pie %>%
-#'   echart_("name") %>%
-#'   epie_("value", roseType = "area") %>%
+#'   echart(name) %>%
+#'   epie(value, roseType = "area") %>%
 #'   etheme("helianthus")
 #'
 #' pie %>%
 #'   echart_("name") %>%
 #'   epie_("value", roseType = "radius") %>%
-#'   etheme("mint")
+#'   etheme("blue")
 #'
 #' @seealso \href{http://echarts.baidu.com/echarts2/doc/option-en.html#series-i(pie)}{official pie options docs}
 #'
@@ -457,14 +457,22 @@ epie_ <- function(p, serie, name = NULL, clickable = TRUE, legendHoverLink = TRU
 #' }
 #'
 #' @examples
-#' radar <- data.frame(axis = rep(LETTERS[1:6], 4), grp = rep(LETTERS[4:9], 4),
+#' radar <- data.frame(axis = rep(LETTERS[1:6], 4), grp = sample(LETTERS[4:9], 24, replace = T),
 #'   value = runif(24, 2, 10))
 #'
 #' radar %>%
 #'   group_by_("grp") %>%
 #'   echart_("axis") %>%
-#'   eradar_("value") %>%
-#'   elegend()
+#'   eradar_("value", symbolSize = 0) %>%
+#'   elegend() %>%
+#'   etheme("macarons")
+#'
+#' radar %>%
+#'   group_by_("grp") %>%
+#'   echart_("axis") %>%
+#'   eradar_("value", symbolSize = htmlwidgets::JS("function(value){return(value)}")) %>%
+#'   elegend() %>%
+#'   etheme("roma")
 #'
 #' @seealso \href{http://echarts.baidu.com/echarts2/doc/option-en.html#series-i(radar)}{official radar options docs}
 #'

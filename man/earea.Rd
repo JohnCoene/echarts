@@ -23,8 +23,6 @@ earea_(p, serie, name = NULL, stack = NULL, smooth = TRUE, ...)
 \item{...}{any other argument to pass to the serie. i.e.: same parameters as \code{\link{eline}} or \code{\link{eline_}}}
 }
 \description{
-Add area
-
 Add area serie.
 }
 \examples{

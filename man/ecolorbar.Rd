@@ -11,7 +11,7 @@ ecolorbar(p, min = NULL, max = NULL, which = "previous", show = TRUE,
   borderWidth = 0, padding = 5, itemGap = 10, itemWidth = 20,
   itemHeight = 14, precision = 0, splitNumber = 5, splitList = NULL,
   range = NULL, selectedMode = TRUE, calculable = FALSE,
-  hoverLink = TRUE, realtime = FALSE, text = list("High", "Low"), ...)
+  hoverLink = TRUE, realtime = FALSE, ...)
 }
 \arguments{
 \item{p}{an echart object.}
@@ -61,8 +61,6 @@ ecolorbar(p, min = NULL, max = NULL, which = "previous", show = TRUE,
 \item{hoverLink}{hoverlink with map.}
 
 \item{realtime}{set to \code{TRUE} if using real time stream.}
-
-\item{text}{text at either end of bar.}
 
 \item{...}{any other argument to pass to color bar.}
 }

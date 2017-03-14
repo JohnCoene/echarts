@@ -1,5 +1,3 @@
-#' Add bars
-#'
 #' @rdname ebar
 #'
 #' @export
@@ -15,8 +13,6 @@ ebar <- function(p, serie, name = NULL, stack = NULL, clickable = TRUE, xAxisInd
 
 }
 
-#' Add lines
-#'
 #' @rdname eline
 #'
 #' @export
@@ -33,8 +29,6 @@ eline <- function(p, serie, name = NULL, stack = NULL, clickable = TRUE, xAxisIn
 
 }
 
-#' Add area
-#'
 #' @rdname earea
 #'
 #' @export
@@ -46,17 +40,6 @@ earea <- function(p, serie, name = NULL, stack = NULL, smooth = TRUE, ...){
     earea_(serie, name, stack, smooth, ...)
 }
 
-#' Add scatter
-#'
-#' @examples
-#' mtcars %>%
-#'   echart(disp) %>%
-#'   escatter(mpg)
-#'
-#' mtcars %>%
-#'   echart(disp) %>%
-#'   escatter(mpg, qsec)
-#'
 #' @rdname escatter
 #'
 #' @export
@@ -70,26 +53,6 @@ escatter <- function(p, serie, size = NULL, name = NULL, clickable = TRUE, symbo
     escatter_(serie, size, name, clickable, symbol, symbolSize, symbolRotate, large, largeThreshold, legendHoverLink, z, zlevel, ...)
 }
 
-#' Add pie
-#'
-#' @examples
-#' pie <- data.frame(name = c("banana", "apple", "pineapple", "onion"),
-#'   value = c(40, 15, 12, 9))
-#'
-#' pie %>%
-#'   echart(name) %>%
-#'   epie(value)
-#'
-#' pie %>%
-#'   echart(name) %>%
-#'   epie(value, roseType = "area") %>%
-#'   etheme("helianthus")
-#'
-#' pie %>%
-#'   echart(name) %>%
-#'   epie(value, roseType = "radius") %>%
-#'   etheme("mint")
-#'
 #' @rdname epie
 #'
 #' @export
@@ -104,15 +67,6 @@ epie <- function(p, serie, name = NULL, clickable = TRUE, legendHoverLink = TRUE
           selectedMode, z, zlevel, ...)
 }
 
-#' Add radar
-#'
-#' @examples
-#' radar <- data.frame(axis = LETTERS[1:6], value = runif(6, 2, 10))
-#'
-#' radar %>%
-#'   echart(axis) %>%
-#'   eradar(value)
-#'
 #' @rdname eradar
 #'
 #' @export

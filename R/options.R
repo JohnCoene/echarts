@@ -403,7 +403,6 @@ etitle <- function(p, text, subtext, link, sublink, target = "blank", subtarget 
 #' @param calculable whether values are calculable.
 #' @param hoverLink hoverlink with map.
 #' @param realtime set to \code{TRUE} if using real time stream.
-#' @param text text at either end of bar.
 #' @param ... any other argument to pass to color bar.
 #'
 #' @details
@@ -425,7 +424,7 @@ ecolorbar <- function(p, min = NULL, max = NULL, which = "previous", show = TRUE
                        backgroundColor = "rgba(0,0,0,0)", borderColor = "#ccc", borderWidth = 0, padding = 5,
                        itemGap = 10, itemWidth = 20, itemHeight = 14, precision = 0, splitNumber = 5,
                        splitList = NULL, range = NULL, selectedMode = TRUE, calculable = FALSE, hoverLink = TRUE,
-                       realtime = FALSE, text = list("High", "Low"), ...){
+                       realtime = FALSE, ...){
 
   opts <- list(...)
   opts$show <- show
@@ -449,7 +448,6 @@ ecolorbar <- function(p, min = NULL, max = NULL, which = "previous", show = TRUE
   opts$selectedMode <- selectedMode
   opts$hoverLink <- hoverLink
   opts$realtime <- realtime
-  opts$text <- text
 
   p$x$options$dataRange <- append(p$x$options$dataRange, opts)
 

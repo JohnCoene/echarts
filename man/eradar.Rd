@@ -37,8 +37,6 @@ eradar_(p, serie, name = NULL, clickable = TRUE, symbol = NULL,
 \item{...}{any other options to pass to the serie.}
 }
 \description{
-Add radar
-
 Add radar chart.
 }
 \details{
@@ -60,20 +58,22 @@ Valid values for \code{symbol}:
 }
 }
 \examples{
-radar <- data.frame(axis = LETTERS[1:6], value = runif(6, 2, 10))
-
-radar \%>\%
-  echart(axis) \%>\%
-  eradar(value)
-
-radar <- data.frame(axis = rep(LETTERS[1:6], 4), grp = rep(LETTERS[4:9], 4),
+radar <- data.frame(axis = rep(LETTERS[1:6], 4), grp = sample(LETTERS[4:9], 24, replace = T),
   value = runif(24, 2, 10))
 
 radar \%>\%
   group_by_("grp") \%>\%
   echart_("axis") \%>\%
-  eradar_("value") \%>\%
-  elegend()
+  eradar_("value", symbolSize = 0) \%>\%
+  elegend() \%>\%
+  etheme("macarons")
+
+radar \%>\%
+  group_by_("grp") \%>\%
+  echart_("axis") \%>\%
+  eradar_("value", symbolSize = htmlwidgets::JS("function(value){return(value)}")) \%>\%
+  elegend() \%>\%
+  etheme("roma")
 
 }
 \seealso{

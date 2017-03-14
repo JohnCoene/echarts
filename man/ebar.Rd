@@ -39,8 +39,6 @@ ebar_(p, serie, name = NULL, stack = NULL, clickable = TRUE,
 \item{...}{any other argument to pass to the serie.}
 }
 \description{
-Add bars
-
 Add bar serie.
 }
 \examples{

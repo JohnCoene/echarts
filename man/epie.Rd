@@ -45,16 +45,14 @@ epie_(p, serie, name = NULL, clickable = TRUE, legendHoverLink = TRUE,
 \item{...}{any other option to pass to serie.}
 }
 \description{
-Add pie
-
 Add pie chart
 }
 \examples{
 pie <- data.frame(name = c("banana", "apple", "pineapple", "onion"),
-  value = c(40, 15, 12, 9))
+  value = c(26, 15, 12, 9))
 
 pie \%>\%
-  echart(name) \%>\%
+  echart_("name") \%>\%
   epie(value)
 
 pie \%>\%
@@ -63,26 +61,9 @@ pie \%>\%
   etheme("helianthus")
 
 pie \%>\%
-  echart(name) \%>\%
-  epie(value, roseType = "radius") \%>\%
-  etheme("mint")
-
-pie <- data.frame(name = c("banana", "apple", "pineapple", "onion"),
-  value = c(26, 15, 12, 9))
-
-pie \%>\%
-  echart_("name") \%>\%
-  epie_("value")
-
-pie \%>\%
-  echart_("name") \%>\%
-  epie_("value", roseType = "area") \%>\%
-  etheme("helianthus")
-
-pie \%>\%
   echart_("name") \%>\%
   epie_("value", roseType = "radius") \%>\%
-  etheme("mint")
+  etheme("blue")
 
 }
 \seealso{
