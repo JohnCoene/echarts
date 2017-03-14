@@ -58,8 +58,6 @@ of value axis as the starting and ending value of your value axis.}
 \item{logLabelBase}{base log.}
 
 \item{logPositive}{if \code{FALSE} negative values are not supported.}
-
-\item{nameTextStyle}{style of \code{name}.}
 }
 \description{
 Customise x axis.

@@ -9,6 +9,7 @@
 #' @param position position of axis, takes \code{bottom}, \code{top}, \code{left} or \code{right}.
 #' @param name name of the axis.
 #' @param nameLocation location of \code{name}, takes \code{start} or \code{end}.
+#' @param nameTextStyle style \code{name} text.
 #' @param min,max min and max values.
 #' @param scale If \code{FALSE}, the value axis must start with 0. If \code{TRUE}, you can set the minimum and maximum value
 #' of value axis as the starting and ending value of your value axis.
@@ -112,7 +113,6 @@ eyAxis_log <- function(p, show = TRUE, zlevel = 0, z = 0, position = "left", log
 #' @param position position of axis, takes \code{bottom}, \code{top}, \code{left} or \code{right}.
 #' @param name name of the axis.
 #' @param nameLocation location of \code{name}, takes \code{start} or \code{end}.
-#' @param nameTextStyle style of \code{name}.
 #' @param min,max min and max values.
 #' @param scale If \code{FALSE}, the value axis must start with 0. If \code{TRUE}, you can set the minimum and maximum value
 #' of value axis as the starting and ending value of your value axis.

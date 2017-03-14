@@ -85,7 +85,7 @@ eoptions <- function(p, backgroundColor = NULL, renderAsImage = FALSE, calculabl
 #'
 #' mtcars %>%
 #'   echart(mpg) %>%
-#'   escatter(qsec) %>%
+#'   escatter(qsec, drat, symbolSize = 20) %>%
 #'   eanimation(animationEasing = "CubicInOut")
 #'
 #' @export

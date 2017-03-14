@@ -243,7 +243,7 @@ earea_ <- function(p, serie, name = NULL, stack = NULL, smooth = TRUE, ...){
     opts <- list(...)
     opts$name <- if(is.null(name)) names(data)[i] else name
     opts$type <- "line"
-    opts$data <- xy_data_(data[[i]], serie)
+    opts$data <- xy_data_(data[[i]], serie, stack)
     opts$smooth <- smooth
     opts$stack <- if(!is.null(stack)) stack
     opts$itemStyle <-  list(normal= list(areaStyle = list(type = 'default')))
@@ -251,7 +251,7 @@ earea_ <- function(p, serie, name = NULL, stack = NULL, smooth = TRUE, ...){
     p$x$options$series <- append(p$x$options$series, list(opts))
   }
 
-  p <- adjust_axis(p, data)
+  p <- adjust_axis(p, data, stack)
 
   p
 }
@@ -334,7 +334,7 @@ escatter_ <- function(p, serie, size = NULL, name = NULL, clickable = TRUE, symb
     p$x$options$series <- append(p$x$options$series, list(opts))
   }
 
-  p <- adjust_axis(p, data)
+  p <- adjust_axis(p, data, NULL)
 
   # change axis type
   p$x$options$yAxis <- list(list(type = "value"))

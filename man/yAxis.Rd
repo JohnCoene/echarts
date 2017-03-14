@@ -48,6 +48,8 @@ eyAxis_log(p, show = TRUE, zlevel = 0, z = 0, position = "left",
 
 \item{nameLocation}{location of \code{name}, takes \code{start} or \code{end}.}
 
+\item{nameTextStyle}{style \code{name} text.}
+
 \item{min, max}{min and max values.}
 
 \item{scale}{If \code{FALSE}, the value axis must start with 0. If \code{TRUE}, you can set the minimum and maximum value
