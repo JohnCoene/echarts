@@ -5,9 +5,9 @@
 \alias{echart_}
 \title{Initiate an echart}
 \usage{
-echart(data, x, width = NULL, height = NULL, elementId = NULL)
+echart(data, x, width = "100\%", height = NULL, elementId = NULL)
 
-echart_(data, x, width = NULL, height = NULL, elementId = NULL)
+echart_(data, x, width = "100\%", height = NULL, elementId = NULL)
 }
 \arguments{
 \item{data}{data.frame containing data to plot.}

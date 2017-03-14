@@ -15,7 +15,7 @@
 #' @importFrom methods is
 #'
 #' @export
-echart <- function(data, x, width = NULL, height = NULL, elementId = NULL) {
+echart <- function(data, x, width = "100%", height = NULL, elementId = NULL) {
 
   # x
   if(!missing(x)){
@@ -74,7 +74,7 @@ echart <- function(data, x, width = NULL, height = NULL, elementId = NULL) {
 #' @rdname echart
 #'
 #' @export
-echart_ <- function(data, x, width = NULL, height = NULL, elementId = NULL) {
+echart_ <- function(data, x, width = "100%", height = NULL, elementId = NULL) {
 
   # x
   if(!missing(x)){
