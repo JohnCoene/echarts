@@ -14,6 +14,4 @@ You can install echarts from github with:
 devtools::install_github("JohnCoene/echarts")
 ```
 
-## Docs and Examples
-
-- [Docs](http://john-coene.com/htmlwidgets/echarts/)
+## [Docs & Examples](http://john-coene.com/htmlwidgets/echarts/)
