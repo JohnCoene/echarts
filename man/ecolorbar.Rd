@@ -5,9 +5,8 @@
 \title{Customise colorbar}
 \usage{
 ecolorbar(p, min = NULL, max = NULL, which = "previous", show = TRUE,
-  color = list("#1e90ff", "#f0ffff"), zlevel = 4, z = 0,
-  orient = "vertical", x = "left", y = "bottom",
-  backgroundColor = "rgba(0,0,0,0)", borderColor = "#ccc",
+  color = NULL, zlevel = 4, z = 0, orient = "vertical", x = "left",
+  y = "bottom", backgroundColor = "rgba(0,0,0,0)", borderColor = "#ccc",
   borderWidth = 0, padding = 5, itemGap = 10, itemWidth = 20,
   itemHeight = 14, precision = 0, splitNumber = 5, splitList = NULL,
   range = NULL, selectedMode = TRUE, calculable = FALSE,
@@ -22,7 +21,7 @@ ecolorbar(p, min = NULL, max = NULL, which = "previous", show = TRUE,
 
 \item{show}{whether to show the color bar.}
 
-\item{color}{colors.}
+\item{color}{colors as list from high to low. i.e.: \code{list("red", "blue")}.}
 
 \item{z, zlevel}{first and second grade cascading control, the higher z the closer to the top.}
 

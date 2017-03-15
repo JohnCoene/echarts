@@ -394,7 +394,7 @@ etitle <- function(p, text, subtext, link, sublink, target = "blank", subtarget 
 #' @param min,max minimum and maximum.
 #' @param which series to serie is to be affected, takes the name of a serie, \code{previous} or \code{all}.
 #' @param show whether to show the color bar.
-#' @param color colors.
+#' @param color colors as list from high to low. i.e.: \code{list("red", "blue")}.
 #' @param z,zlevel first and second grade cascading control, the higher z the closer to the top.
 #' @param orient orientation of bar, \code{vertical} or \code{horizontal}.
 #' @param x x position; \code{left} or \code{right}.
@@ -430,16 +430,14 @@ etitle <- function(p, text, subtext, link, sublink, target = "blank", subtarget 
 #'   ecolorbar(color = list("red", "blue"), min = 5, max = 15, calculable = TRUE)
 #'
 #' @export
-ecolorbar <- function(p, min = NULL, max = NULL, which = "previous", show = TRUE, color = list("#1e90ff", "#f0ffff"),
-                       zlevel = 4, z = 0, orient = "vertical", x = "left", y = "bottom",
-                       backgroundColor = "rgba(0,0,0,0)", borderColor = "#ccc", borderWidth = 0, padding = 5,
-                       itemGap = 10, itemWidth = 20, itemHeight = 14, precision = 0, splitNumber = 5,
-                       splitList = NULL, range = NULL, selectedMode = TRUE, calculable = FALSE, hoverLink = TRUE,
-                       realtime = FALSE, ...){
+ecolorbar <- function(p, min = NULL, max = NULL, which = "previous", show = TRUE, color = NULL, zlevel = 4, z = 0,
+                      orient = "vertical", x = "left", y = "bottom", backgroundColor = "rgba(0,0,0,0)", borderColor = "#ccc",
+                      borderWidth = 0, padding = 5, itemGap = 10, itemWidth = 20, itemHeight = 14, precision = 0, splitNumber = 5,
+                      splitList = NULL, range = NULL, selectedMode = TRUE, calculable = FALSE, hoverLink = TRUE, realtime = FALSE, ...){
 
   opts <- list(...)
   opts$show <- show
-  opts$color <- color
+  opts$color <- if(!is.null(color)) color
   opts$zlevel <- zlevel
   opts$z <- z
   opts$orient <- orient
