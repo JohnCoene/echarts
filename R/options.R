@@ -260,6 +260,8 @@ etheme <- function(p, theme = "default"){
 #'   eline(qsec) %>%
 #'   etooltip(trigger = "axis")
 #'
+#' @seealso \href{http://echarts.baidu.com/echarts2/doc/option-en.html#title~tooltip}{official tooltip docs}
+#'
 #' @export
 etooltip <- function(p, show = TRUE, trigger = "axis", zlevel = 1, z = 8, showContent = TRUE,
                      position = NULL, formatter = NULL, islandFormatter = "{a} < br/>{b} : {c}",
@@ -301,6 +303,8 @@ etooltip <- function(p, show = TRUE, trigger = "axis", zlevel = 1, z = 8, showCo
 #'   echart(disp) %>%
 #'   eline(mpg) %>%
 #'   ezoom()
+#'
+#' @seealso \href{http://echarts.baidu.com/echarts2/doc/option-en.html#title~dataZoom}{official dataZoom docs}
 #'
 #' @export
 ezoom <- function(p, show = TRUE, zlevel = 0, z = 4, orient = "horizontal", backgroundColor = "rgba(0,0,0,0)",
@@ -355,6 +359,8 @@ ezoom <- function(p, show = TRUE, zlevel = 0, z = 4, orient = "horizontal", back
 #'   echart(disp) %>%
 #'   eline(mpg) %>%
 #'   etitle("MPG vs DISP", "Made with EChart", link = "http://echarts.baidu.com", target = "blank")
+#'
+#' @seealso \href{http://echarts.baidu.com/echarts2/doc/option-en.html#title~title}{official title docs}
 #'
 #' @export
 etitle <- function(p, text, subtext, link, sublink, target = "blank", subtarget = "blank", x = "left", y = "top",
@@ -429,6 +435,8 @@ etitle <- function(p, text, subtext, link, sublink, target = "blank", subtarget 
 #'   escatter(y, size, symbolSize = 10, legendHoverLink = TRUE) %>%
 #'   ecolorbar(color = list("red", "blue"), min = 5, max = 15, calculable = TRUE)
 #'
+#' @seealso \href{http://echarts.baidu.com/echarts2/doc/option-en.html#dataRange.hoverLink}{official dataRange docs}
+#'
 #' @export
 ecolorbar <- function(p, min = NULL, max = NULL, which = "previous", show = TRUE, color = NULL, zlevel = 4, z = 0,
                       orient = "vertical", x = "left", y = "bottom", backgroundColor = "rgba(0,0,0,0)", borderColor = "#ccc",
@@ -500,6 +508,8 @@ ecolorbar <- function(p, min = NULL, max = NULL, which = "previous", show = TRUE
 #'   emap_points_("values") %>%
 #'   emap_roam(mapTypeControl = list(world = TRUE))
 #'
+#' @seealso \href{http://echarts.baidu.com/echarts2/doc/option-en.html#title~roamController}{official roam controller docs}
+#'
 #' @export
 emap_roam <- function(p, show = TRUE, zlevel = 0, z = 4, x = "left", y = "top", width = 80, height = 120,
                       backgroundColor = "rgba(0,0,0,0)", borderColor = "#ccc", borderWidth = 0, padding = 5,
@@ -523,6 +533,52 @@ emap_roam <- function(p, show = TRUE, zlevel = 0, z = 4, x = "left", y = "top", 
   opts$mapTypeControl <- if(!is.null(mapTypeControl)) mapTypeControl
 
   p$x$options$roamController <- opts
+
+  p
+
+}
+
+#' Customise grid
+#'
+#' @param p an echart object.
+#' @param backgroundColor background color.
+#' @param borderWidth border width.
+#' @param borderColor border color.
+#' @param width,height dimensions of grid.
+#' @param z,zlevel first and second grade cascading control, the higher z the closer to the top.
+#' @param x,y ordinate on upper left corner.
+#' @param x2,y2 ordinate on upper right corner.
+#'
+#' @examples
+#' df <- data.frame(x = 1:20, y = runif(20, 5, 20))
+#'
+#' df %>%
+#'   echart(x) %>%
+#'   eline(x) %>%
+#'   egrid(borderWidth = 5, borderColor = "red", backgroundColor = "yellow")
+#'
+#' @seealso \href{http://echarts.baidu.com/echarts2/doc/option-en.html#title~grid.width}{official grid docs}
+#'
+#' @export
+egrid <- function(p, backgroundColor = NULL, borderWidth = 1, borderColor = NULL, width = NULL, height = NULL,
+                  z = 0, zlevel = 0, x = 80, y = 60, x2 = 80, y2 = 80){
+
+  opts <- list(
+    borderWidth = borderWidth,
+    z = z,
+    zlevel = zlevel,
+    x = x,
+    y = y,
+    x2 = x2,
+    y2 = y2
+  )
+
+  opts$backgroundColor <- if(!is.null(backgroundColor)) backgroundColor
+  opts$borderColor <- if(!is.null(borderColor)) borderColor
+  opts$width <- if(!is.null(width)) width
+  opts$height <- if(!is.null(height)) height
+
+  p$x$options$grid <- opts
 
   p
 
