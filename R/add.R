@@ -253,3 +253,17 @@ edata <- function(p, data, x){
   p
 
 }
+
+#' @rdname etreemap
+#' @export
+etreemap <- function(p, serie, name = NULL, itemStyle = NULL, clickable = FALSE, center = list("50%", "50%"),
+                     size = list("80%", "80%"), z = 2, zlevel = 0, ...){
+
+  serie <- deparse(substitute(serie))
+
+  p <- p %>%
+    etreemap_(serie, name, itemStyle, clickable, center, size, z, zlevel, ...)
+
+  p
+
+}

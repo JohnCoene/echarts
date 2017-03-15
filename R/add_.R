@@ -23,7 +23,7 @@
 #'   echart_("disp") %>%
 #'   ebar_("mpg", stack = "grp") %>% # stack
 #'   ebar_("qsec", stack = "grp") %>% # stack
-#'   ebar_("wt") %>% # not stacked
+#'   ebar_("wt", stack = "grp2") %>% # not stacked
 #'   etooltip(trigger = "item") %>%
 #'   elegend() %>%
 #'   etoolbox_magic(type = list("stack", "tiled")) %>%
@@ -35,7 +35,7 @@
 #'   echart(x) %>%
 #'   ebar(y, stack = "grp") %>%
 #'   ebar(z, stack = "grp") %>%
-#'   ebar(w) %>%
+#'   ebar(w, "grp2") %>%
 #'   etheme("macarons") %>%
 #'   etooltip(trigger = "axis")
 #'
@@ -129,33 +129,30 @@ ebar_ <- function(p, serie, name = NULL, stack = NULL, clickable = TRUE, xAxisIn
 #' df <- data.frame(x = 1:50, y = runif(50, 5, 10), z = runif(50, 7, 12), w = runif(50, 10, 13))
 #'
 #' df %>%
+#'   echart(x) %>%
+#'   eline(y) %>%
+#'   eline(z)
+#'
+#' # JS sizing function
+#' sizing <- htmlwidgets::JS("function(value){ return value[1]/1.5}")
+#'
+#' df %>%
 #'   echart_("x") %>%
-#'   eline_("y",
-#'          symbolSize = htmlwidgets::JS("function(value){ return value[1]/2}"),
+#'   eline_("y", "w",
+#'          symbolSize = sizing,
 #'          showAllSymbol = TRUE,
 #'          symbol = "emptyCircle") %>%
-#'   eline_("w",
-#'          symbolSize = htmlwidgets::JS("function(value){ return value[1]/2}"),
-#'          showAllSymbol = TRUE,
-#'          symbol = "emptyDiamond") %>%
 #'   etooltip() %>%
 #'   etheme("helianthus")
 #'
 #' df %>%
 #'   echart_("x") %>%
 #'   eline_("y", stack = "grp") %>%
-#'   eline_("z", stack = "grp") %>%
-#'   eline_("w", smooth = FALSE, showAllSymbol = TRUE, symbolSize = 3, symbol = "circle") %>%
+#'   eline_("z", stack = "grp", symbol = "emptyDroplet", showAllSymbol = TRUE, symbolSize = 5) %>%
+#'   eline_("w", showAllSymbol = TRUE, symbolSize = 4, symbol = "emptyHeart", stack = "grp2") %>%
 #'   etooltip() %>%
 #'   elegend() %>%
 #'   etoolbox_magic(type = list("line", "bar"))
-#'
-#' df <- data.frame(x = LETTERS[1:10], y = round(runif(10, 30, 70)), z = round(runif(10, 10, 50)))
-#'
-#' df %>%
-#'   echart(x) %>%
-#'   eline(y) %>%
-#'   eline(z)
 #'
 #' @seealso \href{http://echarts.baidu.com/echarts2/doc/option-en.html#series-i(line)}{official line options docs}
 #'
@@ -172,6 +169,7 @@ eline_ <- function(p, serie, name = NULL, stack = NULL, clickable = TRUE, xAxisI
   data <- get_dat(serie)
 
   for(i in 1:length(data)){
+
     # build $serie
     opts <- list(...)
     opts$name <- if(is.null(name)) names(data)[i] else name
@@ -215,7 +213,7 @@ eline_ <- function(p, serie, name = NULL, stack = NULL, clickable = TRUE, xAxisI
 #'
 #' df %>%
 #'   echart_("x") %>%
-#'   earea_("y", smooth = FALSE)
+#'   earea_("y", smooth = FALSE, symbol = "emptyRectangle", symbolSize = 5)
 #'
 #' df %>%
 #'   echart(x) %>%
@@ -227,7 +225,7 @@ eline_ <- function(p, serie, name = NULL, stack = NULL, clickable = TRUE, xAxisI
 #'
 #' df %>%
 #'   echart(x) %>%
-#'   earea(z) %>%
+#'   earea(z, stack = "grp") %>%
 #'   earea(y)
 #'
 #' @name earea
@@ -299,10 +297,11 @@ earea_ <- function(p, serie, name = NULL, stack = NULL, smooth = TRUE, ...){
 #'   exAxis()
 #'
 #' mtcars %>%
-#'   echart_("disp") %>%
-#'   escatter_("mpg", "qsec", symbolSize = 15) %>%
+#'   echart(disp) %>%
+#'   escatter(mpg, qsec, symbolSize = 15) %>%
 #'   exAxis_value(axisLabel = list(show = FALSE)) %>%
-#'   etheme("mint")
+#'   etheme("mint") %>%
+#'   eanimation(animationEasing = "ElasticOut")
 #'
 #' @seealso \href{http://echarts.baidu.com/echarts2/doc/option-en.html#series-i(scatter)}{official scatter options docs}
 #'
@@ -1399,6 +1398,56 @@ edata_ <- function(p, data, x){
   # assign for future use
   assign("x", xvar, envir = data_env)
   if(length(xvar)) assign("x.name", x, envir = data_env)
+
+  p
+}
+
+#' Add Treemap
+#'
+#' @param p an echart object.
+#' @param serie values to plot.
+#' @param name name of serie.
+#' @param itemStyle style of rectangles.
+#' @param z,zlevel first and second grade cascading control, the higher z the closer to the top.
+#' @param center center of map.
+#' @param clickable whether rectangles are clickable.
+#' @param size size of chart.
+#' @param ... any other option to pass to treemap.
+#'
+#' @examples
+#' df <- data.frame(name = LETTERS[1:10], values = round(runif(10, 1, 10)))
+#'
+#' df %>%
+#'   echart_("name") %>%
+#'   etreemap_("values") %>%
+#'   etooltip(trigger = "item") %>%
+#'   etheme("macarons")
+#'
+#' @name etreemap
+#' @rdname etreemap
+#'
+#' @export
+etreemap_ <- function(p, serie, name = NULL, itemStyle = NULL, clickable = FALSE, center = list("50%", "50%"),
+                      size = list("80%", "80%"), z = 2, zlevel = 0, ...){
+
+  data <- get_dat(serie)
+
+  if(is.null(itemStyle)) itemStyle <- list(normal = list(label = list(show = TRUE), borderWidth = 1),
+                                           emphasis = list(label = list(show = TRUE)))
+
+  for(i in 1:length(data)){
+    opts <- list(...)
+    opts$name <- if(is.null(name)) names(data)[i] else name
+    opts$type <- "treemap"
+    opts$itemStyle <- itemStyle
+    opts$data <- treemap_data_(data[[i]], serie)
+
+    p$x$options$series <- append(p$x$options$series, list(opts))
+  }
+
+  # remove axis
+  p$x$options$xAxis <- NULL
+  p$x$options$yAxis <- NULL
 
   p
 }

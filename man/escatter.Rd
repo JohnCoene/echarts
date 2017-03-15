@@ -68,10 +68,11 @@ mtcars \%>\%
   exAxis()
 
 mtcars \%>\%
-  echart_("disp") \%>\%
-  escatter_("mpg", "qsec", symbolSize = 15) \%>\%
+  echart(disp) \%>\%
+  escatter(mpg, qsec, symbolSize = 15) \%>\%
   exAxis_value(axisLabel = list(show = FALSE)) \%>\%
-  etheme("mint")
+  etheme("mint") \%>\%
+  eanimation(animationEasing = "ElasticOut")
 
 }
 \seealso{

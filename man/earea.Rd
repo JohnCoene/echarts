@@ -30,7 +30,7 @@ df <- data.frame(x = LETTERS[1:10], y = runif(10, 30, 70), z = runif(10, 10, 50)
 
 df \%>\%
   echart_("x") \%>\%
-  earea_("y", smooth = FALSE)
+  earea_("y", smooth = FALSE, symbol = "emptyRectangle", symbolSize = 5)
 
 df \%>\%
   echart(x) \%>\%
@@ -42,7 +42,7 @@ df <- data.frame(x = 1:10, y = runif(10, 30, 70), z = runif(10, 10, 50))
 
 df \%>\%
   echart(x) \%>\%
-  earea(z) \%>\%
+  earea(z, stack = "grp") \%>\%
   earea(y)
 
 }

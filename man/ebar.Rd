@@ -50,7 +50,7 @@ mtcars \%>\%
   echart_("disp") \%>\%
   ebar_("mpg", stack = "grp") \%>\% # stack
   ebar_("qsec", stack = "grp") \%>\% # stack
-  ebar_("wt") \%>\% # not stacked
+  ebar_("wt", stack = "grp2") \%>\% # not stacked
   etooltip(trigger = "item") \%>\%
   elegend() \%>\%
   etoolbox_magic(type = list("stack", "tiled")) \%>\%
@@ -62,7 +62,7 @@ df \%>\%
   echart(x) \%>\%
   ebar(y, stack = "grp") \%>\%
   ebar(z, stack = "grp") \%>\%
-  ebar(w) \%>\%
+  ebar(w, "grp2") \%>\%
   etheme("macarons") \%>\%
   etooltip(trigger = "axis")
 

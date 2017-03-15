@@ -1,18 +1,22 @@
+# change NA to `-` : ECharts missing data
 na2ec <- function(data){
   data[is.na(data)] <- "-"
   data
 }
 
+# fetch data
 get_dat <- function(serie){
   data <- get("data", envir = data_env)
   if(length(data) == 1) names(data) <- serie
   data
 }
 
+# simple data vector
 vector_data_ <- function(data, serie){
   data[, serie]
 }
 
+# xy_data_ for line and bar
 xy_data_ <- function(data, serie, stack){
   x <- get("x.name", envir = data_env)
   x <- data[, x]
@@ -31,7 +35,7 @@ xy_data_ <- function(data, serie, stack){
   return(x)
 }
 
-# override axis
+# override axis depending on data type
 adjust_axis <- function(p, data, stack){
 
   data <- do.call("rbind.data.frame", lapply(data, as.data.frame))
@@ -51,6 +55,7 @@ adjust_axis <- function(p, data, stack){
   p
 }
 
+# prepare scatter data
 scatter_data_ <- function(data, serie, size = NULL, symbolSize){
 
   # get for eval
@@ -74,6 +79,7 @@ scatter_data_ <- function(data, serie, size = NULL, symbolSize){
   return(values)
 }
 
+# return list of i.e.:{name: 'name', value: 3}
 val_name_data_ <- function(data, serie){
 
   # get for eval
@@ -89,6 +95,7 @@ val_name_data_ <- function(data, serie){
   return(data)
 }
 
+# polar indicator for radar
 polar_indicator <- function(){
   x <- get("x", envir = data_env)
   x <- unique(x)
@@ -97,6 +104,7 @@ polar_indicator <- function(){
   return(x)
 }
 
+# data for chord diagram
 chord_data <- function(){
   x <- get("x", envir = data_env)
   x <- data.frame(name = x)
@@ -104,6 +112,7 @@ chord_data <- function(){
   return(x)
 }
 
+# process chord matrix
 chord_matrix <- function(){
 
   matrix <- get("data", envir = data_env)
@@ -122,6 +131,8 @@ chord_matrix <- function(){
   return(matrix)
 }
 
+# default colorbar
+# no data shows without...
 default_dataRange_ <- function(data, serie){
   serie <- data[, serie]
 
@@ -137,6 +148,7 @@ default_dataRange_ <- function(data, serie){
 
 }
 
+# use class to define `calculable`
 class2calc <- function(x){
 
   if(class(x)[1] == "integer" || class(x)[1] == "numeric"){
@@ -146,6 +158,7 @@ class2calc <- function(x){
   }
 }
 
+# build coordinates
 build_coord_ <- function(data, lon, lat){
 
   x <- get("x.name", envir = data_env)
@@ -165,6 +178,7 @@ build_coord_ <- function(data, lon, lat){
 
 }
 
+# lines on map / edges
 map_lines_ <- function(data, source, target){
 
   # source & target
@@ -180,6 +194,7 @@ map_lines_ <- function(data, source, target){
   return(edges)
 }
 
+# wordcloud data
 cloud_data_ <- function(data, freq, color){
 
   x <- get("x", envir = data_env) # get words
@@ -202,6 +217,7 @@ cloud_data_ <- function(data, freq, color){
   return(df)
 }
 
+# heatmap
 heat_data_ <- function(data, y, z){
 
   x <- get("x", envir = data_env) # get words
@@ -218,6 +234,7 @@ heat_data_ <- function(data, y, z){
   return(df)
 }
 
+# data for heatmap
 heat_map_data_ <- function(lon, lat, z){
 
   # build data
@@ -233,6 +250,7 @@ heat_map_data_ <- function(lon, lat, z){
   return(df)
 }
 
+# default legend setup
 default_legend <- function(p){
   series <- p$x$options$series
 
@@ -244,6 +262,7 @@ default_legend <- function(p){
   return(name)
 }
 
+# default tooltip
 default_tooltip <- function(show = TRUE, trigger = "axis", zlevel = 1, z = 8, showContent = TRUE,
                      position = NULL, formatter = NULL, islandFormatter = "{a} < br/>{b} : {c}",
                      showDelay = 5, hideDelay = 100, transitionDuration = 4, enterable = FALSE,
@@ -635,4 +654,23 @@ axis_it <- function(p, append, opts, axis){
   }
 
   p
+}
+
+treemap_data_ <- function(data, serie){
+
+  # get for eval
+  x <- get("x", envir = data_env)
+
+  serie <- data[, serie]
+
+  data <- cbind.data.frame(x, serie)
+  names(data) <- c("name", "value")
+
+  data <- apply(data, 1, as.list)
+
+  for(i in 1:length(data)){
+    data[[i]][[2]] <- as.numeric(paste0(data[[i]][[2]]))
+  }
+
+  return(data)
 }
