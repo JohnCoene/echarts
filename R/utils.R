@@ -634,7 +634,8 @@ axis_data <- function(type){
   if(type == "category"){
     x <- tryCatch(get("x", envir = data_env), error = function(e) e)
     if(!is(x, "error")){
-      x <- sort(x)
+      sort <- sortable(x)
+      if(sort == TRUE) x <- sort(x)
       x <- unique(x)
       return(x)
     } else {
