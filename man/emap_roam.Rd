@@ -58,4 +58,7 @@ coords \%>\%
   emap_roam(mapTypeControl = list(world = TRUE))
 
 }
+\seealso{
+\href{http://echarts.baidu.com/echarts2/doc/option-en.html#title~roamController}{official roam controller docs}
+}
 

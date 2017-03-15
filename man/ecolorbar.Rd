@@ -80,4 +80,7 @@ df \%>\%
   ecolorbar(color = list("red", "blue"), min = 5, max = 15, calculable = TRUE)
 
 }
+\seealso{
+\href{http://echarts.baidu.com/echarts2/doc/option-en.html#dataRange.hoverLink}{official dataRange docs}
+}
 

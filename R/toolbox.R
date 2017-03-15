@@ -198,9 +198,23 @@ etoolbox_view <- function(p, show = TRUE, title = "View", readOnly = FALSE, lang
 #'
 #' @param p an echart object.
 #' @param show wehtehr to show magic buttons.
-#' @param type chart types.
+#' @param type chart types, see details.
 #' @param title titles of charts.
 #' @param ... any other options to pass to magic feature.
+#'
+#' @details
+#' Pass a \code{list} to \code{type}, valid values are:
+#'
+#' \itemize{
+#'   \item{\code{line}}
+#'   \item{\code{bar}}
+#'   \item{\code{stack}}
+#'   \item{\code{tiled}}
+#'   \item{\code{force}}
+#'   \item{\code{chord}}
+#'   \item{\code{pie}}
+#'   \item{\code{funnel}}
+#' }
 #'
 #' @examples
 #' mtcars %>%

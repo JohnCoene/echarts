@@ -37,4 +37,7 @@ df \%>\%
   egrid(borderWidth = 5, borderColor = "red", backgroundColor = "yellow")
 
 }
+\seealso{
+\href{http://echarts.baidu.com/echarts2/doc/option-en.html#title~grid.width}{official grid docs}
+}
 

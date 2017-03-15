@@ -55,4 +55,7 @@ mtcars \%>\%
   etitle("MPG vs DISP", "Made with EChart", link = "http://echarts.baidu.com", target = "blank")
 
 }
+\seealso{
+\href{http://echarts.baidu.com/echarts2/doc/option-en.html#title~title}{official title docs}
+}
 

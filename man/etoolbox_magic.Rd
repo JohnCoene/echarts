@@ -11,7 +11,7 @@ etoolbox_magic(p, show = TRUE, type = list(), title, ...)
 
 \item{show}{wehtehr to show magic buttons.}
 
-\item{type}{chart types.}
+\item{type}{chart types, see details.}
 
 \item{title}{titles of charts.}
 
@@ -19,6 +19,20 @@ etoolbox_magic(p, show = TRUE, type = list(), title, ...)
 }
 \description{
 Enable changing chart type.
+}
+\details{
+Pass a \code{list} to \code{type}, valid values are:
+
+\itemize{
+  \item{\code{line}}
+  \item{\code{bar}}
+  \item{\code{stack}}
+  \item{\code{tiled}}
+  \item{\code{force}}
+  \item{\code{chord}}
+  \item{\code{pie}}
+  \item{\code{funnel}}
+}
 }
 \examples{
 mtcars \%>\%
