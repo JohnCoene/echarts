@@ -185,6 +185,10 @@ map_lines_ <- function(data, source, target){
   source <- data[, source]
   target <- data[, target]
 
+  # essential for list building, vectors break
+  source <- as.character(source) # force character
+  target <- as.character(target) # force character
+
   # list of lists
   edges <- list()
   for(i in 1:length(source)){
