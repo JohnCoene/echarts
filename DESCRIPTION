@@ -14,3 +14,5 @@ Imports:
     dplyr,
     methods
 RoxygenNote: 5.0.1
+URL: http://john-coene.com/htmlwidgets/echarts/
+BugReports: https://github.com/JohnCoene/echarts/issues

@@ -48,6 +48,9 @@
 ebar_ <- function(p, serie, name = NULL, stack = NULL, clickable = TRUE, xAxisIndex = 0, yAxisIndex = 0, barGap = "30%",
                  barCategoryGap = "20%", legendHoverLink = TRUE, z = 2, zlevel = 0, tooltip, ...){
 
+  # test input
+  if(missing(serie)) stop("must pass serie", call. = FALSE)
+
   tooltip <- if(missing(tooltip)) default_tooltip(trigger = "axis")
 
   data <- get_dat(serie)
@@ -164,6 +167,9 @@ eline_ <- function(p, serie, name = NULL, stack = NULL, clickable = TRUE, xAxisI
                   symbolSize = "4", symbolRotate = NULL, showAllSymbol = FALSE, smooth = TRUE, legendHoverLink = TRUE,
                   dataFilter = "nearest", z = 2, zlevel = 0, tooltip, ...){
 
+  # test input
+  if(missing(serie)) stop("must pass serie", call. = FALSE)
+
   tooltip <- if(missing(tooltip)) default_tooltip(trigger = "axis")
 
   data <- get_dat(serie)
@@ -233,6 +239,9 @@ eline_ <- function(p, serie, name = NULL, stack = NULL, clickable = TRUE, xAxisI
 #'
 #' @export
 earea_ <- function(p, serie, name = NULL, stack = NULL, smooth = TRUE, ...){
+
+  # test input
+  if(missing(serie)) stop("must pass serie", call. = FALSE)
 
   data <- get_dat(serie)
 
@@ -312,6 +321,9 @@ earea_ <- function(p, serie, name = NULL, stack = NULL, smooth = TRUE, ...){
 escatter_ <- function(p, serie, size = NULL, name = NULL, clickable = TRUE, symbol = NULL, symbolSize = 4, symbolRotate = NULL,
                       large = FALSE, largeThreshold = 2000, legendHoverLink = TRUE, z = 2, zlevel = 0, ...){
 
+  # test input
+  if(missing(serie)) stop("must pass serie", call. = FALSE)
+
   data <- get_dat(serie)
 
   for(i in 1:length(data)){
@@ -387,6 +399,9 @@ escatter_ <- function(p, serie, size = NULL, name = NULL, clickable = TRUE, symb
 epie_ <- function(p, serie, name = NULL, clickable = TRUE, legendHoverLink = TRUE, center = list("50%", "50%"),
                   radius = list(0, "75%"), startAngle = 90, minAngle = 0, clockWise = TRUE, roseType = NULL, selectedOffset = 10,
                   selectedMode = TRUE, z = 2, zlevel = 0, ...){
+
+  # test input
+  if(missing(serie)) stop("must pass serie", call. = FALSE)
 
   data <- get_dat(serie)
 
@@ -481,6 +496,9 @@ epie_ <- function(p, serie, name = NULL, clickable = TRUE, legendHoverLink = TRU
 #' @export
 eradar_ <- function(p, serie, name = NULL, clickable = TRUE, symbol = NULL, symbolSize = 4, symbolRotate = NULL,
                     legendHoverLink = TRUE, polarIndex = 0, z = 2, zlevel = 0, ...){
+
+  # test input
+  if(missing(serie)) stop("must pass serie", call. = FALSE)
 
   data <- get_dat(serie)
 
@@ -633,6 +651,9 @@ echord_ <- function(p, name = NULL, sort = "none", sortSub = "none", clickable =
 #' @export
 emap_choropleth_ <- function(p, serie){
 
+  # test input
+  if(missing(serie)) stop("must pass serie", call. = FALSE)
+
   data <- get_dat(serie)
 
   p$x$options$dataRange <- default_dataRange_(data[[1]], serie)
@@ -670,6 +691,9 @@ emap_choropleth_ <- function(p, serie){
 #'
 #' @export
 emap_coords_ <- function(p, lon, lat){
+
+  # test input
+  if(missing(lon) || missing(lat)) stop("must pass longitude and latitude", call. = FALSE)
 
   data <- get("data", envir = data_env)
   data <- clean_data_map(data)
@@ -771,6 +795,10 @@ emap_lines_ <- function(p, edges, source, target, name = NULL, clickable = TRUE,
                        symbolSize = 2, symbolRotate = NULL, large = FALSE, smooth = TRUE, z = 2, zlevel = 0,
                        smoothness = 0.2, precision = 2, bundling = list(enable = FALSE, maxTurningAngle = 45), ...){
 
+  # test input
+  if(missing(edges)) stop("must pass edges", call. = FALSE)
+  if(missing(source) || missing(target)) stop("must pass source and target columns", call. = FALSE)
+
   edges <- map_grps_(edges)
 
   for(i in 1:length(edges)){
@@ -863,6 +891,9 @@ emap_lines_ <- function(p, edges, source, target, name = NULL, clickable = TRUE,
 emap_points_ <- function(p, serie, clickable = TRUE, symbol = "pin", symbolSize = 10, symbolRotate = NULL,
                          large = FALSE, itemStyle = NULL, ...){
 
+  # test input
+  if(missing(serie)) stop("must pass serie", call. = FALSE)
+
   itemStyle <- if(is.null(itemStyle)) list(normal = list(label = list(show = FALSE))) else itemStyle
 
   data <- get("data", envir = data_env)
@@ -919,6 +950,10 @@ emap_points_ <- function(p, serie, clickable = TRUE, symbol = "pin", symbolSize 
 #' @export
 emap_heat_ <- function(p, lon, lat, z, blurSize = 30, minAlpha = 0.05, valueScale = 1, opacity = 1,
                       gradientColors = NULL, ...){
+
+  # test input
+  if(missing(lon) || missing(lat)) stop("must pass longitude and latitude", call. = FALSE)
+  if(missing(z)) stop("must pass z", call. = FALSE)
 
   opts <- list(...)
   opts$blurSize <- blurSize
@@ -1086,6 +1121,9 @@ egauge_ <- function(p, value, indicator = "", name = NULL, clickable = FALSE, le
                    radius = list("0%", "75%"), startAngle = 225, endAngle = -45, min = 0, max = 100,
                    splitNumber = 10, z = 2, zlevel = 0, tooltip, ...){
 
+  # test input
+  if(missing(value)) stop("must pass value", call. = FALSE)
+
   tooltip <- if(missing(tooltip)) default_tooltip(trigger = "item")
   name <- ifelse(is.null(name), indicator, name)
 
@@ -1150,6 +1188,9 @@ egauge_ <- function(p, value, indicator = "", name = NULL, clickable = FALSE, le
 efunnel_ <- function(p, serie, name = NULL, clickable = TRUE, legendHoverLink = TRUE, sort = "descending",
                     min = 0, max = NULL, x = 80, y = 60, x2 = 80, y2 = 60, width = NULL, height = NULL,
                     funnelAlign = "center", minSize = "0%", maxSize = "100%", gap = 0, tooltip, ...){
+
+  # test input
+  if(missing(serie)) stop("must pass serie", call. = FALSE)
 
   data <- get_dat(serie)
 
@@ -1217,6 +1258,9 @@ efunnel_ <- function(p, serie, name = NULL, clickable = TRUE, legendHoverLink = 
 #' @export
 evenn_ <- function(p, serie, name = NULL, clickable = TRUE, z = 2, zlevel = 0, tooltip = NULL, ...){
 
+  # test input
+  if(missing(serie)) stop("must pass serie", call. = FALSE)
+
   data <- get_dat(serie)
 
   name <- if(is.null(name)) names(data)[1] else name
@@ -1275,6 +1319,9 @@ evenn_ <- function(p, serie, name = NULL, clickable = TRUE, z = 2, zlevel = 0, t
 #' @export
 ecloud_ <- function(p, freq, color = NULL, name = NULL, clickable = TRUE, center = list("50%", "50%"), size = list("40%", "40%"),
                    textRotation = list(0, 90), autoSize = list(enable = TRUE, minSize = 12), z = 2, zlevel = 0, tooltip, ...){
+
+  # test input
+  if(missing(freq)) stop("must pass freq", call. = FALSE)
 
   data <- get_dat(freq)
 
@@ -1336,6 +1383,9 @@ ecloud_ <- function(p, freq, color = NULL, name = NULL, clickable = TRUE, center
 eheatmap_ <- function(p, y, values, name = NULL, clickable = TRUE, blurSize = 30, minAlpha = 0.5, valueScale = 1,
                      opacity = 1, z = 2, zlevel = 0, gradientColors, tooltip, ...){
 
+  # test input
+  if(missing(y) || missing(values)) stop("must pass y and values", call. = FALSE)
+
   data <- get_dat(values)
 
   for(i in 1:length(data)){
@@ -1377,6 +1427,9 @@ eheatmap_ <- function(p, y, values, name = NULL, clickable = TRUE, blurSize = 30
 #'
 #' @export
 edata_ <- function(p, data, x){
+
+  # test input
+  if(missing(data)) stop("must pass data", call. = FALSE)
 
   # x
   if(!missing(x)){
@@ -1429,6 +1482,9 @@ edata_ <- function(p, data, x){
 #' @export
 etreemap_ <- function(p, serie, name = NULL, itemStyle = NULL, clickable = FALSE, center = list("50%", "50%"),
                       size = list("80%", "80%"), z = 2, zlevel = 0, ...){
+
+  # test input
+  if(missing(serie)) stop("must pass serie", call. = FALSE)
 
   data <- get_dat(serie)
 
@@ -1495,6 +1551,11 @@ etreemap_ <- function(p, serie, name = NULL, itemStyle = NULL, clickable = FALSE
 #'
 #' @export
 ecandle_ <- function(p, opening, closing, low, high, name = NULL, clickable = TRUE, z = 2, zlevel = 0, ...){
+
+  # test input
+  if(missing(opening) || missing(closing) || missing(low) || missing(high)) {
+    stop("must pass opening, closing, low and high", call. = FALSE)
+  }
 
   dat <- get("data", envir = data_env)
 
