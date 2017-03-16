@@ -425,6 +425,7 @@ epie_ <- function(p, serie, name = NULL, clickable = TRUE, legendHoverLink = TRU
     opts$z <- z
     opts$zlevel <- zlevel
 
+    # remove axis if present
     p$x$options$xAxis <- NULL
     p$x$options$yAxis <- NULL
 
