@@ -10,6 +10,7 @@ map_grps_ <- function(data){
     data <- dplyr::ungroup(data)
     data <- apply(data, 2, na2ec)
     data <- as.data.frame(data)
+    row.names(data) <- NULL
 
     grps <- unique(data[,g.col]) # get unique grps
 
@@ -23,7 +24,8 @@ map_grps_ <- function(data){
 
   } else {
     data <- na2ec(data)
-    data <- list(data)
+    row.names(data) <- NULL
+    data <- list(as.data.frame(data))
   }
 
   return(data)

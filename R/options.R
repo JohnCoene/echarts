@@ -151,7 +151,7 @@ elegend <- function(p, legend, show = TRUE, zlevel = 0, z = 4, orient = "horizon
   } else if(missing(legend) && length(p$x$options$legend$data)) {
     legend <- p$x$options$legend$data
   } else if (!missing(legend)) {
-    legend <- legend
+    legend <- list(legend)
   }
 
   opts <- list(...)

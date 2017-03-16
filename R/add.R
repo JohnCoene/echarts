@@ -267,3 +267,19 @@ etreemap <- function(p, serie, name = NULL, itemStyle = NULL, clickable = FALSE,
   p
 
 }
+
+#' @rdname candlestick
+#' @export
+ecandle <- function(p, opening, closing, low, high, name = NULL, clickable = TRUE, z = 2, zlevel = 0, ...){
+
+  opening <- deparse(substitute(opening))
+  closing <- deparse(substitute(closing))
+  low <- deparse(substitute(low))
+  high <- deparse(substitute(high))
+
+  p <- p %>%
+    ecandle_(opening, closing, low, high, name = NULL, clickable = TRUE, z = 2, zlevel = 0, ...)
+
+  p
+
+}

@@ -602,8 +602,10 @@ scatter_size <- function(size){
 }
 
 normalise_size <- function(x, symbolSize){
-  x <- (x - min(x)) / (max(x) - min(x))
-  x <- x * symbolSize
+  if(class(x)[1] == "integer" || class(x)[1] == "numeric"){
+    x <- (x - min(x)) / (max(x) - min(x))
+    x <- x * symbolSize
+  }
   return(x)
 }
 
@@ -676,6 +678,15 @@ treemap_data_ <- function(data, serie){
   for(i in 1:length(data)){
     data[[i]][[2]] <- as.numeric(paste0(data[[i]][[2]]))
   }
+
+  return(data)
+}
+
+candle_data_ <- function(data, opening, closing, minimum, maximum){
+
+  data <- data[, c(opening, closing, minimum, maximum)]
+  colnames(data) <- NULL
+  data <- apply(data, 1, as.list)
 
   return(data)
 }
