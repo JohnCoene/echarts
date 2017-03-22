@@ -1,6 +1,8 @@
 # group2series
 map_grps_ <- function(data){
 
+  row.names(data) <- NULL
+
   if(dplyr::is.grouped_df(data)){
 
     # deparse groups to get grp column
@@ -23,8 +25,8 @@ map_grps_ <- function(data){
     names(data) <- grps
 
   } else {
-    data <- na2ec(data)
     row.names(data) <- NULL
+    data <- na2ec(data)
     data <- list(as.data.frame(data))
   }
 
