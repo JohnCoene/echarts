@@ -1,5 +1,6 @@
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/JohnCoene/echarts?branch=master&svg=true)](https://ci.appveyor.com/project/JohnCoene/echarts)
 [![Travis-CI Build Status](https://travis-ci.org/JohnCoene/echarts.svg?branch=master)](https://travis-ci.org/JohnCoene/echarts)
+[version](https://img.shields.io/github/release/JohnCoene/echarts.svg)
 
 # echarts
 
