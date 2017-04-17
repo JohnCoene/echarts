@@ -1,4 +1,4 @@
-#' Customise axis
+#' Customise Y axis
 #'
 #' @param p an echart object.
 #' @param show whether to show the axis.
@@ -100,8 +100,6 @@ eyAxis_log <- function(p, show = TRUE, zlevel = 0, z = 0, position = "left", log
   p
 }
 
-#' Customize X axis
-#'
 #' Customise x axis.
 #'
 #' @param p an echart object.

@@ -7,7 +7,7 @@
 \alias{eyAxis_time}
 \alias{eyAxis_value}
 \alias{yAxis}
-\title{Customise axis}
+\title{Customise Y axis}
 \usage{
 eyAxis(p, show = TRUE, type = "value", append = FALSE, ...)
 
@@ -62,7 +62,7 @@ of value axis as the starting and ending value of your value axis.}
 \item{logPositive}{if \code{FALSE} negative values are not supported.}
 }
 \description{
-Customise axis
+Customise Y axis
 }
 \examples{
 df <- data.frame(x = c("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"),

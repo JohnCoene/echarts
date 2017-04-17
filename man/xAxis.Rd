@@ -7,7 +7,7 @@
 \alias{exAxis_time}
 \alias{exAxis_value}
 \alias{xAxis}
-\title{Customize X axis}
+\title{Customise x axis.}
 \usage{
 exAxis(p, show = TRUE, type = "value", append = FALSE, ...)
 
