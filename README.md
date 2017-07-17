@@ -34,4 +34,5 @@ devtools::install_github("JohnCoene/echarts")
 15. responsive
 16. animations
 
-## [Docs & Examples](http://john-coene.com/htmlwidgets/echarts/)
+### [In-depth examples](http://john-coene.com/htmlwidgets/echarts/)
+### [Manual](http://john-coene.com/htmlwidgets/echarts/echarts.pdf)
