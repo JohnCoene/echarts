@@ -2,6 +2,7 @@
 % Please edit documentation in R/add.R, R/add_.R
 \name{emap_choropleth}
 \alias{emap_choropleth}
+\alias{emap_choropleth}
 \alias{emap_choropleth_}
 \title{Add choropleth}
 \usage{
@@ -36,4 +37,3 @@ choropleth \%>\%
 \seealso{
 \code{\link{ecolorbar}}
 }
-

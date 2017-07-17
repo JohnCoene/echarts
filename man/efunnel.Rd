@@ -2,6 +2,7 @@
 % Please edit documentation in R/add.R, R/add_.R
 \name{efunnel}
 \alias{efunnel}
+\alias{efunnel}
 \alias{efunnel_}
 \title{Add funnel}
 \usage{
@@ -59,4 +60,3 @@ funnel \%>\%
 \seealso{
 \href{http://echarts.baidu.com/echarts2/doc/option-en.html#series-i(funnel)}{official funnel docs}
 }
-

@@ -32,4 +32,3 @@ mtcars \%>\%
   eoptions(backgroundColor = "black")
 
 }
-

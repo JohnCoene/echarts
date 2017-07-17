@@ -2,6 +2,7 @@
 % Please edit documentation in R/add.R, R/add_.R
 \name{ebar}
 \alias{ebar}
+\alias{ebar}
 \alias{ebar_}
 \title{Add bars}
 \usage{
@@ -70,4 +71,3 @@ df \%>\%
 \seealso{
 \href{http://echarts.baidu.com/echarts2/doc/option-en.html#series-i(bar)}{official bar options docs}
 }
-

@@ -73,4 +73,3 @@ df \%>\%
   etoolbox_magic(type = list("tiled", "stack", "line", "bar"))
 
 }
-

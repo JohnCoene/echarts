@@ -31,4 +31,3 @@ mtcars \%>\%
   etoolbox_view()
 
 }
-

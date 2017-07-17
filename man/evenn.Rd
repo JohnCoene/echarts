@@ -2,6 +2,7 @@
 % Please edit documentation in R/add.R, R/add_.R
 \name{evenn}
 \alias{evenn}
+\alias{evenn}
 \alias{evenn_}
 \title{Add venn}
 \usage{
@@ -42,4 +43,3 @@ venn \%>\%
 \seealso{
 \href{http://echarts.baidu.com/echarts2/doc/option-en.html#series-i(venn)}{official venn docs}
 }
-

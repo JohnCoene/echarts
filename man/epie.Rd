@@ -2,6 +2,7 @@
 % Please edit documentation in R/add.R, R/add_.R
 \name{epie}
 \alias{epie}
+\alias{epie}
 \alias{epie_}
 \title{Add pie}
 \usage{
@@ -69,4 +70,3 @@ pie \%>\%
 \seealso{
 \href{http://echarts.baidu.com/echarts2/doc/option-en.html#series-i(pie)}{official pie options docs}
 }
-

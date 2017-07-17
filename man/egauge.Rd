@@ -2,6 +2,7 @@
 % Please edit documentation in R/add.R, R/add_.R
 \name{egauge}
 \alias{egauge}
+\alias{egauge}
 \alias{egauge_}
 \title{Add gauge}
 \usage{
@@ -65,4 +66,3 @@ echart() \%>\%
 \seealso{
 \href{http://echarts.baidu.com/echarts2/doc/option-en.html#series-i(gauge)}{official gauge docs}
 }
-

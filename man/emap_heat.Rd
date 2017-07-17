@@ -2,6 +2,7 @@
 % Please edit documentation in R/add.R, R/add_.R
 \name{emap_heat}
 \alias{emap_heat}
+\alias{emap_heat}
 \alias{emap_heat_}
 \title{Add heat on map}
 \usage{
@@ -49,4 +50,3 @@ data \%>\%
   emap_heat_("lon", "lat", "z", blurSize = 50, minAlpha = 0.3, opacity = 0.8)
 
 }
-

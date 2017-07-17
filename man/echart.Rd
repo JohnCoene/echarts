@@ -21,4 +21,3 @@ echart_(data, x, width = NULL, height = NULL, elementId = NULL)
 \description{
 Initiate an echart graph.
 }
-

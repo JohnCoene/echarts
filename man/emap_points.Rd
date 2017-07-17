@@ -2,6 +2,7 @@
 % Please edit documentation in R/add.R, R/add_.R
 \name{emap_points}
 \alias{emap_points}
+\alias{emap_points}
 \alias{emap_points_}
 \title{Add map points}
 \usage{
@@ -80,4 +81,3 @@ coords \%>\%
 \seealso{
 \href{http://echarts.baidu.com/echarts2/doc/option-en.html#series-i(map).markPoint}{office map points docs}
 }
-

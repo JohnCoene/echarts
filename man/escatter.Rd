@@ -2,6 +2,7 @@
 % Please edit documentation in R/add.R, R/add_.R
 \name{escatter}
 \alias{escatter}
+\alias{escatter}
 \alias{escatter_}
 \title{Add scatter}
 \usage{
@@ -78,4 +79,3 @@ mtcars \%>\%
 \seealso{
 \href{http://echarts.baidu.com/echarts2/doc/option-en.html#series-i(scatter)}{official scatter options docs}
 }
-

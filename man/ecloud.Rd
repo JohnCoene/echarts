@@ -2,6 +2,7 @@
 % Please edit documentation in R/add.R, R/add_.R
 \name{ecloud}
 \alias{ecloud}
+\alias{ecloud}
 \alias{ecloud_}
 \title{Add wordcloud}
 \usage{
@@ -56,4 +57,3 @@ tf \%>\%
 \seealso{
 \href{http://echarts.baidu.com/echarts2/doc/option-en.html#series-i(wordCloud)}{official wordcloud docs}
 }
-

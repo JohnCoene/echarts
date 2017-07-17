@@ -2,11 +2,14 @@
 % Please edit documentation in R/imports.R
 \docType{import}
 \name{reexports}
-\alias{\%>\%}
-\alias{group_by}
-\alias{group_by_}
 \alias{reexports}
+\alias{\%>\%}
+\alias{reexports}
+\alias{group_by}
+\alias{reexports}
+\alias{group_by_}
 \title{Objects exported from other packages}
+\keyword{internal}
 \description{
 These objects are imported from other packages. Follow the links
 below to see their documentation.
@@ -16,5 +19,4 @@ below to see their documentation.
 
   \item{magrittr}{\code{\link[magrittr]{\%>\%}}}
 }}
-\keyword{internal}
 

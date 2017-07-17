@@ -72,4 +72,3 @@ mtcars \%>\%
   eanimation(animationEasing = "CubicInOut")
 
 }
-

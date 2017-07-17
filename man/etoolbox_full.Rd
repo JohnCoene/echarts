@@ -17,4 +17,3 @@ Adds toolbok mark, restor, save, and view.
 \details{
 Adds mark, restore, save, view and zoom buttons
 }
-

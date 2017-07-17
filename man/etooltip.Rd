@@ -17,7 +17,7 @@ etooltip(p, show = TRUE, trigger = "axis", zlevel = 1, z = 8,
 
 \item{show}{whether to show the tooltip.}
 
-\item{trigger}{element that triggers the tooltip, takes \code{item}, \code{axis}.}
+\item{trigger}{element that triggers the tooltip, takes \code{item} or \code{axis}.}
 
 \item{z, zlevel}{first and second grade cascading control, the higher z the closer to the top.}
 
@@ -68,4 +68,3 @@ mtcars \%>\%
 \seealso{
 \href{http://echarts.baidu.com/echarts2/doc/option-en.html#title~tooltip}{official tooltip docs}
 }
-

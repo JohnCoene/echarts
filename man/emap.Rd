@@ -2,6 +2,7 @@
 % Please edit documentation in R/add.R, R/add_.R
 \name{emap}
 \alias{emap}
+\alias{emap}
 \alias{emap_}
 \title{Add blank map}
 \usage{
@@ -103,4 +104,3 @@ us_data \%>\%
 \code{\link{emap_coords}}, \code{\link{emap_heat}}, \code{\link{emap_lines}}, \code{emap_choropleth},
 \code{\link{emap_points}}, \href{http://echarts.baidu.com/echarts2/doc/option-en.html#series-i(map)}{official map docs}
 }
-

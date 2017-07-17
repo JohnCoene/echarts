@@ -2,6 +2,7 @@
 % Please edit documentation in R/add.R, R/add_.R
 \name{emap_coords}
 \alias{emap_coords}
+\alias{emap_coords}
 \alias{emap_coords_}
 \title{Add map coordinates}
 \usage{
@@ -32,4 +33,3 @@ coords \%>\%
   emap_lines_(edges, "source", "target")
 
 }
-

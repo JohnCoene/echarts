@@ -2,6 +2,7 @@
 % Please edit documentation in R/add.R, R/add_.R
 \name{edata}
 \alias{edata}
+\alias{edata}
 \alias{edata_}
 \title{Add data}
 \usage{
@@ -22,4 +23,3 @@ Add a dataset.
 \seealso{
 \code{emap}
 }
-

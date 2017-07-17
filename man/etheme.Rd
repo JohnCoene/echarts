@@ -42,4 +42,3 @@ mtcars \%>\%
   etheme("roma")
 
 }
-

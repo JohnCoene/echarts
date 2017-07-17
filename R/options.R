@@ -233,7 +233,7 @@ etheme <- function(p, theme = "default"){
 #'
 #' @param p an echart object.
 #' @param show whether to show the tooltip.
-#' @param trigger element that triggers the tooltip, takes \code{item}, \code{axis}.
+#' @param trigger element that triggers the tooltip, takes \code{item} or \code{axis}.
 #' @param z,zlevel first and second grade cascading control, the higher z the closer to the top.
 #' @param showContent whether to show the content of tooltip.
 #' @param position specifies position, pass a \code{list}, like \code{list(10, 10)}, fixed position; pass a function,

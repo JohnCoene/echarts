@@ -25,4 +25,3 @@ mtcars \%>\%
   etoolbox_restore()
 
 }
-

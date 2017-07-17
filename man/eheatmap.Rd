@@ -2,6 +2,7 @@
 % Please edit documentation in R/add.R, R/add_.R
 \name{eheatmap}
 \alias{eheatmap}
+\alias{eheatmap}
 \alias{eheatmap_}
 \title{Add heatmap}
 \usage{
@@ -55,4 +56,3 @@ matrix \%>\%
 \seealso{
 \href{http://echarts.baidu.com/echarts2/doc/option-en.html#series-i(heatmap)}{official heatmap docs}
 }
-

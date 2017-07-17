@@ -40,4 +40,3 @@ df \%>\%
 \seealso{
 \href{http://echarts.baidu.com/echarts2/doc/option-en.html#title~grid.width}{official grid docs}
 }
-

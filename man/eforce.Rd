@@ -53,8 +53,24 @@ eforce_(p, name = NULL, large = FALSE, center = list("50\%", "50\%"),
 \item{...}{any other options to pass to serie.}
 }
 \description{
-Plot force directed graph.
+Build force network
 
 Plot force directed graph.
 }
+\examples{
+let <- LETTERS[1:20]
 
+edges <- data.frame(source = sample(let, 20), target = sample(let, 20),
+  weight = runif(20, 5, 20))
+
+nodes <- data.frame(name = let, value = runif(20, 5, 25), group = rep(LETTERS[1:4], 5))
+
+echart() \%>\%
+  eforce(itemStyle = list(normal = list(label = list(show = TRUE)))) \%>\% # show labels
+  enodes(nodes, name, value = value, category = group) \%>\%
+  elinks(edges, source, target)
+
+}
+\seealso{
+\code{\link{enodes}} \code{\link{eforce}}
+}

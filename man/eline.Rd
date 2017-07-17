@@ -2,6 +2,7 @@
 % Please edit documentation in R/add.R, R/add_.R
 \name{eline}
 \alias{eline}
+\alias{eline}
 \alias{eline_}
 \title{Add lines}
 \usage{
@@ -115,4 +116,3 @@ df \%>\%
 \seealso{
 \href{http://echarts.baidu.com/echarts2/doc/option-en.html#series-i(line)}{official line options docs}
 }
-

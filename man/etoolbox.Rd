@@ -58,4 +58,3 @@ mtcars \%>\%
   etoolbox_magic(type = list("line", "bar"))
 
 }
-

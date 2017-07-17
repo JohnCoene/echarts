@@ -29,6 +29,8 @@
 #' @name elinks
 #' @rdname elinks
 #'
+#' @seealso \code{\link{enodes}} \code{\link{eforce}}
+#'
 #' @export
 elinks <- function(p, links, source, target, weight = 1){
 
@@ -91,6 +93,8 @@ elinks <- function(p, links, source, target, weight = 1){
 #' @name nodes
 #' @rdname enodes
 #'
+#' @seealso \code{\link{enodes}} \code{\link{eforce}}
+#'
 #' @export
 enodes <- function(p, nodes, name, label, value, category, symbolSize, depth, ignore = FALSE, symbol = "circle",
                    fixX = FALSE, fixY = FALSE){
@@ -108,8 +112,6 @@ enodes <- function(p, nodes, name, label, value, category, symbolSize, depth, ig
 }
 
 #' Build force network
-#'
-#' Plot force directed graph.
 #'
 #' @param p an echart objects.
 #' @param name name of network.
@@ -129,8 +131,23 @@ enodes <- function(p, nodes, name, label, value, category, symbolSize, depth, ig
 #' @param z,zlevel first and second grade cascading control, the higher z the closer to the top.
 #' @param ... any other options to pass to serie.
 #'
+#' @examples
+#' let <- LETTERS[1:20]
+#'
+#' edges <- data.frame(source = sample(let, 20), target = sample(let, 20),
+#'   weight = runif(20, 5, 20))
+#'
+#' nodes <- data.frame(name = let, value = runif(20, 5, 25), group = rep(LETTERS[1:4], 5))
+#'
+#' echart() %>%
+#'   eforce(itemStyle = list(normal = list(label = list(show = TRUE)))) %>% # show labels
+#'   enodes(nodes, name, value = value, category = group) %>%
+#'   elinks(edges, source, target)
+#'
 #' @name eforce
 #' @rdname eforce
+#'
+#' @seealso \code{\link{enodes}} \code{\link{eforce}}
 #'
 #' @export
 eforce <- function(p, name = NULL, large = FALSE, center = list("50%", "50%"), roam = FALSE, size = "100%", ribbonType = FALSE,

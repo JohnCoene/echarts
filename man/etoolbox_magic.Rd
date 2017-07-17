@@ -46,4 +46,3 @@ mtcars \%>\%
   etoolbox_magic(type = list("bar", "line", "stack", "tiled"))
 
 }
-

@@ -2,6 +2,7 @@
 % Please edit documentation in R/add.R, R/add_.R
 \name{eradar}
 \alias{eradar}
+\alias{eradar}
 \alias{eradar_}
 \title{Add radar}
 \usage{
@@ -79,4 +80,3 @@ radar \%>\%
 \seealso{
 \href{http://echarts.baidu.com/echarts2/doc/option-en.html#series-i(radar)}{official radar options docs}
 }
-

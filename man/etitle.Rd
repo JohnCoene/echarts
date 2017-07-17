@@ -58,4 +58,3 @@ mtcars \%>\%
 \seealso{
 \href{http://echarts.baidu.com/echarts2/doc/option-en.html#title~title}{official title docs}
 }
-

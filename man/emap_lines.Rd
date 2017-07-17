@@ -2,6 +2,7 @@
 % Please edit documentation in R/add.R, R/add_.R
 \name{emap_lines}
 \alias{emap_lines}
+\alias{emap_lines}
 \alias{emap_lines_}
 \title{Add map lines}
 \usage{
@@ -112,4 +113,3 @@ coords \%>\%
 \seealso{
 \code{\link{emap_coords}} \href{http://echarts.baidu.com/echarts2/doc/option-en.html#series-i(map).markLine}{official map line docs}
 }
-

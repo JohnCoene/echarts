@@ -33,4 +33,3 @@ mtcars \%>\%
   etoolbox_feature(restore = list(show = TRUE))
 
 }
-

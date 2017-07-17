@@ -2,6 +2,7 @@
 % Please edit documentation in R/add.R, R/add_.R
 \name{echord}
 \alias{echord}
+\alias{echord}
 \alias{echord_}
 \title{Add chord}
 \usage{
@@ -83,4 +84,3 @@ matrix \%>\%
 \seealso{
 \href{http://echarts.baidu.com/echarts2/doc/option-en.html#series-i(radar)}{official scatter options docs}
 }
-

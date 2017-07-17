@@ -52,4 +52,3 @@ mtcars \%>\%
 \seealso{
 \href{http://echarts.baidu.com/echarts2/doc/option-en.html#title~dataZoom}{official dataZoom docs}
 }
-

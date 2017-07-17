@@ -60,4 +60,3 @@ df \%>\%
   emark_point(which = "all", data = list(list(type = "min"), list(type = "max")))
 
 }
-

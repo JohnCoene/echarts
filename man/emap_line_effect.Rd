@@ -42,4 +42,3 @@ coords \%>\%
   emap_lines(edges, source, target, effect = emap_line_effect())
 
 }
-

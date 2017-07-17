@@ -56,4 +56,6 @@ echart() \%>\%
   elinks_(edges, "source", "target")
 
 }
-
+\seealso{
+\code{\link{enodes}} \code{\link{eforce}}
+}

@@ -2,6 +2,7 @@
 % Please edit documentation in R/add.R, R/add_.R
 \name{earea}
 \alias{earea}
+\alias{earea}
 \alias{earea_}
 \title{Add area}
 \usage{
@@ -46,4 +47,3 @@ df \%>\%
   earea(y)
 
 }
-

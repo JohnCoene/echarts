@@ -2,6 +2,7 @@
 % Please edit documentation in R/add.R, R/add_.R
 \name{etreemap}
 \alias{etreemap}
+\alias{etreemap}
 \alias{etreemap_}
 \title{Add Treemap}
 \usage{
@@ -45,4 +46,3 @@ df \%>\%
   etheme("macarons")
 
 }
-
