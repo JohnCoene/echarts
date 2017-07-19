@@ -43,7 +43,7 @@ escatter <- function(p, serie, size = NULL, name = NULL, clickable = TRUE, symbo
                      large = FALSE, largeThreshold = 2000, legendHoverLink = TRUE, z = 2, zlevel = 0, ...){
 
   serie <- deparse(substitute(serie))
-  size <- if(!is.null(size)) deparse(substitute(size)) else NULL
+  size <- if(!missing(size)) deparse(substitute(size)) else NULL
 
   p %>%
     escatter_(serie, size, name, clickable, symbol, symbolSize, symbolRotate, large, largeThreshold, legendHoverLink, z, zlevel, ...)
