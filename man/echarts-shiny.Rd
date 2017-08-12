@@ -6,7 +6,7 @@
 \alias{renderEcharts}
 \title{Shiny bindings for echarts}
 \usage{
-echartsOutput(outputId, width = "100\%", height = "400px")
+echartsOutput(outputId, width = "100\%", height = "400px", inline = FALSE)
 
 renderEcharts(expr, env = parent.frame(), quoted = FALSE)
 }

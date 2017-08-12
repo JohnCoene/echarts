@@ -75,10 +75,12 @@ var solarlight = {backgroundColor:'#fdf6e3',color:["#b58900","#cb4b16","#dc322f"
 
         }
 
+        myChart.refresh();
+
       },
 
       resize: function(width, height) {
-
+        myChart.resize();
       }
 
     };

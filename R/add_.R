@@ -1265,7 +1265,6 @@ evenn_ <- function(p, serie, name = NULL, clickable = TRUE, z = 2, zlevel = 0, t
   data <- get_dat(serie)
 
   name <- if(is.null(name)) names(data)[1] else name
-  if(is.null(tooltip)) tooltip <- default_tooltip(trigger = "item")
   itemStyle <- list(normal = list(label = list(show = TRUE)))
 
   opts <- list(...)
@@ -1275,7 +1274,7 @@ evenn_ <- function(p, serie, name = NULL, clickable = TRUE, z = 2, zlevel = 0, t
   opts$clickable <- clickable
   opts$z <- z
   opts$zlevel <- zlevel
-  opts$tooltip <- tooltip
+  opts$tooltip <- if(is.null(tooltip)) tooltip
   opts$data = val_name_data_(data[[1]], serie)
 
   p$x$options$xAxis <- NULL
