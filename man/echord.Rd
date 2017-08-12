@@ -73,8 +73,8 @@ set.seed(19880525)
 matrix <- matrix(sample(0:1, 100, replace = TRUE, prob = c(0.9,0.6)), nc = 10)
 
 matrix \%>\%
-  echart_(LETTERS[1:10]) \%>\%
-  echord_()
+  echart(LETTERS[1:10]) \%>\%
+  echord()
 
 matrix \%>\%
   echart(LETTERS[1:10]) \%>\%

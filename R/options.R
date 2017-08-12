@@ -502,10 +502,10 @@ ecolorbar <- function(p, min = NULL, max = NULL, which = "previous", show = TRUE
 #'   values = runif(4, 10, 20))
 #'
 #' coords %>%
-#'   echart_("city") %>%
+#'   echart(city) %>%
 #'   emap() %>%
-#'   emap_coords_("lon", "lat") %>%
-#'   emap_points_("values") %>%
+#'   emap_coords(lon, lat) %>%
+#'   emap_points(values) %>%
 #'   emap_roam(mapTypeControl = list(world = TRUE))
 #'
 #' @seealso \href{http://echarts.baidu.com/echarts2/doc/option-en.html#title~roamController}{official roam controller docs}

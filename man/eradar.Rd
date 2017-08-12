@@ -63,16 +63,16 @@ radar <- data.frame(axis = rep(LETTERS[1:6], 4), grp = sample(LETTERS[4:9], 24, 
                     value = runif(24, 2, 10))
 
 radar \%>\%
-  group_by_("grp") \%>\%
-  echart_("axis") \%>\%
-  eradar_("value", symbolSize = 0) \%>\%
+  group_by(grp) \%>\%
+  echart(axis) \%>\%
+  eradar(value, symbolSize = 0) \%>\%
   elegend() \%>\%
   etheme("macarons")
 
 radar \%>\%
-  group_by_("grp") \%>\%
-  echart_("axis") \%>\%
-  eradar_("value", symbolSize = htmlwidgets::JS("function(value){return(value)}")) \%>\%
+  group_by(grp) \%>\%
+  echart(axis) \%>\%
+  eradar(value, symbolSize = htmlwidgets::JS("function(value){return(value)}")) \%>\%
   elegend() \%>\%
   etheme("roma")
 

@@ -40,8 +40,8 @@ Add Treemap
 df <- data.frame(name = LETTERS[1:10], values = round(runif(10, 1, 10)))
 
 df \%>\%
-  echart_("name") \%>\%
-  etreemap_("values") \%>\%
+  echart(name) \%>\%
+  etreemap(values) \%>\%
   etooltip(trigger = "item") \%>\%
   etheme("macarons")
 

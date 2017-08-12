@@ -53,8 +53,8 @@ Add funnel
 funnel <- data.frame(stage = c("View", "Click", "Purchase"), value = c(80, 30, 20))
 
 funnel \%>\%
-  echart_("stage") \%>\%
-  efunnel_("value")
+  echart(stage) \%>\%
+  efunnel(value)
 
 }
 \seealso{

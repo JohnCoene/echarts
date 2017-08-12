@@ -84,6 +84,7 @@ Valid values for \code{dataFilter} are:
 }
 }
 \examples{
+\dontrun{
 df <- data.frame(x = 1:50, y = runif(50, 5, 10), z = runif(50, 7, 12), w = runif(50, 10, 13))
 
 df \%>\%
@@ -111,6 +112,7 @@ df \%>\%
   etooltip() \%>\%
   elegend() \%>\%
   etoolbox_magic(type = list("line", "bar"))
+}
 
 }
 \seealso{

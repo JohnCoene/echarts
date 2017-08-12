@@ -64,8 +64,8 @@ Valid values for \code{symbol}:
 }
 \examples{
 mtcars \%>\%
-  echart_("disp") \%>\%
-  escatter_("mpg", symbol = "emptyCircle") \%>\%
+  echart(disp) \%>\%
+  escatter(mpg, symbol = "emptyCircle") \%>\%
   exAxis()
 
 mtcars \%>\%

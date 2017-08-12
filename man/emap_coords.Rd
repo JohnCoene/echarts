@@ -27,9 +27,9 @@ edges <- data.frame(source = c("Beijing", "Beijing", "New York"),
   target = c("Sydney", "London", "London"))
 
 coords \%>\%
-  echart_("city") \%>\%
+  echart(city) \%>\%
   emap() \%>\%
-  emap_coords_("lon", "lat") \%>\%
-  emap_lines_(edges, "source", "target")
+  emap_coords(lon, lat) \%>\%
+  emap_lines(edges, source, target)
 
 }

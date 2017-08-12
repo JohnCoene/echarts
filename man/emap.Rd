@@ -59,6 +59,7 @@ emap_(p, name = NULL, mapType = "world", clickable = TRUE, z = 2,
 Setup map plot.
 }
 \examples{
+\dontrun{
 coords <- data.frame(city = c("London", "New York", "Beijing", "Sydney"),
   lon = c(-0.1167218, -73.98002, 116.3883, 151.18518),
   lat = c(51.49999, 40.74998, 39.92889, -33.92001),
@@ -98,6 +99,7 @@ us_data \%>\%
   emap(mapType = "world|United States of America") \%>\%
   emap_coords_("lon", "lat") \%>\%
   emap_points_("values")
+}
 
 }
 \seealso{

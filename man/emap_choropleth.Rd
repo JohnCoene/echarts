@@ -23,12 +23,12 @@ choropleth <- data.frame(countries = c("France", "Brazil", "China", "Russia", "C
   values = round(runif(6, 10, 25)))
 
 choropleth \%>\%
-  echart_("countries") \%>\%
-  emap_() \%>\%
-  emap_choropleth_("values")
+  echart(countries) \%>\%
+  emap() \%>\%
+  emap_choropleth(values)
 
 choropleth \%>\%
-  echart_("countries") \%>\%
+  echart(countries) \%>\%
   emap() \%>\%
   emap_choropleth(values) \%>\%
   ecolorbar(color = list("red", "yellow"), calculable = TRUE)

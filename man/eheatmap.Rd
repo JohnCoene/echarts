@@ -49,8 +49,8 @@ set.seed(19880525)
 matrix <- data.frame(x = runif(150, 10, 500), y = runif(150, 10, 500), z = runif(150, 10 , 200))
 
 matrix \%>\%
-  echart_("x") \%>\%
-  eheatmap_("y", "z")
+  echart(x) \%>\%
+  eheatmap(y, z)
 
 }
 \seealso{

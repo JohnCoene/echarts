@@ -35,8 +35,8 @@ venn <- data.frame(name = c("banana", "pineapple", "overlap"),
   values = c(20, 50, 10))
 
 venn \%>\%
-  echart_("name") \%>\%
-  evenn_("values") \%>\%
+  echart(name) \%>\%
+  evenn(values) \%>\%
   etheme("macarons2")
 
 }

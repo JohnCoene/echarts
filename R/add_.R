@@ -15,6 +15,7 @@
 #' @param ... any other argument to pass to the serie.
 #'
 #' @examples
+#' \dontrun{
 #' mtcars %>%
 #'   echart_("mpg") %>%
 #'   ebar_("qsec")
@@ -38,6 +39,7 @@
 #'   ebar(w, "grp2") %>%
 #'   etheme("macarons") %>%
 #'   etooltip(trigger = "axis")
+#' }
 #'
 #' @seealso \href{http://echarts.baidu.com/echarts2/doc/option-en.html#series-i(bar)}{official bar options docs}
 #'
@@ -129,6 +131,7 @@ ebar_ <- function(p, serie, name = NULL, stack = NULL, clickable = TRUE, xAxisIn
 #' }
 #'
 #' @examples
+#' \dontrun{
 #' df <- data.frame(x = 1:50, y = runif(50, 5, 10), z = runif(50, 7, 12), w = runif(50, 10, 13))
 #'
 #' df %>%
@@ -156,6 +159,7 @@ ebar_ <- function(p, serie, name = NULL, stack = NULL, clickable = TRUE, xAxisIn
 #'   etooltip() %>%
 #'   elegend() %>%
 #'   etoolbox_magic(type = list("line", "bar"))
+#' }
 #'
 #' @seealso \href{http://echarts.baidu.com/echarts2/doc/option-en.html#series-i(line)}{official line options docs}
 #'
@@ -215,6 +219,7 @@ eline_ <- function(p, serie, name = NULL, stack = NULL, clickable = TRUE, xAxisI
 #' @param ... any other argument to pass to the serie. i.e.: same parameters as \code{\link{eline}} or \code{\link{eline_}}
 #'
 #' @examples
+#' \dontrun{
 #' df <- data.frame(x = LETTERS[1:10], y = runif(10, 30, 70), z = runif(10, 10, 50))
 #'
 #' df %>%
@@ -233,6 +238,7 @@ eline_ <- function(p, serie, name = NULL, stack = NULL, clickable = TRUE, xAxisI
 #'   echart(x) %>%
 #'   earea(z, stack = "grp") %>%
 #'   earea(y)
+#' }
 #'
 #' @name earea
 #' @rdname earea
@@ -301,8 +307,8 @@ earea_ <- function(p, serie, name = NULL, stack = NULL, smooth = TRUE, ...){
 #'
 #' @examples
 #' mtcars %>%
-#'   echart_("disp") %>%
-#'   escatter_("mpg", symbol = "emptyCircle") %>%
+#'   echart(disp) %>%
+#'   escatter(mpg, symbol = "emptyCircle") %>%
 #'   exAxis()
 #'
 #' mtcars %>%
@@ -377,7 +383,7 @@ escatter_ <- function(p, serie, size = NULL, name = NULL, clickable = TRUE, symb
 #'   value = c(26, 15, 12, 9))
 #'
 #' pie %>%
-#'   echart_("name") %>%
+#'   echart(name) %>%
 #'   epie(value)
 #'
 #' pie %>%
@@ -386,8 +392,8 @@ escatter_ <- function(p, serie, size = NULL, name = NULL, clickable = TRUE, symb
 #'   etheme("helianthus")
 #'
 #' pie %>%
-#'   echart_("name") %>%
-#'   epie_("value", roseType = "radius") %>%
+#'   echart(name) %>%
+#'   epie(value, roseType = "radius") %>%
 #'   etheme("blue")
 #'
 #' @seealso \href{http://echarts.baidu.com/echarts2/doc/option-en.html#series-i(pie)}{official pie options docs}
@@ -476,16 +482,16 @@ epie_ <- function(p, serie, name = NULL, clickable = TRUE, legendHoverLink = TRU
 #'                     value = runif(24, 2, 10))
 #'
 #' radar %>%
-#'   group_by_("grp") %>%
-#'   echart_("axis") %>%
-#'   eradar_("value", symbolSize = 0) %>%
+#'   group_by(grp) %>%
+#'   echart(axis) %>%
+#'   eradar(value, symbolSize = 0) %>%
 #'   elegend() %>%
 #'   etheme("macarons")
 #'
 #' radar %>%
-#'   group_by_("grp") %>%
-#'   echart_("axis") %>%
-#'   eradar_("value", symbolSize = htmlwidgets::JS("function(value){return(value)}")) %>%
+#'   group_by(grp) %>%
+#'   echart(axis) %>%
+#'   eradar(value, symbolSize = htmlwidgets::JS("function(value){return(value)}")) %>%
 #'   elegend() %>%
 #'   etheme("roma")
 #'
@@ -581,8 +587,8 @@ eradar_ <- function(p, serie, name = NULL, clickable = TRUE, symbol = NULL, symb
 #' matrix <- matrix(sample(0:1, 100, replace = TRUE, prob = c(0.9,0.6)), nc = 10)
 #'
 #' matrix %>%
-#'   echart_(LETTERS[1:10]) %>%
-#'   echord_()
+#'   echart(LETTERS[1:10]) %>%
+#'   echord()
 #'
 #' matrix %>%
 #'   echart(LETTERS[1:10]) %>%
@@ -634,12 +640,12 @@ echord_ <- function(p, name = NULL, sort = "none", sortSub = "none", clickable =
 #'   values = round(runif(6, 10, 25)))
 #'
 #' choropleth %>%
-#'   echart_("countries") %>%
-#'   emap_() %>%
-#'   emap_choropleth_("values")
+#'   echart(countries) %>%
+#'   emap() %>%
+#'   emap_choropleth(values)
 #'
 #' choropleth %>%
-#'   echart_("countries") %>%
+#'   echart(countries) %>%
 #'   emap() %>%
 #'   emap_choropleth(values) %>%
 #'   ecolorbar(color = list("red", "yellow"), calculable = TRUE)
@@ -682,10 +688,10 @@ emap_choropleth_ <- function(p, serie){
 #'   target = c("Sydney", "London", "London"))
 #'
 #' coords %>%
-#'   echart_("city") %>%
+#'   echart(city) %>%
 #'   emap() %>%
-#'   emap_coords_("lon", "lat") %>%
-#'   emap_lines_(edges, "source", "target")
+#'   emap_coords(lon, lat) %>%
+#'   emap_lines(edges, source, target)
 #'
 #' @name emap_coords
 #' @rdname emap_coords
@@ -746,6 +752,7 @@ emap_coords_ <- function(p, lon, lat){
 #' }
 #'
 #' @examples
+#' \dontrun{
 #' coords <- data.frame(city = c("London", "New York", "Beijing", "Sydney"),
 #'   lon = c(-0.1167218, -73.98002, 116.3883, 151.18518),
 #'   lat = c(51.49999, 40.74998, 39.92889, -33.92001))
@@ -785,6 +792,7 @@ emap_coords_ <- function(p, lon, lat){
 #'   emap_coords_("lon", "lat") %>%
 #'   emap_points_("value", symbol = "emptyCircle", effect = list(show = TRUE, shadowBlur = 10)) %>%
 #'   etheme("dark")
+#' }
 #'
 #' @seealso \code{\link{emap_coords}} \href{http://echarts.baidu.com/echarts2/doc/option-en.html#series-i(map).markLine}{official map line docs}
 #'
@@ -859,6 +867,7 @@ emap_lines_ <- function(p, edges, source, target, name = NULL, clickable = TRUE,
 #' }
 #'
 #' @examples
+#' \dontrun{
 #' coords <- data.frame(city = c("London", "New York", "Beijing", "Sydney"),
 #'   lon = c(-0.1167218, -73.98002, 116.3883, 151.18518),
 #'   lat = c(51.49999, 40.74998, 39.92889, -33.92001),
@@ -882,6 +891,7 @@ emap_lines_ <- function(p, edges, source, target, name = NULL, clickable = TRUE,
 #'   emap_coords_("lon", "lat") %>%
 #'   emap_points_("value", symbol = "emptyCircle", effect = list(show = TRUE, shadowBlur = 10)) %>%
 #'   etheme("helianthus")
+#' }
 #'
 #' @seealso \href{http://echarts.baidu.com/echarts2/doc/option-en.html#series-i(map).markPoint}{office map points docs}
 #'
@@ -936,14 +946,14 @@ emap_points_ <- function(p, serie, clickable = TRUE, symbol = "pin", symbolSize 
 #'   z = runif(300, 75, 100))
 #'
 #' data %>%
-#'   echart_() %>%
+#'   echart() %>%
 #'   emap(mapType = "china") %>%
-#'   emap_heat_("lon", "lat", "z")
+#'   emap_heat(lon, lat, z)
 #'
 #' data %>%
 #'   echart() %>%
 #'   emap(mapType = "china") %>%
-#'   emap_heat_("lon", "lat", "z", blurSize = 50, minAlpha = 0.3, opacity = 0.8)
+#'   emap_heat(lon, lat, z, blurSize = 50, minAlpha = 0.3, opacity = 0.8)
 #'
 #' @name emap_heat
 #' @rdname emap_heat
@@ -994,6 +1004,7 @@ emap_heat_ <- function(p, lon, lat, z, blurSize = 30, minAlpha = 0.05, valueScal
 #' @param ... any other options to pass to map serie.
 #'
 #' @examples
+#' \dontrun{
 #' coords <- data.frame(city = c("London", "New York", "Beijing", "Sydney"),
 #'   lon = c(-0.1167218, -73.98002, 116.3883, 151.18518),
 #'   lat = c(51.49999, 40.74998, 39.92889, -33.92001),
@@ -1033,6 +1044,7 @@ emap_heat_ <- function(p, lon, lat, z, blurSize = 30, minAlpha = 0.05, valueScal
 #'   emap(mapType = "world|United States of America") %>%
 #'   emap_coords_("lon", "lat") %>%
 #'   emap_points_("values")
+#' }
 #'
 #' @seealso \code{\link{emap_coords}}, \code{\link{emap_heat}}, \code{\link{emap_lines}}, \code{emap_choropleth},
 #' \code{\link{emap_points}}, \href{http://echarts.baidu.com/echarts2/doc/option-en.html#series-i(map)}{official map docs}
@@ -1177,8 +1189,8 @@ egauge_ <- function(p, value, indicator = "", name = NULL, clickable = FALSE, le
 #' funnel <- data.frame(stage = c("View", "Click", "Purchase"), value = c(80, 30, 20))
 #'
 #' funnel %>%
-#'   echart_("stage") %>%
-#'   efunnel_("value")
+#'   echart(stage) %>%
+#'   efunnel(value)
 #'
 #' @seealso \href{http://echarts.baidu.com/echarts2/doc/option-en.html#series-i(funnel)}{official funnel docs}
 #'
@@ -1247,8 +1259,8 @@ efunnel_ <- function(p, serie, name = NULL, clickable = TRUE, legendHoverLink = 
 #'   values = c(20, 50, 10))
 #'
 #' venn %>%
-#'   echart_("name") %>%
-#'   evenn_("values") %>%
+#'   echart(name) %>%
+#'   evenn(values) %>%
 #'   etheme("macarons2")
 #'
 #' @seealso \href{http://echarts.baidu.com/echarts2/doc/option-en.html#series-i(venn)}{official venn docs}
@@ -1307,8 +1319,8 @@ evenn_ <- function(p, serie, name = NULL, clickable = TRUE, z = 2, zlevel = 0, t
 #'   freq = c(20, 17, 15, 7), color = c("red", "orange", "yellow", "grey"))
 #'
 #' tf %>%
-#'   echart_("terms") %>%
-#'   ecloud_("freq", "color") %>%
+#'   echart(terms) %>%
+#'   ecloud(freq, color) %>%
 #'   etooltip()
 #'
 #' @seealso \href{http://echarts.baidu.com/echarts2/doc/option-en.html#series-i(wordCloud)}{official wordcloud docs}
@@ -1371,8 +1383,8 @@ ecloud_ <- function(p, freq, color = NULL, name = NULL, clickable = TRUE, center
 #' matrix <- data.frame(x = runif(150, 10, 500), y = runif(150, 10, 500), z = runif(150, 10 , 200))
 #'
 #' matrix %>%
-#'   echart_("x") %>%
-#'   eheatmap_("y", "z")
+#'   echart(x) %>%
+#'   eheatmap(y, z)
 #'
 #' @seealso \href{http://echarts.baidu.com/echarts2/doc/option-en.html#series-i(heatmap)}{official heatmap docs}
 #'
@@ -1471,8 +1483,8 @@ edata_ <- function(p, data, x){
 #' df <- data.frame(name = LETTERS[1:10], values = round(runif(10, 1, 10)))
 #'
 #' df %>%
-#'   echart_("name") %>%
-#'   etreemap_("values") %>%
+#'   echart(name) %>%
+#'   etreemap(values) %>%
 #'   etooltip(trigger = "item") %>%
 #'   etheme("macarons")
 #'
@@ -1528,11 +1540,6 @@ etreemap_ <- function(p, serie, name = NULL, itemStyle = NULL, clickable = FALSE
 #'                     closing = c(200.72, 198.85, 199.05, 203.73, 204.08, 208.11, 211.88),
 #'                     low = c(197.82, 198.07, 197.90, 198.10, 202.00, 201.50, 207.60),
 #'                     high = c(203.32, 200.67, 200.00, 203.95, 204.90, 208.44, 213.17))
-#'
-#' stock %>%
-#'   echart_("date") %>%
-#'   ecandle_("opening", "closing", "low", "high")
-#'
 #'
 #' js <- htmlwidgets::JS("function(params){
 #'   var res = 'opening: ' + params.value[0] + '<br>' + 'closing: ' + params.value[3];

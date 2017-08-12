@@ -43,6 +43,7 @@ ebar_(p, serie, name = NULL, stack = NULL, clickable = TRUE,
 Add bar serie.
 }
 \examples{
+\dontrun{
 mtcars \%>\%
   echart_("mpg") \%>\%
   ebar_("qsec")
@@ -66,6 +67,7 @@ df \%>\%
   ebar(w, "grp2") \%>\%
   etheme("macarons") \%>\%
   etooltip(trigger = "axis")
+}
 
 }
 \seealso{

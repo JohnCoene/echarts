@@ -27,6 +27,7 @@ earea_(p, serie, name = NULL, stack = NULL, smooth = TRUE, ...)
 Add area serie.
 }
 \examples{
+\dontrun{
 df <- data.frame(x = LETTERS[1:10], y = runif(10, 30, 70), z = runif(10, 10, 50))
 
 df \%>\%
@@ -45,5 +46,6 @@ df \%>\%
   echart(x) \%>\%
   earea(z, stack = "grp") \%>\%
   earea(y)
+}
 
 }

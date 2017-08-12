@@ -53,7 +53,7 @@ pie <- data.frame(name = c("banana", "apple", "pineapple", "onion"),
   value = c(26, 15, 12, 9))
 
 pie \%>\%
-  echart_("name") \%>\%
+  echart(name) \%>\%
   epie(value)
 
 pie \%>\%
@@ -62,8 +62,8 @@ pie \%>\%
   etheme("helianthus")
 
 pie \%>\%
-  echart_("name") \%>\%
-  epie_("value", roseType = "radius") \%>\%
+  echart(name) \%>\%
+  epie(value, roseType = "radius") \%>\%
   etheme("blue")
 
 }

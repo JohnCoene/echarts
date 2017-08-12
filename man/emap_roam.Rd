@@ -51,10 +51,10 @@ coords <- data.frame(city = c("London", "New York", "Beijing", "Sydney"),
   values = runif(4, 10, 20))
 
 coords \%>\%
-  echart_("city") \%>\%
+  echart(city) \%>\%
   emap() \%>\%
-  emap_coords_("lon", "lat") \%>\%
-  emap_points_("values") \%>\%
+  emap_coords(lon, lat) \%>\%
+  emap_points(values) \%>\%
   emap_roam(mapTypeControl = list(world = TRUE))
 
 }

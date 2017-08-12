@@ -40,13 +40,13 @@ data <- data.frame(lon = runif(300, 90, 120),
   z = runif(300, 75, 100))
 
 data \%>\%
-  echart_() \%>\%
+  echart() \%>\%
   emap(mapType = "china") \%>\%
-  emap_heat_("lon", "lat", "z")
+  emap_heat(lon, lat, z)
 
 data \%>\%
   echart() \%>\%
   emap(mapType = "china") \%>\%
-  emap_heat_("lon", "lat", "z", blurSize = 50, minAlpha = 0.3, opacity = 0.8)
+  emap_heat(lon, lat, z, blurSize = 50, minAlpha = 0.3, opacity = 0.8)
 
 }

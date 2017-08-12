@@ -38,11 +38,6 @@ stock <- data.frame(date = date,
                     low = c(197.82, 198.07, 197.90, 198.10, 202.00, 201.50, 207.60),
                     high = c(203.32, 200.67, 200.00, 203.95, 204.90, 208.44, 213.17))
 
-stock \%>\%
-  echart_("date") \%>\%
-  ecandle_("opening", "closing", "low", "high")
-
-
 js <- htmlwidgets::JS("function(params){
   var res = 'opening: ' + params.value[0] + '<br>' + 'closing: ' + params.value[3];
   return res}")
