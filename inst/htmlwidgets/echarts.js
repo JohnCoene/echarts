@@ -10,7 +10,7 @@ HTMLWidgets.widget({
 
     return {
 
-      renderValue: function(x) {
+      renderValue: function(x, instance) {
 
         var mint = {color:['#8aedd5','#93bc9e','#cef1db','#7fe579','#a6d7c2','#bef0bb','#99e2vb','#94f8a8','#7de5b8','#4dfb70'],dataRange:{color:['#93bc92','#bef0bb']},k:{itemStyle:{normal:{color:'#8aedd5',color0:'#7fe579',lineStyle:{width:1,color:'#8aedd5',color0:'#7fe579'}},emphasis:{}}},pie:{itemStyle:{normal:{borderColor:'#fff',borderWidth:1,label:{show:true,position:'outer',textStyle:{color:'#1b1b1b'},lineStyle:{color:'#1b1b1b'}},labelLine:{show:true,length:20,lineStyle:{width:1,type:'solid'}}}}},map:{mapType:'china',mapLocation:{x:'center',y:'center'},showLegendSymbol:true,itemStyle:{normal:{borderColor:'#fff',borderWidth:1,areaStyle:{color:'#ccc'},label:{show:false,textStyle:{color:'rgba(139,69,19,1)'}}},emphasis:{borderColor:'rgba(0,0,0,0)',borderWidth:1,areaStyle:{color:'#f3f39d'},label:{show:false,textStyle:{color:'rgba(139,69,19,1)'}}}}},force:{itemStyle:{normal:{label:{show:false},nodeStyle:{brushType:'both',strokeColor:'#49b485'},linkStyle:{strokeColor:'#49b485'}},emphasis:{label:{show:false},nodeStyle:{},linkStyle:{}}}},gauge:{axisLine:{show:true,lineStyle:{color:[[0.2,'#93bc9e'],[0.8,'#8aedd5'],[1,'#a6d7c2']],width:8}},axisTick:{splitNumber:10,length:12,lineStyle:{color:'auto'}},axisLabel:{textStyle:{color:'auto'}},splitLine:{length:18,lineStyle:{color:'auto'}},pointer:{length:'90%',color:'auto'},title:{textStyle:{color:'#333'}},detail:{textStyle:{color:'auto'}}}
 };
@@ -79,8 +79,8 @@ var solarlight = {backgroundColor:'#fdf6e3',color:["#b58900","#cb4b16","#dc322f"
 
       },
 
-      resize: function(width, height) {
-        myChart.resize();
+      resize: function(width, height, instance) {
+        instance.resize();
       }
 
     };
