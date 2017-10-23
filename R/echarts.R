@@ -63,11 +63,9 @@ echart <- function(data, x, width = NULL, height = NULL, elementId = NULL) {
     x,
     width = width,
     height = height,
-    sizingPolicy = htmlwidgets::sizingPolicy(defaultWidth = "100%",
-                                             knitr.defaultWidth = "100%",
+    sizingPolicy = htmlwidgets::sizingPolicy(knitr.defaultWidth = "100%",
                                              knitr.defaultHeight = 400,
                                              viewer.fill = TRUE,
-                                             browser.fill = TRUE,
                                              padding = 0),
     package = 'echarts',
     elementId = elementId
