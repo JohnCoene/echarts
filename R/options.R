@@ -218,9 +218,9 @@ elegend <- function(p, legend, show = TRUE, zlevel = 0, z = 4, orient = "horizon
 etheme <- function(p, theme = "default"){
 
   themes <- c("default", "mint", "macarons", "macarons2", "green", "blue", "dark", "blue", "dark", "gray", "helianthus",
-              "red", "roma", "sakura", "shine", "infographic", "solarlight")
+              "red", "roma", "sakura", "shine", "infographic", "solarlight", "wef")
 
-  if(!tolower(theme) %in% themes) stop("invalid theme")
+  if(!tolower(theme) %in% themes) stop("invalid theme", call. = FALSE)
 
   p$x$theme <- tolower(theme)
 
