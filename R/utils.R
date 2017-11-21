@@ -690,3 +690,7 @@ candle_data_ <- function(data, opening, closing, minimum, maximum){
 
   return(data)
 }
+
+valid_effects <- function(){
+  c('spin' , 'bar' , 'ring' , 'whirling' , 'dynamicLine' , 'bubble')
+}

@@ -584,3 +584,62 @@ egrid <- function(p, backgroundColor = NULL, borderWidth = 1, borderColor = NULL
   p
 
 }
+
+#' Data loading options
+#'
+#' Customise the data loading options.
+#'
+#' @param p an echart object.
+#' @param text the loading text that appears when the chart is set into the loading state, use \code{\\n} for new line.
+#' @param effect loading effect, see details for valid values.
+#' @param progress specifies the current progress \code{[0~1]}. Applicable to specific effects.
+#' @param x,y position, takes \code{left}, \code{right}, \code{center}.
+#' @param ... any other parameters, i.e.:\code{textStyle}.
+#'
+#' @details
+#' Valid \code{effect} values:
+#' \itemize{
+#'   \item{spin}
+#'   \item{bar}
+#'   \item{ring}
+#'   \item{whirling}
+#'   \item{dynamicLine}
+#'   \item{bubble}
+#' }
+#'
+#' @examples
+#' # no data
+#' df <- data.frame(x = NA, y = NA) %>%
+#'   dplyr::filter(!is.na(x))
+#'
+#' df %>%
+#'   echart(x) %>%
+#'   eline(y)
+#'
+#' df %>%
+#'   echart(x) %>%
+#'   eline(y) %>%
+#'   eload(effect = "ring", text = "loading data...")
+#'
+#' df %>%
+#'   echart(x) %>%
+#'   eline(y) %>%
+#'   eload(effect = "dynamicLine")
+#'
+#' @export
+eload <- function(p, text = "loading", effect = "bubble", x = "center", y = "center", progress = NULL, ...){
+
+  if(missing(p)) stop("missing echarts object", call. = FALSE)
+  if(!effect %in% valid_effects()) stop("invalid effect", call. = FALSE)
+
+  opts <- list(...)
+  opts$text <- text
+  opts$effect <- effect
+  opts$x <- x
+  opts$y <-y
+  opts$progress <- if(!is.null(progress)) progress
+
+  p$x$options$noDataLoadingOption <- opts
+
+  p
+}
