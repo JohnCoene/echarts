@@ -27,6 +27,7 @@ valid themes:
   \item{\code{gray}}
   \item{\code{helianthus}}
   \item{\code{red}}
+  \item{\code{wef}}
   \item{\code{roma}}
   \item{\code{sakura}}
   \item{\code{shine}}

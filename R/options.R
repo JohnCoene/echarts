@@ -200,6 +200,7 @@ elegend <- function(p, legend, show = TRUE, zlevel = 0, z = 4, orient = "horizon
 #'   \item{\code{gray}}
 #'   \item{\code{helianthus}}
 #'   \item{\code{red}}
+#'   \item{\code{wef}}
 #'   \item{\code{roma}}
 #'   \item{\code{sakura}}
 #'   \item{\code{shine}}
