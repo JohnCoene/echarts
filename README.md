@@ -6,6 +6,8 @@
 
 R htmlwidget for Baidu's [ECharts](http://echarts.baidu.com) 2.2.7
 
+![echarts](https://raw.githubusercontent.com/JohnCoene/echarts/master/echarts.png)
+
 ## Installation
 
 You can install echarts from github with:
@@ -28,11 +30,13 @@ devtools::install_github("JohnCoene/echarts")
 9. force networks
 10. word-clouds
 11. maps
-12. treemaps
-13. candlestick charts
-14. themes
-15. responsive
-16. animations
+12. candlestick charts
+13. themes
+14. responsive
+15. animations
+16. data loading effects
+17. tons of options
 
-### [In-depth examples](http://john-coene.com/htmlwidgets/echarts/)
-### [Manual](http://john-coene.com/htmlwidgets/echarts/echarts.pdf)
+## Documentation
+
+Visit the [website](http://john-coene.com/htmlwidgets/echarts/) for examples, documentation and [manual](http://john-coene.com/htmlwidgets/echarts/echarts.pdf)
