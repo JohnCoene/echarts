@@ -98,7 +98,7 @@ enodes_ <- function(p, nodes, name, label = NULL, value = NULL, category = NULL,
 #' @rdname eforce
 #'
 #' @export
-eforce_ <- function(p, name = NULL, large = FALSE, center = list("50%", "50%"), roam = FALSE, size = "100%", ribbonType = FALSE,
+eforce_ <- function(p, name = NULL, large = FALSE, center = list("50%", "50%"), roam = FALSE, size = "100%",
                     minRadius = 10, maxRadius = 20, linkSymbol = "none", linkSymbolSize = list(10, 15), scaling = 1,
                     gravity = 1, draggable = TRUE, useWorker = TRUE, steps = 1, z = 2, zlevel = 0, ...){
 

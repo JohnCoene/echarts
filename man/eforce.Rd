@@ -6,16 +6,16 @@
 \title{Build force network}
 \usage{
 eforce(p, name = NULL, large = FALSE, center = list("50\%", "50\%"),
-  roam = FALSE, size = "100\%", ribbonType = FALSE, minRadius = 10,
-  maxRadius = 20, linkSymbol = "none", linkSymbolSize = list(10, 15),
-  scaling = 1, gravity = 1, draggable = TRUE, useWorker = TRUE,
-  steps = 1, z = 2, zlevel = 0, ...)
+  roam = FALSE, size = "100\%", minRadius = 10, maxRadius = 20,
+  linkSymbol = "none", linkSymbolSize = list(10, 15), scaling = 1,
+  gravity = 1, draggable = TRUE, useWorker = TRUE, steps = 1, z = 2,
+  zlevel = 0, ...)
 
 eforce_(p, name = NULL, large = FALSE, center = list("50\%", "50\%"),
-  roam = FALSE, size = "100\%", ribbonType = FALSE, minRadius = 10,
-  maxRadius = 20, linkSymbol = "none", linkSymbolSize = list(10, 15),
-  scaling = 1, gravity = 1, draggable = TRUE, useWorker = TRUE,
-  steps = 1, z = 2, zlevel = 0, ...)
+  roam = FALSE, size = "100\%", minRadius = 10, maxRadius = 20,
+  linkSymbol = "none", linkSymbolSize = list(10, 15), scaling = 1,
+  gravity = 1, draggable = TRUE, useWorker = TRUE, steps = 1, z = 2,
+  zlevel = 0, ...)
 }
 \arguments{
 \item{p}{an echart objects.}
@@ -29,8 +29,6 @@ eforce_(p, name = NULL, large = FALSE, center = list("50\%", "50\%"),
 \item{roam}{set to \code{TRUE} to enable zoom and drag.}
 
 \item{size}{size of layout.}
-
-\item{ribbonType}{whether to use ribbons.}
 
 \item{minRadius, maxRadius}{minimum and maximum radius of nodes.}
 

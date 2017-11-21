@@ -119,7 +119,6 @@ enodes <- function(p, nodes, name, label, value, category, symbolSize, depth, ig
 #' @param center center of network.
 #' @param roam set to \code{TRUE} to enable zoom and drag.
 #' @param size size of layout.
-#' @param ribbonType whether to use ribbons.
 #' @param minRadius,maxRadius minimum and maximum radius of nodes.
 #' @param linkSymbol can be set to \code{arrow}.
 #' @param linkSymbolSize size of \code{symbol}.
@@ -150,12 +149,12 @@ enodes <- function(p, nodes, name, label, value, category, symbolSize, depth, ig
 #' @seealso \code{\link{enodes}} \code{\link{eforce}}
 #'
 #' @export
-eforce <- function(p, name = NULL, large = FALSE, center = list("50%", "50%"), roam = FALSE, size = "100%", ribbonType = FALSE,
+eforce <- function(p, name = NULL, large = FALSE, center = list("50%", "50%"), roam = FALSE, size = "100%",
                    minRadius = 10, maxRadius = 20, linkSymbol = "none", linkSymbolSize = list(10, 15), scaling = 1,
                    gravity = 1, draggable = TRUE, useWorker = TRUE, steps = 1, z = 2, zlevel = 0, ...){
 
   p %>%
-    eforce_(name, large, center, roam, size, ribbonType, minRadius, maxRadius, linkSymbol, linkSymbolSize, scaling,
+    eforce_(name, large, center, roam, size, minRadius, maxRadius, linkSymbol, linkSymbolSize, scaling,
            gravity, draggable, useWorker, steps, z, zlevel, ...)
 
 }
