@@ -53,7 +53,7 @@ enodes_ <- function(p, nodes, name, label = NULL, value = NULL, category = NULL,
 
   if(missing(name) || missing(nodes)) stop("must pass nodes and name column")
 
-  name <- nodes[, name]
+  name <- as.character(nodes[, name])
   ignore <- if(length(ignore) > 1) nodes[, ignore]
   symbol <- if(length(symbol) > 1) nodes[, symbol]
   fixX <- if(length(fixX) > 1) nodes[, fixX]

@@ -333,8 +333,8 @@ build_nodes <- function(nodes, name, label = NULL, value = NULL, category = NULL
 
 build_links_ <- function(edges, source, target, weight = 1){
 
-  source <- edges[, source]
-  target <- edges[, target]
+  source <- as.character(edges[, source])
+  target <- as.character(edges[, target])
   if(class(weight)[1] == "character") edges[, weight]
 
   links <- cbind.data.frame(source, target)
