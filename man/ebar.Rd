@@ -12,7 +12,7 @@ ebar(p, serie, name = NULL, stack = NULL, clickable = TRUE,
   tooltip, ...)
 
 ebar_(p, serie, name = NULL, stack = NULL, clickable = TRUE,
-  xAxisIndex = 0, yAxisIndex = 0, barGap = "30\%",
+  xAxisIndex = 0, yAxisIndex = 0, barGap = "100\%",
   barCategoryGap = "20\%", legendHoverLink = TRUE, z = 2, zlevel = 0,
   tooltip, ...)
 }
