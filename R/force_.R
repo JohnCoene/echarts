@@ -47,7 +47,8 @@ elinks_ <- function(p, links, source, target, weight = 1){
 #' @rdname enodes
 #'
 #' @export
-enodes_ <- function(p, nodes, name, label = NULL, value = NULL, category = NULL, symbolSize = NULL, depth = NULL, ignore = FALSE,
+enodes_ <- function(p, nodes, name, label = NULL, value = NULL, category = NULL,
+                    symbolSize = NULL, depth = NULL, ignore = FALSE,
                     symbol = "circle", fixX = FALSE, fixY = FALSE){
 
 
@@ -73,6 +74,13 @@ enodes_ <- function(p, nodes, name, label = NULL, value = NULL, category = NULL,
 
   row.names(vertices) <- NULL
   vertices <- apply(vertices, 1, as.list)
+
+  # removes inserted white spaces
+  vertices <- lapply(vertices, function(x){
+    lapply(x, function(y){
+      trimws(y)
+    })
+  })
 
   previous <- length(p$x$options$series)
 
