@@ -6,7 +6,7 @@
 
 R htmlwidget for Baidu's [ECharts](http://echarts.baidu.com) 2.2.7
 
-![echarts](https://raw.githubusercontent.com/JohnCoene/echarts/master/echarts.png)
+![echarts](http://john-coene.com/img/echarts_sticker.png)
 
 ## Installation
 
