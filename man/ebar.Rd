@@ -9,12 +9,12 @@
 ebar(p, serie, name = NULL, stack = NULL, clickable = TRUE,
   xAxisIndex = 0, yAxisIndex = 0, barGap = "100\%",
   barCategoryGap = "20\%", legendHoverLink = TRUE, z = 2, zlevel = 0,
-  tooltip, ...)
+  ...)
 
 ebar_(p, serie, name = NULL, stack = NULL, clickable = TRUE,
-  xAxisIndex = 0, yAxisIndex = 0, barGap = "30\%",
+  xAxisIndex = 0, yAxisIndex = 0, barGap = "100\%",
   barCategoryGap = "20\%", legendHoverLink = TRUE, z = 2, zlevel = 0,
-  tooltip, ...)
+  ...)
 }
 \arguments{
 \item{p}{an echart object.}
@@ -34,8 +34,6 @@ ebar_(p, serie, name = NULL, stack = NULL, clickable = TRUE,
 \item{legendHoverLink}{enables legend hover links.}
 
 \item{z, zlevel}{first and second grade cascading control, the higher z the closer to the top.}
-
-\item{tooltip}{style of tooltip.}
 
 \item{...}{any other argument to pass to the serie.}
 }
@@ -66,7 +64,8 @@ df \%>\%
   ebar(z, stack = "grp") \%>\%
   ebar(w, "grp2") \%>\%
   etheme("macarons") \%>\%
-  etooltip(trigger = "axis")
+  etooltip(trigger = "axis") \%>\%
+  etheme("blue")
 }
 
 }

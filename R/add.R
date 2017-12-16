@@ -1,14 +1,12 @@
 #' @rdname ebar
 #' @export
 ebar <- function(p, serie, name = NULL, stack = NULL, clickable = TRUE, xAxisIndex = 0, yAxisIndex = 0, barGap = "100%",
-                 barCategoryGap = "20%", legendHoverLink = TRUE, z = 2, zlevel = 0, tooltip, ...){
+                 barCategoryGap = "20%", legendHoverLink = TRUE, z = 2, zlevel = 0, ...){
 
   serie <- deparse(substitute(serie))
-  tooltip <- if(missing(tooltip)) default_tooltip(trigger = "axis")
 
   p %>%
-    ebar_(serie, name, stack, clickable, xAxisIndex, yAxisIndex, barGap, barCategoryGap, legendHoverLink, z, zlevel,
-          tooltip, ...)
+    ebar_(serie, name, stack, clickable, xAxisIndex, yAxisIndex, barGap, barCategoryGap, legendHoverLink, z, zlevel, ...)
 
 }
 

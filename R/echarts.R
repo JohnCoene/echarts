@@ -120,7 +120,7 @@ echart_ <- function(data, x, width = NULL, height = NULL, elementId = NULL) {
 
   # create widget
   htmlwidgets::createWidget(
-    name = 'echart',
+    name = 'echarts',
     x,
     width = width,
     height = height,

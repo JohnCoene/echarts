@@ -11,7 +11,6 @@
 #' @param barGap,barCategoryGap distance between each bar.
 #' @param legendHoverLink enables legend hover links.
 #' @param z,zlevel first and second grade cascading control, the higher z the closer to the top.
-#' @param tooltip style of tooltip.
 #' @param ... any other argument to pass to the serie.
 #'
 #' @examples
@@ -38,7 +37,8 @@
 #'   ebar(z, stack = "grp") %>%
 #'   ebar(w, "grp2") %>%
 #'   etheme("macarons") %>%
-#'   etooltip(trigger = "axis")
+#'   etooltip(trigger = "axis") %>%
+#'   etheme("blue")
 #' }
 #'
 #' @seealso \href{http://echarts.baidu.com/echarts2/doc/option-en.html#series-i(bar)}{official bar options docs}
@@ -47,13 +47,11 @@
 #' @rdname ebar
 #'
 #' @export
-ebar_ <- function(p, serie, name = NULL, stack = NULL, clickable = TRUE, xAxisIndex = 0, yAxisIndex = 0, barGap = "30%",
-                 barCategoryGap = "20%", legendHoverLink = TRUE, z = 2, zlevel = 0, tooltip, ...){
+ebar_ <- function(p, serie, name = NULL, stack = NULL, clickable = TRUE, xAxisIndex = 0, yAxisIndex = 0, barGap = "100%",
+                 barCategoryGap = "20%", legendHoverLink = TRUE, z = 2, zlevel = 0, ...){
 
   # test input
   if(missing(serie)) stop("must pass serie", call. = FALSE)
-
-  tooltip <- if(missing(tooltip)) default_tooltip(trigger = "axis")
 
   data <- get_dat(serie)
 
@@ -72,7 +70,6 @@ ebar_ <- function(p, serie, name = NULL, stack = NULL, clickable = TRUE, xAxisIn
     opts$legendHoverLink <- legendHoverLink
     opts$z <- z
     opts$zlevel <- zlevel
-    opts$tooltip <- tooltip
 
     p$x$options$series <- append(p$x$options$series, list(opts))
   }
