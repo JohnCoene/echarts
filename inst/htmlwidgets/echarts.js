@@ -142,12 +142,20 @@ if (HTMLWidgets.shinyMode) {
       }
   });
 
-    Shiny.addCustomMessageHandler('eadd_linedata_p',
+  Shiny.addCustomMessageHandler('eadd_line_p',
     function(data) {
       var chart = get_echart_object(data.id);
       if (typeof chart != 'undefined') {
-        // chart.unload();
         chart.addData(data.data);
+      }
+  });
+
+  Shiny.addCustomMessageHandler('emark_point_p',
+    function(data) {
+      var chart = get_echart_object(data.id);
+      if (typeof chart != 'undefined') {
+        console.log(data.data);
+        chart.addMarkPoint(data.data);
       }
   });
 }

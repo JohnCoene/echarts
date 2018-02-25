@@ -12,11 +12,11 @@
 #'   titlePanel("echarts Proxies"),
 #'   fluidRow(
 #'     column(
-#'       4,
+#'       3,
 #'       actionButton("getOptions", "get options")
 #'     ),
 #'     column(
-#'       4,
+#'       3,
 #'       selectInput(
 #'         "theme",
 #'         "change theme",
@@ -42,8 +42,16 @@
 #'       )
 #'     ),
 #'     column(
-#'       4,
+#'       3,
 #'       actionButton("addData", "add data")
+#'     ),
+#'     column(
+#'       3,
+#'       numericInput(
+#'         "markPoint",
+#'         "Mark point",
+#'         10
+#'       )
 #'     )
 #'   ),
 #'   fluidRow(
@@ -57,14 +65,22 @@
 #'   output$chart <- renderEcharts(
 #'     df %>%
 #'       echart(x) %>%
-#'       eline(y, name = "Metric", stack = "grp1") %>%
-#'       earea(w, name = "Variable", stack = "grp2") %>%
-#'       earea(z, name = "Variable", stack = "grp2") %>%
+#'       earea(y, name = "Metric", stack = "grp1") %>%
+#'       eline(w, name = "Variable", stack = "grp2") %>%
+#'       eline(z, name = "Var", stack = "grp3") %>%
 #'       etitle("echarts", "and its Shiny proxies")
 #'   )
 #'
-#'   reactive_data <- reactive({
-#'     data.frame(x = 1:50, y = runif(50, 5, 10), z = runif(50, 7, 12), w = runif(50, 10, 13))
+#'   reactive_1 <- eventReactive(input$addData, {
+#'     runif(1, 5, 13)
+#'   })
+#'
+#'   reactive_2 <- eventReactive(input$addData, {
+#'     runif(1, 5, 13)
+#'   })
+#'
+#'   reactive_3 <- eventReactive(input$addData, {
+#'     runif(1, 5, 13)
 #'   })
 #'
 #'   observeEvent(input$getOptions, {
@@ -79,7 +95,18 @@
 #'
 #'   observeEvent(input$addData, {
 #'     echartsProxy("chart") %>%
-#'       eadd_linedata_p(reactive_data(), "y")
+#'       edata_p(index = 0, reactive_1()) %>%
+#'       edata_p(index = 1, reactive_2()) %>%
+#'       edata_p(index = 2, reactive_3())
+#'   })
+#'
+#'   observeEvent(input$markPoint, {
+#'     data = list(
+#'       name = "point",
+#'       value = input$markPoint,
+#'       x = 20,
+#'       y = 10
+#'     )
 #'   })
 #' }
 #'
@@ -99,11 +126,11 @@ eget_options_p <- function(proxy){
 
 #' @rdname proxies
 #' @export
-eadd_line_p <- function(proxy, data, serie, head = FALSE, grow = FALSE){
+edata_p <- function(proxy, index, data, head = FALSE, grow = FALSE){
 
-  data <- list(id = proxy$id, data = xy_data_(data, serie, FALSE))
+  data <- list(id = proxy$id, data = list(list(index, data, head, grow)))
 
-  proxy$session$sendCustomMessage("eadd_linedata_p", data)
+  proxy$session$sendCustomMessage("eadd_line_p", data)
 
   return(proxy)
 }
@@ -121,6 +148,27 @@ etheme_p <- function(proxy, theme){
   data <- list(id = proxy$id, theme = theme)
 
   proxy$session$sendCustomMessage("etheme_p", data)
+
+  return(proxy)
+}
+
+#' @rdname proxies
+#' @export
+emark_point_p <- function(proxy, index, data = list(), clickable = TRUE, symbol = "pin", symbol.size = 10,
+                          symbol.rotate = NULL, large = FALSE, effect = NULL){
+
+  opts <- list()
+  opts$clickable <- clickable
+  opts$symbol = symbol
+  opts$symbolSize <- symbol.size
+  opts$symbolRotate <- symbol.rotate
+  opts$large <- large
+  opts$effect <- effect
+  opts$data <- data
+
+  data <- list(id = proxy$id, data = opts)
+
+  proxy$session$sendCustomMessage("emark_point_p", data)
 
   return(proxy)
 }

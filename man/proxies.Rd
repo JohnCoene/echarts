@@ -2,13 +2,13 @@
 % Please edit documentation in R/proxies.R
 \name{eget_options_p}
 \alias{eget_options_p}
-\alias{eadd_linedata_p}
+\alias{edata_p}
 \alias{etheme_p}
 \title{echarts Shiny proxies}
 \usage{
 eget_options_p(proxy)
 
-eadd_linedata_p(proxy, data, serie, head = FALSE, grow = FALSE)
+edata_p(proxy, index, data, head = FALSE, grow = FALSE)
 
 etheme_p(proxy, theme)
 }
@@ -71,14 +71,22 @@ server <- function(input, output){
   output$chart <- renderEcharts(
     df \%>\%
       echart(x) \%>\%
-      eline(y, name = "Metric", stack = "grp1") \%>\%
-      earea(w, name = "Variable", stack = "grp2") \%>\%
-      earea(z, name = "Variable", stack = "grp2") \%>\%
+      earea(y, name = "Metric", stack = "grp1") \%>\%
+      eline(w, name = "Variable", stack = "grp2") \%>\%
+      eline(z, name = "Var", stack = "grp3") \%>\%
       etitle("echarts", "and its Shiny proxies")
   )
 
-  reactive_data <- reactive({
-    data.frame(x = 1:50, y = runif(50, 5, 10), z = runif(50, 7, 12), w = runif(50, 10, 13))
+  reactive_1 <- eventReactive(input$addData, {
+    runif(1, 5, 13)
+  })
+
+  reactive_2 <- eventReactive(input$addData, {
+    runif(1, 5, 13)
+  })
+
+  reactive_3 <- eventReactive(input$addData, {
+    runif(1, 5, 13)
   })
 
   observeEvent(input$getOptions, {
@@ -93,7 +101,9 @@ server <- function(input, output){
 
   observeEvent(input$addData, {
     echartsProxy("chart") \%>\%
-      eadd_linedata_p(reactive_data(), "y")
+      edata_p(index = 0, reactive_1()) \%>\%
+      edata_p(index = 1, reactive_2()) \%>\%
+      edata_p(index = 2, reactive_3())
   })
 }
 
