@@ -218,6 +218,8 @@ elegend <- function(p, legend, show = TRUE, zlevel = 0, z = 4, orient = "horizon
 #' @export
 etheme <- function(p, theme = "default"){
 
+  if(tolower(theme) == "grey") theme <- "gray"
+
   themes <- c("default", "mint", "macarons", "macarons2", "green", "blue", "dark", "blue", "dark", "gray", "helianthus",
               "red", "roma", "sakura", "shine", "infographic", "solarlight", "wef")
 

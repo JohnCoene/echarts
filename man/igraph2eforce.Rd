@@ -25,6 +25,6 @@ links <- igraph_links(g)
 echart() \%>\%
   eforce_() \%>\%
   enodes_(nodes, "name", ) \%>\%
-  elinks_(edges, "source", "target")
+  elinks_(links, "source", "target")
 
 }

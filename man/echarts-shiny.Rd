@@ -4,11 +4,14 @@
 \alias{echarts-shiny}
 \alias{echartsOutput}
 \alias{renderEcharts}
+\alias{echartsProxy}
 \title{Shiny bindings for echarts}
 \usage{
 echartsOutput(outputId, width = "100\%", height = "400px")
 
 renderEcharts(expr, env = parent.frame(), quoted = FALSE)
+
+echartsProxy(id, session = shiny::getDefaultReactiveDomain())
 }
 \arguments{
 \item{outputId}{output variable to read from}
@@ -23,6 +26,10 @@ string and have \code{'px'} appended.}
 
 \item{quoted}{Is \code{expr} a quoted expression (with \code{quote()})? This
 is useful if you want to save an expression in a variable.}
+
+\item{id}{target chart id.}
+
+\item{session}{shiny session}
 }
 \description{
 Output and render functions for using echarts within Shiny
