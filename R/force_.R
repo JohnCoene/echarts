@@ -137,3 +137,35 @@ eforce_ <- function(p, name = NULL, large = FALSE, center = list("50%", "50%"), 
   p
 
 }
+
+#' Plot igraph
+#'
+#' Plot a network from an igraph object.
+#'
+#' @param g igraph object
+#'
+#' @examples
+#' g <- igraph::make_directed_graph(LETTERS)
+#'
+#' nodes <- igraph_nodes(g)
+#' links <- igraph_links(g)
+#'
+#' echart() %>%
+#'   eforce_() %>%
+#'   enodes_(nodes, "name", ) %>%
+#'   elinks_(links, "source", "target")
+#'
+#' @name igraph2eforce
+#' @rdname igraph2eforce
+#' @export
+igraph_nodes <- function(g){
+  data.frame(name = igraph::V(g)$name)
+}
+
+#' @rdname igraph2eforce
+#' @export
+igraph_links <- function(g){
+  df <- as.data.frame(igraph::get.edgelist(g))
+  names(df) <- c("source", "target")
+  df
+}
