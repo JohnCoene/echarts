@@ -3,6 +3,7 @@
 #' Shiny proxies for echarts.
 #'
 #' @param proxy as returned by \code{\link{echartsProxy}}
+#' @param theme as passed in \code{\link{etheme}}.
 #'
 #' @examples
 #' \dontrun{
@@ -153,7 +154,7 @@ etheme_p <- function(proxy, theme){
 }
 
 #' @rdname proxies
-#' @export
+#' @keywords internal
 emark_point_p <- function(proxy, index, data = list(), clickable = TRUE, symbol = "pin", symbol.size = 10,
                           symbol.rotate = NULL, large = FALSE, effect = NULL){
 
