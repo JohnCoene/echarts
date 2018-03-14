@@ -43,13 +43,12 @@ HTMLWidgets.widget({
 
   factory: function(el, width, height) {
 
-    var chart = null;
+    var chart;
 
     return {
 
       renderValue: function(x) {
 
-      if(chart === null){
         chart = echarts.init(document.getElementById(el.id));
 
         chart.setOption(x.options);
@@ -72,7 +71,6 @@ HTMLWidgets.widget({
           if(x.theme == "solarlight"){chart.setTheme(solarlight);}
           if(x.theme == "wef"){chart.setTheme(wef);}
         }
-      }
 
       },
 

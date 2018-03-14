@@ -62,6 +62,10 @@ echart <- function(data, x, width = NULL, height = NULL, elementId = NULL) {
     )
   )
 
+  if(!missing(data)){
+    x$init <- TRUE
+  }
+
   # create widget
   htmlwidgets::createWidget(
     name = 'echarts',
