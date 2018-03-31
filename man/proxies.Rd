@@ -4,6 +4,7 @@
 \alias{eget_options_p}
 \alias{edata_p}
 \alias{etheme_p}
+\alias{emark_point_p}
 \title{echarts Shiny proxies}
 \usage{
 eget_options_p(proxy)
@@ -11,6 +12,10 @@ eget_options_p(proxy)
 edata_p(proxy, index, data, head = FALSE, grow = FALSE)
 
 etheme_p(proxy, theme)
+
+emark_point_p(proxy, index, data = list(), clickable = TRUE,
+  symbol = "pin", symbol.size = 10, symbol.rotate = NULL, large = FALSE,
+  effect = NULL)
 }
 \arguments{
 \item{proxy}{as returned by \code{\link{echartsProxy}}}
@@ -26,11 +31,11 @@ ui <- fluidPage(
   titlePanel("echarts Proxies"),
   fluidRow(
     column(
-      4,
+      3,
       actionButton("getOptions", "get options")
     ),
     column(
-      4,
+      3,
       selectInput(
         "theme",
         "change theme",
@@ -56,8 +61,16 @@ ui <- fluidPage(
       )
     ),
     column(
-      4,
+      3,
       actionButton("addData", "add data")
+    ),
+    column(
+      3,
+      numericInput(
+        "markPoint",
+        "Mark point",
+        10
+      )
     )
   ),
   fluidRow(
@@ -105,9 +118,19 @@ server <- function(input, output){
       edata_p(index = 1, reactive_2()) \%>\%
       edata_p(index = 2, reactive_3())
   })
+
+  observeEvent(input$markPoint, {
+    data = list(
+      name = "point",
+      value = input$markPoint,
+      x = 20,
+      y = 10
+    )
+  })
 }
 
 shinyApp(ui, server)
 }
 
 }
+\keyword{internal}

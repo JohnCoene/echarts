@@ -114,7 +114,7 @@
 #' }
 #'
 #' @rdname proxies
-#' @export
+#' @keywords internal
 eget_options_p <- function(proxy){
 
   data <- list(id = proxy$id)
@@ -125,7 +125,6 @@ eget_options_p <- function(proxy){
 }
 
 #' @rdname proxies
-#' @export
 edata_p <- function(proxy, index, data, head = FALSE, grow = FALSE){
 
   data <- list(id = proxy$id, data = list(list(index, data, head, grow)))
@@ -136,7 +135,7 @@ edata_p <- function(proxy, index, data, head = FALSE, grow = FALSE){
 }
 
 #' @rdname proxies
-#' @export
+#' @keywords internal
 etheme_p <- function(proxy, theme){
   if(tolower(theme) == "grey") theme <- "gray"
 
@@ -153,7 +152,7 @@ etheme_p <- function(proxy, theme){
 }
 
 #' @rdname proxies
-#' @export
+#' @keywords internal
 emark_point_p <- function(proxy, index, data = list(), clickable = TRUE, symbol = "pin", symbol.size = 10,
                           symbol.rotate = NULL, large = FALSE, effect = NULL){
 
