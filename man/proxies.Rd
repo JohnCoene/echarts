@@ -19,6 +19,8 @@ emark_point_p(proxy, index, data = list(), clickable = TRUE,
 }
 \arguments{
 \item{proxy}{as returned by \code{\link{echartsProxy}}}
+
+\item{theme}{as passed in \code{\link{etheme}}.}
 }
 \description{
 Shiny proxies for echarts.

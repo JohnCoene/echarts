@@ -3,6 +3,7 @@
 #' Shiny proxies for echarts.
 #'
 #' @param proxy as returned by \code{\link{echartsProxy}}
+#' @param theme as passed in \code{\link{etheme}}.
 #'
 #' @examples
 #' \dontrun{

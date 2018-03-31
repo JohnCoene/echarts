@@ -200,7 +200,7 @@ evenn <- function(p,  serie, name = NULL, clickable = TRUE, z = 2, zlevel = 0, t
 
 #' @rdname ecloud
 #' @export
-ecloud <- function(p, freq, color, name = NULL, clickable = TRUE, center = list("50%", "50%"), size = list("40%", "40%"),
+ecloud <- function(p, freq, color, name = NULL, clickable = TRUE, center = list("50%", "50%"), size = list("100%", "100%"),
                    textRotation = list(0, 90), autoSize = list(enable = TRUE, minSize = 12), z = 2, zlevel = 0, tooltip, ...){
 
   tooltip <- if(missing(tooltip)) default_tooltip(trigger = "item")

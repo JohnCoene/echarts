@@ -4,9 +4,9 @@
 
 # echarts
 
-R htmlwidget for Baidu's [ECharts](http://echarts.baidu.com) 2.2.7
-
 ![echarts hex sticker](http://john-coene.com/img/echarts_sticker2.png)
+
+R htmlwidget for Baidu's [ECharts](http://echarts.baidu.com) 2.2.7
 
 **Check out echarts for ECharts 4: [echarts4r](https://github.com/JohnCoene/echarts4r)**
 
