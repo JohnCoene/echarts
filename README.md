@@ -8,7 +8,7 @@
 
 R htmlwidget for Baidu's [ECharts](http://echarts.baidu.com) 2.2.7
 
-**Check out echarts for ECharts 4: [echarts4r](https://github.com/JohnCoene/echarts4r)**
+## Check out echarts for ECharts version 4: [echarts4r](https://github.com/JohnCoene/echarts4r)
 
 ## Installation
 
