@@ -4,7 +4,7 @@
 
 # echarts
 
-![echarts hex sticker](http://john-coene.com/img/echarts_sticker2.png)
+![sticker](https://raw.githubusercontent.com/JohnCoene/projects/master/img/echarts_sticker2.png)
 
 R htmlwidget for Baidu's [ECharts](http://echarts.baidu.com) 2.2.7
 
