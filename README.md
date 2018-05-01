@@ -8,7 +8,7 @@
 
 R htmlwidget for Baidu's [ECharts](http://echarts.baidu.com) 2.2.7
 
-## Check out echarts for ECharts version 4: [echarts4r](https://github.com/JohnCoene/echarts4r)
+# Check out echarts for ECharts version 4: [echarts4r](https://github.com/JohnCoene/echarts4r)
 
 ## Installation
 
@@ -38,7 +38,3 @@ devtools::install_github("JohnCoene/echarts")
 15. animations
 16. data loading effects
 17. tons of options
-
-## Documentation
-
-Visit the [website](http://john-coene.com/htmlwidgets/echarts/) for examples, documentation and [manual](http://john-coene.com/htmlwidgets/echarts/echarts.pdf)
